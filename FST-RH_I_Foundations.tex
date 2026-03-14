@@ -113,7 +113,11 @@ For $\Re(s) > 1$, the Fredholm determinant of the vacuum-projected transfer oper
 \end{theorem}
 
 \begin{proof}
-By the Ruelle identity \cite{Ruelle1976}, $\log\det(I - \mathcal{L}_s) = -\sum_{m=1}^\infty \frac{1}{m}\operatorname{Tr}(\mathcal{L}_s^m)$. The vacuum trace restricts to configurations forming prime-power loops, yielding $\operatorname{Tr}_{\mathrm{vac}}(\mathcal{L}_s^{m\log p}) = \log p \cdot p^{-ms}$, which integrates to $-\log(1-p^{-s})$.
+By the Ruelle identity \cite{Ruelle1976}, $\log\det(I - \mathcal{L}_s) = -\sum_{m=1}^\infty \frac{1}{m}\operatorname{Tr}(\mathcal{L}_s^m)$. The vacuum projection restricts the trace to configurations that form closed loops of prime powers: the only periodic orbits of length $m\log p$ in $\mathcal{G}$ are the $m$-fold traversals of the primitive cycle $\gamma_p$, each contributing weight $p^{-ms}$ with multiplicity $\log p$ (the geometric length). Summing over prime powers and exponentiating:
+\[
+  \log\det(I - \mathcal{L}_s)^{\mathrm{vac}} = -\sum_p \sum_{m=1}^\infty \frac{1}{m} p^{-ms} = \sum_p \log(1 - p^{-s}).
+\]
+This is the logarithm of the Euler product $\prod_p(1-p^{-s}) = 1/\zeta(s)$, valid for $\Re(s) > 1$ by absolute convergence.
 \end{proof}
 
 \subsection{The MEPP Heuristic}
@@ -262,17 +266,13 @@ By Bochner's theorem: $K(t,u) = \hat{\mu}(u-t)$ with $\mu = \sum_p w_p\,\delta_{
 
 \subsection{Arithmetic Uncertainty Relation}
 
-\begin{theorem}[Arithmetic Uncertainty Relation]
-\label{thm:uncertainty}
-For normalized $\psi \in \ell^2(\PP)$, define the prime-domain spread $\Delta_D$ and the zero-domain spread $\Delta_t$ via $\hat\psi(t) = \sum_p a_p e^{-it\log p}$. Then $\Delta_D \cdot \Delta_t \geq 1/2$.
-\end{theorem}
-
-\begin{proof}
-The substitution $x_p = \log p$ reduces this to the Heisenberg--Kennard--Weyl inequality.
-\end{proof}
+\begin{heuristic}[Arithmetic Uncertainty Relation]
+\label{heur:uncertainty}
+For normalized $\psi \in \ell^2(\PP)$, define the prime-domain spread $\Delta_D$ via $\Delta_D^2 = \sum_p |a_p|^2(\log p - \overline{\log p})^2$ and the zero-domain spread $\Delta_t$ via the Fourier transform $\hat\psi(t) = \sum_p a_p e^{-it\log p}$. Then $\Delta_D \cdot \Delta_t \geq 1/2$.
+\end{heuristic}
 
 \begin{remark}
-A zero off the critical line would require a ``localized phase conspiracy'' among finitely many primes, which the arithmetic incommensurability of $\{\log p\}$ makes heuristically implausible. This is a consistency check, not a proof.
+This follows formally from the substitution $x_p = \log p$ and the Heisenberg--Kennard--Weyl inequality on $L^2(\mathbb{R})$. However, $\psi$ is supported on the discrete set $\{\log p : p \in \PP\}$, not on all of $\mathbb{R}$, so the reduction requires an embedding into $L^2(\mathbb{R})$ whose properties depend on the distribution of primes. We state this as a heuristic principle, not a theorem. The physical content is a consistency check: a zero off the critical line would require a ``localized phase conspiracy'' among finitely many primes, which the arithmetic incommensurability of $\{\log p\}$ makes implausible but does not rigorously exclude.
 \end{remark}
 
 \subsection{Strict Convexity and the Spectral Census}
@@ -328,7 +328,7 @@ R1: Bombieri--Lagarias representation & proven \\
 R2: Archimedean--finite decomposition & proven \\
 R3: Non-identification ($I_n \neq \lambda_n$) & proven \\
 R4: Variance lower bound ($I_1 \geq \frac{1}{2}V_1$) & proven \\
-R5: Arithmetic uncertainty relation & proven \\
+R5: Arithmetic uncertainty relation & heuristic \\
 R6: Strict convexity of $-\log\zeta$ & proven \\
 R7: OS reflection positivity & proven \\
 R8: Spectral census (index $= 2$) & numerical \\
@@ -587,7 +587,7 @@ A.~Connes, \emph{Prolate and the Riemann zeta function}, arXiv:2602.04022v1, 202
 C.~Deninger, \emph{On the nature of the ``explicit formulas'' in analytic number theory}, Banach Center Publ.~\textbf{57} (2002), 97--118.
 
 \bibitem{Geiger2026partII}
-L.~Geiger, \emph{Even Dominance of the Weil Quadratic Form: Structural Analysis and Computer-Assisted Proof}, 2026.
+L.~Geiger, \emph{Even Dominance of the Weil Quadratic Form: Spectral Analysis, Computer-Assisted Proof, and the Resolvent Gap Theorem}, 2026.
 
 \bibitem{Geiger2026partIII}
 L.~Geiger, \emph{The FST-RH Framework: Conclusio}, 2026.
