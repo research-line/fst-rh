@@ -602,7 +602,7 @@ The structural reason: $\mu$ grows quadratically (driven by prime resonances in 
 
 \subsection{Building Block~2: Precompactness via Rellich}
 
-Given \Cref{conj:sobolev}:
+Given the uniform Sobolev bound (Building Block~1):
 
 \begin{proposition}[Precompactness]
 \label{prop:precompact}
@@ -668,7 +668,7 @@ $\lambda$ & $S(\lambda)$ (even) & $\|\psi\|_{H^1}$ & Top modes & $S(\lambda)$ (o
 \end{tabular}
 \end{center}
 
-\noindent The even-sector $S(\lambda)$ stabilizes at $\approx 1.3$--$1.7$ for $\lambda \geq 100$ with dominant modes $n = 0, 1, 2$---strongly supporting \Cref{conj:sobolev}. The odd sector converges more slowly (transition regime at $\lambda \leq 50$).
+\noindent The even-sector $S(\lambda)$ stabilizes at $\approx 1.3$--$1.7$ for $\lambda \geq 100$ with dominant modes $n = 0, 1, 2$---strongly supporting the uniform Sobolev bound. The odd sector converges more slowly (transition regime at $\lambda \leq 50$).
 
 \paragraph{Eigenfunction profile convergence.}
 Successive $L^2[-1,1]$ distances of the rescaled even eigenfunctions:
@@ -702,7 +702,7 @@ $\lambda$ & $\lambda_1^+$ & $W_{11}^+$ & $\lambda_1^+ / \sqrt{\lambda}$ & $W_{11
 
 \subsection{Assessment and Risks}
 
-The weighted compactness strategy decomposes the proof closure into four conjectures (\ref{conj:sobolev}, Rellich, \ref{conj:mosco}, \ref{conj:pw}). Each is supported by numerical evidence:
+The weighted compactness strategy decomposes the proof closure into four building blocks (uniform Sobolev bound, Rellich precompactness, Mosco convergence, Paley--Wiener control). Each is supported by numerical evidence:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.15}
@@ -865,9 +865,9 @@ The FST-RH program provides a thermodynamic perspective on the Riemann Hypothesi
 
 The value of the program lies in:
 \begin{enumerate}
-  \item The \emph{honest identification of obstructions} (K1--K3), which may prevent other researchers from pursuing the same dead ends.
+  \item The \emph{honest identification of obstructions} (K1--K4, see Part~I \cite{Geiger2026partI}), which may prevent other researchers from pursuing the same dead ends.
   \item The \emph{structural results} (R1--R9), which add to the toolkit of unconditional statements about the Li coefficients.
-  \item The \emph{localization table} (\Cref{sec:localization}), which makes the logical structure transparent.
+  \item The \emph{localization table} (see Part~I \cite{Geiger2026partI} and Part~III \cite{Geiger2026partIII}), which makes the logical structure transparent.
   \item The \emph{formulation of concrete open problems} (OP1--OP5), which may guide future work.
   \item \emph{Numerical and computer-assisted evidence for Connes' Theorem~6.1} (\Cref{sec:connes,sec:certificates}): even dominance is rigorously certified for $29$ values of $\lambda$ from $100$ to $320{,}000$, with margins growing as $|\mathrm{cert\_gap}| \sim c\sqrt{\lambda}$. The crossover from odd to even ground state spreads over $\lambda \in [25,55]$; this is not an obstruction to Connes' asymptotic Hurwitz program (which requires even dominance only along a sequence $\lambda_n \to \infty$).
   \item A \emph{decomposition analysis} revealing that even dominance is driven entirely by prime contributions (not the archimedean kernel), via constructive interference in the cosine basis. This structural insight narrows the scope of any future formal proof to the prime shift operators alone.
