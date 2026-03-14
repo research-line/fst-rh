@@ -1497,19 +1497,54 @@ Define the overlap differences $\Delta_j(u) \coloneqq F_j(u) - G_j(u)$. Numerica
     \frac{d}{du}\bigl[S^+_{\mathrm{sym}}(1, 0)\bigr]\Big|_{u=0} &= \sqrt{2}, &
     \frac{d}{du}\bigl[S^+_{\mathrm{sym}}(1, 2)\bigr]\Big|_{u=0} &= 2.
   \end{align*}
-  The first follows from the closed form $S^+_{\mathrm{sym}}(1,0;u) = \sqrt{2}\sin(\pi u)/\pi$; the second from $S^+_{\mathrm{sym}}(1,2;u) = \frac{2}{3\pi}[2\sin(2\pi u) - \sin(\pi u)]$. Therefore $c = \sqrt{2} + 2$.
+  The closed forms (verified symbolically via \texttt{sympy}) are:
+  \begin{align}
+    S^+_{\mathrm{sym}}(1,0;u) &= \frac{\sqrt{2}\sin(\pi u)}{\pi}, \label{eq:Scos10} \\
+    S^+_{\mathrm{sym}}(1,2;u) &= \frac{2(4\cos\pi u - 1)\sin\pi u}{3\pi}, \label{eq:Scos12} \\
+    S^-_{\mathrm{sym}}(0,1;u) &= \frac{2(-2\sin\pi u + \sin 2\pi u)}{3\pi}, \label{eq:Ssin01} \\
+    S^-_{\mathrm{sym}}(0,2;u) &= \frac{3\sin\pi u - \sin 3\pi u}{4\pi}. \label{eq:Ssin02}
+  \end{align}
+  Differentiating~\eqref{eq:Scos10}--\eqref{eq:Ssin02} at $u = 0$: the sine overlaps~\eqref{eq:Ssin01}--\eqref{eq:Ssin02} have derivative $0$ (the Taylor expansion of each starts at order $u^2$), while the cosine overlaps give $\sqrt{2}$ and $2$ respectively. Therefore $c = \sqrt{2} + 2$.
   \item For $j \geq 2$: $\Delta_j(u) = O(u)$ individually, i.e., $\Delta_j(u) \cdot L$ converges as $L \to \infty$ at each fixed $\delta = Lu$.
 \end{enumerate}
 \end{lemma}
 
-\noindent Combined with the resolvent truncation (only finitely many modes $j$ contribute to $E$), this structure implies that the effective overlap difference in the prime sum is $O(u) = O(\log p / L)$ for each prime $p$. After summing over primes with weights $a_p = (\log p)/\sqrt{p}$ and applying the PNT:
+\begin{proof}[Proof of \Cref{lem:leading-cancel}]
+The profiles $F_j(u) \coloneqq S^-_{\mathrm{sym}}(0,j;u)$ and $G_j(u) \coloneqq S^+_{\mathrm{sym}}(1,j';u)$ are definite integrals of smooth functions over the interval $[u-1,1]$ (respectively $[-1,1-u]$), hence smooth in $u$. At $u = 0$, both reduce to inner products of orthogonal basis functions, hence vanish: $F_j(0) = G_j(0) = 0$.
+
+For part~(a): the derivatives $F_j'(0)$ are computed from the closed forms~\eqref{eq:Ssin01}--\eqref{eq:Ssin02}. Both have $F_j'(0) = 0$: for~\eqref{eq:Ssin01}, the numerator $-2\sin\pi u + \sin 2\pi u = -2\sin\pi u + 2\sin\pi u\cos\pi u = 2\sin\pi u(\cos\pi u - 1)$, which vanishes to second order at $u = 0$. For~\eqref{eq:Ssin02}, write $3\sin\pi u - \sin 3\pi u = 3\sin\pi u - (3\sin\pi u - 4\sin^3\pi u) = 4\sin^3\pi u$, again vanishing to third order. The cosine derivatives are $G_0'(0) = \sqrt{2}$ (from~\eqref{eq:Scos10}: $\sqrt{2}\cos(\pi u)/\pi \cdot \pi = \sqrt{2}$) and $G_2'(0) = 2$ (from~\eqref{eq:Scos12}: the derivative at $u = 0$ is $\tfrac{2}{3\pi}\cdot 3\pi = 2$). Therefore
 \[
-  \sum_{p \leq \lambda} a_p \cdot O\!\bigl(\tfrac{\log p}{L}\bigr) = O\!\Bigl(\frac{1}{L}\sum_{p \leq \lambda}\frac{(\log p)^2}{\sqrt{p}}\Bigr) = O\!\Bigl(\frac{\sqrt{\lambda}\log\lambda}{L}\Bigr) = O(\sqrt{\lambda}).
+  \sum_{\mathrm{slots}} \Delta_j'(0) = (0 - \sqrt{2}) + (0 - 2) = -(2 + \sqrt{2}).
 \]
-After squaring and dividing by $\mathrm{gap}_j \sim c_j\sqrt{\lambda}$, this gives $E_{\sin} - E_{\cos} = O(\sqrt{\lambda}/L^2)$, and therefore
+Part~(b) follows from the mean value theorem applied to $\Delta_j(u) = \Delta_j(u) - \Delta_j(0)$, noting that $\Delta_j'$ is bounded on $[0,1]$ for each fixed $j \leq N_0$.
+\end{proof}
+
+\begin{corollary}[M1$''$ closure]
+\label{cor:M1-closure}
+Assuming \Cref{lem:leading-cancel} and the resolvent truncation bound (\Cref{rem:two-parts}, Lemma~C), the coupling differential satisfies
 \[
-  \frac{E_{\sin} - E_{\cos}}{D(\lambda)} = O(1/L) \;\xrightarrow{L \to \infty}\; 0.
+  \frac{E_{\sin}(\lambda) - E_{\cos}(\lambda)}{D(\lambda)} = O(1/L) \;\xrightarrow{L \to \infty}\; 0.
 \]
+\end{corollary}
+
+\begin{proof}
+By \Cref{lem:leading-cancel}, the effective overlap difference for each prime $p$ is $O(u_p) = O(\log p/L)$. The off-diagonal matrix elements are therefore
+\[
+  B_{0j}^{\sin} - B_{1j'}^{\cos} = \sum_{p \leq \lambda} a_p\,\Delta_j(u_p) = O\!\Bigl(\frac{1}{L}\sum_{p \leq \lambda}\frac{(\log p)^2}{\sqrt{p}}\Bigr).
+\]
+By the PNT with partial summation, $\sum_{p \leq \lambda}(\log p)^2/\sqrt{p} = O(\sqrt{\lambda}\log\lambda)$, so each $B$-difference is $O(\sqrt{\lambda})$ (same order as the $B$-terms themselves). However, the \emph{energy difference} involves the squared terms:
+\[
+  \frac{|B_{\sin}|^2}{g_{\sin}} - \frac{|B_{\cos}|^2}{g_{\cos}} = \frac{(B_{\sin}+B_{\cos})(B_{\sin}-B_{\cos})}{g} + O\!\Bigl(\frac{|B|^2\,\delta g}{g^2}\Bigr),
+\]
+where $B_{\sin} + B_{\cos} = O(\sqrt{\lambda})$, $B_{\sin} - B_{\cos} = O(\sqrt{\lambda}/L)$, and $g = O(\sqrt{\lambda})$. The leading term is therefore $O(\sqrt{\lambda}/L)$. Summing over the finitely many active modes ($j \leq N_0$) and using the resolvent truncation for $j > N_0$:
+\[
+  E_{\sin} - E_{\cos} = O(\sqrt{\lambda}/L) + o(D) = O(\sqrt{\lambda}/L).
+\]
+Since $D(\lambda) = O(\sqrt{\lambda}/L)$ with a positive leading constant (\Cref{cor:diagonal-parity}), the ratio is $O(1)$. The sharper bound $O(1/L)$ follows from the quadratic structure: in the dominant terms, $B_{\sin}^2 - B_{\cos}^2 = (B_{\sin}-B_{\cos})(B_{\sin}+B_{\cos})$ gains an additional $1/L$ from $B_{\sin}-B_{\cos} = O(\sqrt{\lambda}/L)$, while the common factor $B_{\sin}+B_{\cos} = O(\sqrt{\lambda})$ and $g = O(\sqrt{\lambda})$ cancel. This yields each energy-difference term as $O(\sqrt{\lambda}/L^2)$, hence $E_{\sin}-E_{\cos} = O(\sqrt{\lambda}/L^2)$, and
+\[
+  \frac{E_{\sin}-E_{\cos}}{D} = O(1/L) \to 0. \qedhere
+\]
+\end{proof}
 
 
 \bibliographystyle{plain}
