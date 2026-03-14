@@ -25,8 +25,7 @@
 \newcommand{\muG}{\mu_\sigma}
 \newcommand{\PP}{\mathcal{P}}
 
-\title{A Gauge-theoretic Reformulation of the Riemann Hypothesis:\\
-Part~IV: Conclusio}
+\title{The FST-RH Framework: Conclusio}
 \author{Lukas Geiger\\
 \small Bernau, Germany\\
 \small ORCID: \href{https://orcid.org/0009-0005-7296-1534}{0009-0005-7296-1534}}
@@ -36,7 +35,7 @@ Part~IV: Conclusio}
 \maketitle
 
 \begin{abstract}
-This final paper in a four-part series draws together the results of the preceding papers into a unified picture. We catalog the proven structural results (R1--R9), the excluded paths (K1--K4), and the new contributions: the Shift Parity Lemma, the computer-assisted proof of even dominance at $\lambda = 100$ and $\lambda = 200$, the frontier-prime mechanism, and the Hellmann--Feynman analysis. We present the complete proof architecture from Connes' Theorem~6.1 through even dominance to the Riemann Hypothesis, identifying the cumulative step as the single remaining challenge. We formulate five open problems and discuss connections to the wider landscape of analytic number theory.
+This final paper in a three-part series draws together the results of the preceding papers into a unified picture. We catalog the proven structural results (R1--R9), the excluded paths (K1--K4), and the new contributions: the Shift Parity Lemma, the computer-assisted proof of even dominance for $29$ values of $\lambda$ up to $320{,}000$, the resolvent-damped M1$''$ framework, and the Leading-Mode Cancellation Lemma with exact constant $c = 2 + \sqrt{2}$. We present the complete proof architecture from Connes' Theorem~6.1 through even dominance to the Riemann Hypothesis, identifying the resolvent subdominance condition as the single remaining analytical step. We formulate open problems and discuss connections to the wider landscape of analytic number theory.
 \end{abstract}
 
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
@@ -50,17 +49,14 @@ This final paper in a four-part series draws together the results of the precedi
 \label{sec:intro}
 % =============================================================================
 
-This paper serves as the conclusion of a four-part investigation of the Riemann Hypothesis through gauge theory, spectral analysis, and arithmetic thermodynamics. The journey began with hope (Part~I), encountered systematic failure (Part~II), found a new direction in Connes' spectral program (Part~III), and now arrives at an honest assessment of what has been achieved.
-
-The series structure is:
+This paper concludes a three-part investigation of the Riemann Hypothesis through gauge theory, spectral analysis, and arithmetic thermodynamics:
 \begin{description}[font=\bfseries,leftmargin=2em]
-  \item[Part~I \cite{Geiger2026partI}:] The Landscape --- structural results, analytical toolkit, the thermodynamic formalism.
-  \item[Part~II \cite{Geiger2026partII}:] The Path and the Dead Ends --- four critical obstructions (K1--K4), localization of difficulty.
-  \item[Part~III \cite{Geiger2026partIII}:] Even Dominance --- computer-assisted proof, Shift Parity Lemma, frontier primes.
-  \item[Part~IV (this paper):] Conclusio --- synthesis, proof architecture, open problems.
+  \item[Part~I \cite{Geiger2026partI}:] Foundations and Obstructions --- structural results (R1--R9), four critical obstructions (K1--K4), reorientation to Connes' spectral program.
+  \item[Part~II \cite{Geiger2026partII}:] Even Dominance --- Shift Parity Lemma, computer-assisted proof ($29$ certificates, $\lambda$ up to $320{,}000$), resolvent-damped M1$''$ framework, Leading-Mode Cancellation ($c = 2 + \sqrt{2}$).
+  \item[Part~III (this paper):] Conclusio --- synthesis, proof architecture, open problems.
 \end{description}
 
-The key message is that the Riemann Hypothesis, when approached through the Li criterion and the Weil quadratic form, reduces to a single algebraic challenge: the \emph{cumulative step}, i.e., showing that the sum over primes preserves the individual even preference established by the Shift Parity Lemma.
+The key message is that the Riemann Hypothesis, when approached through the Li criterion and the Weil quadratic form, reduces to a well-characterized analytical condition: the \emph{resolvent subdominance} of the coupling differential, which the Leading-Mode Cancellation Lemma (Part~II) reduces to classical Fourier analysis and the Prime Number Theorem.
 
 
 % =============================================================================
@@ -102,16 +98,7 @@ The following results are unconditional (they do not assume RH):
   \[ \lambda_1(D_N(r)) < 0, \]
   where $D_N(r) = S_N^+(r) - S_N^-(r)$ is the difference between even- and odd-sector shift matrices. Proved analytically (two-case det/Tr argument for $N=3$, monotonicity reduction for $N \geq 4$) and certified by interval arithmetic (55,000 subintervals, 60-digit precision, Gershgorin disk bounds).
 
-  \item \textbf{Computer-Assisted Proof of Even Dominance} (Part~III, \S7). For $\lambda = 100$ and $\lambda = 200$:
-  \begin{center}
-  \renewcommand{\arraystretch}{1.15}
-  \begin{tabular}{r|r|r|r}
-  $\lambda$ & upper $\lambda_1^+$ & lower $\lambda_1^-$ & certified gap \\\hline
-  100 & $-11.1819$ & $-9.4479$ & $-1.734$ \\
-  200 & $-19.1611$ & $-15.2217$ & $-3.939$
-  \end{tabular}
-  \end{center}
-  Certified via interval arithmetic (mpmath.iv, 50-digit precision). Safety margins: $3.9\times$ ($\lambda = 100$) and $16.7\times$ ($\lambda = 200$).
+  \item \textbf{Computer-Assisted Proof of Even Dominance} (Part~II). For $29$ values of $\lambda$ from $100$ to $320{,}000$, even dominance is rigorously certified via interval arithmetic (mpmath.iv, 50-digit precision). The certified gap grows monotonically as $\sim\!\sqrt{\lambda}$, from $-2.25$ at $\lambda = 100$ to $-241.75$ at $\lambda = 320{,}000$. No failure in $3.5$ orders of magnitude.
 
   \item \textbf{Universal Even Preference of Individual Primes} (Part~III, Corollary~4.2). For every prime $p$ with $r = \log p / \log\lambda \in (0,2)$:
   \[ \lambda_1(W_p^+) \leq \lambda_1(W_p^-) + \lambda_1(D_N(r)) < \lambda_1(W_p^-), \]
@@ -121,9 +108,11 @@ The following results are unconditional (they do not assume RH):
 
   \item \textbf{Hellmann--Feynman Analysis} (Part~III, \S9.3). The $L$-derivative $\partial\Delta/\partial L > 0$ for all $\lambda \geq 80$ through $\lambda = 500$. The gap deepening is driven by new primes entering the sum (prime-counting mechanism), not by the growth of $L = \log\lambda$. This rules out $L$-monotonicity as a proof strategy.
 
-  \item \textbf{Gap Asymptotics} (Part~III, \S8). The even--odd gap scales as
-  \[ \Delta(\lambda) \approx -0.0035 \cdot (\log\lambda)^{4.2}, \]
-  robustly negative for all $\lambda \geq 55$, with $\Delta \to -\infty$.
+  \item \textbf{Gap Asymptotics} (Part~II). The even--odd gap scales as $\Delta(\lambda) \sim -c\sqrt{\lambda}$ (exponential in $L = \log\lambda$), robustly negative for all $\lambda \geq 55$, with $|\Delta| \to \infty$.
+
+  \item \textbf{Resolvent-Damped M1$''$ Framework} (Part~II). The coupling differential decomposes via second-order perturbation theory. The resolvent-damped energy difference satisfies $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/L) \to 0$, reducing the remaining analytical step to Fourier analysis.
+
+  \item \textbf{Leading-Mode Cancellation Lemma} (Part~II). The overlap differences between even and odd sectors cancel pairwise at $u = 0$ (Fourier orthogonality), with the derivative giving the exact constant $c = 2 + \sqrt{2} \approx 3.414$. The closed-form profiles $S^+_{\mathrm{sym}}(1,0;u) = \sqrt{2}\sin(\pi u)/\pi$ and $S^+_{\mathrm{sym}}(1,2;u) = \tfrac{2}{3\pi}(4\cos\pi u - 1)\sin\pi u$ are verified symbolically.
 \end{enumerate}
 
 
@@ -380,13 +369,10 @@ Gap asymptotics: $|\Delta| \sim (\log\lambda)^{4.2}$ & numerical & III \\
 \begin{thebibliography}{99}
 
 \bibitem{Geiger2026partI}
-L.~Geiger, \emph{A Gauge-theoretic Reformulation of the Riemann Hypothesis: Part~I: The Landscape}, 2026.
+L.~Geiger, \emph{The FST-RH Framework: Foundations, Obstructions, and Reorientation}, 2026.
 
 \bibitem{Geiger2026partII}
-L.~Geiger, \emph{A Gauge-theoretic Reformulation of the Riemann Hypothesis: Part~II: The Path and the Dead Ends}, 2026.
-
-\bibitem{Geiger2026partIII}
-L.~Geiger, \emph{Even Dominance of the Weil Quadratic Form: Structural Analysis and Computer-Assisted Proof}, 2026.
+L.~Geiger, \emph{Even Dominance of the Weil Quadratic Form: Spectral Analysis, Computer-Assisted Proof, and the Resolvent Gap Theorem}, 2026.
 
 \bibitem{Connes2025}
 A.~Connes, \emph{Prolate and the Riemann zeta function}, arXiv:2602.04022v1, 2025.

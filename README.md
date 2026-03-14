@@ -6,14 +6,13 @@ verification of even dominance for the Weil quadratic form QW_lambda, plus
 an analytical framework (Leading-Mode Cancellation Lemma) that explains
 *why* even dominance holds asymptotically.
 
-## Paper Series (4 Parts)
+## Paper Series (3 Parts)
 
-| Paper | Title | Pages | Content |
-|-------|-------|-------|---------|
-| **Part I** | The Landscape | 7 | Thermodynamic foundation: Prime Hub Graphs, Li coefficients, archimedean/finite decomposition |
-| **Part II** | The Path and the Dead Ends | 6 | Critical errors K1-K4, failed approaches, reorientation to Connes' program |
-| **Part III** | Proof Closure | 37 | **Main paper.** Even dominance, Shift Parity Lemma, resolvent-damped M1'' framework, Leading-Mode Cancellation (c=2+sqrt(2)), 29 computer-assisted certificates |
-| **Part IV** | Conclusio | 9 | Synthesis: catalog of proven results (R1-R9), excluded paths (K1-K4), open problems |
+| Paper | File | Pages | Content |
+|-------|------|-------|---------|
+| **Part I** | `FST-RH_I_Foundations` | 12 | Foundations and Obstructions: thermodynamic landscape (R1-R9), dead ends (K1-K4), reorientation to Connes |
+| **Part II** | `FST-RH_II_Even_Dominance` | 32 | **Main paper.** Shift Parity Lemma, 29 computer-assisted certificates, weighted compactness, resolvent M1'' framework, Leading-Mode Cancellation (c=2+sqrt(2)) |
+| **Part III** | `FST-RH_III_Conclusio` | 10 | Synthesis: proof architecture (A1-A8), catalog of results, open problems, assessment |
 
 ## Key Results
 
