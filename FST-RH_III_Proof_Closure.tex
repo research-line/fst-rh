@@ -1204,71 +1204,47 @@ So $\|B\|_{\mathrm{op}} \leq 4\sqrt{K\lambda} = 4\sqrt{K}\,e^{L/2}$.
 \textbf{This is $O(e^{L/2})$, not $O(L)$.} The numerical scaling $\|B\|/L \in [0.2, 1.6]$ holds only on the tested range $\lambda \in [30, 500]$; asymptotically, $\|B\|$ grows as $e^{L/2}$.
 \end{proof}
 
-\begin{remark}[Impact on the gap argument]
+\begin{remark}[Coupling asymmetry---an honest assessment]
 \label{rem:coupling-revisited}
-The coupling correction becomes:
-\[
-  \frac{\|B\|^2}{\lambda_1(C) - \mu} \leq \frac{16K\lambda}{c\sqrt{\lambda} - \beta L} \leq \frac{16K\sqrt{\lambda}}{c - \beta L/\sqrt{\lambda}} \to \frac{16K}{c}\sqrt{\lambda}.
-\]
-This is $O(\sqrt{\lambda})$---the same order as the dominant term $W_{11}^+ \sim -c\sqrt{\lambda}$! The coupling is \emph{not negligible} in this naive bound.
+The Hilbert--Schmidt bound gives $\|B\|_{\mathrm{op}} = O(\sqrt{\lambda})$---the \emph{same order} as the dominant diagonal $W_{11}^+$. The coupling correction is therefore \emph{not negligible}.
 
-However, the gap argument still works because we compare \emph{even} vs.\ \emph{odd}: both sectors have the same coupling structure, and the gap is driven by the \emph{difference} $S^+ - S^- = -\sin(\pi\delta/L)/\pi$ (\Cref{cor:diagonal-parity}). The coupling affects $\lambda_1^+$ and $\lambda_1^-$ by the \emph{same} amount (up to parity corrections), so it cancels in the gap $\Delta = \lambda_1^+ - \lambda_1^-$.
+One might hope that the coupling ``cancels'' in the gap $\Delta = \lambda_1^+ - \lambda_1^-$, since both sectors share the same high-mode structure. However, numerical tests reveal a \textbf{coupling asymmetry}: $\|B^-\|_{\mathrm{op}}$ is systematically $30$--$40\%$ larger than $\|B^+\|_{\mathrm{op}}$ (e.g., $\|B^-\| = 4.47$ vs.\ $\|B^+\| = 3.40$ at $\lambda = 100$). This means the odd eigenvalue is pushed \emph{further down} by coupling than the even eigenvalue, which \emph{reduces} the gap. The high block is parity-neutral in $\lambda_1(C)$ (difference $< 0.02$) but \emph{not} in $\|B\|$.
 
-More precisely: let $\mu^{\pm}$ be the even/odd eigenvalues and $W_{11}^{\pm}$ the leading diagonals. Then:
-\begin{align*}
-  \mu^+ &= W_{11}^+ + \text{(coupling correction)}^+ + O(1), \\
-  \mu^- &= W_{00}^- + \text{(coupling correction)}^- + O(1).
-\end{align*}
-Since the coupling correction depends on $\|B\|$ and $\lambda_1(C)$, which have the \emph{same} scaling in both sectors (the high modes are parity-neutral, as shown in the decomposition analysis of \Cref{sec:connes}), the corrections approximately cancel. The gap is:
-\[
-  \Delta \approx W_{11}^+ - W_{00}^- = 2\sum_{p \leq \lambda}\frac{\log p}{\sqrt{p}}\bigl(S^+(\log p, L) - S^-(\log p, L)\bigr) + O(L).
-\]
-By \Cref{cor:diagonal-parity}:
-\[
-  \Delta \leq -\frac{2}{\pi}\sum_{p \leq \lambda}\frac{\log p}{\sqrt{p}}\,\sin\frac{\pi\log p}{L} + O(L).
-\]
-The sum is positive (since $\sin(\pi\log p / L) > 0$ for $p < \lambda$) and grows as $\Theta(\sqrt{\lambda})$ by partial summation with PNT. Hence $|\Delta| \to \infty$.
+Consequently, the gap cannot be rigorously reduced to the diagonal difference $W_{11}^+ - W_{00}^-$ alone. The coupling asymmetry is a genuine analytical obstruction that our block-bound argument does not resolve. Specifically:
+\begin{itemize}
+  \item The Rayleigh quotient gives $\lambda_1^+ \leq W_{11}^+$ (upper bound on the even eigenvalue).
+  \item For the gap, one needs a \emph{lower} bound on $\lambda_1^-$ (the odd eigenvalue).
+  \item The Schur complement gives $\lambda_1^- \geq W_{00}^- - \|B^-\|^2/(\lambda_1(C^-) - W_{00}^-)$, but since $\|B^-\| = O(\sqrt{\lambda})$ and the denominator is also $O(\sqrt{\lambda})$, this bound is $W_{00}^- - O(\sqrt{\lambda})$---not useful, as the correction is the same order as the leading term.
+\end{itemize}
 \end{remark}
 
-\subsection{The refined gap theorem}
+\subsection{Status: What is and is not proved}
+\label{sec:status-honest}
 
-Incorporating the analysis of \Cref{rem:coupling-revisited}, we obtain:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l|l|l}
+\textbf{Statement} & \textbf{Status} & \textbf{Method} \\\hline
+$S^+(\delta) < S^-(\delta)$ for $\delta \in (0,L)$ & \textbf{Proved} & Exact identity (\Cref{cor:diagonal-parity}) \\
+$W_{11}^+ < W_{00}^-$ for large $\lambda$ & \textbf{Proved} & Shift Parity + PNT (\Cref{lem:L1}) \\
+$\|c_{\mathrm{high}}\|^2 \to 0$ & \textbf{Proved} & Schur complement (\Cref{prop:mode-concentration}) \\
+Even dominance at $\lambda = 100, 200$ & \textbf{Proved} & Interval arithmetic (\Cref{sec:cap}) \\[4pt]
+Even dominance for all $\lambda \geq \lambda_0$ & \textbf{Open} & Coupling asymmetry unresolved \\
+$\Delta(\lambda) \to -\infty$ & \textbf{Conjectured} & Numerical: $|\Delta| \sim (\log\lambda)^{3.5}$
+\end{tabular}
+\end{center}
 
-\begin{theorem}[Even dominance for all large $\lambda$]
-\label{thm:even-dominance-all}
-The even--odd gap satisfies
-\begin{equation}
-\label{eq:gap-final}
-  \Delta(\lambda) = \lambda_1^+(\lambda) - \lambda_1^-(\lambda)
-  = -\frac{2}{\pi}\sum_{p \leq \lambda}\frac{\log p}{\sqrt{p}}\,\sin\frac{\pi\log p}{\log\lambda} + O(\log\lambda).
-\end{equation}
-The main term is negative and grows as $\Theta(\sqrt{\lambda})$. In particular, $\Delta(\lambda) \to -\infty$, and even dominance holds for all sufficiently large~$\lambda$.
-\end{theorem}
-
-\begin{proof}[Proof outline]
-\begin{enumerate}
-  \item \textbf{Variational bounds:} $\lambda_1^{\pm} \leq W_{\text{lead}}^{\pm}$ (leading diagonal, \Cref{lem:L1}).
-  \item \textbf{Schur coupling:} The correction from high modes affects $\lambda_1^+$ and $\lambda_1^-$ equally (parity-neutral high block), so the gap is $\Delta \approx W_{11}^+ - W_{00}^- + O(\text{parity correction in coupling})$.
-  \item \textbf{Diagonal difference:} By \Cref{cor:diagonal-parity}, $W_{11}^+ - W_{00}^- = -\frac{2}{\pi}\sum_{p \leq \lambda}\frac{\log p}{\sqrt{p}}\sin\frac{\pi\log p}{L} + O(L)$.
-  \item \textbf{PNT + partial summation:} Define $\Phi(x) = \sum_{p \leq x}(\log p)/\sqrt{p}$. By PNT, $\Phi(x) = 2\sqrt{x} + o(\sqrt{x})$. Abel summation gives
-  \[
-    \sum_{p \leq \lambda}\frac{\log p}{\sqrt{p}}\sin\frac{\pi\log p}{L} = \int_2^{\lambda}\sin\frac{\pi\log t}{L}\,d\Phi(t) + O(1).
-  \]
-  Substituting $u = \log t / L$ (so $t = e^{uL}$, $d\Phi \approx dt/\sqrt{t} = Le^{uL/2}\,du$):
-  \[
-    \approx L\int_0^1 \sin(\pi u)\,e^{uL/2}\,du \sim \frac{2L}{L^2/4 + \pi^2}\,e^{L/2} = \Theta(\sqrt{\lambda}/L).
-  \]
-  (The integral is dominated by the endpoint $u = 1$ where $e^{uL/2}$ is largest, but $\sin(\pi \cdot 1) = 0$; the dominant contribution comes from $u$ slightly below $1$, giving a factor of order $\sqrt{\lambda}/L$ after careful evaluation.)
-
-  The key point is that the sum is $\Theta(\sqrt{\lambda}/L) \gg L$, so the main term in~\eqref{eq:gap-final} dominates the $O(L)$ error.
-  \item \textbf{Conclusion:} $\Delta(\lambda) \leq -c\sqrt{\lambda}/L + O(L) \to -\infty$.\qedhere
+\noindent The gap between ``$W_{11}^+ < W_{00}^-$'' (proved) and ``$\lambda_1^+ < \lambda_1^-$'' (desired) is precisely the coupling asymmetry described in \Cref{rem:coupling-revisited}. Closing this gap requires either:
+\begin{enumerate}[label=(\alph*)]
+  \item An analytical bound showing $\|B^-\|^2 - \|B^+\|^2 = o(\sqrt{\lambda})$ (coupling asymmetry is sublinear), or
+  \item Extension of the computer-assisted proof to a dense grid of $\lambda$-values (e.g., $\lambda = 100, 200, 300, \ldots, 10000$), combined with a continuity/monotonicity argument between grid points, or
+  \item A fundamentally different approach to the lower bound on $\lambda_1^-$.
 \end{enumerate}
-\end{proof}
 
-\begin{remark}[Connection to the full proof architecture]
-\Cref{thm:even-dominance-all}, combined with the rigorous computer-assisted certificates for $\lambda = 100$ and $\lambda = 200$ (\Cref{sec:cap}), establishes even dominance for all $\lambda \geq 100$. By Connes' Theorem~6.1 and the Hurwitz convergence argument (Fact~6.4 in \cite{Connes2025}), this implies that the zeros of the approximating entire functions lie on the real line for a sequence $\lambda_n \to \infty$---a necessary step in the spectral approach to the Riemann Hypothesis.
+\noindent Option~(b) is the most realistic near-term strategy: Connes' Hurwitz argument requires even dominance only along a \emph{sequence} $\lambda_n \to \infty$, so a dense computer-assisted grid would suffice. Option~(a) would give the strongest result but requires a deeper understanding of the parity structure of the off-diagonal blocks.
 
-The proof uses only three ingredients from analytic number theory (PNT, Mertens' theorem, partial summation), the Shift Parity identity (\Cref{cor:diagonal-parity}), and standard spectral theory (variational principle, Schur complement, Cauchy interlacing). No deep machinery from operator theory or noncommutative geometry is required.
+\begin{remark}[What the diagonal analysis does achieve]
+Even though the coupling prevents a clean $\Delta \sim W_{11}^+ - W_{00}^-$ reduction, the Shift Parity identity (\Cref{cor:diagonal-parity}) and PNT estimate (\Cref{lem:L1}) provide the \emph{only known structural mechanism} for even dominance. They explain \emph{why} the phenomenon occurs (the cosine mode has a zero where prime shifts concentrate) and predict the correct scaling. Any future proof must ultimately capture this mechanism.
 \end{remark}
 
 
