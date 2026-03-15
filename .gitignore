@@ -9,8 +9,10 @@
 *.fdb_latexmk
 *.fls
 
-# Internal / private
+# Internal / private (not for publication)
 BEWEISNOTIZ.md
+BEWEISNOTIZ_LANG_ALT.md
+MEILENSTEINE.md
 PUBLIKATIONSSTRATEGIE.md
 ZENODO_DRAFT.md
 TODO.md
@@ -24,10 +26,13 @@ _partners/
 CORE.txt
 removed_sections/
 
-# Server logs / intermediate results
+# Kombi-PDFs (generated from EN+DE merge, not source)
+*_kombi.pdf
+
+# Server logs (not results)
 scripts/*.log
-scripts/*.json
-scripts/_results/
+
+# Exploration scripts (historical, not needed)
 scripts/_exploration/
 
 # Python

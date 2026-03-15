@@ -1,0 +1,605 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Korollar}
+\newtheorem{conjecture}[theorem]{Vermutung}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Bemerkung}
+\newtheorem{heuristic}[theorem]{Heuristisches Prinzip}
+
+\newcommand{\Ksym}{K_\sigma^{\mathrm{sym}}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\muG}{\mu_\sigma}
+\newcommand{\PP}{\mathcal{P}}
+
+\title{Das FST-RH Framework:\\
+Grundlagen, Hindernisse und Neuausrichtung}
+\author{Lukas Geiger\\
+\small Bernau, Deutschland\\
+\small ORCID: \href{https://orcid.org/0009-0005-7296-1534}{0009-0005-7296-1534}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Diese Arbeit, die erste in einer dreiteiligen Serie über die Riemannsche Vermutung, beschreibt die mathematische Landschaft und dokumentiert die systematische Untersuchung --- und letztlich das Scheitern --- eines eich-theoretischen Ansatzes. Im ersten Teil entwickeln wir den analytischen Rahmen: die Riemannsche Vermutung als Stabilitätsproblem, das Li-Kriterium als zentrales Werkzeug und die Bombieri-Lagarias-Zerlegung der Li-Koeffizienten in archimedische und endlich-teilige Beiträge. Ausgehend von einem thermodynamischen Formalismus (Prime Hub Graphen und Ruelle-Transferoperatoren) beweisen wir mehrere unbedingte strukturelle Ergebnisse: die archimedisch-endliche Zerlegung, das Paradoxon der archimedischen Dominanz, die OS-Reflexionspositivität, die arithmetische Unschärferelation und die spektrale Bestandsaufnahme des arithmetischen Kerns. Im zweiten Teil identifizieren wir vier kritische Hindernisse (K1--K4), die einzeln und kollektiv die ursprüngliche Beweisstrategie zum Scheitern bringen: die Gibbs-Normierungslücke, der Vorzeichenwechsel des Zielfunktionals, die falsche Monotonierichtung und das Spurklassen-Hindernis. Wir lokalisieren die Schwierigkeit präzise durch eine neunstufige Logikkette und zeigen, dass sich der \emph{gesamte} Inhalt von RH in einem einzigen Schritt konzentriert (S5: die unbedingte Positivität der Li-Koeffizienten). Wir formulieren fünf konkrete offene Probleme und identifizieren die Neuausrichtung auf das Spektralprogramm von Connes als den Weg nach vorne. Teil~II entwickelt diese neue Richtung über das Shift-Parity-Lemma und computergestützte Beweise der Dominanz gerader Eigenfunktionen; Teil~III zieht die endgültigen Schlussfolgerungen.
+\end{abstract}
+
+\noindent\textbf{MSC 2020:} 11M26, 11M36, 37C30, 47A75, 82B05\\
+\textbf{Schlagworte:} Riemannsche Vermutung, Li-Koeffizienten, Ruelle-Transferoperator, archimedische Dominanz, Eich-Positivität, Hindernisse, Spektralanalyse
+
+\tableofcontents
+
+
+% =============================================================================
+% =============================================================================
+%                     TEIL I: DIE LANDSCHAFT
+% =============================================================================
+% =============================================================================
+
+\part*{Die Landschaft}
+\addcontentsline{toc}{part}{Die Landschaft}
+
+
+% =============================================================================
+\section{Einleitung}
+\label{sec:intro}
+% =============================================================================
+
+Die Riemannsche Vermutung (RH) besagt, dass alle nicht-trivialen Nullstellen der Riemannschen Zetafunktion $\zeta(s)$ auf der kritischen Geraden $\Re(s) = 1/2$ liegen. Formuliert über das Li-Kriterium \cite{Li1997}, ist RH äquivalent zur Positivität einer unendlichen Folge von reellen Zahlen:
+\begin{equation}
+\label{eq:li-criterion}
+\text{RH} \quad \Longleftrightarrow \quad \lambda_n \geq 0 \text{ für alle } n \geq 1,
+\end{equation}
+wobei $\lambda_n = \sum_\rho [1 - (1-1/\rho)^n]$ und die Summe über die nicht-trivialen Nullstellen von $\zeta$ läuft.
+
+Diese Arbeit ist die erste in einer dreiteiligen Serie:
+\begin{itemize}
+  \item \textbf{Teil~I} (diese Arbeit): Grundlagen, Hindernisse und Neuausrichtung --- mathematische Grundlagen, analytische Werkzeuge, strukturelle Ergebnisse, Dokumentation von vier Sackgassen, Lokalisierung der Schwierigkeit und Neuausrichtung auf das Spektralprogramm von Connes.
+  \item \textbf{Teil~II} \cite{Geiger2026partII}: Gerade Dominanz --- das Shift-Parity-Lemma, computergestützte Beweise und die neue Beweisarchitektur.
+  \item \textbf{Teil~III} \cite{Geiger2026partIII}: Conclusio --- was bewiesen ist, was ausgeschlossen ist und was offen bleibt.
+\end{itemize}
+
+Die Serie dokumentiert eine ehrliche Forschungsreise: von einem vielversprechenden eich-theoretischen Ansatz (Abschnitte~\ref{sec:thermodynamic}--\ref{sec:gauge}), über dessen Scheitern an mehreren Punkten (Abschnitte~\ref{sec:K1}--\ref{sec:K4}), hin zu einem neuen strukturellen Verständnis des Problems über die quadratische Weil-Form (Abschnitt~\ref{sec:reorientation}) und eine abschließende Bilanz dessen, was erreicht wurde (Teil~III).
+
+\subsection{Die Hoffnung}
+
+Die Hilbert-Pólya-Vermutung schlägt vor, dass die nicht-trivialen Nullstellen Eigenwerten eines selbstadjungierten Operators entsprechen. Der semiklassische Ansatz von Berry und Keating ($\hat{H} = xp$) scheitert am Weyl-Gesetz-Hindernis. Diese Arbeit verschiebt das Paradigma von der Quantenmechanik zur statistischen Mechanik: Die Nullstellen werden nicht als Eigenwerte eines Hamiltonoperators erzeugt, sondern als Resonanzen eines Ruelle-artigen Transferoperators.
+
+Die leitende Idee ist, dass die Riemannsche Vermutung eine \emph{Stabilitätsbedingung} ist: Die arithmetische Struktur der Primzahlen, kodiert in den Li-Koeffizienten $\lambda_n$, wird durch einen Wettbewerb zwischen arithmetischer Instabilität (von den Primzahlen) und archimedischer Konvexität (von der Gammafunktion) stabilisiert. Das Verständnis dieses Wettbewerbs ist das zentrale Thema dieser Serie.
+
+
+% =============================================================================
+\section{Der thermodynamische Formalismus}
+\label{sec:thermodynamic}
+% =============================================================================
+
+\subsection{Prime Hub Graph und die Vakuumspur}
+
+Um das Euler-Produkt $\zeta(s) = \prod_p (1-p^{-s})^{-1}$ zu reproduzieren, konstruieren wir ein dynamisches System, dessen primitive periodische Orbits Primzahlen entsprechen.
+
+\begin{definition}[Primzahl-Orbit-Axiom]
+Wir postulieren einen topologisch mischenden gerichteten Graphen $\mathcal{G} = (\mathcal{V}, \mathcal{E})$, dessen primitive Zyklen $\gamma_p$ in Bijektion zu den Primzahlen $p \in \PP$ stehen, mit geometrischer Länge $\ell(\gamma_p) = \log p$.
+\end{definition}
+
+\begin{remark}[Motivation vs. logische Abhängigkeit]
+Das Primzahl-Orbit-Axiom ist eine konstruktive Motivation. Die analytischen Ergebnisse in den folgenden Abschnitten hängen ausschließlich von den Eigenschaften von $\zeta(s)$ und dem arithmetischen Euler-Produkt ab und sind logisch unabhängig von dieser Graphenkonstruktion.
+\end{remark}
+
+Unter Verwendung eines Holonomie-Filters auf dem von $\PP$ erzeugten freien Monoid definieren wir einen Transferoperator $\mathcal{L}_s$ und beweisen:
+
+\begin{theorem}[Wiederherstellung der Zetafunktion]
+\label{thm:vacuum-trace}
+Für $\Re(s) > 1$ erfüllt die Fredholm-Determinante des vakuum-projizierten Transferoperators:
+\[
+\det(I - \mathcal{L}_s)^{\mathrm{vac}} = \prod_p (1 - p^{-s}) = \frac{1}{\zeta(s)}.
+\]
+\end{theorem}
+
+\begin{proof}
+Nach der Ruelle-Identität \cite{Ruelle1976} gilt $\log\det(I - \mathcal{L}_s) = -\sum_{m=1}^\infty \frac{1}{m}\operatorname{Tr}(\mathcal{L}_s^m)$. Die Vakuumprojektion beschränkt die Spur auf Konfigurationen, die geschlossene Schleifen von Primzahlpotenzen bilden: Die einzigen periodischen Orbits der Länge $m\log p$ in $\mathcal{G}$ sind die $m$-fachen Durchläufe des primitiven Zyklus $\gamma_p$, die jeweils das Gewicht $p^{-ms}$ mit der Multiplizität $\log p$ (die geometrische Länge) beitragen. Summierung über Primzahlpotenzen und Exponentiation ergibt:
+\[
+  \log\det(I - \mathcal{L}_s)^{\mathrm{vac}} = -\sum_p \sum_{m=1}^\infty \frac{1}{m} p^{-ms} = \sum_p \log(1 - p^{-s}).
+\]
+Dies ist der Logarithmus des Euler-Produkts $\prod_p(1-p^{-s}) = 1/\zeta(s)$, gültig für $\Re(s) > 1$ durch absolute Konvergenz.
+\end{proof}
+
+\subsection{Die MEPP-Heuristik}
+
+Das Prinzip der maximalen Entropieproduktion (MEPP) interpretiert die kritische Gerade $\Re(s) = 1/2$ als eine Bedingung des detaillierten Gleichgewichts:
+
+\begin{heuristic}[Modellierung von RH über MEPP]
+\label{heur:mepp}
+Wenn die Primzahlen die optimal stabile Konfiguration eines „Primzahlgases“ darstellen, das der PNT-Dichtebedingung unterliegt, erfüllt das resultierende Gibbs-Maß die Zeitumkehrsymmetrie, was die Nullstellen auf die kritische Gerade zwingt.
+\end{heuristic}
+
+Diese Heuristik stellt keinen Beweis dar, motiviert aber die unten entwickelte thermodynamische Perspektive.
+
+
+% =============================================================================
+\section{Die Li-Koeffizienten: Analytischer Rahmen}
+\label{sec:li-coefficients}
+% =============================================================================
+
+\subsection{Bombieri-Lagarias-Darstellung}
+
+Die vervollständigte Xi-Funktion $\xi(s) = \frac{1}{2}s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$ liefert die definitive Darstellung:
+
+\begin{theorem}[Bombieri-Lagarias \cite{BombieriLagarias1999}]
+\label{thm:bombieri-lagarias}
+Für $n \geq 1$:
+\[
+\lambda_n = \frac{1}{(n-1)!}\,\frac{\partial^n}{\partial s^n}\Big[s^{n-1}\log\xi(s)\Big]_{s=1}.
+\]
+Da $\xi(s)$ ganz von der Ordnung $1$ mit $\xi(1) = 1/2 \neq 0$ ist, ist $\log\xi(s)$ holomorph nahe $s = 1$ und die Ableitung ist wohldefiniert.
+\end{theorem}
+
+\subsection{Archimedisch-endliche Zerlegung}
+
+\begin{proposition}[Archimedisch-endliche Zerlegung]
+\label{prop:decomposition}
+Jeder Li-Koeffizient lässt sich zerlegen als $\lambda_n = \lambda_n^{(\infty)} + \lambda_n^{(\mathrm{fin})}$, mit:
+\begin{align}
+\lambda_n^{(\infty)} &= \frac{1}{(n-1)!}\frac{\partial^n}{\partial s^n}\Big[s^{n-1}\log\!\big(\tfrac{1}{2}s\,\pi^{-s/2}\,\Gamma(s/2)\big)\Big]_{s=1}, \label{eq:arch-part} \\
+\lambda_n^{(\mathrm{fin})} &= \frac{1}{(n-1)!}\frac{\partial^n}{\partial s^n}\Big[s^{n-1}\log g(s)\Big]_{s=1}, \quad g(s) := (s-1)\zeta(s). \label{eq:fin-part}
+\end{align}
+Beide Teile sind individuell berechenbar; $g(s)$ ist holomorph bei $s=1$ mit $g(1) = 1$.
+\end{proposition}
+
+\begin{remark}[Drei-Regime-Struktur]
+\label{rem:three-regime}
+Numerische Berechnungen ergeben:
+\begin{enumerate}[label=(\alph*)]
+  \item \textbf{Kleines $n$ ($n \lesssim 8$):} $\lambda_n^{(\infty)} < 0$, kompensiert durch $\lambda_n^{(\mathrm{fin})} > 0$. Die Positivität ist eine feine Auslöschung.
+  \item \textbf{Übergang ($n \approx 8$):} $\lambda_n^{(\infty)}$ durchläuft Null.
+  \item \textbf{Großes $n$ ($n \gg 10$):} $\lambda_n^{(\infty)} \sim \frac{n}{2}\log n$ dominiert; die Positivität ist automatisch.
+\end{enumerate}
+Die „harten“ Instanzen des Li-Kriteriums konzentrieren sich im Regime~(a). Tabelle~\ref{tab:li-coefficients} zeigt die Zerlegung für $n = 1, \ldots, 13$.
+\end{remark}
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{r|r|r|r|r}
+$n$ & $\lambda_n$ & $\lambda_n^{(\infty)}$ & $\lambda_n^{(\mathrm{fin})}$ & $c_n = \lambda_n/n$ \\\hline
+1 & $0.023$ & $-0.554$ & $0.577$ & $0.023$ \\
+2 & $0.092$ & $-0.875$ & $0.967$ & $0.046$ \\
+3 & $0.208$ & $-1.013$ & $1.221$ & $0.069$ \\
+5 & $0.576$ & $-0.883$ & $1.458$ & $0.115$ \\
+8 & $1.466$ & $+0.021$ & $1.445$ & $0.183$ \\
+10 & $2.279$ & $+0.956$ & $1.324$ & $0.228$ \\
+13 & $3.817$ & $+2.725$ & $1.093$ & $0.294$ \\
+\end{tabular}
+\caption{Archimedisch-endliche Zerlegung der Li-Koeffizienten. Die Folge $c_n = \lambda_n/n$ ist streng monoton wachsend, was eine vollständige Monotonie ausschließt.}
+\label{tab:li-coefficients}
+\end{table}
+
+
+% =============================================================================
+\section{Das Paradoxon der archimedischen Dominanz}
+\label{sec:dominance}
+% =============================================================================
+
+\begin{proposition}[Stabilitäts-Zerlegung]
+\label{prop:stability}
+Die globale Krümmung $\mathcal{M}(\sigma) = \partial_s^2\log\xi(s)$ zerfällt als $\mathcal{M} = \mathcal{M}_{\mathrm{arith}} + \mathcal{M}_{\mathrm{arch}}$:
+\begin{enumerate}
+  \item \textbf{Arithmetische Instabilität:} $\mathcal{M}_{\mathrm{arith}}(1) = \sum_\rho \Re(1/\rho^2) < 0$.
+  \item \textbf{Archimedische Stabilität:} $\mathcal{M}_{\mathrm{arch}}(\sigma) > 0$ für $\sigma > 1/2$ (explizit positiv und konvex).
+\end{enumerate}
+\end{proposition}
+
+\noindent Die Riemannsche Vermutung ist äquivalent dazu, dass die archimedische Konvexität die arithmetische Konkavität für alle $\sigma > 1/2$ global dominiert. Dieses „Dominanz-Paradoxon“ --- ein offensichtlich positiver kontinuierlicher Term muss unendlich viele oszillierende arithmetische Beiträge überwinden --- ist der strukturelle Kern des Problems.
+
+
+% =============================================================================
+\section{Strukturelle Ergebnisse}
+\label{sec:structural}
+% =============================================================================
+
+Wir etablieren fünf unbedingte Ergebnisse, die das Problem einschränken und das Rüstzeug für nachfolgende Abschnitte und Arbeiten bilden.
+
+\subsection{Primsummen-Funktionale und der Gibbs-Rahmen}
+
+\begin{definition}[Arithmetisches Gibbs-Maß]
+Das Gibbs-Maß ist $\muG(p) = p^{-\sigma}/P(\sigma)$ mit $P(\sigma) = \sum_p p^{-\sigma}$. Die Primsummen-Funktionale sind:
+\begin{align*}
+A(\sigma) &:= \sum_p \frac{\log p}{p^\sigma(p^\sigma - 1)}, &
+B(\sigma) &:= \sum_p \frac{\log p}{p^\sigma},\\
+C(\sigma) &:= \sum_p \frac{(\log p)^2}{p^\sigma(p^\sigma - 1)}, &
+D(\sigma) &:= \sum_p \frac{(\log p)^2}{(p^\sigma - 1)^2}.
+\end{align*}
+\end{definition}
+
+\begin{lemma}[Konvergenz des endlichen Teils]
+\label{lem:convergence}
+$A(\sigma)$, $C(\sigma)$ und $D(\sigma)$ konvergieren absolut bei $\sigma = 1$ und sind rechtsstetig. $B(\sigma)$ und $P(\sigma)$ divergieren wie $\sim\log(1/(\sigma-1))$.
+\end{lemma}
+
+\begin{remark}[Gibbs-Normierungslücke]
+Das Gibbs-normierte Erwartungswert-Funktional $-A(\sigma)/P(\sigma)$ verliert die Information des endlichen Teils für $\sigma \to 1^+$: Die $1/P(\sigma)$-Normierung annihiliert $\lambda_n^{(\mathrm{fin})}$. Dies ist der erste Hinweis darauf, dass der thermodynamische Ansatz strukturelle Einschränkungen hat (siehe Abschnitt~\ref{sec:K1}).
+\end{remark}
+
+\subsection{Nicht-Identifikations-Theorem}
+
+\begin{proposition}[Nicht-Identifikation]
+\label{prop:non-ident}
+Die Überschuss-Freie-Energie $I_n := \lim_{\sigma \to 1^+}\Phi_n(\sigma)$ und der Li-Koeffizient $\lambda_n$ sind im Allgemeinen \emph{nicht} identisch: $I_n \neq \lambda_n$. Erstere ist eine KL-Divergenz (Tilt-Kosten), letzterer eine spektrale Spur von $\log\xi$.
+\end{proposition}
+
+\subsection{Varianz-Untergrenze}
+
+\begin{proposition}[Varianz-Schranke]
+\label{prop:variance}
+$I_1 \geq \frac{1}{2}V_1$ wobei $V_1 = \lim_{\sigma \to 1^+}\mathrm{Var}_{\muG}(H_{1,\sigma}) > 0$. Numerisch gilt $I_1 \geq 0.034 > \lambda_1 \approx 0.023$.
+\end{proposition}
+
+\subsection{OS-Reflexionspositivität}
+
+\begin{proposition}[OS-Reflexionspositivität]
+\label{prop:os}
+Die Osterwalder-Schrader-Form
+\[
+K(t,u) = \sum_{p \in \PP} w_p\,e^{-i(u-t)\log p}, \qquad w_p = \frac{p^{-(\sigma+1)}}{P(\sigma)} > 0,
+\]
+ist positiv definit auf $L^2_+(\mathbb{R})$. Der OS-Hilbertraum trägt eine kontraktive Halbgruppe $e^{-\tau H}$ mit $H = \mathrm{diag}(\log p)$.
+\end{proposition}
+
+\begin{proof}
+Nach dem Satz von Bochner gilt: $K(t,u) = \hat{\mu}(u-t)$ mit $\mu = \sum_p w_p\,\delta_{\log p}$ als positivem Maß, also $\int\!\!\int \bar{f}(t)f(u)K(t,u)\,dt\,du = \sum_p w_p|\hat{f}(\log p)|^2 \geq 0$.
+\end{proof}
+
+\subsection{Arithmetische Unschärferelation}
+
+\begin{heuristic}[Arithmetische Unschärferelation]
+\label{heur:uncertainty}
+Für normiertes $\psi \in \ell^2(\PP)$ definiere die Primzahlbereichs-Streuung $\Delta_D$ über $\Delta_D^2 = \sum_p |a_p|^2(\log p - \overline{\log p})^2$ und die Nullstellenbereichs-Streuung $\Delta_t$ über die Fourier-Transformierte $\hat\psi(t) = \sum_p a_p e^{-it\log p}$. Dann gilt $\Delta_D \cdot \Delta_t \geq 1/2$.
+\end{heuristic}
+
+\begin{remark}
+Dies folgt formal aus der Substitution $x_p = \log p$ und der Heisenberg-Kennard-Weyl-Ungleichung auf $L^2(\mathbb{R})$. Da jedoch $\psi$ auf der diskreten Menge $\{\log p : p \in \PP\}$ und nicht auf ganz $\mathbb{R}$ getragen wird, erfordert die Reduktion eine Einbettung in $L^2(\mathbb{R})$, deren Eigenschaften von der Verteilung der Primzahlen abhängen. Wir formulieren dies als heuristisches Prinzip, nicht als Theorem. Der physikalische Inhalt ist eine Konsistenzprüfung: Eine Nullstelle abseits der kritischen Geraden würde eine „lokalisierte Phasenverschwörung“ zwischen endlich vielen Primzahlen erfordern, was die arithmetische Inkommensurabilität von $\{\log p\}$ unplausibel macht, aber nicht rigoros ausschließt.
+\end{remark}
+
+\subsection{Strikte Konvexität und spektrale Bestandsaufnahme}
+
+\begin{proposition}[Strikte Konvexität]
+\label{prop:convexity}
+$F(\sigma) := -\log\zeta(\sigma)$ ist streng konvex auf $(1,\infty)$: $F''(\sigma) = \sum_p (\log p)^2 p^{-\sigma}/(1-p^{-\sigma})^2 > 0$.
+\end{proposition}
+
+\begin{proposition}[Spektrale Bestandsaufnahme]
+\label{prop:spectral-census}
+Für den symmetrisierten arithmetischen Kern $\Ksym$, abgeschnitten auf $N \geq 300$ Primzahlen und $\sigma \in (1, 5)$, ist der negative Trägheitsindex exakt $2$, unabhängig von $N$ und $\sigma$.
+\end{proposition}
+
+
+% =============================================================================
+\section{Der Eich-Äquivalenz-Rahmen}
+\label{sec:gauge}
+% =============================================================================
+
+Die spektrale Bestandsaufnahme (\Cref{prop:spectral-census}) schlägt einen Eich-Korrektur-Ansatz vor: Kann eine Korrektur vom Rang 2 die positive Semidefinitheit wiederherstellen?
+
+\begin{definition}[Zulässige Eichung]
+Ein symmetrischer Kern $G_\sigma$ auf $\PP \times \PP$ ist zulässig, wenn $\sum_{p,q}G_\sigma(p,q)\muG(p)\muG(q) = 0$ gilt.
+\end{definition}
+
+\begin{theorem}[Eich-Äquivalenz]
+\label{thm:gauge}
+Für festes $\sigma > 1$ sind folgende Aussagen äquivalent:
+\begin{enumerate}[label=(\roman*)]
+  \item Das Ziel-Funktional $F(\sigma) = A(\sigma)B(\sigma) - P(\sigma)[C(\sigma)+D(\sigma)] \geq 0$.
+  \item Es existiert eine zulässige Eichung, die $\Ksym + G_\sigma \succeq 0$ macht.
+\end{enumerate}
+\end{theorem}
+
+Diese tautologische Äquivalenz liefert die formale Struktur für den eich-theoretischen Ansatz. Ob dieser zu einem Ergebnis führt, hängt vom \emph{globalen} Verhalten von $F(\sigma)$ ab --- eine Frage, die in Abschnitt~\ref{sec:K2} behandelt wird, wo wir entdecken, dass $F(\sigma) < 0$ für $\sigma > 1.14$ gilt.
+
+
+% =============================================================================
+\section{Zusammenfassung: Die Ausgangsposition}
+\label{sec:summary}
+% =============================================================================
+
+Am Ende der Landschaftsanalyse haben wir das folgende Rüstzeug zusammengestellt:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{ll}
+\toprule
+\textbf{Ergebnis} & \textbf{Status} \\
+\midrule
+R1: Bombieri-Lagarias-Darstellung & bewiesen \\
+R2: Archimedisch-endliche Zerlegung & bewiesen \\
+R3: Nicht-Identifikation ($I_n \neq \lambda_n$) & bewiesen \\
+R4: Varianz-Untergrenze ($I_1 \geq \frac{1}{2}V_1$) & bewiesen \\
+R5: Arithmetische Unschärferelation & heuristisch \\
+R6: Strikte Konvexität von $-\log\zeta$ & bewiesen \\
+R7: OS-Reflexionspositivität & bewiesen \\
+R8: Spektrale Bestandsaufnahme (Index $= 2$) & numerisch \\
+R9: Eich-Äquivalenz (tautologisch) & bewiesen \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Hoffnung ist klar: Nutze den Eich-Rahmen (R9) zusammen mit der spektralen Bestandsaufnahme (R8), um ein globales Zertifikat zu konstruieren, das $\lambda_n \geq 0$ beweist. Die folgenden Abschnitte werden zeigen, dass diese Hoffnung durch einen Vorzeichenwechsel bei $\sigma_0 \approx 1.14$ zunichte gemacht wird --- dass aber ein völlig anderer Ansatz über die quadratische Weil-Form von Connes einen neuen und vielversprechenderen Weg eröffnet.
+
+
+% =============================================================================
+% =============================================================================
+%                     TEIL II: DIE SACKGASSEN
+% =============================================================================
+% =============================================================================
+
+\part*{Die Sackgassen}
+\addcontentsline{toc}{part}{Die Sackgassen}
+
+
+% =============================================================================
+\section{Die ursprüngliche Strategie}
+\label{sec:original-strategy}
+% =============================================================================
+
+Das Rüstzeug aus neun strukturellen Ergebnissen (R1--R9) und der oben etablierte Eich-Äquivalenz-Rahmen legen eine klare Beweisstrategie nahe:
+
+\begin{enumerate}
+  \item Nutze die spektrale Bestandsaufnahme (R8: negativer Trägheitsindex $= 2$), um die instabilen Moden zu identifizieren.
+  \item Konstruiere eine explizite Eich-Korrektur vom Rang 2, die die positive Semidefinitheit wiederherstellt.
+  \item Wende das Eich-Äquivalenz-Theorem (R9) an, um $\lambda_n \geq 0$ zu folgern.
+\end{enumerate}
+
+Diese Strategie scheitert an Schritt 2. In diesem Teil dokumentieren wir vier unabhängige Hindernisse, die sie unmöglich machen, und nutzen das daraus resultierende Verständnis, um die Schwierigkeit präzise zu lokalisieren.
+
+
+% =============================================================================
+\section{Sackgasse 1: Die Gibbs-Normierungslücke (K1)}
+\label{sec:K1}
+% =============================================================================
+
+Die thermodynamische Formulierung definiert den renormalisierten Constraint $m_n(\sigma) = \EE_{\muG}[X_{n,\sigma}] - h_n(\sigma)$, in der Hoffnung, dass $\lim_{\sigma \to 1^+} m_n(\sigma) = \lambda_n$ gilt.
+
+\begin{proposition}[K1: Kritische Identifikation scheitert]
+\label{prop:K1}
+Der Gibbs-normierte Erwartungswert $m_1(\sigma) = -A(\sigma)/P(\sigma) - h_1(\sigma)$ konvergiert für $\sigma \to 1^+$ \emph{nicht} gegen $\lambda_1$. Die $1/P(\sigma)$-Normierung annihiliert den Beitrag des endlichen Teils $\lambda_1^{(\mathrm{fin})} = \gamma \approx 0.577$.
+\end{proposition}
+
+\begin{proof}
+Die Zählersumme $S(\sigma) = \sum_p (\log p)p^{-\sigma}f(p,\sigma)$ konvergiert gegen einen endlichen Grenzwert, während $P(\sigma) \to \infty$ geht. Daher gilt $-S(\sigma)/P(\sigma) \to 0$. Der Li-Koeffizient $\lambda_1$ ergibt sich aus $\frac{d}{ds}\log\xi(s)|_{s=1}$, was $\zeta'(s)/\zeta(s) + 1/(s-1) \to \gamma$ beinhaltet --- eine Auslöschung, die \emph{vor} der Gibbs-Normierung erfolgt, nicht danach.
+\end{proof}
+
+\begin{remark}[Konsequenz]
+Die Überschuss-Freie-Energie $I_n$ und der Li-Koeffizient $\lambda_n$ sind strukturell unterschiedliche Objekte (\Cref{prop:non-ident}). Selbst $I_n \geq 0$ (was als KL-Divergenz unbedingt gilt) impliziert nicht $\lambda_n \geq 0$. Dies ist die „Konvexitätsfalle“: Nach der Bregman-Ungleichung ist $I_n \geq 0$ eine universelle Identität für jede streng konvexe erzeugende Funktion, unabhängig vom Vorzeichen $\mathrm{sign}(\lambda_n)$.
+\end{remark}
+
+
+% =============================================================================
+\section{Sackgasse 2: Globale Eich-Positivität scheitert (K2)}
+\label{sec:K2}
+% =============================================================================
+
+Das Eich-Äquivalenz-Theorem (R9) erfordert $F(\sigma) \geq 0$ für alle $\sigma > 1$.
+
+\begin{proposition}[K2: Vorzeichenwechsel von $F(\sigma)$]
+\label{prop:K2}
+Das Zielfunktional $F(\sigma) = A(\sigma)B(\sigma) - P(\sigma)[C(\sigma) + D(\sigma)]$ erfüllt:
+\begin{itemize}
+  \item $F(\sigma) > 0$ für $\sigma \in (1, \sigma_0)$ mit $\sigma_0 \approx 1.14$,
+  \item $F(\sigma) < 0$ für alle getesteten $\sigma > \sigma_0$ (Minimum $F \approx -0.184$ bei $\sigma \approx 1.28$).
+\end{itemize}
+Dieser Vorzeichenwechsel ist unabhängig von RH.
+\end{proposition}
+
+\begin{proof}
+Nahe $\sigma = 1 + \varepsilon$: $A \cdot B \sim 1/\varepsilon$ dominiert $P(C+D) \sim \log(1/\varepsilon)$, also $F > 0$. Für größere $\sigma$: $B(\sigma)$ fällt schneller ab als $P(\sigma)$, und das Produkt $AB$ fällt unter $P(C+D)$. Numerische Berechnungen mit $N = 10000$ Primzahlen und Rosser-Schoenfeld-Abschätzungen bestätigen den Übergang bei $\sigma_0 \approx 1.14$.
+\end{proof}
+
+\begin{remark}[Konsequenz]
+Die Behauptung „RH $\Leftrightarrow$ $F(\sigma) \geq 0$ für alle $\sigma > 1$“ ist \textbf{falsch}. Der Eich-Ansatz funktioniert nur in der Randschicht $(1, 1.14)$, nicht global. Keine zulässige Eichung kann $\Ksym$ für $\sigma > 1.14$ positiv semidefinit machen.
+\end{remark}
+
+
+% =============================================================================
+\section{Sackgasse 3: Falsche Monotonierichtung (K3)}
+\label{sec:K3}
+% =============================================================================
+
+Das ursprüngliche Argument nahm an, dass $\frac{d}{ds}\log\xi(\sigma)$ fallend ist, was $\lambda_1$ zum Maximum machen würde.
+
+\begin{proposition}[K3: Konvexität statt Konkavität]
+\label{prop:K3}
+$\frac{d^2}{ds^2}\log\xi(\sigma) \approx +0.046 > 0$ bei $\sigma = 1$. Die Funktion $\log\xi$ ist nahe $s = 1$ \emph{konvex}, nicht konkav. Daher ist $\lambda_1$ das \emph{Minimum} des Ableitungsprofils, nicht das Maximum.
+\end{proposition}
+
+\begin{remark}[Konsequenz]
+Dies kehrt die Logik des Monotonie-Arguments um: Anstatt $\lambda_1 \geq 0$ zu zeigen, indem man das Maximum von unten abschätzt, müsste man das Minimum von unten abschätzen --- ein wesentlich schwierigeres Problem.
+\end{remark}
+
+
+% =============================================================================
+\section{Sackgasse 4: Die Stieltjes-Realisierung und A8 (K4)}
+\label{sec:K4}
+% =============================================================================
+
+\subsection{Pfad D2: Stieltjes-Realisierung}
+
+\begin{proposition}[K4a: Vollständige Monotonie scheitert]
+Die Folge $c_n = \lambda_n/n$ ist \emph{streng monoton wachsend}: $c_1 \approx 0.023$, $c_{13} \approx 0.294$, mit $c_n \sim \frac{1}{2}\log n$ asymptotisch. Dies verletzt die vollständige Monotonie bei $k = 1$ ($\Delta c_n > 0$, also $(-1)^1\Delta c_n < 0$). Der Stieltjes-Realisierungs-Ansatz mit einem Maß auf $[0,1]$ ist ausgeschlossen.
+\end{proposition}
+
+Unter RH lebt das spektrale Maß auf dem Einheitskreis $|w_\rho| = 1$, nicht auf $[0,1]$. Die Positivität von $c_n$ ist eine essenziell zahlentheoretische Eigenschaft.
+
+\subsection{K4b: Inkonsistenz des ursprünglichen A8}
+
+\begin{proposition}[Hardy-Widerspruch]
+\label{prop:hardy}
+Das ursprüngliche Axiom A8 postuliert $\mathcal{K}_0 \geq 0$ in der Spurklasse mit $\xi(1/2+it) = C\cdot\det(I + V_t\mathcal{K}_0V_t^*)$. Aber $\mathcal{K}_0 \geq 0$ impliziert $\det(I + V_t\mathcal{K}_0V_t^*) \geq 1 > 0$ für alle reellen $t$. Dies widerspricht dem Satz von Hardy (1914): $\xi$ hat unendlich viele Nullstellen auf der kritischen Geraden.
+\end{proposition}
+
+\subsection{Das Spurklassen-Hindernis}
+
+Das korrigierte Axiom A8$'$ erfordert $\xi(s)/\xi(0) = \det(I - \mathcal{L}_s)$ mit nuklearem $\mathcal{L}_s$. Das Euler-Produkt ergibt jedoch $\mathcal{L}_s = \mathrm{diag}(p^{-s})$ auf $\ell^2(\PP)$, was nur für $\Re(s) > 1$ von der Spurklasse ist ($\sum_p p^{-1/2} = +\infty$).
+
+Für die Selbergsche Zetafunktion funktioniert die analoge Konstruktion, weil die Längen der Geodäten exponentiell wachsen ($\#\{\gamma: l_\gamma \leq T\} \sim e^T/T$), während die Primzahl-„Längen“ $\log p$ zu dicht sind ($\pi(x) \sim x/\log x$). Diese Dichtelücke ist das fundamentale Hindernis.
+
+
+% =============================================================================
+\section{Routenanalyse: Was überlebt}
+\label{sec:routes}
+% =============================================================================
+
+Das Axiomensystem (definiert in Teil~II) lässt zwei logische Wege zu RH zu:
+
+\begin{description}[font=\bfseries,leftmargin=2em]
+  \item[Route 1 (A7 + A8$'$):] A7 (OS-Reflexionspositivität) ist \textbf{bewiesen}. A8$'$ (nukleare Fredholm-Determinante für $\xi$) bleibt \textbf{offen} und steht vor dem Spurklassen-Hindernis.
+  \item[Route 2 (A9):] \textbf{Tot.} A9(i--ii) gelten, aber A9(iii) wird durch K1 und die Konvexitätsfalle zerstört.
+\end{description}
+
+
+% =============================================================================
+\section{Die Lokalisierungstabelle}
+\label{sec:localization}
+% =============================================================================
+
+Wir verfolgen die Logikkette von den Definitionen zu RH und identifizieren genau, wo sich die Schwierigkeit konzentriert.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c|l|l|l}
+\textbf{Schritt} & \textbf{Aussage} & \textbf{Status} & \textbf{Methode} \\\hline
+S1 & Definiere $\xi(s)$ & bewiesen & Definition \\
+S2 & $\lambda_n$ über Bombieri-Lagarias & bewiesen & \cite{BombieriLagarias1999} \\
+S3 & $\lambda_n = \lambda_n^{(\infty)} + \lambda_n^{(\mathrm{fin})}$ & bewiesen & Abschnitt~\ref{sec:li-coefficients} \\
+S4 & $\lambda_n^{(\infty)} \sim \frac{n}{2}\log n$ für großes $n$ & bewiesen & Stirling \\
+\textbf{S5} & \textbf{$\lambda_n \geq 0$ für alle $n \geq 1$} & \textbf{OFFEN} & \textbf{$\Longleftrightarrow$ RH} \\
+S6 & Alle Nullstellen auf $\Re(s) = 1/2$ & $\Leftrightarrow$ S5 & Li (1997) \\
+S7 & $\pi(x) = \mathrm{Li}(x) + O(\sqrt{x}\log x)$ & $\Leftarrow$ S6 & von Koch \\
+S8 & Spektrale Bestandsaufnahme (Index $= 2$) & numerisch & Abschnitt~\ref{sec:structural} \\
+S9 & Eich-Äquivalenz (tautologisch) & bewiesen & Abschnitt~\ref{sec:gauge} \\
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Fazit:} Der \emph{gesamte} Inhalt der Riemannschen Vermutung konzentriert sich in Schritt S5. Alles davor ist unbedingt gültig; alles danach ist entweder äquivalent oder eine Konsequenz. Das FST-RH-Programm hat S5 nicht auf eine einfachere Aussage reduziert.
+
+
+% =============================================================================
+\section{Fünf offene Probleme}
+\label{sec:open-problems}
+% =============================================================================
+
+Basierend auf unserer Analyse formulieren wir fünf konkrete offene Probleme, geordnet nach der geschätzten Schwierigkeit:
+
+\begin{conjecture}[OP1: Analytischer Beweis der Indexstabilität]
+Der negative Trägheitsindex von $\Ksym$ ist exakt $2$ für alle hinreichend großen $N$ und $\sigma \in (1, \sigma_{\max})$. Ein Beweis sollte die Rang-2-Hub-Struktur des Transferoperators ausnutzen.
+\end{conjecture}
+
+\begin{conjecture}[OP2: Gleichmäßige Schranke für $\lambda_n^{(\mathrm{fin})}$]
+$\lambda_n^{(\mathrm{fin})} > 0$ für alle $n \geq 1$. Dies wird durch die numerische Beobachtung gestützt, dass $\lambda_n^{(\mathrm{fin})}$ immer positiv ist, mit langsamem algebraischem Abfall.
+\end{conjecture}
+
+\begin{conjecture}[OP3: Wachstumsrate]
+$\lambda_n^{(\infty)} \sim \frac{n}{2}\log n$ mit expliziten Fehlerschranken, gleichmäßig in $n$. Dies würde RH für alle $n$ oberhalb einer expliziten Schwelle klären.
+\end{conjecture}
+
+\begin{conjecture}[OP4: Positivität für kleine $n$]
+$\lambda_n > 0$ für $n = 1, \ldots, n_0$ (ein explizites $n_0$) unkonditioniert --- ohne RH vorauszusetzen. Die ersten $10^4$ Koeffizienten sind als positiv bekannt \cite{Keiper1992}.
+\end{conjecture}
+
+\begin{conjecture}[OP5: Nuklearer Transferoperator für $\xi$]
+Konstruiere einen separablen Hilbertraum $\mathcal{V}$ und eine nukleare Familie $s \mapsto \mathcal{L}_s$ mit $\xi(s)/\xi(0) = \det(I - \mathcal{L}_s)$, Spektralradius $< 1$ für $\Re(s) > 1/2$ und Eigenwert $1$ an den Nullstellen.
+\end{conjecture}
+
+OP5 ist im Wesentlichen das Hilbert-Pólya-Programm und verbindet sich mit Deningers foliierten Räumen \cite{Deninger2002} und dem adelischen Ansatz von Connes \cite{Connes1999}.
+
+
+% =============================================================================
+\section{Neuausrichtung: Das Spektralprogramm von Connes}
+\label{sec:reorientation}
+% =============================================================================
+
+Das Scheitern des eich-theoretischen Ansatzes (K1--K4) erzwingt eine grundlegende Neuausrichtung. Eine aktuelle Übersicht von Connes \cite{Connes2025} bietet einen neuen Weg: Die quadratische Weil-Form $\mathrm{QW}_\lambda$ auf $L^2([-\log\lambda, \log\lambda])$, konstruiert aus der expliziten Formel von Weil, definiert einen selbstadjungierten Operator $A_\lambda$, dessen spektrale Eigenschaften direkt mit den Nullstellen von $\zeta$ verknüpft sind.
+
+\begin{theorem}[Connes, Theorem 6.1 in \cite{Connes2025}]
+Wenn der kleinste Eigenwert von $A_\lambda$ einfach ist und eine gerade Eigenfunktion besitzt, dann liegen alle Nullstellen der Fourier-Transformierten der Eigenfunktion auf der reellen Geraden.
+\end{theorem}
+
+Connes' Abschnitt 6.6 identifiziert die Verifizierung dieser \emph{Eigenschaft der Dominanz gerader Eigenfunktionen} als den verbleibenden offenen Schritt. Entscheidend ist, dass das Hurwitz-Argument von Connes die Dominanz gerader Eigenfunktionen nur entlang einer Folge $\lambda_n \to \infty$ erfordert, nicht für alle $\lambda$.
+
+Hier zahlt sich die thermodynamische Erkenntnis auf unerwartete Weise aus: Die Zerlegungsanalyse aus den Landschaftsabschnitten (die Primsummen-Funktionale, die trigonometrische Struktur der Shift-Operatoren) wird zum Schlüssel des Verständnisses, \emph{warum} die Dominanz gerader Eigenfunktionen gilt. Teil~II entwickelt dies vollständig und etabliert das Shift-Parity-Lemma, den Frontier-Primzahl-Mechanismus und computergestützte Beweise der Dominanz für 33 Werte von $\lambda$ bis zu $1{,}300{,}000$.
+
+\begin{remark}[Verzweiflung als Keim der Hoffnung]
+Der eich-theoretische Ansatz scheiterte, weil er versuchte, eine \emph{globale} Aussage ($\lambda_n \geq 0$ für alle $n$) über ein \emph{lokales} Werkzeug (das Gibbs-Maß nahe $\sigma = 1$) zu beweisen. Der Ansatz von Connes ist dort erfolgreich, wo der Eichansatz scheitert, weil er direkt im Spektralbereich von $A_\lambda$ arbeitet, wo die Gerade-Ungerade-Zerlegung eine natürliche Struktur bietet. Das Shift-Parity-Lemma (Teil~II) zeigt, dass diese Struktur fundamental algebraisch und nicht analytisch ist.
+\end{remark}
+
+
+% =============================================================================
+\section{Fazit}
+\label{sec:conclusion}
+% =============================================================================
+
+Diese Arbeit hat sowohl ein Rüstzeug als auch ein ehrliches Scheitern dokumentiert. Der eich-theoretische Ansatz zur Riemannschen Vermutung erzeugte echte strukturelle Einsichten (R1--R9), kann aber die Lücke zwischen der lokalen thermodynamischen Analyse und der globalen spektralen Positivität, die das Li-Kriterium erfordert, nicht schließen. Vier unabhängige Hindernisse (K1--K4) machen die ursprüngliche Strategie zunichte, und die Lokalisierungstabelle zeigt, dass keine Reduktion auf ein einfacheres Problem erreicht wurde: Die Schwierigkeit bleibt in Schritt S5 konzentriert.
+
+Dennoch ist das Scheitern produktiv:
+\begin{enumerate}
+  \item Die Landschaftsanalyse (Abschnitte~\ref{sec:thermodynamic}--\ref{sec:gauge}) etabliert ein dauerhaftes Rüstzeug unbedingter struktureller Ergebnisse.
+  \item Die Sackgassen (K1--K4) sind klar kartografiert, was andere daran hindert, sie weiter zu verfolgen.
+  \item Die Neuausrichtung auf das Programm von Connes nutzt die thermodynamische Erkenntnis (Prim-Shift-Operatoren, trigonometrische Struktur) in einem neuen Kontext.
+  \item Das Verständnis, dass die Dominanz gerader Eigenfunktionen durch Primzahlbeiträge und nicht durch archimedische Effekte getrieben wird, ergab sich direkt aus der Zerlegungsanalyse.
+\end{enumerate}
+
+Teil~II nimmt den neuen Faden auf: das Shift-Parity-Lemma, der computergestützte Beweis der Dominanz gerader Eigenfunktionen und die Identifizierung des kumulativen Schritts als die verbleibende Herausforderung. Teil~III zieht die endgültige Bilanz darüber, was bewiesen wurde, was ausgeschlossen wurde und was offen bleibt.
+
+
+\section*{KI-Offenlegung}
+
+Dieses Manuskript wurde in umfassender Zusammenarbeit mit KI-Sprachmodellen (Claude, Anthropic) erstellt. Die KI trug zur konzeptionellen Exploration, analytischen Arbeit, Literaturrecherche, Texterstellung und kritischen \"Uberpr\"ufung bei. Der Autor, Lukas Geiger, hat die Forschungsrichtung konzipiert, seine Fachexpertise eingebracht und die finale redaktionelle Entscheidungsgewalt ausge\"ubt. Der Autor \"ubernimmt die alleinige wissenschaftliche Verantwortung f\"ur den gesamten Inhalt einschlie\ss{}lich etwaiger Fehler.
+
+
+\begin{thebibliography}{99}
+
+\bibitem{Li1997}
+X.-J.~Li, \emph{The positivity of a sequence of numbers and the Riemann hypothesis}, J.~Number Theory~\textbf{65} (1997), 325--333.
+
+\bibitem{BombieriLagarias1999}
+E.~Bombieri and J.~C.~Lagarias, \emph{Complements to Li's criterion for the Riemann hypothesis}, J.~Number Theory~\textbf{77} (1999), 274--287.
+
+\bibitem{Ruelle1976}
+D.~Ruelle, \emph{Zeta-functions for expanding maps and Anosov flows}, Invent.~Math.~\textbf{34} (1976), 231--242.
+
+\bibitem{Keiper1992}
+J.~B.~Keiper, \emph{Power series expansions of Riemann's $\xi$ function}, Math.~Comp.~\textbf{58} (1992), 765--773.
+
+\bibitem{Connes1999}
+A.~Connes, \emph{Trace formula in noncommutative geometry and the zeros of the Riemann zeta function}, Selecta Math.~\textbf{5} (1999), 29--106.
+
+\bibitem{Connes2025}
+A.~Connes, \emph{Prolate and the Riemann zeta function}, arXiv:2602.04022v1, 2026.
+
+\bibitem{Deninger2002}
+C.~Deninger, \emph{On the nature of the ``explicit formulas'' in analytic number theory}, Banach Center Publ.~\textbf{57} (2002), 97--118.
+
+\bibitem{Geiger2026partII}
+L.~Geiger, \emph{Gerade Dominanz der quadratischen Weil-Form: Spektralanalyse, computergestützter Beweis und das Resolventen-Gap-Theorem}, 2026.
+
+\bibitem{Geiger2026partIII}
+L.~Geiger, \emph{Das FST-RH Framework: Conclusio}, 2026.
+
+\end{thebibliography}
+
+\end{document}
