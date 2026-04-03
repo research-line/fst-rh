@@ -27,8 +27,9 @@ _partners/
 CORE.txt
 removed_sections/
 
-# PDFs (rebuild from .tex; only source files tracked)
+# PDFs (ignore generated PDFs everywhere EXCEPT paper/)
 *.pdf
+!paper/*.pdf
 
 # Internal temp files
 _zenodo_draft_id.txt
