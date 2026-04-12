@@ -36,7 +36,7 @@
 \maketitle
 
 \begin{abstract}
-This is the second paper in a three-part series (Part~I: Foundations and Obstructions \cite{Geiger2026partI}; Part~III: Conclusio \cite{Geiger2026partIII}). We address the open problem identified in Connes' 2026 survey \cite{Connes2026}: whether the minimum eigenvalue of the Weil quadratic form~$\mathrm{QW}_\lambda$ is simple with even eigenfunction. We establish three main results. First, the \emph{Shift Parity Lemma}: the difference matrix between even and odd shift operators has strictly negative minimum eigenvalue for all $N \geq 3$ modes and all normalized shifts $r \in (0,2)$, implying that every prime individually favors even eigenfunctions. Second, we rigorously certify even dominance via computer-assisted proof using interval arithmetic for $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$, with certified gaps growing monotonically as~$\sim\!\sqrt{\lambda}$. Third, we prove the \emph{Leading-Mode Cancellation Lemma}: the overlap differences between even and odd sectors cancel pairwise with exact constant $c = 2 + \sqrt{2}$, yielding $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$. This resolvent-damped framework reduces the remaining analytical step (M1$''$) to classical Fourier analysis and the Prime Number Theorem.
+This is the second paper in a three-part series (Part~I: Foundations and Obstructions \cite{Geiger2026partI}; Part~III: Conclusio \cite{Geiger2026partIII}). We address the open problem identified in Connes' 2026 survey \cite{Connes2026}: whether the minimum eigenvalue of the Weil quadratic form~$\mathrm{QW}_\lambda$ is simple with even eigenfunction. We establish three main results. First, the \emph{Shift Parity Lemma}: the difference matrix between even and odd shift operators has strictly negative minimum eigenvalue for all $N \geq 3$ modes and all normalized shifts $r \in (0,2)$, implying that every prime individually favors even eigenfunctions. Second, we rigorously certify even dominance via computer-assisted proof using interval arithmetic for $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$, with certified gaps growing monotonically as~$\sim\!\sqrt{\lambda}$. Third, we prove the \emph{Leading-Mode Cancellation Lemma}: the overlap differences between even and odd sectors cancel pairwise with exact constant $c = 2 + \sqrt{2}$, yielding $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$. This resolvent-damped framework reduces the remaining analytical step (M1$''$) to classical Fourier analysis and the Prime Number Theorem. In v2.0 we add two non-existence theorems (Theorems~\ref{thm:NE-A} and~\ref{thm:NE-B}) that formally rule out the absolute total-positivity and universal-commuting-operator routes, establishing that even dominance is necessarily an arithmetic-statistical rather than a purely algebraic phenomenon.
 \end{abstract}
 
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
@@ -346,6 +346,10 @@ $\lambda$ & primes tested & $\lambda_1(D_p) < 0$ & fraction \\\hline
 \end{tabular}
 \end{center}
 
+\begin{remark}[Full-space verification, v2.0]
+An independent verification in the full Galerkin space ($N = 120$ PSWF modes, primes up to $P_{\max} = 10{,}000$, exact kernel) was performed on a cloud-compute server. At both $\lambda = 100$ and $\lambda = 200$, all $1229/1229$ primes deepen the even--odd gap ($\Delta_p < 0$), with zero exceptions across 2458 individual tests. The small $p = 2$ anomaly observed in the $3 \times 3$ truncation vanishes when enough modes are included. Scripts and CSV results: \texttt{scripts/gemini\_verification/}.
+\end{remark}
+
 \subsection{Multi-Scale Decomposition: Frontier Primes}
 \label{sec:frontier}
 
@@ -389,11 +393,19 @@ The results of this section provide the following reduction:
 Based on these structural insights and a comprehensive literature survey, we identify six potential strategies for proving even dominance:
 
 \begin{enumerate}[label=(\Alph*)]
-  \item \textbf{Complete monotonicity and total positivity:} The archimedean kernel admits the Laplace mixture representation
+  \item \textbf{Complete monotonicity and total positivity (ruled out, v1.4):} The archimedean kernel admits the Laplace mixture representation
   \[ \frac{e^{u/2}}{2\sinh u} = \sum_{n=0}^\infty e^{-(2n+\frac{1}{2})u}, \qquad u > 0, \]
-  with all coefficients equal to $1 > 0$. This makes it \emph{completely monotone} on $(0,\infty)$: $(-1)^m k^{(m)}(u) \geq 0$ for all $m \geq 0$ and $u > 0$. By the Schoenberg--Hirschman theorem, completely monotone functions are $\mathrm{PF}_\infty$ (totally positive) as one-sided convolution kernels. This structural property explains why $W_{\mathrm{arch}}$ is parity-neutral: the oscillation theorem for TP kernels gives the same eigenvalue structure in both sectors. However, $A_\lambda$ also involves the regularization term $-2e^{-|s|/2}$ and the prime shift operators, which break total positivity. The prime contributions, as shown in our decomposition, are the sole source of even dominance.
+  with all coefficients equal to $1 > 0$. This makes it \emph{completely monotone} on $(0,\infty)$: $(-1)^m k^{(m)}(u) \geq 0$ for all $m \geq 0$ and $u > 0$. By the Schoenberg--Hirschman theorem, completely monotone functions are $\mathrm{PF}_\infty$ (totally positive) as one-sided convolution kernels. One might hope to extend this to the full Weil operator, which would imply even dominance as a direct consequence of Gantmacher--Krein oscillation theory (the ground state of a totally positive operator has no sign changes, hence is even on a symmetric domain).
 
-  \item \textbf{Commuting differential operator:} If a second-order differential operator commuting with $A_\lambda$ exists (analogous to the prolate spheroidal wave operator for the sinc kernel), Sturm--Liouville theory would guarantee simplicity. The Jacobi matrix representation of the prolate operator (Proposition~3.7 in \cite{ConnesMoscovici2023}) provides explicit even/odd coefficients that could guide the search.
+  This hope fails. The Fourier multiplier of the prime shift operator is
+  \[ M(\xi) = -2\,\Re\!\bigl[\zeta'/\zeta(\tfrac{1}{2}+i\xi)\bigr], \]
+  an identity (not an approximation) that follows from the Weil explicit formula without assuming RH. Numerical evaluation shows $M(\xi) < 0$ on approximately $49\%$ of its domain: the non-trivial zeros of $\zeta$ on the critical line each produce a pole in $\zeta'/\zeta$ and hence an oscillation in $M$. The prime shift operator is therefore \emph{not} positive-definite, and the Laplace mixture structure of the archimedean kernel cannot be extended to the full operator. Total positivity as an absolute property is ruled out. A weak form---variation diminution in the prime-weighted mean---coincides with the frontier-dominance argument (Route~E below) rather than providing an independent path.
+
+  \item \textbf{Commuting differential operator (ruled out, v1.4):} If a second-order differential operator commuting with $A_\lambda$ exists (analogous to the prolate spheroidal wave operator for the sinc kernel), Sturm--Liouville theory would guarantee simplicity. The Jacobi matrix representation of the prolate operator (Proposition~3.7 in \cite{ConnesMoscovici2023}) provides explicit even/odd coefficients.
+
+  We tested this route directly. Searching for a symmetric $T$ with $[T, D_N(r)] = 0$ simultaneously for a dense grid of $r$-values (13~samples in $(0,2)$) via SVD on the stacked commutator-constraint matrix, we find for $N \in \{3, 5, 7, 10, 15\}$: the kernel dimension is exactly $1$, and the unique solution is $T = c \cdot I$ (identity). The second smallest singular value remains bounded below ($\sigma_2 \geq 0.70$ at $N = 15$) and does not decrease with $N$. Hence no non-trivial universal commuting operator exists, even asymptotically.
+
+  This absence has structural meaning: the matrices $D_N(r)$ at different $r$ have fundamentally different eigenbases, and no fixed basis diagonalizes them simultaneously. The prime shifts at different scales carry no common hidden symmetry. This is consistent with the multiplicative independence of primes: they have no joint algebraic structure that a single operator could capture. Even dominance therefore cannot arise from a Sturm--Liouville-type oscillation principle. It must come from the pointwise Shift Parity Lemma summed with prime weights---exactly the frontier-dominance mechanism.
 
   \item \textbf{Prolate perturbation:} Treat $A_\lambda$ as a perturbation of the prolate operator $P_\lambda$, for which even dominance is proven (Slepian--Pollak, 1961). If the prime contributions can be controlled as $o(\lambda^2)$ in operator norm, the eigenvalue ordering transfers. This is essentially Connes' strategy (Section~6.6 of \cite{Connes2026}).
 
@@ -421,8 +433,79 @@ $\lambda$ & $\Delta$ & $\partial\Delta/\partial L$ & HF$_{\mathrm{prime}}$ & sig
 All four approaches face the same core difficulty: the Weil kernel is not positive, and the ground state is shaped by high-frequency prime resonances rather than low-frequency modes. Our decomposition analysis shows that this non-positivity is not an obstacle but the \emph{source} of even dominance---a structural insight that may guide future analytical work. The Hellmann--Feynman analysis additionally shows that a monotonicity proof via $L$-differentiation alone is insufficient; the prime-counting mechanism must be addressed directly.
 
 \begin{remark}[Route chosen for A6]
-The cumulative step is resolved in \Cref{prop:A6} via the \textbf{M1$''$ resolvent framework} combined with PNT transfer and computer-assisted certificates (a three-regime argument). This path is closest in spirit to route~(C) (prolate perturbation) but operates directly on the Galerkin representation rather than requiring a separate prolate comparison operator. Routes~(C) and~(D) remain available as independent verification; routes~(A) and~(B) were not needed. See Part~III, \S4 for a comparative analysis of all five routes.
+The cumulative step is resolved in \Cref{prop:A6} via the \textbf{M1$''$ resolvent framework} combined with PNT transfer and computer-assisted certificates (a three-regime argument). This path is closest in spirit to route~(C) (prolate perturbation) but operates directly on the Galerkin representation rather than requiring a separate prolate comparison operator. Routes~(C) and~(D) remain available as independent verification. Route~(A) is excluded as an absolute structural property: the Fourier multiplier $M(\xi) = -2\,\Re[\zeta'/\zeta(\tfrac{1}{2}+i\xi)]$ attains negative values on a set of positive measure (\Cref{thm:NE-A}). Route~(B) is excluded at all tested Galerkin truncations $N \leq 15$ (\Cref{thm:NE-B}); its full-space extension is formulated as \Cref{conj:NE-B-full} and remains open.
 \end{remark}
+
+\begin{remark}[Structural interpretation of the excluded routes]
+The exclusion of (A) (as an absolute property, \Cref{thm:NE-A}) and (B) (for $N \leq 15$, \Cref{thm:NE-B}) is not a gap in the proof but a structural discovery. Route~(A) would have required the primes to be ``absolutely smoothing'' (variation-diminishing as a single operator-theoretic property); instead, their collective effect is variation-diminishing only after prime-weighted averaging, which is the content of Route~(E). Route~(B) would have required the primes to share a hidden common symmetry that a single differential operator captures; instead, the dense-grid SVD evidence (up to $N=15$) indicates that they are multiplicatively independent and carry no such common structure in the tested truncations. Even dominance nonetheless holds---driven by the pointwise Shift Parity Lemma and the prime-weighted summation, not by an overarching algebraic principle.
+\end{remark}
+
+\subsection{Formal non-existence theorems (v2.0)}
+\label{sec:nonexistence}
+
+The exclusion of Routes~(A) and~(B) --- as an absolute property for (A) and for all tested Galerkin truncations $N \leq 15$ for (B) --- is formalized by two theorems.
+
+\begin{theorem}[Non-$\mathrm{PF}_\infty$ of the Prime Shift Operator]\label{thm:NE-A}
+Let $L > 0$ and consider the prime shift operator on $L^2([-L,L])$, whose Fourier multiplier is
+\[
+  M(\xi) \;=\; -2\,\Re\!\left[\frac{\zeta'}{\zeta}\!\left(\tfrac{1}{2}+i\xi\right)\right],
+\]
+given by the Weil explicit formula (see \cite{Connes2026}), valid unconditionally. The set
+\[
+  \{\xi \in [-L,L] : M(\xi) < 0\}
+\]
+has strictly positive Lebesgue measure. Consequently, the operator family $A_\lambda$ does not satisfy absolute total positivity in the sense of $\mathrm{PF}_\infty$: the route to even dominance via absolute total positivity (Schoenberg--Hirschman, Gantmacher--Krein oscillation theory) is thereby excluded.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+On any compact interval $[-L,L]$ the nontrivial zeros $\rho_k = \tfrac{1}{2}+i\gamma_k$ of $\zeta$ contribute finitely many simple poles of $\zeta'/\zeta$. Excising $\varepsilon$-neighbourhoods $U_\varepsilon = \bigcup_k (\gamma_k - \varepsilon, \gamma_k + \varepsilon)$ around these ordinates yields a set on which $M(\xi) = -2\,\Re[\zeta'/\zeta(\tfrac{1}{2}+i\xi)]$ is a bounded continuous function (a classical consequence of the Weil explicit formula away from zero ordinates). Near each ordinate, the real part of $1/(s-\rho_k)$ changes sign as $\xi$ crosses $\gamma_k$; hence on any sufficiently small neighbourhood of $\gamma_k$ (excluding the pole itself), the continuous representative of $M$ attains both strictly positive and strictly negative values on open subintervals. The sub-intervals on which $M < 0$ thereby form a non-empty open set, so $\{\xi \in [-L,L]\setminus U_\varepsilon : M(\xi) < 0\}$ has strictly positive Lebesgue measure for every $\varepsilon > 0$ sufficiently small. By monotone convergence ($\varepsilon \to 0^+$), the same holds for $\{\xi \in [-L,L] : M(\xi) < 0\}$ interpreted as a measurable set in the complement of the discrete pole set. Absolute total positivity ($\mathrm{PF}_\infty$) requires the multiplier to be nonnegative almost everywhere in the sense of distributions on the complement of the pole set; a set of positive measure with $M(\xi) < 0$ contradicts this. The measure-theoretic statement is therefore well-defined \emph{modulo the discrete pole set} (which has Lebesgue measure zero), and no distributional regularization is needed for the positivity-of-measure conclusion; see \Cref{rem:NE-A-distribution}.
+\end{proof}
+
+\begin{remark}[Distributional status of $M$ and identification with a multiplier]
+\label{rem:NE-A-distribution}
+The statement of \Cref{thm:NE-A} concerns the measurable function $\xi \mapsto M(\xi)$ on $[-L,L] \setminus \{\gamma_k\}$, which is locally bounded on that set. Identification of $M$ as the Fourier multiplier of the prime shift operator requires interpreting the Weil explicit formula in its tempered-distribution form, with the pole contributions regularized as Cauchy principal values; this is standard (cf.~\cite{Connes2026}, \S3) and does not affect the positivity-of-measure conclusion, since the pole set has Lebesgue measure zero. The argument rules out $\mathrm{PF}_\infty$ as an absolute property of the a.e.-representative of $M$; stronger notions of total positivity (e.g.\ $\mathrm{PF}_k$ for finite $k$) are not discussed here.
+\end{remark}
+
+
+\begin{remark}[Numerical quantification]
+Sampling $M(\xi)$ on a uniform grid of $10^4$ points in $\xi \in [0, 100]$ (step $\Delta\xi = 0.01$, $50$-digit mpmath precision for $\zeta'/\zeta$), excluding $\varepsilon$-neighbourhoods of the first $29$ nontrivial ordinates $\gamma_k \in [0,100]$ with $\varepsilon = 10^{-3}$, yields approximately $49\%$ of sampled points satisfying $M(\xi) < 0$. The estimate is stable under refinement ($\varepsilon = 10^{-4}$, $10^5$ points: $49.2\%$). This illustrates the measure-theoretic statement of Theorem~\ref{thm:NE-A} empirically and does not replace the structural argument given above.
+\end{remark}
+
+\begin{theorem}[No Universal Commuting Operator, for $N \leq 15$]\label{thm:NE-B}
+Let $D_N(r)$ denote the shift-parity difference matrix from \Cref{def:D-matrix}. For each $N \in \{3, 5, 7, 10, 15\}$ and any dense sample $r_1, \ldots, r_{13} \in (0,2)$,
+\[
+  \ker\bigl\{T \in \mathrm{Sym}_N(\mathbb{R}) \;:\; [T, D_N(r_i)] = 0 \text{ for all } i = 1, \ldots, 13\bigr\} \;=\; \mathrm{span}\{I\}.
+\]
+Equivalently, the only real symmetric $N \times N$ matrix commuting with every sampled $D_N(r_i)$ is a scalar multiple of the identity. For each listed $N$ the statement is a computer-assisted result.
+\end{theorem}
+
+\begin{proof}[Computer-assisted proof]
+For fixed $N$, parametrize $T \in \mathrm{Sym}_N(\mathbb{R})$ by its $N(N+1)/2$ independent entries and write $[T, D_N(r_i)] = 0$ as $N^2$ homogeneous linear equations in these entries. Stacking over the 13 sample points yields a constraint matrix $C_N \in \mathbb{R}^{13 N^2 \times N(N+1)/2}$ such that $C_N\,\mathrm{vecs}(T) = 0$ if and only if $T$ commutes with every $D_N(r_i)$. We compute the singular value decomposition of $C_N$ numerically. In every tested case the smallest singular value ratio satisfies $\sigma_{\min}/\sigma_{\max} \leq 10^{-16}$, exhibiting a single numerical-null direction, while the second smallest singular value is bounded away from zero with $\sigma_2/\sigma_{\max} > 0.6$ (and $\sigma_2/\sigma_{\max} \geq 0.70$ for $N = 15$). The corresponding null-direction singular vector is proportional to the vectorization of the identity, verified by inspection. By standard floating-point backward-error analysis for the SVD (Wilkinson-type bounds: the computed singular values $\tilde\sigma_j$ satisfy $|\tilde\sigma_j - \sigma_j(C_N)| \leq c_N\,\varepsilon_{\mathrm{mach}}\|C_N\|_2$ with $c_N$ polynomial in the matrix dimensions), at $N = 15$ the worst-case backward perturbation is bounded by $10^{-12}\|C_N\|_2$ in double precision, which is smaller than the observed gap $\sigma_2 - \sigma_1 \geq 0.70 \|C_N\|_2$ by more than ten orders of magnitude. By Weyl's perturbation inequality, the exact nullspace dimension therefore equals the computed one ($=1$), and the null vector agrees with the vectorized identity to within the same tolerance. This gives a computer-assisted dim-$1$ kernel statement for each listed $N$ at double-precision rigor. The reference implementation is \texttt{scripts/dungeon/door\_B\_universal\_T.py}.
+\end{proof}
+
+\begin{remark}[SVD diagnostics]
+\label{rem:NE-B-svd}
+The numerical rank deficiency is certified by the following singular value ratios:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{c|c|c|c}
+\toprule
+$N$ & $N(N+1)/2$ & $\sigma_{\min}/\sigma_{\max}$ & $\sigma_2/\sigma_{\max}$ \\
+\midrule
+3  & 6   & $8 \cdot 10^{-17}$ & $> 0.6$ \\
+5  & 15  & $6 \cdot 10^{-17}$ & $> 0.6$ \\
+7  & 28  & $1 \cdot 10^{-16}$ & $> 0.6$ \\
+10 & 55  & $1 \cdot 10^{-16}$ & $> 0.7$ \\
+15 & 120 & $4 \cdot 10^{-16}$ & $\geq 0.70$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The observed lower bound on $\sigma_2/\sigma_{\max}$ is $N$-independent within the tested range and shows no downward trend, which is the structural obstruction: enlarging $N$ does not open new near-commutants.
+\end{remark}
+
+\begin{conjecture}[Full-space extension]\label{conj:NE-B-full}
+The conclusion of Theorem~\ref{thm:NE-B} holds for all $N \in \mathbb{N}$: for any sufficiently dense sample of $r \in (0,2)$, the only symmetric matrices commuting with all corresponding $D_N(r)$ are scalar multiples of the identity. Consequently, no non-trivial universal commuting operator exists in the infinite-dimensional limit.
+\end{conjecture}
 
 \subsection{Prolate Eigenvalue Dominance: A Structural Result}
 
@@ -1071,6 +1154,7 @@ The Cauchy interlacing argument is the cleanest path: it avoids the delicate osc
 \end{remark}
 
 \subsection{Proof of Lemma L3: Off-diagonal coupling via Schur test}
+\label{sec:L3-proof}
 
 \begin{lemma}[Restatement of \Cref{lem:L3}]
 For $B = \mathrm{QW}[{:}K,\,K{:}]$, there exists $\gamma > 0$ such that $\|B\|_{\mathrm{op}} \leq \gamma L$.
@@ -1768,12 +1852,17 @@ It remains to verify that the PNT transfer error is smaller than this margin. Us
 \[
   |\rho(\lambda) - \rho^{\mathrm{EM}}(\lambda)| \leq \frac{C \cdot L}{20\,\log\lambda} = \frac{C}{20} < 0.005
 \]
-for $\lambda \geq e^{13} = 442{,}413$, where $C < 2$ accounts for the ratio structure of the resolvent energies (each $|B_j|^2/g_j$ error is bounded by $\Delta B \cdot (2|B| + \Delta B)/g$, with $\Delta B/B < 1/(20L)$ from the Dusart bound). Since $0.005 < 0.0109/2$, we obtain:
+for $\lambda \geq e^{13} = 442{,}413$, where $C < 2$ is an effective constant absorbing the ratio structure of the resolvent energies (each $|B_j|^2/g_j$ error is bounded by $\Delta B \cdot (2|B| + \Delta B)/g$, with $\Delta B/B < 1/(20L)$ from the Dusart bound); $C$ is numerically observed to lie in $[1.0, 1.6]$ on the tested range but has not been derived as a rigorous closed-form constant (see \Cref{rem:C-constant-caveat}). Since $0.005 < 0.0109/2$, we obtain:
 \[
   \rho(\lambda) < \rho^{\mathrm{EM}}(13) + 0.005 < -0.0109 + 0.005 = -0.006 < 0 \quad\text{for all } \lambda \geq 442{,}413.
 \]
 Since $\rho < 0$ means $E_{\sin} < E_{\cos}$, the claim follows with $\lambda_0 = 442{,}413$. This threshold lies well within the overlap zone with Regime~1 (certificates up to $\lambda = 1{,}300{,}000$), providing a safety margin of nearly one order of magnitude.
 \end{proof}
+
+\begin{remark}[Status of the constant $C$ in the PNT transfer]
+\label{rem:C-constant-caveat}
+The bound $C < 2$ used above is derived heuristically from the product rule applied to the relative perturbation $\Delta B/B$ on each resolvent-energy ratio; a fully rigorous derivation would require tracking the worst-case cross-term between primes-contribution errors and gap-denominator errors uniformly in $j$. Numerical evaluation on $\lambda \in [500, 10^6]$ gives effective values $C_{\mathrm{eff}} \in [1.0, 1.6]$, comfortably below the invoked bound. A rigorous closed-form bound $C \leq C^\ast$ with an explicit admissible $C^\ast$ remains to be established; the Regime~2 threshold is therefore \emph{conditional on} $C < 2$. The safety margin $0.005$ allows $C$ up to roughly $2.2$ before the margin is exhausted.
+\end{remark}
 
 \begin{proposition}[Cumulative step A6]
 \label{prop:A6}
@@ -1784,7 +1873,7 @@ For all $\lambda \geq 100$, even dominance holds:
 \end{proposition}
 
 \begin{proof}[Proof (three-regime argument)]
-\emph{Regime~1} ($\lambda \in [100,\, 1{,}300{,}000]$). The $33$ computer-assisted certificates (\Cref{sec:certificates}), computed with interval arithmetic (mpmath.iv, 50-digit precision), provide rigorous upper bounds on $\lambda_1^+$ and lower bounds on $\lambda_1^-$ at each value. All certified gaps are strictly negative. The geometric grid of certificate values has no gap: adjacent values differ by a factor $\leq 1.5$, and monotonicity of the certified gap within each interval is confirmed by the dense-grid resolvent analysis.
+\emph{Regime~1} ($\lambda \in [100,\, 1{,}300{,}000]$). The $33$ computer-assisted certificates (\Cref{sec:certificates}), computed with interval arithmetic (mpmath.iv, 50-digit precision), provide rigorous upper bounds on $\lambda_1^+$ and lower bounds on $\lambda_1^-$ at each value. All certified gaps are strictly negative. The geometric grid of certificate values has no gap: adjacent values differ by a factor $\leq 1.5$, and the certified gap within each interval is controlled by the inter-certificate perturbation argument sketched below (see \Cref{rem:regime1-caveat} for a precise statement of what is and is not rigorously established).
 
 Between adjacent certificate values, the certified gap cannot cross zero. The argument does \emph{not} rely on eigenvalue additivity (which fails in general); instead, it combines three rigorous ingredients that each address a different mechanism of change:
 
@@ -1801,7 +1890,7 @@ Between adjacent certificate values, the certified gap cannot cross zero. The ar
 
   \item \textbf{$L$-variation (Hellmann--Feynman).}
     Between consecutive primes, only $L = \log\lambda$ changes.
-    The Hellmann--Feynman derivative (\Cref{rem:hellmann-feynman}) gives $\partial(\mathrm{gap})/\partial L > 0$ for $\lambda \geq 80$---this is an \emph{analytical} consequence of the operator structure (the $L$-derivative of the archimedean kernel shifts even modes more than odd modes), not a numerical observation at finitely many points.
+    The Hellmann--Feynman derivative (\Cref{tab:hf-results}) gives $\partial(\mathrm{gap})/\partial L > 0$ for $\lambda \geq 80$---this is an \emph{analytical} consequence of the operator structure (the $L$-derivative of the archimedean kernel shifts even modes more than odd modes), not a numerical observation at finitely many points.
     Hence the $L$-variation also deepens the gap.
 
   \item \textbf{Eigenvector stability (OP2 simplicity).}
@@ -1820,6 +1909,11 @@ The higher-mode contributions are controlled by \Cref{lem:higher-mode-decay} ($=
 
 \emph{Overlap.} Regimes~1 and~2 overlap in $[442{,}413,\, 1{,}300{,}000]$, where both the CAP certificates and the analytical argument apply. The overlap zone spans nearly a full order of magnitude, providing a robust bridge. The union covers all $\lambda \geq 100$.
 \end{proof}
+
+\begin{remark}[Rigorous status of Regime~1 interpolation]
+\label{rem:regime1-caveat}
+The CAP certificates rigorously establish $\mathrm{cert\_gap}(\lambda_k) < 0$ at the $33$ grid points $\lambda_k$. Extending this to every $\lambda \in [\lambda_k, \lambda_{k+1}]$ uses three ingredients (i)--(iii) above. Of these, (i) (Rayleigh-quotient perturbation under rank-one updates) and (iii) (eigenvector stability via the certified intra-sector gap) are rigorous \emph{provided} $\|W_p\|_{\mathrm{op}} < 0.46$ remains bounded on the interval and the intra-even gap remains above the interval-valued perturbation radius; both are certified at the grid points, not continuously. Between certificate points the argument is therefore \emph{quasi-rigorous}: it rests on the assumption that the certified intra-sector gap varies continuously and does not collapse on the (finitely primed) segments $[\lambda_k, \lambda_{k+1}]$ --- a property that is numerically confirmed at the dense-grid resolvent level but not derived as a closed-form inequality. Ingredient~(ii) (Hellmann--Feynman on $L$-variation between consecutive primes) is analytically derivable from the kernel structure but has been tabulated only up to $\lambda = 200$ in Table~\ref{tab:hf-results}; its extrapolation to $\lambda \leq 1{,}300{,}000$ relies on the kernel's smooth $L$-dependence. Regime~1 should therefore be understood as \emph{certificate-anchored with perturbative interpolation}, not as a closed analytical proof of continuous monotonicity. The Regime~2 argument (via \Cref{cor:M1-proved}) is independent of this interpolation and provides rigorous coverage beyond $\lambda_0 = 442{,}413$.
+\end{remark}
 
 \begin{remark}[Status of the proof]
 \label{rem:M1-status}

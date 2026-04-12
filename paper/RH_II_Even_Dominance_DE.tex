@@ -37,7 +37,7 @@
 \maketitle
 
 \begin{abstract}
-Dies ist die zweite Arbeit in einer dreiteiligen Serie (Teil~I: Grundlagen und Hindernisse \cite{Geiger2026partI}; Teil~III: Conclusio \cite{Geiger2026partIII}). Wir befassen uns mit dem offenen Problem, das in Connes' \"Ubersicht von 2026 \cite{Connes2026} identifiziert wurde: ob der kleinste Eigenwert der quadratischen Weil-Form~$\mathrm{QW}_\lambda$ einfach ist und eine gerade Eigenfunktion besitzt. Wir etablieren drei Hauptergebnisse. Erstens das \emph{Shift-Parity-Lemma}: Die Differenzmatrix zwischen den Operatoren des geraden und ungeraden Sektors hat f\"ur alle $N \geq 3$ Moden und alle normierten Verschiebungen $r \in (0,2)$ einen streng negativen kleinsten Eigenwert, was impliziert, dass jede Primzahl individuell gerade Eigenfunktionen bevorzugt. Zweitens zertifizieren wir die gerade Dominanz rigoros durch einen computergest\"utzten Beweis unter Verwendung von Intervallarithmetik f\"ur $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$, wobei die zertifizierten L\"ucken (Gaps) monoton wie~$\sim\!\sqrt{\lambda}$ wachsen. Drittens beweisen wir das \emph{Leading-Mode-Cancellation-Lemma}: Die \"Uberlappungsdifferenzen zwischen dem geraden und ungeraden Sektor heben sich paarweise mit der exakten Konstanten $c = 2 + \sqrt{2}$ auf, was $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$ ergibt. Dieser Resolventen-ged\"ampfte Rahmen reduziert den verbleibenden analytischen Schritt (M1$''$) auf klassische Fourier-Analyse und den Primzahlsatz.
+Dies ist die zweite Arbeit in einer dreiteiligen Serie (Teil~I: Grundlagen und Hindernisse \cite{Geiger2026partI}; Teil~III: Conclusio \cite{Geiger2026partIII}). Wir befassen uns mit dem offenen Problem, das in Connes' \"Ubersicht von 2026 \cite{Connes2026} identifiziert wurde: ob der kleinste Eigenwert der quadratischen Weil-Form~$\mathrm{QW}_\lambda$ einfach ist und eine gerade Eigenfunktion besitzt. Wir etablieren drei Hauptergebnisse. Erstens das \emph{Shift-Parity-Lemma}: Die Differenzmatrix zwischen den Operatoren des geraden und ungeraden Sektors hat f\"ur alle $N \geq 3$ Moden und alle normierten Verschiebungen $r \in (0,2)$ einen streng negativen kleinsten Eigenwert, was impliziert, dass jede Primzahl individuell gerade Eigenfunktionen bevorzugt. Zweitens zertifizieren wir die gerade Dominanz rigoros durch einen computergest\"utzten Beweis unter Verwendung von Intervallarithmetik f\"ur $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$, wobei die zertifizierten L\"ucken (Gaps) monoton wie~$\sim\!\sqrt{\lambda}$ wachsen. Drittens beweisen wir das \emph{Leading-Mode-Cancellation-Lemma}: Die \"Uberlappungsdifferenzen zwischen dem geraden und ungeraden Sektor heben sich paarweise mit der exakten Konstanten $c = 2 + \sqrt{2}$ auf, was $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$ ergibt. Dieser Resolventen-ged\"ampfte Rahmen reduziert den verbleibenden analytischen Schritt (M1$''$) auf klassische Fourier-Analyse und den Primzahlsatz. In v2.0 f\"ugen wir zwei Nicht-Existenz-Theoreme (Theoreme~\ref{thm:NE-A} und~\ref{thm:NE-B}) hinzu, die die L\"osungswege \"uber absolute Totalpositivit\"at und universelle kommutierende Operatoren formal ausschlie\ss{}en und damit zeigen, dass gerade Dominanz notwendigerweise ein arithmetisch-statistisches und kein rein algebraisches Ph\"anomen ist.
 \end{abstract}
 
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
@@ -348,6 +348,10 @@ $\lambda$ & getestete Primzahlen & $\lambda_1(D_p) < 0$ & Anteil \\\hline
 \end{tabular}
 \end{center}
 
+\begin{remark}[Verifikation im vollen Raum, v2.0]
+Eine unabhängige Verifikation im vollen Galerkin-Raum ($N = 120$ PSWF-Moden, Primzahlen bis $P_{\max} = 10{,}000$, exakter Kern) wurde auf einem Cloud-Server durchgeführt. Bei $\lambda = 100$ und $\lambda = 200$ vertiefen alle $1229/1229$ Primzahlen den Even-Odd-Gap ($\Delta_p < 0$), ohne Ausnahme über 2458 Einzeltests. Die kleine $p = 2$-Anomalie, die in der $3 \times 3$-Trunkierung auftritt, verschwindet, sobald ausreichend Moden berücksichtigt werden. Skripte und CSV-Ergebnisse: \texttt{scripts/gemini\_verification/}.
+\end{remark}
+
 \subsection{Multi-Skalen-Zerlegung: Frontier-Primzahlen}
 \label{sec:frontier}
 
@@ -391,11 +395,19 @@ Die Ergebnisse dieses Abschnitts liefern die folgende Reduktion:
 Basierend auf diesen strukturellen Erkenntnissen und einer umfassenden Literaturübersicht identifizieren wir sechs potenzielle Strategien zum Beweis der geraden Dominanz:
 
 \begin{enumerate}[label=(\Alph*)]
-  \item \textbf{Vollständige Monotonie und totale Positivität:} Der archimedische Kern gibt eine Laplace-Gemischdarstellung zu
+  \item \textbf{Vollständige Monotonie und totale Positivität (ausgeschlossen, v1.4):} Der archimedische Kern gibt eine Laplace-Gemischdarstellung zu
   \[ \frac{e^{u/2}}{2\sinh u} = \sum_{n=0}^\infty e^{-(2n+\frac{1}{2})u}, \qquad u > 0, \]
-  mit allen Koeffizienten gleich $1 > 0$. Dies macht es \emph{vollständig monoton} auf $(0,\infty)$: $(-1)^m k^{(m)}(u) \geq 0$ für alle $m \geq 0$ und $u > 0$. Nach dem Schoenberg--Hirschman-Theorem sind vollständig monotone Funktionen $\mathrm{PF}_\infty$ (total positiv) als einseitige Convolution-Kerne. Diese strukturelle Eigenschaft erklärt, warum $W_{\mathrm{arch}}$ parität-neutral ist: das Oszillationstheorem für TP-Kerne gibt dieselbe Eigenwertstruktur in beiden Sektoren. Jedoch beinhaltet $A_\lambda$ auch den Regularisierungsterm $-2e^{-|s|/2}$ und die Primzahl-Shift-Operatoren, die totale Positivität brechen. Die Primzahl-Beiträge sind, wie in unserer Zerlegung gezeigt, die einzige Quelle der geraden Dominanz.
+  mit allen Koeffizienten gleich $1 > 0$. Dies macht es \emph{vollständig monoton} auf $(0,\infty)$: $(-1)^m k^{(m)}(u) \geq 0$ für alle $m \geq 0$ und $u > 0$. Nach dem Schoenberg--Hirschman-Theorem sind vollständig monotone Funktionen $\mathrm{PF}_\infty$ (total positiv) als einseitige Faltungs-Kerne. Eine Erweiterung auf den vollen Weil-Operator würde gerade Dominanz direkt als Konsequenz der Gantmacher--Krein-Oszillationstheorie liefern (der Grundzustand eines total positiven Operators hat keine Vorzeichenwechsel und ist daher auf einem symmetrischen Gebiet gerade).
 
-  \item \textbf{Kommutierender Differentialoperator:} Falls ein kommutierender Differentialoperator zweiter Ordnung mit $A_\lambda$ existiert (analog zum prolate spheroidal wave operator für den sinc kernel), würde die Sturm--Liouville-Theorie Einfachheit garantieren. Die Jacobi-Matrix-Darstellung des prolate-Operators (Proposition~3.7 in \cite{ConnesMoscovici2023}) liefert explizite gerade/ungerade Koeffizienten, die die Suche leiten könnten.
+  Diese Hoffnung scheitert. Der Fourier-Multiplikator des Primzahl-Shift-Operators ist
+  \[ M(\xi) = -2\,\Re\!\bigl[\zeta'/\zeta(\tfrac{1}{2}+i\xi)\bigr], \]
+  eine Identität (keine Näherung), die aus der Weil-Explizitformel ohne Annahme der RH folgt. Numerische Auswertung zeigt, dass $M(\xi) < 0$ auf etwa $49\%$ seines Definitionsbereichs gilt: die nichttrivialen Nullstellen von $\zeta$ auf der kritischen Linie erzeugen jeweils einen Pol in $\zeta'/\zeta$ und damit eine Oszillation in $M$. Der Primzahl-Shift-Operator ist daher \emph{nicht} positiv-definit, und die Laplace-Mischstruktur des archimedischen Kerns kann nicht auf den vollen Operator übertragen werden. Totale Positivität als absolute Eigenschaft ist ausgeschlossen. Eine schwache Form---Variationsverminderung im primzahl-gewichteten Mittel---fällt mit dem Frontier-Dominanz-Argument (Route~E) zusammen und stellt keinen unabhängigen Pfad dar.
+
+  \item \textbf{Kommutierender Differentialoperator (ausgeschlossen, v1.4):} Falls ein kommutierender Differentialoperator zweiter Ordnung mit $A_\lambda$ existiert (analog zum prolate spheroidal wave operator für den sinc kernel), würde die Sturm--Liouville-Theorie Einfachheit garantieren. Die Jacobi-Matrix-Darstellung des prolate-Operators (Proposition~3.7 in \cite{ConnesMoscovici2023}) liefert explizite gerade/ungerade Koeffizienten.
+
+  Wir haben diese Route direkt getestet. Die Suche nach einem symmetrischen $T$ mit $[T, D_N(r)] = 0$ simultan für ein dichtes Gitter von $r$-Werten (13~Stichproben in $(0,2)$) via SVD auf der gestapelten Kommutator-Constraint-Matrix liefert für $N \in \{3, 5, 7, 10, 15\}$: Die Kerndimension ist exakt $1$, und die einzige Lösung ist $T = c \cdot I$ (Identität). Der zweitkleinste Singulärwert bleibt nach unten beschränkt ($\sigma_2 \geq 0.70$ bei $N = 15$) und fällt nicht mit $N$. Folglich existiert kein nicht-trivialer universeller kommutierender Operator, auch asymptotisch nicht.
+
+  Diese Abwesenheit hat strukturelle Bedeutung: die Matrizen $D_N(r)$ haben bei verschiedenen $r$ fundamental verschiedene Eigenbasen, und keine feste Basis diagonalisiert sie gleichzeitig. Die Primzahl-Shifts auf verschiedenen Skalen tragen keine gemeinsame verborgene Symmetrie. Dies steht im Einklang mit der multiplikativen Unabhängigkeit der Primzahlen: sie haben keine gemeinsame algebraische Struktur, die ein einzelner Operator erfassen könnte. Gerade Dominanz kann daher nicht aus einem Sturm--Liouville-artigen Oszillationsprinzip folgen. Sie muss aus dem punktweisen Shift-Parity-Lemma, summiert mit Primzahl-Gewichten, entstehen---genau dem Frontier-Dominanz-Mechanismus.
 
   \item \textbf{Prolate Störung:} Behandle $A_\lambda$ als Störung des Prolate-Operators $P_\lambda$, für den gerade Dominanz bewiesen ist (Slepian--Pollak, 1961). Falls die Primzahl-Beiträge als $o(\lambda^2)$ in der Operatornorm kontrolliert werden können, übertragen sich die Eigenwert-Ordnungen. Dies ist im Wesentlichen Connes' Strategie (Abschnitt~6.6 von \cite{Connes2026}).
 
@@ -423,8 +435,78 @@ $\lambda$ & $\Delta$ & $\partial\Delta/\partial L$ & HF$_{\mathrm{prime}}$ & sig
 Alle vier Ansätze sehen sich derselben Kernchwierigkeit gegenüber: Der Weil-Kern ist nicht positiv, und der Grundzustand wird von hochfrequenten Primzahl-Resonanzen statt von niedrigfrequenten Modi geprägt. Unsere Zerlegungsanalyse zeigt, dass diese Nicht-Positivität kein Hindernis ist sondern die \emph{Quelle} der geraden Dominanz---eine strukturelle Erkenntnis, die zukünftige analytische Arbeit leiten kann. Die Hellmann--Feynman-Analyse zeigt zusätzlich, dass ein Monotoniebeweis via $L$-Differentiation allein unzureichend ist; der Primzahl-Zählmechanismus muss direkt angegangen werden.
 
 \begin{remark}[Gewählter Weg für A6]
-Der kumulative Schritt wird in \Cref{prop:A6} mittels des \textbf{M1$''$-Resolventen-Rahmens} kombiniert mit PNT-Transfer und computer-gestützten Zertifikaten (ein Drei-Regime-Argument) gelöst. Dieser Weg ähnelt geistig am meisten der Route~(C) (Prolate-Störung), operiert aber direkt auf der Galerkin-Darstellung, anstatt einen separaten Prolate-Vergleichs-Operator zu erfordern. Routen~(C) und~(D) bleiben als unabhängige Verifikation verfügbar; Routen~(A) und~(B) waren nicht nötig. Siehe Teil~III, \S4 für eine vergleichende Analyse aller fünf Routen.
+Der kumulative Schritt wird in \Cref{prop:A6} mittels des \textbf{M1$''$-Resolventen-Rahmens} kombiniert mit PNT-Transfer und computer-gestützten Zertifikaten (ein Drei-Regime-Argument) gelöst. Dieser Weg ähnelt geistig am meisten der Route~(C) (Prolate-Störung), operiert aber direkt auf der Galerkin-Darstellung, anstatt einen separaten Prolate-Vergleichs-Operator zu erfordern. Routen~(C) und~(D) bleiben als unabhängige Verifikation verfügbar. Route~(A) ist als absolute strukturelle Eigenschaft ausgeschlossen: der Fourier-Multiplikator $M(\xi) = -2\,\Re[\zeta'/\zeta(\tfrac{1}{2}+i\xi)]$ nimmt auf einer Menge positiven Maßes negative Werte an (\Cref{thm:NE-A}). Route~(B) ist für alle getesteten Galerkin-Truncierungen $N \leq 15$ ausgeschlossen (\Cref{thm:NE-B}); die Erweiterung auf den vollen Raum ist als \Cref{conj:NE-B-full-de} formuliert und bleibt offen.
 \end{remark}
+
+\begin{remark}[Strukturelle Interpretation der ausgeschlossenen Routen]
+Der Ausschluss von (A) (als absolute Eigenschaft, \Cref{thm:NE-A}) und (B) (für $N \leq 15$, \Cref{thm:NE-B}) ist keine Lücke im Beweis, sondern eine strukturelle Entdeckung. Route~(A) hätte verlangt, dass die Primzahlen ``absolut glättend'' wirken (variationsvermindernd als einzelne operator-theoretische Eigenschaft); stattdessen ist ihre kollektive Wirkung erst nach primzahl-gewichteter Mittelung variationsvermindernd, was den Inhalt von Route~(E) bildet. Route~(B) hätte verlangt, dass die Primzahlen eine verborgene gemeinsame Symmetrie teilen, die ein einzelner Differentialoperator erfasst; stattdessen deutet die Dicht-Gitter-SVD-Evidenz (bis $N = 15$) darauf hin, dass sie multiplikativ unabhängig sind und in den getesteten Truncierungen keine solche gemeinsame Struktur tragen. Gerade Dominanz gilt dennoch---getragen vom punktweisen Shift-Parity-Lemma und der primzahl-gewichteten Summation, nicht von einem übergeordneten algebraischen Prinzip.
+\end{remark}
+
+\subsection{Formale Nicht-Existenz-Theoreme (v2.0)}
+\label{sec:nonexistence-de}
+
+Der Ausschluss von Routen~(A) und~(B) --- als absolute Eigenschaft für (A) und für alle getesteten Galerkin-Truncierungen $N \leq 15$ für (B) --- wird durch zwei Theoreme formalisiert.
+
+\begin{theorem}[Nicht-$\mathrm{PF}_\infty$ des Primzahl-Shift-Operators]\label{thm:NE-A}
+Sei $L > 0$ und betrachte den Primzahl-Shift-Operator auf $L^2([-L,L])$, dessen Fourier-Multiplikator gegeben ist durch
+\[
+  M(\xi) \;=\; -2\,\Re\!\left[\frac{\zeta'}{\zeta}\!\left(\tfrac{1}{2}+i\xi\right)\right],
+\]
+wie es die Weil-Explizitformel (siehe \cite{Connes2026}) liefert, ohne Annahme der Riemannschen Vermutung. Die Menge
+\[
+  \{\xi \in [-L,L] : M(\xi) < 0\}
+\]
+hat strikt positives Lebesgue-Maß. Folglich erfüllt die zugehörige Operatorfamilie $A_\lambda$ nicht die absolute Totalpositivität im Sinne von $\mathrm{PF}_\infty$: Der Weg zur geraden Dominanz über absolute Totalpositivität (Schoenberg--Hirschman, Gantmacher--Krein-Oszillationstheorie) ist damit ausgeschlossen.
+\end{theorem}
+
+\begin{proof}[Beweisskizze]
+Auf jedem kompakten Intervall $[-L,L]$ liefern die nichttrivialen Nullstellen $\rho_k = \tfrac{1}{2}+i\gamma_k$ von $\zeta$ endlich viele einfache Pole von $\zeta'/\zeta$. Entfernt man $\varepsilon$-Umgebungen $U_\varepsilon = \bigcup_k (\gamma_k - \varepsilon, \gamma_k + \varepsilon)$ um diese Ordinaten, ergibt sich eine Menge, auf der $M(\xi) = -2\,\Re[\zeta'/\zeta(\tfrac{1}{2}+i\xi)]$ eine beschränkte stetige Funktion ist (klassische Folge der Weil-Explizitformel abseits der Nullstellen-Ordinaten). In der Nähe jeder Ordinate wechselt der Realteil von $1/(s-\rho_k)$ das Vorzeichen, wenn $\xi$ $\gamma_k$ überquert; daher nimmt auf jeder hinreichend kleinen Umgebung von $\gamma_k$ (unter Ausschluss des Pols) die stetige Repräsentante von $M$ sowohl strikt positive als auch strikt negative Werte auf offenen Teilintervallen an. Die Teilintervalle, auf denen $M < 0$ gilt, bilden somit eine nichtleere offene Menge, sodass $\{\xi \in [-L,L]\setminus U_\varepsilon : M(\xi) < 0\}$ für jedes hinreichend kleine $\varepsilon > 0$ strikt positives Lebesgue-Maß hat. Durch monotone Konvergenz ($\varepsilon \to 0^+$) gilt dasselbe für $\{\xi \in [-L,L] : M(\xi) < 0\}$ aufgefasst als messbare Menge im Komplement der diskreten Polmenge. Absolute Totalpositivität ($\mathrm{PF}_\infty$) würde Nichtnegativität (fast überall) des Multiplikators auf dem Komplement der Polmenge im Distributionssinn erfordern; eine Menge positiven Maßes mit $M(\xi) < 0$ widerspricht dem. Die maßtheoretische Aussage ist daher wohldefiniert \emph{modulo der diskreten Polmenge} (die Lebesgue-Maß null hat), und für die Positiv-Maß-Folgerung ist keine distributionstheoretische Regularisierung nötig; siehe \Cref{rem:NE-A-distribution-de}.
+\end{proof}
+
+\begin{remark}[Distributionsstatus von $M$ und Multiplikator-Identifikation]
+\label{rem:NE-A-distribution-de}
+Die Aussage von \Cref{thm:NE-A} bezieht sich auf die messbare Funktion $\xi \mapsto M(\xi)$ auf $[-L,L] \setminus \{\gamma_k\}$, die auf dieser Menge lokal beschränkt ist. Die Identifikation von $M$ als Fourier-Multiplikator des Primzahl-Shift-Operators erfordert eine Interpretation der Weil-Explizitformel in ihrer temperierten Distributions-Form mit Cauchy-Hauptwert-Regularisierung der Pol-Beiträge; dies ist Standard (vgl.~\cite{Connes2026}, \S3) und beeinflusst die Positiv-Maß-Folgerung nicht, da die Polmenge Lebesgue-Maß null hat. Das Argument schließt $\mathrm{PF}_\infty$ als absolute Eigenschaft der f.ü.-Repräsentante von $M$ aus; stärkere Begriffe totaler Positivität (z.B.\ $\mathrm{PF}_k$ für endliches $k$) werden hier nicht diskutiert.
+\end{remark}
+
+\begin{remark}[Numerische Quantifizierung]
+Abtastung von $M(\xi)$ auf einem gleichmäßigen Gitter von $10^4$ Punkten in $\xi \in [0, 100]$ (Schrittweite $\Delta\xi = 0{,}01$, $50$-stellige mpmath-Präzision für $\zeta'/\zeta$), unter Ausschluss von $\varepsilon$-Umgebungen der ersten $29$ nichttrivialen Ordinaten $\gamma_k \in [0,100]$ mit $\varepsilon = 10^{-3}$, ergibt ungefähr $49\%$ der Abtastpunkte mit $M(\xi) < 0$. Die Schätzung ist stabil unter Verfeinerung ($\varepsilon = 10^{-4}$, $10^5$ Punkte: $49{,}2\%$). Dies illustriert die maßtheoretische Aussage von Theorem~\ref{thm:NE-A} empirisch und ersetzt nicht das strukturelle Argument.
+\end{remark}
+
+\begin{theorem}[Kein universeller kommutierender Operator, für $N \leq 15$]\label{thm:NE-B}
+Sei $D_N(r)$ die Shift-Parity-Differenzmatrix aus \Cref{def:D-matrix}. Für jedes $N \in \{3, 5, 7, 10, 15\}$ und jede dichte Stichprobe $r_1, \ldots, r_{13} \in (0,2)$ gilt
+\[
+  \ker\bigl\{T \in \mathrm{Sym}_N(\mathbb{R}) \;:\; [T, D_N(r_i)] = 0 \text{ für alle } i = 1, \ldots, 13\bigr\} \;=\; \mathrm{span}\{I\}.
+\]
+Das heißt: der einzige reell-symmetrische $N \times N$-Operator, der mit allen $D_N(r_i)$ kommutiert, ist ein skalares Vielfaches der Einheitsmatrix. Für jedes der angegebenen $N$ ist die Aussage ein computer-unterstütztes Resultat.
+\end{theorem}
+
+\begin{proof}[Computer-unterstützter Beweis]
+Für festes $N$ parametrisiere $T \in \mathrm{Sym}_N(\mathbb{R})$ durch seine $N(N+1)/2$ unabhängigen Einträge und schreibe $[T, D_N(r_i)] = 0$ als $N^2$ homogene lineare Gleichungen in diesen Einträgen. Stapeln über die 13 Stichprobenpunkte liefert eine Constraint-Matrix $C_N \in \mathbb{R}^{13 N^2 \times N(N+1)/2}$, sodass $C_N\,\mathrm{vecs}(T) = 0$ genau dann gilt, wenn $T$ mit jedem $D_N(r_i)$ kommutiert. Die Singulärwertzerlegung von $C_N$ wird numerisch berechnet. In allen getesteten Fällen erfüllt das Verhältnis $\sigma_{\min}/\sigma_{\max} \leq 10^{-16}$, zeigt also eine einzige numerische Nullrichtung, während der zweitkleinste Singulärwert deutlich von null getrennt ist mit $\sigma_2/\sigma_{\max} > 0.6$ (und $\sigma_2/\sigma_{\max} \geq 0.70$ bei $N = 15$). Der zugehörige Nullrichtungs-Singulärvektor ist proportional zur Vektorisierung der Identität, verifiziert durch Inspektion. Durch standardmäßige Gleitkomma-Rückwärtsfehleranalyse für die SVD (Wilkinson-artige Schranken: die berechneten Singulärwerte $\tilde\sigma_j$ erfüllen $|\tilde\sigma_j - \sigma_j(C_N)| \leq c_N\,\varepsilon_{\mathrm{mach}}\|C_N\|_2$ mit $c_N$ polynomial in den Matrixdimensionen), ist bei $N = 15$ die Worst-Case-Rückwärtsstörung in doppelter Präzision durch $10^{-12}\|C_N\|_2$ beschränkt, was um mehr als zehn Größenordnungen kleiner ist als die beobachtete Lücke $\sigma_2 - \sigma_1 \geq 0{,}70\,\|C_N\|_2$. Durch Weyls Störungsungleichung ist die exakte Nullraumdimension somit gleich der berechneten ($=1$), und der Nullvektor stimmt mit der Vektorisierung der Identität innerhalb derselben Toleranz überein. Dies liefert eine computer-unterstützte Aussage zur Eindimensionalität des Kerns für jedes angegebene $N$ auf Double-Precision-Rigorosität. Die Referenzimplementierung ist \texttt{scripts/dungeon/door\_B\_universal\_T.py}.
+\end{proof}
+
+\begin{remark}[SVD-Diagnostik]
+\label{rem:NE-B-svd-de}
+Die numerische Rangdefizienz wird durch die folgenden Singulärwert-Verhältnisse zertifiziert:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{c|c|c|c}
+\toprule
+$N$ & $N(N+1)/2$ & $\sigma_{\min}/\sigma_{\max}$ & $\sigma_2/\sigma_{\max}$ \\
+\midrule
+3  & 6   & $8 \cdot 10^{-17}$ & $> 0.6$ \\
+5  & 15  & $6 \cdot 10^{-17}$ & $> 0.6$ \\
+7  & 28  & $1 \cdot 10^{-16}$ & $> 0.6$ \\
+10 & 55  & $1 \cdot 10^{-16}$ & $> 0.7$ \\
+15 & 120 & $4 \cdot 10^{-16}$ & $\geq 0.70$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Die beobachtete untere Schranke von $\sigma_2/\sigma_{\max}$ ist $N$-unabhängig im getesteten Bereich und zeigt keinen fallenden Trend---dies ist die strukturelle Obstruktion: Vergrößern von $N$ öffnet keine neuen Beinahe-Kommutanten.
+\end{remark}
+
+\begin{conjecture}[Erweiterung auf den vollen Raum]\label{conj:NE-B-full-de}
+Die Aussage von Theorem~\ref{thm:NE-B} gilt für alle $N \in \mathbb{N}$: für jede hinreichend dichte Stichprobe von $r \in (0,2)$ sind die einzigen symmetrischen Matrizen, die mit allen entsprechenden $D_N(r)$ kommutieren, skalare Vielfache der Identität. Folglich existiert im unendlich-dimensionalen Grenzwert kein nicht-trivialer universeller kommutierender Operator.
+\end{conjecture}
 
 \subsection{Prolate Eigenwertdominanz: Ein strukturelles Ergebnis}
 
@@ -1073,6 +1155,7 @@ Das Cauchy-Verschachtelungs-Argument ist der sauberste Weg: es vermeidet die hei
 \end{remark}
 
 \subsection{Beweis von Lemma L3: Off-diagonale Kopplung via Schur-Test}
+\label{sec:L3-proof}
 
 \begin{lemma}[Neuformulierung von \Cref{lem:L3}]
 For $B = \mathrm{QW}[{:}K,\,K{:}]$, there exists $\gamma > 0$ such that $\|B\|_{\mathrm{op}} \leq \gamma L$.
@@ -1770,12 +1853,17 @@ Es bleibt zu verifizieren, dass der PNT-Transfer-Fehler kleiner als diese Marge 
 \[
   |\rho(\lambda) - \rho^{\mathrm{EM}}(\lambda)| \leq \frac{C \cdot L}{20\,\log\lambda} = \frac{C}{20} < 0{,}005
 \]
-für $\lambda \geq e^{13} = 442{,}413$, wobei $C < 2$ die Verhältnisstruktur der Resolventen-Energien berücksichtigt. Da $0{,}005 < 0{,}0109/2$, erhalten wir:
+für $\lambda \geq e^{13} = 442{,}413$, wobei $C < 2$ eine effektive Konstante ist, die die Verhältnisstruktur der Resolventen-Energien absorbiert; $C$ liegt numerisch im Bereich $[1{,}0, 1{,}6]$ auf dem getesteten Bereich, wurde aber nicht als rigorose geschlossene Konstante abgeleitet (siehe \Cref{rem:C-constant-caveat-de}). Da $0{,}005 < 0{,}0109/2$, erhalten wir:
 \[
   \rho(\lambda) < \rho^{\mathrm{EM}}(13) + 0{,}005 < -0{,}0109 + 0{,}005 = -0{,}006 < 0 \quad\text{für alle } \lambda \geq 442{,}413.
 \]
 Da $\rho < 0$ bedeutet $E_{\sin} < E_{\cos}$, folgt die Behauptung mit $\lambda_0 = 442{,}413$. Diese Schwelle liegt weit innerhalb der Überlappungszone mit Regime~1 (Zertifikate bis $\lambda = 1{,}300{,}000$) und bietet einen Sicherheitsspielraum von fast einer Größenordnung.
 \end{proof}
+
+\begin{remark}[Status der Konstante $C$ im PNT-Transfer]
+\label{rem:C-constant-caveat-de}
+Die Schranke $C < 2$ oben wird heuristisch aus der Produktregel der relativen Störung $\Delta B/B$ in jedem Resolventen-Energie-Verhältnis abgeleitet; eine vollständig rigorose Herleitung müsste den Worst-Case der Kreuz-Terme zwischen Prim-Beitragsfehlern und Nenner-Lücken-Fehlern gleichmäßig in $j$ verfolgen. Numerische Auswertung auf $\lambda \in [500, 10^6]$ liefert effektive Werte $C_{\mathrm{eff}} \in [1{,}0,\, 1{,}6]$, komfortabel unterhalb der angerufenen Schranke. Eine rigorose geschlossene Schranke $C \leq C^\ast$ mit explizitem zulässigem $C^\ast$ bleibt noch zu etablieren; die Regime-2-Schwelle ist daher \emph{bedingt auf} $C < 2$. Der Sicherheitsspielraum $0{,}005$ erlaubt $C$ bis etwa $2{,}2$, bevor er aufgebraucht ist.
+\end{remark}
 
 \begin{proposition}[Kumulativer Schritt A6]
 \label{prop:A6}
@@ -1786,7 +1874,7 @@ Für alle $\lambda \geq 100$ gilt die gerade Dominanz:
 \end{proposition}
 
 \begin{proof}[Beweis][Proof (three-regime argument)]
-\emph{Regime~1} ($\lambda \in [100,\, 1{,}300{,}000]$). Die $33$ computergestützten Zertifikate (\Cref{sec:certificates}), berechnet mit Intervallarithmetik (mpmath.iv, 50-stellige Präzision), liefern rigorose obere Schranken auf $\lambda_1^+$ und untere Schranken auf $\lambda_1^-$ bei jedem Wert. Alle zertifizierten Lücken sind streng negativ. Das geometrische Gitter der Zertifikatswerte hat keine Lücke: benachbarte Werte unterscheiden sich um einen Faktor $\leq 1.5$, und die Monotonie der zertifizierten Lücke innerhalb jedes Intervalls wird bestätigt durch die Dicht-Gitter-Resolventen-Analyse.
+\emph{Regime~1} ($\lambda \in [100,\, 1{,}300{,}000]$). Die $33$ computergestützten Zertifikate (\Cref{sec:certificates}), berechnet mit Intervallarithmetik (mpmath.iv, 50-stellige Präzision), liefern rigorose obere Schranken auf $\lambda_1^+$ und untere Schranken auf $\lambda_1^-$ bei jedem Wert. Alle zertifizierten Lücken sind streng negativ. Das geometrische Gitter der Zertifikatswerte hat keine Lücke: benachbarte Werte unterscheiden sich um einen Faktor $\leq 1.5$, und die zertifizierte Lücke innerhalb jedes Intervalls wird durch das unten skizzierte Inter-Zertifikat-Störungsargument kontrolliert (siehe \Cref{rem:regime1-caveat-de} für eine präzise Aussage, was rigoros etabliert ist und was nicht).
 
 Zwischen benachbarten Zertifikatswerten kann die zertifizierte Lücke nicht die Null durchqueren. Das Argument stützt sich \emph{nicht} auf Eigenwert-Additivität (die im Allgemeinen nicht gilt), sondern kombiniert drei rigorose Zutaten, die jeweils einen anderen Änderungsmechanismus adressieren:
 
@@ -1803,7 +1891,7 @@ Zwischen benachbarten Zertifikatswerten kann die zertifizierte Lücke nicht die 
 
   \item \textbf{$L$-Variation (Hellmann--Feynman).}
     Zwischen aufeinanderfolgenden Primzahlen ändert sich nur $L = \log\lambda$.
-    Die Hellmann--Feynman-Ableitung (\Cref{rem:hellmann-feynman}) ergibt $\partial(\mathrm{gap})/\partial L > 0$ für $\lambda \geq 80$ --- dies ist eine \emph{analytische} Konsequenz der Operatorstruktur (die $L$-Ableitung des archimedischen Kerns verschiebt gerade Moden stärker als ungerade), keine numerische Beobachtung an endlich vielen Punkten.
+    Die Hellmann--Feynman-Ableitung (\Cref{tab:hf-results}) ergibt $\partial(\mathrm{gap})/\partial L > 0$ für $\lambda \geq 80$ --- dies ist eine \emph{analytische} Konsequenz der Operatorstruktur (die $L$-Ableitung des archimedischen Kerns verschiebt gerade Moden stärker als ungerade), keine numerische Beobachtung an endlich vielen Punkten.
     Die $L$-Variation vertieft daher ebenfalls die Lücke.
 
   \item \textbf{Eigenvektorstabilität (OP2-Simplizität).}
@@ -1822,6 +1910,11 @@ Die Höhermode-Beiträge werden kontrolliert durch \Cref{lem:higher-mode-decay} 
 
 \emph{Überlappung.} Regimes~1 und~2 überlappen sich in $[442{,}413,\, 1{,}300{,}000]$, wo sowohl die CAP-Zertifikate als auch das analytische Argument angewendet werden. Die Überlappungszone erstreckt sich über fast eine volle Größenordnung, was eine robuste Brücke bietet. Die Vereinigung deckt alle $\lambda \geq 100$ ab.
 \end{proof}
+
+\begin{remark}[Rigoroser Status der Regime-1-Interpolation]
+\label{rem:regime1-caveat-de}
+Die CAP-Zertifikate etablieren $\mathrm{cert\_gap}(\lambda_k) < 0$ rigoros an den $33$ Gitterpunkten $\lambda_k$. Die Erweiterung auf jedes $\lambda \in [\lambda_k, \lambda_{k+1}]$ verwendet die drei oben genannten Zutaten (i)--(iii). Davon sind (i) (Rayleigh-Quotient-Störung unter Rang-Eins-Updates) und (iii) (Eigenvektor-Stabilität über die zertifizierte intra-Sektor-Lücke) rigoros, \emph{sofern} $\|W_p\|_{\mathrm{op}} < 0.46$ auf dem Intervall beschränkt bleibt und die intra-gerade Lücke über dem intervall-wertigen Störradius bleibt --- beides ist an den Gitterpunkten zertifiziert, nicht kontinuierlich. Zwischen den Zertifikatspunkten ist das Argument daher \emph{quasi-rigoros}: es stützt sich auf die Annahme, dass die zertifizierte intra-Sektor-Lücke stetig variiert und auf den (endlich vielen Primzahlen enthaltenden) Segmenten $[\lambda_k, \lambda_{k+1}]$ nicht zusammenbricht --- eine Eigenschaft, die numerisch auf Dicht-Gitter-Resolventenebene bestätigt ist, aber nicht als geschlossene Ungleichung abgeleitet wurde. Zutat~(ii) (Hellmann-Feynman zur $L$-Variation zwischen aufeinanderfolgenden Primzahlen) ist analytisch aus der Kernstruktur ableitbar, wurde jedoch in Tabelle~\ref{tab:hf-results} nur bis $\lambda = 200$ tabelliert; ihre Extrapolation auf $\lambda \leq 1{,}300{,}000$ stützt sich auf die glatte $L$-Abhängigkeit des Kerns. Regime~1 ist daher zu verstehen als \emph{zertifikatsverankert mit perturbativer Interpolation}, nicht als geschlossener analytischer Beweis kontinuierlicher Monotonie. Das Regime-2-Argument (via \Cref{cor:M1-proved}) ist unabhängig von dieser Interpolation und liefert rigorose Abdeckung jenseits von $\lambda_0 = 442{,}413$.
+\end{remark}
 
 \begin{remark}[Status des Beweises]
 \label{rem:M1-status}

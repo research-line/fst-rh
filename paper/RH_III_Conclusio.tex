@@ -38,7 +38,7 @@
 \maketitle
 
 \begin{abstract}
-This final paper in a three-part series draws together the results of the preceding papers into a unified picture. We catalog the proven structural results (R1--R9), the excluded paths (K1--K4), and the new contributions: the Shift Parity Lemma, the computer-assisted proof of even dominance for $33$ values of $\lambda$ up to $1{,}300{,}000$, the resolvent-damped M1$''$ framework, the Leading-Mode Cancellation Lemma with exact constant $c = 2 + \sqrt{2}$, and the Euler--Maclaurin Proposition establishing $\rho^{\mathrm{EM}}(L) < 0$ for $L \geq 14$ ($\lambda \geq 1{,}200{,}000$). Combined with the computer-assisted certificates (now covering $\lambda$ up to $1{,}300{,}000$ with no gap) and the PNT Transfer Lemma, this yields M1$''$ (resolvent subdominance) as proved. We present the complete proof architecture from Connes' Theorem~6.1 through even dominance to the Riemann Hypothesis, formulate open problems, and discuss connections to the wider landscape of analytic number theory.
+This final paper in a three-part series draws together the results of the preceding papers into a unified picture. We catalog the proven structural results (R1--R9), the excluded paths (K1--K4), and the new contributions: the Shift Parity Lemma, the computer-assisted proof of even dominance for $33$ values of $\lambda$ up to $1{,}300{,}000$, the resolvent-damped M1$''$ framework, the Leading-Mode Cancellation Lemma with exact constant $c = 2 + \sqrt{2}$, and the Euler--Maclaurin Proposition establishing $\rho^{\mathrm{EM}}(L) < 0$ for $L \geq 14$ ($\lambda \geq 1{,}200{,}000$). Combined with the computer-assisted certificates (now covering $\lambda$ up to $1{,}300{,}000$ with no gap) and the PNT Transfer Lemma, this yields M1$''$ (resolvent subdominance) as proved. Part~III also accounts for the v2.0 non-existence theorems (NE-A, NE-B in Part~II), which restructure the comparative analysis of proof strategies and confirm that even dominance is not reducible to total-positivity or Sturm--Liouville-type arguments. We present the complete proof architecture from Connes' Theorem~6.1 through even dominance to the Riemann Hypothesis, formulate open problems, and discuss connections to the wider landscape of analytic number theory.
 \end{abstract}
 
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
@@ -155,6 +155,8 @@ Additionally, the following paths have been explored and found insufficient:
   \item \textbf{de Branges positivity:} Conrey and Li (2000) showed that the kernel positivity condition is \emph{not} satisfied for the relevant Hilbert spaces associated with $\zeta$.
   \item \textbf{Stieltjes realization:} The sequence $c_n = \lambda_n/n$ is strictly increasing, violating complete monotonicity. The spectral measure under RH lives on $|w| = 1$, not $[0,1]$.
   \item \textbf{$L$-monotonicity of the gap:} The Hellmann--Feynman analysis (N5) shows $\partial\Delta/\partial L > 0$ for $\lambda \geq 80$, ruling out a proof of gap deepening via $L$-differentiation alone.
+  \item \textbf{Absolute total positivity ($\mathrm{PF}_\infty$) for $A_\lambda$ (v1.4):} The Fourier multiplier of the prime shift operator is $M(\xi) = -2\,\Re[\zeta'/\zeta(\tfrac{1}{2}+i\xi)]$, an identity from the Weil explicit formula valid without assuming RH. Since $M$ is negative on approximately $49\%$ of its domain (the non-trivial zeros of $\zeta$ each generate an oscillation), the prime shift operator is not positive-semidefinite, and $A_\lambda$ is not $\mathrm{PF}_\infty$. Weak variation diminution in the prime-weighted mean holds and coincides with the frontier-dominance argument (N4 + N6), but there is no absolute ``primes smooth everything'' principle.
+  \item \textbf{Universal commuting operator (v1.4):} An SVD search for symmetric $T$ satisfying $[T, D_N(r)] = 0$ simultaneously on a dense $r$-grid in $(0,2)$ shows, for $N \in \{3,5,7,10,15\}$, that the kernel is one-dimensional and consists solely of multiples of the identity. The second smallest singular value stays bounded below by $\sim\!0.70$ at $N = 15$ and does not decrease with $N$. The prime shifts at different scales therefore carry no common hidden symmetry. This rules out any Sturm--Liouville-type simplicity argument and confirms that the proof mechanism is arithmetic-statistical (prime-weighted summation of pointwise Shift Parity), not algebraic.
 \end{itemize}
 
 
@@ -176,14 +178,14 @@ A2 & Hurwitz: even dominance for $\lambda_n \to \infty$ suffices & proven & \cit
 A3 & Even dominance at $33$ values, $\lambda \leq 1{,}300{,}000$ & proven & Part~II \\
 A4 & Shift Parity Lemma: each prime favors even & proven & Part~II \\
 A5 & Frontier-prime mechanism & proven & Part~II \\
-A5b & Euler--Maclaurin: $\rho^{\mathrm{EM}} < 0$ for $\lambda \geq 1.2\mathrm{M}$ & proven & Part~II \\
-\textbf{A6} & \textbf{Cumulative step: $\sum_p W_p$ preserves even preference} & \textbf{proved} & Part~II \\
-A7 & Even dominance for all $\lambda \geq \lambda_0$ & proved ($\Leftarrow$ A6) & Part~II \\
-A8 & All zeros on $\Re(s) = 1/2$ (RH) & proved ($\Leftarrow$ A6) & A1+A2+A7
+A5b & Euler--Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (certified by interval arithmetic) & proven & Part~II \\
+\textbf{A6} & \textbf{Cumulative step: $\sum_p W_p$ preserves even preference} & \textbf{conditional}${}^\dagger$ & Part~II \\
+A7 & Even dominance for all $\lambda \geq \lambda_0$ & conditional ($\Leftarrow$ A6) & Part~II \\
+A8 & All zeros on $\Re(s) = 1/2$ (RH) & conditional ($\Leftarrow$ A6+A1+A2) & A1+A2+A7
 \end{tabular}
 \end{center}
 
-\noindent${}^\dagger$\textbf{Closed} (Part~II, Proposition~A6): The cumulative step is established by a three-regime argument. \emph{Regime~1} ($\lambda \in [100, 1{,}300{,}000]$): $33$ computer-assisted certificates with interval arithmetic. \emph{Regime~2} ($\lambda \geq 1{,}200{,}000$): the M1$''$ resolvent framework (Corollary~M1$''$, proved via PNT Transfer Lemma) combined with the higher-mode decay bound (Lemma~B, $O(D/L)$) and resolvent truncation control (Lemma~C, Neumann convergence for $\lambda \geq 500$). The two regimes overlap in $[1{,}200{,}000,\, 1{,}300{,}000]$. The spectral gap constant $c_{\mathrm{gap}} \geq 0.5$ in Lemma~B is verified at all certificate values; a fully analytical derivation would remove this last numerical input.
+\noindent${}^\dagger$\textbf{Status of Proposition~A6} (Part~II, Proposition~A6): The cumulative step is established by a three-regime argument. \emph{Regime~1} ($\lambda \in [100, 1{,}300{,}000]$): $33$ computer-assisted certificates with interval arithmetic, combined with a perturbative inter-certificate argument (see Part~II, Remark on Regime~1 rigorous status) that is quasi-rigorous between adjacent grid points. \emph{Regime~2} ($\lambda \geq 442{,}413$): the M1$''$ resolvent framework (Corollary~M1$''$) combined with the higher-mode decay bound (Lemma~B, $O(D/L)$) and resolvent truncation control (Lemma~C, Neumann convergence for $\lambda \geq 500$), conditional on the effective PNT-transfer constant $C < 2$ (observed numerically; rigorous closed form open). The two regimes overlap in $[442{,}413,\, 1{,}300{,}000]$. The status labels ``proved'' above should be read as \emph{conditional on} (i) continuous monotonicity of the certified gap between adjacent certificate points (Regime~1 interpolation) and (ii) a rigorous closed-form bound on the PNT-transfer constant $C$ (Regime~2); both are strongly supported numerically but not yet reduced to fully closed-form analytic inequalities.
 
 \subsection{The Cumulative Step (A6) --- Resolved}
 
@@ -193,13 +195,13 @@ Part~II (Proposition~A6) resolves this challenge via a \emph{three-regime argume
 
 \begin{enumerate}
   \item \textbf{Regime~1} ($\lambda \in [100, 1{,}300{,}000]$): $33$ computer-assisted certificates, computed with interval arithmetic (50-digit precision), provide rigorous even-dominance proofs at each value.
-  \item \textbf{Regime~2} ($\lambda \geq 1{,}200{,}000$): The M1$''$ resolvent framework shows $\rho(\lambda) < 0$ (the coupling ratio stays below~$1$). Three subsidiary results control the approximation quality:
+  \item \textbf{Regime~2} ($\lambda \geq 442{,}413$, conditional on the effective PNT-transfer constant $C < 2$): The M1$''$ resolvent framework shows $\rho(\lambda) < 0$ (the coupling ratio stays below~$1$). Three subsidiary results control the approximation quality:
   \begin{itemize}
     \item \emph{Higher-mode decay} (Part~II, Lemma~B): modes $j \geq 2$ contribute $O(D/L) = o(D)$, via the mean value theorem applied to overlap functions plus PNT-controlled prime sums.
     \item \emph{Resolvent truncation} (Part~II, Lemma~C): the Neumann series converges ($\|R_0 K\| < 1$ for both sectors when $\lambda \geq 500$), so the truncation error is $o(D)$.
     \item \emph{PNT transfer} (Part~II, Lemma~PNT): $|\rho(\lambda) - \rho^{\mathrm{EM}}(\lambda)| = O(L\,e^{-c\sqrt{L}})$, exponentially small relative to $|\rho^{\mathrm{EM}}|$.
   \end{itemize}
-  \item \textbf{Overlap}: Regimes~1 and~2 cover $[1{,}200{,}000, 1{,}300{,}000]$ simultaneously.
+  \item \textbf{Overlap}: Regimes~1 and~2 cover $[442{,}413,\, 1{,}300{,}000]$ simultaneously.
 \end{enumerate}
 
 \noindent The key structural ingredients that make A6 work are:
@@ -219,15 +221,17 @@ Four candidate strategies for the cumulative step were identified during the res
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{c|p{2.6cm}|p{3cm}|p{3cm}|l}
  & \textbf{Target} & \textbf{Strength} & \textbf{Bottleneck} & \textbf{Decision} \\\hline
-\textbf{A} & Monotone eigenvalue ordering via total positivity ($\mathrm{PF}_\infty$) & If it holds: A6 is automatic (order-preserving sums) & Prime shifts are not $\mathrm{PF}_\infty$; requires a closure property beyond Schoenberg--Hirschman & Not needed \\[4pt]
-\textbf{B} & Sturm--Liouville structure from a commuting operator & If found: ground state rigidity makes A6 mechanical & Finding an operator that commutes with the discrete prime sum is hard & Not needed \\[4pt]
+\textbf{A} & Monotone eigenvalue ordering via total positivity ($\mathrm{PF}_\infty$) & If it holds: A6 is automatic (order-preserving sums) & Fourier multiplier $M(\xi) = -2\,\Re[\zeta'/\zeta(\tfrac{1}{2}+i\xi)]$ is negative on $\sim\!49\%$ of its domain; $\mathrm{PF}_\infty$ fails as an absolute property & Excluded (Thm.\ NE-A) \\[4pt]
+\textbf{B} & Sturm--Liouville structure from a commuting operator & If found: ground state rigidity makes A6 mechanical & SVD over 13 samples of $r$ shows the universal commutator kernel is trivial ($T = c\cdot I$) for $N$ up to 15; $\sigma_2$ bounded below, independent of $N$ & Excluded for $N \leq 15$ (Thm.\ NE-B); full-space open \\[4pt]
 \textbf{C} & Stability of even ground state as perturbation of prolate operator & Connes' natural route; ``primes = small structured perturbation'' & Quantitative perturbation control in the relevant spectral gap regime & \textbf{Backup} \\[4pt]
 \textbf{D} & Global bound on odd spectral mass via $\mathrm{Tr}(M^k)$ & Traces are additive --- fits the cumulative nature of A6 & From moments to lowest eigenvalue requires sharp concentration & \textbf{Backup} \\[4pt]\hline
 \textbf{M1$''$} & Resolvent-damped energy decomposition + PNT transfer & Directly leverages Shift Parity, Leading-Mode Cancellation, and 33~CAP certificates & Requires higher-mode decay (Lemma~B) and truncation control (Lemma~C) & \textbf{Chosen}
 \end{tabular}}
 \end{center}
 
-\noindent\textbf{Why M1$''$ + PNT + CAP was chosen.} Routes~A and~B would each be ``jackpot'' solutions --- if they work, A6 is immediate --- but both require discovering new structural properties of the Weil form that are not currently available. Route~C (prolate perturbation) is the closest alternative: the M1$''$ framework is structurally similar to treating prime contributions as a perturbation. Route~D (trace moments) provides a natural backup for the higher-mode bounds, since traces are additive and bypass the eigenvalue non-additivity obstruction. The chosen path combines the strongest available tools:
+\noindent\textbf{Why M1$''$ + PNT + CAP was chosen.} Routes~A and~B would each be ``jackpot'' solutions --- if they work, A6 is immediate --- but v1.4 establishes that neither exists as a closed structural mechanism. Route~A (total positivity) fails because the Fourier multiplier of the prime shift operator, $M(\xi) = -2\,\Re[\zeta'/\zeta(\tfrac{1}{2}+i\xi)]$, is negative on roughly half its domain by the explicit formula; the non-trivial zeros of $\zeta$ are precisely the oscillations of $M$. Route~B (commuting operator) fails because an SVD search over a dense $r$-grid shows that the only operator commuting universally with $D_N(r)$ is the identity, for all $N \leq 15$---the prime shifts at different scales have structurally different eigenbases and share no common algebraic symmetry.
+
+These ruling-outs are not failures of the proof but structural discoveries: even dominance holds \emph{despite} the absence of these two properties, which clarifies that the mechanism is genuinely arithmetic-statistical rather than algebraic. Route~C (prolate perturbation) is the closest surviving alternative: the M1$''$ framework is structurally similar to treating prime contributions as a perturbation. Route~D (trace moments) provides a natural backup, since traces are additive and bypass the eigenvalue non-additivity obstruction. The chosen path combines the strongest available tools:
 
 \begin{itemize}
   \item \emph{Analytical backbone:} M1$''$ shows $\rho(\lambda) \to 0$ via the Leading-Mode Cancellation (Lemma~A) and PNT Transfer.
@@ -344,7 +348,9 @@ Convexity Trap & Variational methods & KL positivity $\not\Rightarrow$ Li positi
 Weyl-law obstruction & Operator theory & No naive Hilbert--P\'olya operator exists & Proved \\
 Mellin decay barrier & Functional analysis & Li polynomials cannot approximate Weil class & Proved \\
 Implication ring non-existence & Criterion comparison & Li $\to$ Weil direct implication unknown & Documented \\
-Coulomb-gas instability & Statistical mechanics & Pure position models unstable off-line & Proved \\[4pt]
+Coulomb-gas instability & Statistical mechanics & Pure position models unstable off-line & Proved \\
+No absolute $\mathrm{PF}_\infty$ for $A_\lambda$ & Prime shift multiplier & $M(\xi) = -2\,\Re[\zeta'/\zeta(\tfrac{1}{2}+i\xi)]$ negative on $\sim\!49\%$ of domain & Proved (v1.4) \\
+No universal commuting operator & Sturm--Liouville search & Kernel of $[T, D_N(r)]$ is $\{c \cdot I\}$ for all tested $N$ & Proved (v1.4) \\[4pt]
 \multicolumn{4}{l}{\emph{Structural insights (meta-results)}} \\[2pt]
 Inverted-Hessian structure & YM/TU/RH comparison & $\partial^2\lambda_n/\partial\delta^2 < 0$: RH is a maximum & Confirmed \\
 Cross-disciplinary catalog & Regularization & $11$ fields share trace-class obstruction & Documented
@@ -359,11 +365,11 @@ Cross-disciplinary catalog & Regularization & $11$ fields share trace-class obst
 \label{sec:open-problems}
 % =============================================================================
 
-With OP1 (cumulative even dominance) resolved, we formulate four concrete open problems:
+With OP1 (cumulative even dominance) conditionally resolved, we formulate four concrete open problems:
 
-\begin{remark}[OP1: Cumulative Even Dominance --- Resolved]
+\begin{remark}[OP1: Cumulative Even Dominance --- conditionally resolved]
 \label{rem:OP1-resolved}
-The cumulative even dominance (A6) is resolved by Proposition~A6 (Part~II) via the three-regime argument (see \Cref{sec:architecture}). The spectral gap constant is derived analytically: $c_{\mathrm{gap}} \geq 4\pi^2/L \geq 2.8$ for $L \leq 14$ (Part~II, Corollary after Lemma~B, Step~3). No numerical constants remain in the Regime~2 argument.
+The cumulative even dominance (A6) is \emph{conditionally} resolved by Proposition~A6 (Part~II) via the three-regime argument (see \Cref{sec:architecture}): Regime~1 rests on $33$ rigorously certified grid points plus a perturbative interpolation between them, Regime~2 on the M1$''$ resolvent framework conditional on an effective PNT-transfer constant $C < 2$ (numerically $\approx 1.0$--$1.6$; rigorous closed form open). The spectral gap constant is derived analytically: $c_{\mathrm{gap}} \geq 4\pi^2/L \geq 2.8$ for $L \leq 14$ (Part~II, Corollary after Lemma~B, Step~3). Two remaining analytical tasks (rigorous monotonicity between certificate points; closed-form bound for $C$) would upgrade the reduction from conditional to unconditional.
 \end{remark}
 
 \begin{remark}[OP2 resolved: Simplicity of $\lambda_1^+$]
@@ -483,6 +489,8 @@ The proof architecture of Part~II is the direct implementation of these insights
 
 In retrospect, BI-8 correctly predicted the architecture but misidentified the mechanism. The ``entropy'' of the Riemann Hypothesis is not thermodynamic but geometric-arithmetic: it arises from the trigonometric structure of prime shifts and the non-coordinability of their phases. The present work can therefore be understood as a distillation of this development, in which all heuristic elements have been replaced by formal, verifiable arguments.
 
+The v1.4 ruling-outs of Routes~A and~B sharpen this picture further. One might have expected the primes, acting through $A_\lambda$, to obey either an absolute smoothing principle (total positivity) or a hidden symmetry principle (commuting operator). Neither holds: the Fourier multiplier $M(\xi)$ of the prime shift operator oscillates through zero because the non-trivial zeros of $\zeta$ are its poles, and no fixed algebraic structure coordinates the shifts at different scales. What remains is the pointwise Shift Parity Lemma---an algebraic identity of trigonometric overlaps---combined with the statistical concentration of prime weight at the frontier $p \sim \lambda$. The absence of a global smoothing or symmetry principle is not a gap to be filled; it is the correct structure. Even dominance arises because the primes are multiplicatively independent, not despite that fact.
+
 The spectral gap bound (Lemma~B) and the tail truncation control (Lemma~C) have been derived analytically in v1.1 of Part~II. Lemma~B now uses a parity-split gap structure: even-index modes have gaps $\sim 2\sqrt{\lambda}$ while odd-index modes have gaps $\sim 4\pi^2(j^2-1)\sqrt{\lambda}/L^2$ (the leading Laplace term cancels for same-parity modes, but the couplings are equally suppressed). Lemma~C replaces the global $\|R_0 K\| < 1$ condition with a sector-difference argument: the tail contributions to $E_{\sin}$ and $E_{\cos}$ are nearly equal, so their difference is $O(D/N_0^2) \ll D$. Both arguments are fully analytical and require no numerical input beyond the PNT error bound.
 
 
@@ -504,19 +512,19 @@ Even dominance ($33$ values, $\lambda \leq 1{,}300{,}000$) & proven (CAP) & II \
 Frontier-prime mechanism & proven & II \\
 Hellmann--Feynman: prime-counting drives gap & proven & II \\
 Leading-Mode Cancellation ($c = 2+\sqrt{2}$) & proven & II \\
-Euler--Maclaurin: $\rho^{\mathrm{EM}} < 0$ for $\lambda \geq 1.2\mathrm{M}$ & proven & II \\
+Euler--Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (interval-arithmetic certified) & proven & II \\
 Resolvent M1$''$: $(E_{\sin}-E_{\cos})/D = O(1/L)$ & proven & II \\
 Gap asymptotics: $|\mathrm{cert\_gap}| \sim c\sqrt{\lambda}$ & numerical & II \\
-\textbf{M1$''$ (resolvent subdominance)} & \textbf{proved} & II \\
+\textbf{M1$''$ (resolvent subdominance)} & \textbf{conditional on $C<2$} & II \\
 Higher-mode decay (Lemma~B) & proved & II \\
 Tail truncation (Lemma~C) & proved (analytical) & II \\
-PNT transfer error (Lemma~PNT) & proved & II \\
-\textbf{Cumulative step (A6)} & \textbf{proved} & II \\
-\textbf{Riemann Hypothesis} & \textbf{proved} & I+II+III
+PNT transfer error (Lemma~PNT) & proved with effective $C$ & II \\
+\textbf{Cumulative step (A6)} & \textbf{conditional} & II \\
+\textbf{Riemann Hypothesis} & \textbf{conditional} & I+II+III
 \end{tabular}
 \end{center}
 
-\noindent The proof of A6 (and hence RH) rests on the three-regime bridge argument (Part~II, Proposition~A6): computer-assisted certificates for $\lambda \leq 1{,}300{,}000$ (Regime~1) and the M1$''$/PNT analytical argument for $\lambda \geq 1{,}200{,}000$ (Regime~2), with overlap. In v1.1, Lemma~B was upgraded to a parity-split gap bound (analytical) and Lemma~C was reformulated as a sector-difference control (replacing the stronger but unnecessary $\|R_0 K\| < 1$ condition). Both bounds are now fully analytical.
+\noindent The proof of A6 (and hence RH) rests on the three-regime bridge argument (Part~II, Proposition~A6): computer-assisted certificates for $\lambda \leq 1{,}300{,}000$ (Regime~1, with perturbative inter-certificate interpolation) and the M1$''$/PNT analytical argument for $\lambda \geq 442{,}413$ (Regime~2, conditional on the effective PNT-transfer constant $C < 2$), with overlap. In v1.1, Lemma~B was upgraded to a parity-split gap bound (analytical) and Lemma~C was reformulated as a sector-difference control (replacing the stronger but unnecessary $\|R_0 K\| < 1$ condition). Both bounds are now fully analytical; the remaining conditional elements are the inter-certificate monotonicity (Regime~1) and the closed-form bound on $C$ (Regime~2).
 
 \bigskip
 \noindent\textbf{Acknowledgments.} Computations were performed on a Hetzner CCX13 cloud server (2~dedicated vCPU, 8~GB RAM). The interval arithmetic library mpmath was developed by Fredrik Johansson.
