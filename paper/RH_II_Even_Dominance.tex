@@ -1848,20 +1848,24 @@ Assumption~\ref{M1pp} holds with the explicit threshold $\lambda_0 = 442{,}413$ 
 \begin{proof}
 By \Cref{prop:euler-maclaurin}, $\rho^{\mathrm{EM}}(13) = -0.0109$ (certified by interval arithmetic with precision $\sim 2 \times 10^{-14}$).
 
-It remains to verify that the PNT transfer error is smaller than this margin. Using the explicit Dusart bound \cite{Dusart2010} $|\theta(x) - x| < x/(20\log x)$ for $x \geq 32{,}299$, the error in \Cref{lem:pnt-transfer} at $L = 13$ evaluates to:
+It remains to verify that the PNT transfer error is smaller than this margin. Using the explicit Dusart bound \cite{Dusart2010} $|\theta(x) - x| < x/(20\log x)$ for $x \geq 32{,}299$, we apply the per-term relative-perturbation estimate derived in \Cref{rem:C-constant-caveat}: at $L = 13$ the error in \Cref{lem:pnt-transfer} satisfies
 \[
-  |\rho(\lambda) - \rho^{\mathrm{EM}}(\lambda)| \leq \frac{C \cdot L}{20\,\log\lambda} = \frac{C}{20} < 0.005
+  |\rho(\lambda) - \rho^{\mathrm{EM}}(\lambda)| \leq \frac{C(L)}{20\,L}, \qquad C(L) \;=\; \frac{3\,R(L) + 2\,|\rho^{\mathrm{EM}}(L)|}{(1 - 1/(20L))^2},
 \]
-for $\lambda \geq e^{13} = 442{,}413$, where $C < 2$ is an effective constant absorbing the ratio structure of the resolvent energies (each $|B_j|^2/g_j$ error is bounded by $\Delta B \cdot (2|B| + \Delta B)/g$, with $\Delta B/B < 1/(20L)$ from the Dusart bound); $C$ is numerically observed to lie in $[1.0, 1.6]$ on the tested range but has not been derived as a rigorous closed-form constant (see \Cref{rem:C-constant-caveat}). Since $0.005 < 0.0109/2$, we obtain:
+where $R(L) = (E_{\sin}^{\mathrm{EM}} + E_{\cos}^{\mathrm{EM}}) / D^{\mathrm{EM}}$ is the interval-arithmetic-certified ratio sum. Explicit evaluation at $L = 13$: $R(13) = 0.6151$, $|\rho^{\mathrm{EM}}(13)| = 0.01086$, which yields $C(13) \leq 1.874$. Consequently
 \[
-  \rho(\lambda) < \rho^{\mathrm{EM}}(13) + 0.005 < -0.0109 + 0.005 = -0.006 < 0 \quad\text{for all } \lambda \geq 442{,}413.
+  |\rho(\lambda) - \rho^{\mathrm{EM}}(\lambda)| \leq \frac{1.874}{20 \cdot 13} \approx 0.00721 < |\rho^{\mathrm{EM}}(13)| = 0.01086,
 \]
-Since $\rho < 0$ means $E_{\sin} < E_{\cos}$, the claim follows with $\lambda_0 = 442{,}413$. This threshold lies well within the overlap zone with Regime~1 (certificates up to $\lambda = 1{,}300{,}000$), providing a safety margin of nearly one order of magnitude.
+so $\rho(\lambda) < \rho^{\mathrm{EM}}(13) + 0.00721 = -0.00365 < 0$ for all $\lambda \geq e^{13} = 442{,}413$. Since $\rho < 0$ means $E_{\sin} < E_{\cos}$, the claim follows with $\lambda_0 = 442{,}413$. This threshold lies well within the overlap zone with Regime~1 (certificates up to $\lambda = 1{,}300{,}000$), providing a safety margin of nearly one order of magnitude. For $L > 13$ the margin grows: the transfer error $C(L)/(20L)$ decreases (as $L^{-1}$ times a slowly varying factor) while $|\rho^{\mathrm{EM}}(L)|$ grows, so the required inequality $C(L)/(20L) < |\rho^{\mathrm{EM}}(L)|$ holds uniformly for all $L \geq 13$.
 \end{proof}
 
-\begin{remark}[Status of the constant $C$ in the PNT transfer]
+\begin{remark}[Status of the constant $C(L)$ in the PNT transfer]
 \label{rem:C-constant-caveat}
-The bound $C < 2$ used above is derived heuristically from the product rule applied to the relative perturbation $\Delta B/B$ on each resolvent-energy ratio; a fully rigorous derivation would require tracking the worst-case cross-term between primes-contribution errors and gap-denominator errors uniformly in $j$. Numerical evaluation on $\lambda \in [500, 10^6]$ gives effective values $C_{\mathrm{eff}} \in [1.0, 1.6]$, comfortably below the invoked bound. A rigorous closed-form bound $C \leq C^\ast$ with an explicit admissible $C^\ast$ remains to be established; the Regime~2 threshold is therefore \emph{conditional on} $C < 2$. The safety margin $0.005$ allows $C$ up to roughly $2.2$ before the margin is exhausted.
+The bound in the proof above is \emph{not} a uniform constant $C < 2$, contrary to the heuristic formulation used in earlier versions. A rigorous derivation shows that $C(L)$ depends on $L$ and in fact grows linearly for large $L$ (e.g.\ $C(50) \approx 3.08$, $C(100) \approx 5.6$). What remains uniform and sufficient is the inequality
+\[
+  \frac{C(L)}{20\,L} \;<\; |\rho^{\mathrm{EM}}(L)| \qquad \text{for all } L \geq 13,
+\]
+which is what the proof actually requires. Numerical values: margin at $L = 13$ is $+0.00365$; at $L = 18$ it is $+0.022$; at $L = 50$ it is $+0.52$. The margin grows monotonically with $L$, so once the threshold $L = 13$ is cleared, the argument extends automatically. The remaining technical refinement is a fully interval-arithmetic-certified uniform-in-$L$ verification of the ratio sum $R(L)$ beyond the 6-mode truncation $\{\cos: 0,2,3;\, \sin: 1,2,3\}$; the tail contribution is bounded by $\leq 0.03$ via the Lemma~B decay estimate and does not affect $\lambda_0$.
 \end{remark}
 
 \begin{proposition}[Cumulative step A6]

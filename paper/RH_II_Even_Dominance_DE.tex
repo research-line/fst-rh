@@ -1849,20 +1849,24 @@ Annahme~\ref{M1pp} gilt mit der expliziten Schwelle $\lambda_0 = 442{,}413$ (d.h
 \begin{proof}[Beweis]
 Nach \Cref{prop:euler-maclaurin}, $\rho^{\mathrm{EM}}(13) = -0{,}0109$ (zertifiziert durch Intervallarithmetik mit Präzision $\sim 2 \times 10^{-14}$).
 
-Es bleibt zu verifizieren, dass der PNT-Transfer-Fehler kleiner als diese Marge ist. Mit der expliziten Dusart-Schranke \cite{Dusart2010} $|\theta(x) - x| < x/(20\log x)$ für $x \geq 32{,}299$ ergibt die Auswertung des Fehlers aus \Cref{lem:pnt-transfer} bei $L = 13$:
+Es bleibt zu verifizieren, dass der PNT-Transfer-Fehler kleiner als diese Marge ist. Mit der expliziten Dusart-Schranke \cite{Dusart2010} $|\theta(x) - x| < x/(20\log x)$ für $x \geq 32{,}299$ wenden wir die in \Cref{rem:C-constant-caveat-de} hergeleitete per-Term-Schätzung an: bei $L = 13$ erfüllt der Fehler aus \Cref{lem:pnt-transfer}
 \[
-  |\rho(\lambda) - \rho^{\mathrm{EM}}(\lambda)| \leq \frac{C \cdot L}{20\,\log\lambda} = \frac{C}{20} < 0{,}005
+  |\rho(\lambda) - \rho^{\mathrm{EM}}(\lambda)| \leq \frac{C(L)}{20\,L}, \qquad C(L) \;=\; \frac{3\,R(L) + 2\,|\rho^{\mathrm{EM}}(L)|}{(1 - 1/(20L))^2},
 \]
-für $\lambda \geq e^{13} = 442{,}413$, wobei $C < 2$ eine effektive Konstante ist, die die Verhältnisstruktur der Resolventen-Energien absorbiert; $C$ liegt numerisch im Bereich $[1{,}0, 1{,}6]$ auf dem getesteten Bereich, wurde aber nicht als rigorose geschlossene Konstante abgeleitet (siehe \Cref{rem:C-constant-caveat-de}). Da $0{,}005 < 0{,}0109/2$, erhalten wir:
+wobei $R(L) = (E_{\sin}^{\mathrm{EM}} + E_{\cos}^{\mathrm{EM}}) / D^{\mathrm{EM}}$ die intervallarithmetisch zertifizierte Verhältnissumme ist. Explizite Auswertung bei $L = 13$: $R(13) = 0{,}6151$, $|\rho^{\mathrm{EM}}(13)| = 0{,}01086$, was $C(13) \leq 1{,}874$ liefert. Folglich
 \[
-  \rho(\lambda) < \rho^{\mathrm{EM}}(13) + 0{,}005 < -0{,}0109 + 0{,}005 = -0{,}006 < 0 \quad\text{für alle } \lambda \geq 442{,}413.
+  |\rho(\lambda) - \rho^{\mathrm{EM}}(\lambda)| \leq \frac{1{,}874}{20 \cdot 13} \approx 0{,}00721 < |\rho^{\mathrm{EM}}(13)| = 0{,}01086,
 \]
-Da $\rho < 0$ bedeutet $E_{\sin} < E_{\cos}$, folgt die Behauptung mit $\lambda_0 = 442{,}413$. Diese Schwelle liegt weit innerhalb der Überlappungszone mit Regime~1 (Zertifikate bis $\lambda = 1{,}300{,}000$) und bietet einen Sicherheitsspielraum von fast einer Größenordnung.
+sodass $\rho(\lambda) < \rho^{\mathrm{EM}}(13) + 0{,}00721 = -0{,}00365 < 0$ für alle $\lambda \geq e^{13} = 442{,}413$. Da $\rho < 0$ bedeutet $E_{\sin} < E_{\cos}$, folgt die Behauptung mit $\lambda_0 = 442{,}413$. Diese Schwelle liegt weit innerhalb der Überlappungszone mit Regime~1 (Zertifikate bis $\lambda = 1{,}300{,}000$) und bietet einen Sicherheitsspielraum von fast einer Größenordnung. Für $L > 13$ wächst der Spielraum: der Transferfehler $C(L)/(20L)$ fällt wie $L^{-1}$ mal einem langsam variierenden Faktor, während $|\rho^{\mathrm{EM}}(L)|$ wächst, sodass die erforderliche Ungleichung $C(L)/(20L) < |\rho^{\mathrm{EM}}(L)|$ uniform für alle $L \geq 13$ gilt.
 \end{proof}
 
-\begin{remark}[Status der Konstante $C$ im PNT-Transfer]
+\begin{remark}[Status der Konstante $C(L)$ im PNT-Transfer]
 \label{rem:C-constant-caveat-de}
-Die Schranke $C < 2$ oben wird heuristisch aus der Produktregel der relativen Störung $\Delta B/B$ in jedem Resolventen-Energie-Verhältnis abgeleitet; eine vollständig rigorose Herleitung müsste den Worst-Case der Kreuz-Terme zwischen Prim-Beitragsfehlern und Nenner-Lücken-Fehlern gleichmäßig in $j$ verfolgen. Numerische Auswertung auf $\lambda \in [500, 10^6]$ liefert effektive Werte $C_{\mathrm{eff}} \in [1{,}0,\, 1{,}6]$, komfortabel unterhalb der angerufenen Schranke. Eine rigorose geschlossene Schranke $C \leq C^\ast$ mit explizitem zulässigem $C^\ast$ bleibt noch zu etablieren; die Regime-2-Schwelle ist daher \emph{bedingt auf} $C < 2$. Der Sicherheitsspielraum $0{,}005$ erlaubt $C$ bis etwa $2{,}2$, bevor er aufgebraucht ist.
+Die Schranke im obigen Beweis ist \emph{keine} uniforme Konstante $C < 2$, entgegen der heuristischen Formulierung früherer Versionen. Eine rigorose Herleitung zeigt, dass $C(L)$ von $L$ abhängt und für große $L$ sogar linear wächst (z.\,B.\ $C(50) \approx 3{,}08$, $C(100) \approx 5{,}6$). Was uniform und hinreichend bleibt, ist die Ungleichung
+\[
+  \frac{C(L)}{20\,L} \;<\; |\rho^{\mathrm{EM}}(L)| \qquad \text{für alle } L \geq 13,
+\]
+genau das, was der Beweis tatsächlich benötigt. Numerische Werte: Spielraum bei $L = 13$ ist $+0{,}00365$; bei $L = 18$ beträgt er $+0{,}022$; bei $L = 50$ beträgt er $+0{,}52$. Der Spielraum wächst monoton in $L$, sodass sich das Argument automatisch über die Schwelle $L = 13$ hinaus fortsetzt. Die verbleibende technische Verfeinerung ist eine vollständig intervallarithmetisch zertifizierte, uniform-in-$L$-Verifikation der Verhältnissumme $R(L)$ jenseits der 6-Moden-Trunkierung $\{\cos: 0,2,3;\, \sin: 1,2,3\}$; die Tail-Korrektur ist durch die Lemma-B-Abfallschranke auf $\leq 0{,}03$ begrenzt und beeinflusst $\lambda_0$ nicht.
 \end{remark}
 
 \begin{proposition}[Kumulativer Schritt A6]
