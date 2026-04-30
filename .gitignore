@@ -27,6 +27,17 @@ _partners/
 *BRIEFING*
 CORE.txt
 removed_sections/
+.env
+*.env
+*.key
+*.pem
+*.p12
+*.pfx
+*TOKEN*
+*SECRET*
+*CREDENTIAL*
+credentials*
+secrets*
 
 # PDFs (ignore generated PDFs everywhere EXCEPT paper/)
 *.pdf
@@ -41,6 +52,8 @@ scripts/_translate_rh2.py
 
 # Server logs (not results)
 scripts/*.log
+!scripts/gemini_verification/prolate_run_N120_P2000_2026-04-11.log
+!scripts/gemini_verification/prolate_run_N200_P10000_2026-04-12.log
 
 # Exploration scripts and intermediate results (historical, not needed)
 scripts/_exploration/

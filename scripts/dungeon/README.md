@@ -50,7 +50,8 @@ Dependencies: numpy, scipy (eigh, quad).
 
 ## Related external work
 
-See `../gemini_verification/` for Gemini's full Galerkin-space (N=120) prime
-verification at $\lambda=100$ and $\lambda=200$. Result: 303/303 primes
-deepen the gap, no exceptions. Provides independent numerical support for
-the Shift Parity Lemma in the full operator space.
+See `../gemini_verification/` for Gemini's full Galerkin-space prime
+verification at $\lambda=100$ and $\lambda=200$. The archived production run is
+N=200, P_max=10000, with 1229/1229 primes deepening the gap in both cases and
+zero exceptions. Provides independent numerical support for the Shift Parity
+Lemma in the full operator space.

@@ -6,7 +6,9 @@ A three-part research series establishing the Riemann Hypothesis via Connes'
 spectral program (arXiv:2602.04022). The proof combines computer-assisted
 certificates (interval arithmetic), the Leading-Mode Cancellation Lemma
 (c = 2 + sqrt(2)), and the PNT Transfer Lemma into a three-regime bridge
-argument covering all lambda >= 100.
+argument covering all lambda >= 100. Version 2.1 adds a robust Direct
+Frontier-Dominance proof using a common Rayleigh test vector and finite CAP
+coverage up to the explicit asymptotic threshold.
 
 **Submitted to:** Communications in Mathematics (cm:17829, 2026-03-27)
 
@@ -15,11 +17,11 @@ argument covering all lambda >= 100.
 | Paper | File | Pages | Content |
 |-------|------|-------|---------|
 | **Part I** | `RH_I_Foundations` | 14 | Foundations and Obstructions: thermodynamic landscape (R1-R9), dead ends (K1-K4), reorientation to Connes |
-| **Part II** | `RH_II_Even_Dominance` | 44 | **Main paper.** Shift Parity Lemma, 33 CAP certificates, resolvent M1'' framework, Leading-Mode Cancellation (c=2+sqrt(2)), Higher-Mode Decay (Lemma B), Resolvent Truncation (Lemma C), PNT Transfer, Euler-Maclaurin Proposition, **Proposition A6 (cumulative step)** |
-| **Part III** | `RH_III_Conclusio` | 18 | Synthesis: proof architecture (A1-A8, all closed), explored alternatives (BI-1..11), independent results, assessment |
+| **Part II** | `RH_II_Even_Dominance` | 44 | **Main paper.** Shift Parity Lemma, 33 CAP certificates, resolvent M1'' framework, Leading-Mode Cancellation (c=2+sqrt(2)), Higher-Mode Decay (Lemma B), Resolvent Truncation (Lemma C), PNT Transfer, Euler-Maclaurin Proposition, **Proposition A6 (cumulative step)**, v2.1 Direct Frontier-Dominance |
+| **Part III** | `RH_III_Conclusio` | 18 | Synthesis: proof architecture (A1-A8, all closed), explored alternatives (BI-1..11), independent results, assessment, v2.1 status reconciliation |
 
 All papers are available in English and German (DE suffix).
-Combined English version: `RH_Complete_Series_EN.pdf` (76 pages).
+Combined English version: `paper/RH_Complete_Series_EN.pdf` (76 pages).
 
 ## Proof Architecture
 
@@ -54,7 +56,11 @@ Combined English version: `RH_Complete_Series_EN.pdf` (76 pages).
    - Regime 2 (lambda >= 442,413): M1'' + PNT Transfer + Lemma B + Lemma C
    - Overlap at [442k, 1.3M] (nearly one order of magnitude)
 
-6. **OP2 Simplicity**: Intra-even spectral gap certified by interval arithmetic
+6. **v2.1 Direct Frontier-Dominance**: independent robust route for A6 using
+   a common frontier Rayleigh vector, PNT partial summation, Mertens bounds, and
+   finite CAP coverage through the explicit asymptotic threshold.
+
+7. **OP2 Simplicity**: Intra-even spectral gap certified by interval arithmetic
    at all 33 values (gap >= 8.69 at lambda=100, growing to >= 731 at lambda=320k).
 
 ## Scripts
@@ -83,17 +89,31 @@ Combined English version: `RH_Complete_Series_EN.pdf` (76 pages).
 | `weighted_compactness_test.py` | Weighted compactness test |
 | `weighted_compactness_server.py` | Server version of compactness test |
 
-### Results (scripts/_results/)
+### Results (`results/`)
 
 | File | Content |
 |------|---------|
-| `certificates.json` | 23 rigorous certificates (lambda 100-9201) |
-| `certificates_extended.json` | 29 certificates (lambda 10000-320000) |
-| `certificates_gap_closure.json` | 3 gap-closure certificates (700K, 1.05M, 1.3M) |
-| `simplicity_certificates.json` | 29 OP2 simplicity certificates (lambda 100-320000) |
-| `euler_maclaurin_results.json` | Euler-Maclaurin IA certification results |
-| `lipschitz_analysis.json` | Gap-continuity Lipschitz analysis |
-| `resolvent_analysis.json` | 12-point resolvent energy analysis |
+| `results/certificates/certificates.json` | 23 rigorous certificates (lambda 100-9201) |
+| `results/certificates/certificates_extended.json` | 29 certificates (lambda 10000-320000) |
+| `results/certificates/certificates_gap_closure.json` | 3 gap-closure certificates (700K, 1.05M, 1.3M) |
+| `results/certificates/euler_maclaurin_results.json` | Euler-Maclaurin interval-arithmetic certification |
+| `results/certificates/largeN_results.json` | Large-N certificate output |
+| `results/certificates/rigorous_v3_results.json` | v3 rigorous certificate summary |
+| `results/certificates/rigorous_v4_lam100.json` | v4 lambda=100 certificate |
+| `results/certificates/rigorous_v4_lam200.json` | v4 lambda=200 certificate |
+| `results/certificates/simplicity_certificates.json` | OP2 simplicity certificates |
+| `results/gap_analysis/gap_monotone_results.json` | Gap monotonicity analysis |
+| `results/gap_analysis/gap_monotone_v2_results.json` | v2 gap monotonicity analysis |
+| `results/gap_analysis/hellmann_feynman_results.json` | Hellmann-Feynman derivative analysis |
+| `results/gap_analysis/lipschitz_analysis.json` | Gap-continuity Lipschitz analysis |
+| `results/gap_analysis/resolvent_analysis.json` | Dense-grid resolvent energy analysis |
+
+### Gemini Verification (`scripts/gemini_verification/`)
+
+Independent full-Galerkin checks at `lambda=100` and `lambda=200` are archived
+with scripts, CSV outputs, and recovered server logs. The production run uses
+`N=200`, `P_max=10000`, and confirms `1229/1229` tested primes deepen the gap
+for both lambda values.
 
 ## Server Computation
 
@@ -103,6 +123,7 @@ even block and float64 with Cauchy tail bounds for the odd block.
 
 ## Version History
 
+- **2.1** (2026-04-30): Robust Direct Frontier-Dominance route, Gemini N=200 server-script archival, repo hygiene audit
 - **1.4** (2026-03-27): Reviewer-driven clarifications (Prop A6 interpolation, M1'' explicit threshold, Lemma B Step 3/4 separation, Lemma L3 superseded, Galerkin safety margins, Connes2026 reference key)
 - **1.3** (2026-03-17): Bibliographic corrections (Connes title, Deninger journal, Keiper type)
 - **1.2** (2026-03-16): IA certifications (Euler-Maclaurin, OP2 simplicity, Lipschitz), explicit PNT bounds, new scripts
@@ -123,4 +144,3 @@ Dieses Projekt ist eine **unentgeltliche Open-Source-Schenkung** im Sinne der §
 Nutzung auf eigenes Risiko. Keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit oder Eignung für einen bestimmten Zweck.
 
 This project is an unpaid open-source donation. Liability is limited to intent and gross negligence (§ 521 German Civil Code). Use at your own risk. No warranty, no maintenance guarantee, no fitness-for-purpose assumed.
-
