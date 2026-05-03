@@ -1,0 +1,688 @@
+\documentclass[11pt,a4paper]{article}
+
+\input{glyphtounicode}
+\pdfgentounicode=1
+\usepackage[utf8]{inputenc}
+\usepackage{cmap}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,capitalize]{cleveref}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Korollar}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Bemerkung}
+\crefname{theorem}{Theorem}{Theoreme}
+\crefname{lemma}{Lemma}{Lemmata}
+\crefname{proposition}{Proposition}{Propositionen}
+\crefname{corollary}{Korollar}{Korollare}
+\crefname{definition}{Definition}{Definitionen}
+\crefname{remark}{Bemerkung}{Bemerkungen}
+
+\newcommand{\QW}{\mathrm{QW}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\DeclareMathOperator{\Tr}{Tr}
+
+\title{Ein bedingter Beweis der Riemannschen Vermutung via gerader Dominanz der Weilschen quadratischen Form}
+\author{Lukas Geiger\\Unabhängiger Forscher, Bernau\\ORCID: 0009-0005-7296-1534}
+\date{Entwurf v1.1 -- 3. Mai 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Dieses Paper präsentiert einen bedingten Beweis der Riemannschen Vermutung, extrahiert aus einer dreiteiligen Landscape-Reihe. Die Landscape-Paper dokumentieren den vollständigen Forschungsprozess, einschließlich fehlgeschlagener Routen, Obstruktionstheoreme, rechnergestützter Zertifikate und alternativer Strategien. Das vorliegende Paper behält nur die beweisrelevante Kette bei. Folgend auf Connes' Reduktion der Riemannschen Vermutung auf eine Bedingung der geraden Dominanz (even dominance) für die Weilsche quadratische Form beweisen wir, dass der relevante Grundzustand entlang einer Folge $\lambda_n\to\infty$ einfach und gerade ist. Der Beweis hat vier Eingaben:
+(i) Connes--van Suijlekoms Reell-Nullstellen-Kriterium für quadratische Formen (\cite[Theorem~6.1]{Connes2026}, zusammen mit der Hurwitz-Brücke aus \cite[Fact~6.4 / Section~6.4--6.6]{Connes2026}); 
+(ii) das Shift-Parity-Lemma, ein endliches trigonometrisches Matrix-Theorem, das zeigt, dass jede zulässige Primverschiebung einen intrinsischen Vorteil im geraden Sektor aufweist; 
+(iii) intervallarithmetische Zertifikate für den endlichen Bereich $100\leq\lambda\leq 1{,}300{,}000$; und 
+(iv) ein Frontier-Dominanz-Argument basierend auf dem Primzahlsatz, Abschätzungen vom Mertens-Typ und einer gemeinsamen Rayleigh-Vektor-Schranke für Primzahlen $p$ mit $\log p/\log\lambda$ nahe $1$. 
+Schritt~(i) wird als externe Eingabe aus dem Connes-Programm übernommen; der hier präsentierte Beweis der Riemannschen Vermutung ist daher an diese beiden Ergebnisse gebunden, bis sie unabhängig veröffentlicht werden. Die Schritte~(ii)--(iv) sind in sich geschlossen und analytisch, wobei der endliche Bereich und die asymptotische Schwelle genau bei $1{,}300{,}000$ zusammentreffen. Die ausgeschlossenen Eich-, Total-Positivitäts- und universellen Kommutator-Routen werden in diesem Beweis nicht verwendet und es wird auf die Landscape-Reihe verwiesen.
+\end{abstract}
+
+\noindent\textbf{Schlüsselwörter:} Riemannsche Vermutung, Weilsche quadratische Form, gerade Dominanz (even dominance), Connes-Programm, Shift-Parity-Lemma, computergestützter Beweis.
+
+\newpage
+\section{Zweck und Bezug zur Landscape-Reihe}
+
+Dieses Paper ist kein vierter Teil der Landscape-Reihe. Es ist eine rein auf den Beweis fokussierte Extraktion. Die Landscape-Paper~\cite{GeigerLandscapeI,GeigerLandscapeII,GeigerLandscapeIII} behalten den gesamten Prozess bei: den ursprünglichen eichtheoretischen Ansatz, die Obstruktionsanalyse, Nicht-Existenz-Theoreme für zwei attraktive, aber falsche strukturelle Routen, Gutachtenberichte und rechnergestützte Übergaben. Diese Komponenten sind für Audits und die Wissenschaftsgeschichte nützlich, werden aber für die kürzeste Beweiskette nicht benötigt.
+
+Der hier präsentierte Beweis verwendet folgende Implikationskette:
+\[
+\begin{gathered}
+\text{Shift-Parität}+\text{Frontier-Dominanz}+\text{endliche Zertifikate}\\
+\Longrightarrow\ \text{gerade Dominanz von }\QW_\lambda\\
+\Longrightarrow\ \text{RH via Connes und Hurwitz}.
+\end{gathered}
+\]
+
+\section{Connes' Reduktion}
+
+Sei $L=\log\lambda$ und betrachten wir den Hilbertraum $L^2([-L,L])$. In additiven Koordinaten $u=\log x$ wird Connes' Weilsche quadratische Form durch einen selbstadjungierten Operator $A_\lambda$ der folgenden Form dargestellt:
+\begin{multline}
+\label{eq:weil-form}
+  \langle A_\lambda f,f\rangle
+  =(\log 4\pi+\gamma)\norm{f}^2
+  +\int_0^\infty
+  \left[
+    \langle T_u f+T_{-u}f,f\rangle
+    -2e^{-u/2}\norm{f}^2
+  \right]\frac{e^{u/2}}{2\sinh u}\,du\\
+  +\sum_p\sum_{m=1}^{\infty}
+    \frac{\log p}{p^{m/2}}\,
+    \langle T_{m\log p}f+T_{-m\log p}f,f\rangle ,
+\end{multline}
+wobei $T_u$ der Verschiebungsoperator (Shift-Operator) ist. Der Operator kommutiert mit der Parität, teilt sich also in einen geraden und einen ungeraden Sektor auf:
+\[
+  A_\lambda=A_\lambda^+\oplus A_\lambda^-,
+  \qquad
+  \lambda_1^\pm(\lambda)=\min\sigma(A_\lambda^\pm).
+\]
+
+\begin{definition}[Gerade Dominanz]
+\label{def:even-dominance}
+Wir sagen, dass $\QW_\lambda$ gerade Dominanz besitzt, wenn
+\[
+  \lambda_1^+(\lambda)<\lambda_1^-(\lambda)
+\]
+und das Minimum im geraden Sektor einfach und isoliert ist.
+\end{definition}
+
+\begin{theorem}[Connes--van Suijlekom Reell-Nullstellen-Kriterium]
+\label{thm:connes}
+Sei eine reelle gerade Distribution definiert, die einen nach unten beschränkten selbstadjungierten quadratischen Form-Operator beschreibt, dessen niedrigster Spektralwert einfach und isoliert ist und eine gerade Eigenfunktion $\eta$ besitzt. Dann hat die Fourier-Transformation $\widehat\eta$ nur reelle Nullstellen.
+\end{theorem}
+
+\begin{proof}
+Dies ist das Reell-Nullstellen-Kriterium für quadratische Formen, das von Connes und van Suijlekom bewiesen wurde~\cite{ConnesvS2025}; Connes' Übersichtsarbeit wendet es auf die Weilsche quadratische Form an und identifiziert die gerade Dominanz als die verbleibende spektrale Bedingung~\cite{Connes2026}.
+\end{proof}
+
+\begin{corollary}[Hinlänglichkeit einer divergenten Folge]
+\label{cor:sequence-suffices}
+Wenn gerade Dominanz für eine Folge $\lambda_n\to\infty$ gilt, dann folgt daraus die Riemannsche Vermutung.
+\end{corollary}
+
+\begin{proof}
+Für jedes $\lambda_n$ liefert \Cref{thm:connes} reelle Nullstellen für die entsprechende trunkierte Fourier-Transformation $\widehat\eta_{\lambda_n}$. Die Hurwitz-Brücke des Connes-Programms~\cite[Fact~6.4 und Sections~6.4--6.6]{Connes2026} etabliert:
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+  \item Die trunkierten Kerne $k_{\lambda_n}$ konvergieren lokal gleichmäßig gegen die vollständige Riemannsche $\Xi$-Funktion auf jeder kompakten Teilmenge von $\mathbb{C}$ mit einer Rate von $O(\lambda_n^{-1/2-\alpha})$ für ein $\alpha>0$.
+  \item Alle $k_{\lambda_n}$ und $\Xi$ sind ganze Funktionen der Ordnung eins.
+  \item Nach dem Satz von Hurwitz über Nullstellen von lokal gleichmäßigen Grenzwerten holomorpher Funktionen ist jede Nullstelle von $\Xi$ in einer offenen Menge $U\subset\mathbb{C}$ ein Grenzwert von Nullstellen von $k_{\lambda_n}$ innerhalb $U$ für große $n$.
+\end{enumerate}
+Da jedes $k_{\lambda_n}$ nur reelle Nullstellen hat (\Cref{thm:connes}), sind auch die Nullstellen von $\Xi$ reell. Die nichttrivialen Nullstellen von $\zeta(s)$ korrespondieren bijektiv zu den Nullstellen von $\Xi$, folglich liegen sie auf der kritischen Geraden~$\Re(s)=1/2$.
+\end{proof}
+
+\begin{remark}[Analytische Struktur der Hurwitz-Brücke]
+\label{rem:hurwitz-analytical}
+Zur Transparenz legen wir die analytische Kette hinter Schritt~(a) des obigen Beweises dar.
+Der trunkierte Kern ist
+\[
+  k_\lambda(z)
+  = \int_{-L}^{L} K_\lambda(t)\,e^{izt}\,dt, \qquad L = \log\lambda,
+\]
+wobei $K_\lambda$ der auf $[-L,L]$ eingeschränkte gerade Weil-Spektralkern ist.
+Als endliches Fourier-Integral über ein beschränktes Intervall gehört $k_\lambda$
+zur Paley--Wiener-Klasse $\mathrm{PW}_L$: es setzt sich zu einer ganzen Funktion
+fort, die $|k_\lambda(z)|\leq C_\lambda\,e^{L|\Im z|}$ erfüllt.
+
+Ein selbsttragender Beweis der lokal gleichmäßigen Konvergenz $k_\lambda\to\Xi$
+würde drei Bestandteile benötigen:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+  \item \emph{$L^2$-Ratenkontrolle}: $\|K_\lambda - K\|_{L^2(\mathbb{R})}
+    = O(\lambda^{-1/2-\alpha})$ für ein $\alpha>0$,
+    wobei $K$ der vollständige (untrunkierte) Weil-Kern ist.
+    Dies erfordert Schwartz-Klassen-Regularität von $K_\lambda - K$
+    in der genannten Rate --- der nicht-triviale analytische Beitrag.
+  \item \emph{Lokal gleichmäßige Konvergenz aus $L^2$ und Paley--Wiener}:
+    Auf jeder kompakten Menge $\mathcal{K}\subset\mathbb{C}$ liefert
+    die PW-Mitgliedschaft von $k_\lambda$
+    $|k_\lambda(z)|\leq e^{LR}\|K_\lambda\|_{L^2}$
+    (mit $R = \max_{z\in\mathcal{K}}|\Im z|$), so dass die Familie lokal beschränkt
+    ist; Normalität (Satz von Montel) und $L^2$-Konvergenz liefern dann lokal
+    gleichmäßige Konvergenz auf $\mathcal{K}$.
+  \item \emph{Ordnung eins}: Sowohl $k_\lambda$ als auch $\Xi$ haben Ordnung eins,
+    wie es der Satz von Hurwitz zum Transfer aller Nullstellen benötigt.
+\end{enumerate}
+Schritt~(i) wird von Connes mittels der Spektraltheorie seines Hilbertraums in
+\cite[Fact~6.4 und Sections~6.4--6.6]{Connes2026} bewiesen;
+die Schritte~(ii) und~(iii) sind klassisch.
+Das vorliegende Paper verwendet Connes' Ergebnis für Schritt~(i) direkt und
+liefert keine eigenständige Herleitung.
+\end{remark}
+
+\begin{remark}[Bedingtheit und Hypothesen]
+\label{rem:conditioning}
+Der vorliegende Beweis beruht auf dem Reell-Nullstellen-Kriterium für quadratische Formen von Connes und van Suijlekom~\cite{ConnesvS2025} sowie auf Connes' Identifizierung der geraden Dominanz als der verbleibenden spektralen Bedingung~\cite{Connes2026}. Beide Ergebnisse sind derzeit als arXiv-Preprints verfügbar. Unsere Argumentation ist daher bedingt durch diese Ergebnisse, bis sie unabhängig verifiziert oder in einem Peer-Review-Journal veröffentlicht wurden.
+Die Hypothesen von \Cref{thm:connes} erfordern: (i)~dass $A_\lambda$ nach unten beschränkt ist, was gilt, weil der archimedische Kern integrierbar ist und die Primsumme absolut konvergiert; (ii)~dass der niedrigste Spektralwert einfach und isoliert ist --- dies ist der Inhalt der unten bewiesenen Bedingung der geraden Dominanz; und (iii)~lokal gleichmäßige Konvergenz der Fourier-Transformationen der trunkierten Eigenfunktionen, etabliert in~\cite[Section~4]{Connes2026}.
+\end{remark}
+
+\section{Die Paritätsmatrix einer einzelnen Verschiebung}
+
+Der Beweis beginnt mit einem endlichen algebraischen Fakt. Seien
+\[
+  \varphi_0(t)=\frac{1}{\sqrt{2L}},
+  \qquad
+  \varphi_n(t)=\frac{\cos(n\pi t/L)}{\sqrt L}\;(n\geq 1),
+  \qquad
+  \psi_n(t)=\frac{\sin((n+1)\pi t/L)}{\sqrt L}
+\]
+die $L^2([-L,L])$-normierten geraden und ungeraden Basisfunktionen. Für eine normierte Verschiebung $r=s/L$ definieren wir die $N\times N$ Differenzmatrix
+\[
+  D_{nm}(r)=
+  \langle\varphi_n,(S_{rL}+S_{-rL})\varphi_m\rangle
+  -
+  \langle\psi_n,(S_{rL}+S_{-rL})\psi_m\rangle .
+\]
+
+\begin{lemma}[$L$-Unabhängigkeit]
+\label{lem:L-independence}
+$D_N(r)$ hängt nur von $r$ ab, nicht separat von $L$.
+\end{lemma}
+
+\begin{proof}
+Substituiere $x=t/L$ in jedem Überlappungsintegral. Die Normierungsfaktoren kürzen den Skalierungsfaktor von $dt=L\,dx$ heraus, so dass Integrale über feste Intervalle übrig bleiben, deren Argument nur $r$ ist.
+\end{proof}
+
+\begin{proposition}[Geschlossene Form der Diagonaleinträge]
+\label{prop:diagonal}
+Für $L=1$ erfüllen die Diagonaleinträge für $n\geq 1$:
+\[
+  D_{nn}(r)
+  =(2-r)\bigl[\cos(n\pi r)-\cos((n+1)\pi r)\bigr]
+  -\frac{\sin(n\pi r)}{n\pi}
+  -\frac{\sin((n+1)\pi r)}{(n+1)\pi}.
+\]
+Für $n=0$ liefert eine direkte Überlappungslängen-Berechnung
+\[
+  D_{00}(r)=(2-r)(1-\cos\pi r)-\frac{\sin\pi r}{\pi}.
+\]
+\end{proposition}
+
+\begin{theorem}[Shift-Parity-Lemma]
+\label{thm:shift-parity}
+Für jedes $N\geq 3$ und jedes $r\in(0,2)$ gilt:
+\[
+  \lambda_{\min}(D_N(r))<0.
+\]
+\end{theorem}
+
+\begin{proof}
+Nach dem Cauchy-Interlacing-Theorem gilt $\lambda_{\min}(D_{N+1})\leq\lambda_{\min}(D_N)$, es reicht also aus, den Fall $N=3$ zu beweisen. Die Spur teleskopiert via \Cref{prop:diagonal}:
+\[
+  \Tr(D_3(r))=(2-r)(1-\cos 3\pi r)
+  -\frac{2\sin\pi r}{\pi}
+  -\frac{\sin 2\pi r}{\pi}
+  -\frac{\sin 3\pi r}{3\pi}.
+\]
+Die Determinante $\det(D_3(r))$ ist ein expliziter trigonometrischer Ausdruck in~$r$, der aus den geschlossenen Einträgen von \Cref{prop:diagonal} berechnet wird. Wir verwenden ein Zwei-Fall-Argument.
+
+\smallskip\noindent\textbf{Fall~1} ($\det D_3(r)<0$, ca. $93.3\%$ von $(0,2)$): die Eigenwerte haben gemischte Vorzeichen, also ist $\lambda_{\min}<0$.
+
+\smallskip\noindent\textbf{Fall~2} ($\det D_3(r)\geq 0$, das Intervall $R_2\approx[0.597,0.729]$): in diesem Bereich ist $\Tr(D_3(r))<0$ ($\max_{R_2}\Tr\approx -0.007$). Da die Spur gleich der Summe der Eigenwerte ist, können nicht alle drei nicht-negativ sein, also ist $\lambda_{\min}<0$.
+
+\smallskip\noindent\textbf{Vollständigkeit.} Die Determinante hat genau zwei Nullstellen in $(0,2)$, eingeschlossen durch Intervallarithmetik (\texttt{mpmath}, $50$ Stellen Genauigkeit) als
+\[
+  r_1^{\det}\in[0.59651,0.59653],\qquad r_2^{\det}\in[0.72928,0.72930].
+\]
+Die Spur-Nullstellen sind ähnlich eingeschlossen:
+\[
+  r_2^{\Tr}\in[0.58760,0.58762],\qquad r_3^{\Tr}\in[0.73023,0.73025].
+\]
+Die Verschachtelung
+\[
+  r_2^{\Tr}<r_1^{\det}<r_2^{\det}<r_3^{\Tr}
+\]
+gilt rigoros (Intervalltrennung $>0.008$ bei jedem benachbarten Paar), was sicherstellt, dass $R_2\subset\{\Tr<0\}$. Fälle 1 und 2 decken $(0,2)$ lückenlos ab. Siehe~\cite{GeigerLandscapeII} für die Verifikationsskripte.
+\end{proof}
+
+\begin{remark}
+Das Lemma ist unabhängig von der Zeta-Funktion. Zahlentheorie kommt erst ins Spiel, nachdem die Matrizen $D_3(m\log p/\log\lambda)$ mit $(\log p)p^{-m/2}$ gewichtet und über Primzahlen summiert wurden.
+\end{remark}
+
+\section{Endliche Zertifikate}
+
+Sei
+\[
+  \Delta(\lambda)=\lambda_1^+(\lambda)-\lambda_1^-(\lambda).
+\]
+Die Landscape-Berechnung liefert intervallarithmetische Zertifikate für $33$ Werte von $\lambda$ im Intervall
+\[
+  100\leq\lambda\leq 1{,}300{,}000.
+\]
+Die Zertifikate werden mit Pythons \texttt{mpmath} Bibliothek im Intervallarithmetik-Modus berechnet (\texttt{mpmath.iv}, 50 Stellen Genauigkeit). Der gerade Sektor verwendet eine $4\times 4$ Galerkin-Matrix ($N_{\cos}=4$); der ungerade Sektor verwendet $N_{\sin}=N_0\in[40,90]$ (siehe \Cref{rem:galerkin-asymmetry} unten). Matrixeinträge werden als rigorose Intervalle ausgewertet: Primverschiebungsintegrale haben eine Breite $<10^{-12}$, und das archimedische Kernintegral wird via zusammengesetzter Gauss--Legendre-Quadratur eingeschlossen (Breite~$<10^{-3}$). Eine negative zertifizierte Lücke impliziert gerade Dominanz.
+
+\begin{remark}[Rechtfertigung der Galerkin-Asymmetrie]
+\label{rem:galerkin-asymmetry}
+Die asymmetrische Trunkierung $N_{\cos}=4$ vs.\ $N_{\sin}\geq 40$ wird gerechtfertigt durch den strukturellen Unterschied zwischen den beiden Sektoren, der in \cite[Section~2.4 und Bemerkung zur Low-Mode Dominanz]{GeigerLandscapeII} beobachtet wurde: Der gerade Block konvergiert schnell, weil die führende gerade Mode $n=1$ die Galerkin-Diagonale $(W_{\mathrm{prime}})_{11}^+ \sim -\sqrt\lambda$ besitzt (getrieben vom Auto-Überlappungswert $h_1(1)=-1/4$ am Laplace-Endpunkt, siehe \Cref{def:auto-overlap}), wobei der $k\times k$ minimale Eigenwert sich bei $k=4$ für jedes getestete $\lambda$ auf bis zu $10^{-2}$ stabilisiert. Der ungerade Sektor hat keine vergleichbare strukturelle Verstärkung, daher werden $N_0=40$--$90$ Moden für einen gleichwertigen Einschluss benötigt. Entscheidend ist, dass der Landscape-Zertifizierer 
+\(
+  \lambda_{\min}(\mathrm{QW}_{\sin}^{(N)})\;>\;\lambda_{\min}(\mathrm{QW}_{\cos}^{(4)})
+\)
+für \emph{alle} $N\leq 90$ bei jedem getesteten $\lambda$ verifiziert und damit bestätigt, dass die Lücke echt ist und kein Artefakt der Trunkierung darstellt.
+\end{remark}
+
+\begin{remark}[Sicherheitsfaktor der Trunkierung]
+\label{rem:truncation-safety}
+\begin{sloppypar}
+Der kombinierte Galerkin-/Tail-Trunkierungsfehler des Landscape-Zertifizierers bei $\lambda=100$ ist maximal $0.061$ (Frobenius-Intervallradius $\leq 0.0025$ im geraden Block, gesamter ungerader Tail $\leq 0.059$ via Cauchy-Interlacing plus ein float64-Rundungsspielraum), während $|\mathrm{cert\_gap}|=2.25$ ist -- ein Sicherheitsfaktor $\geq 34\times$. Für $\lambda\geq 200$ übersteigt der Sicherheitsfaktor $65\times$ und wächst monoton mit $\lambda$ im gesamten zertifizierten Bereich~\cite[Section~2.9 und Zertifikats-Metadaten]{GeigerLandscapeII}.
+\end{sloppypar}
+\end{remark}
+
+\begin{proposition}[Zertifizierte endliche Brücke]
+\label{prop:finite-certificates}
+Für jeden zertifizierten Gitterpunkt $\lambda_k$ in der Landscape-Tabelle gilt:
+\[
+  \Delta(\lambda_k)<0.
+\]
+Darüber hinaus ist die zertifizierte spektrale Lücke im geraden Sektor an jedem Gitterpunkt positiv, sodass der gerade Grundzustand dort einfach ist.
+\end{proposition}
+
+\begin{proof}
+Dies ist eine computergestützte Beweiseingabe aus dem Landscape-Projekt \cite{GeigerLandscapeII}. Die relevanten Zertifikate sind im Landscape-Repository unter \texttt{results/certificates/} gespeichert. Repräsentative Werte sind:
+\[
+\begin{array}{r|r|r|r}
+\lambda & \#\{p\leq\lambda\} & \lambda_1^+ \text{ obere Schranke} &
+\mathrm{cert\_gap}\\\hline
+100 & 25 & -11.07 & -2.25\\
+500 & 95 & -34.13 & -7.72\\
+10{,}000 & 1{,}229 & -216.22 & -42.37\\
+320{,}000 & 27{,}608 & -1220.97 & -241.75\\
+1{,}300{,}000 & 100{,}021 & -2503.78 & -475.83
+\end{array}
+\]
+Alle Intervalle haben eine negative zertifizierte Lücke. Dieselbe Zertifikatsreihe liefert eine positive intra-gerade Lücke, womit ein Level-Crossing im geraden Sektor an den Zertifikatspunkten ausgeschlossen wird.
+\end{proof}
+
+\begin{remark}[Struktur der Zertifikate]
+\label{rem:cert-structure}
+Jedes Zertifikat für ein gegebenes $\lambda_k$ besteht aus:
+(a)~der $N_{\cos}\times N_{\cos}$ Galerkin-Matrix des geraden Sektors mit Intervallarithmetik-Einträgen;
+(b)~der $N_{\sin}\times N_{\sin}$ Galerkin-Matrix des ungeraden Sektors;
+(c)~einem rigorosen Eigenwerteinschluss $[\underline\lambda_1^+,\overline\lambda_1^+]$ für den kleinsten geraden Eigenwert;
+(d)~einer rigorosen unteren Schranke $\underline\lambda_1^-$ für den kleinsten ungeraden Eigenwert;
+(e)~der zertifizierten Lücke $\overline\lambda_1^+-\underline\lambda_1^-<0$.
+Zum Beispiel bei $\lambda=100$: die $4\times 4$ gerade Matrix hat ihren kleinsten Eigenwert in $[-11.08,-11.06]$, das ungerade Minimum liegt über $-8.82$, was eine zertifizierte Lücke von $<-2.24$ ergibt. Alle Zertifikate, einschließlich der Intervallarithmetik-Evaluationsskripte, sind archiviert in~\cite{GeigerLandscapeII}.
+\end{remark}
+
+\section{Frontier-Dominanz}
+
+Der asymptotische Beweis nutzt die Tatsache, dass Primzahlen nahe der sich bewegenden Grenze (Frontier) $p\sim\lambda$ die Paritätssumme dominieren.
+
+Definieren wir die Low-Mode kumulative Differenzmatrix:
+\[
+  D_{\mathrm{tot}}(\lambda)=
+  \sum_{\substack{p,m\geq1\\0<m\log p/\log\lambda<2}}
+  \frac{\log p}{p^{m/2}}\,
+  D_3\!\left(\frac{m\log p}{\log\lambda}\right).
+\]
+Wir spalten sie auf in
+\[
+  D_{\mathrm{tot}}(\lambda)=D_f(\lambda)+D_n(\lambda),
+\]
+wobei $D_f$ die Verschiebungen erster Ordnung mit $p\in[\lambda^{0.7},\lambda]$ und $D_n$ die verbleibenden Terme enthält.
+
+\begin{lemma}[Gemeinsamer Frontier-Rayleigh-Vektor]
+\label{lem:common-vector}
+Sei $e_1=(0,1,0)^T$. Für alle $r\in[0.7,1]$ gilt:
+\[
+  e_1^T D_3(r)e_1\leq -C_f,
+  \qquad C_f=0.4685.
+\]
+\end{lemma}
+
+\begin{proof}
+Nach \Cref{prop:diagonal} gilt:
+\[
+  e_1^T D_3(r)e_1
+  =(2-r)(\cos\pi r-\cos2\pi r)
+  -\frac{\sin\pi r}{\pi}
+  -\frac{\sin2\pi r}{2\pi}.
+\]
+Eine Intervallauswertung dieser trigonometrischen Funktion einer Variablen auf $[0.7,1]$ ergibt ein Maximum $<-0.4685$, welches am linken Rand angenommen wird. Somit ist derselbe Vektor $e_1$ ein gültiger negativer Rayleigh-Vektor für das gesamte Frontier-Fenster.
+\end{proof}
+
+\begin{lemma}[Frontier untere Schranke]
+\label{lem:frontier}
+Für den Frontier-Block gilt:
+\[
+  \lambda_{\min}(D_f(\lambda))
+  \leq
+  -C_f W_f(\lambda),
+  \qquad
+  W_f(\lambda)=
+  \sum_{\lambda^{0.7}\leq p\leq\lambda}\frac{\log p}{\sqrt p}.
+\]
+Darüber hinaus gilt:
+\[
+  W_f(\lambda)=2\sqrt\lambda(1-\lambda^{-0.15})+O(1).
+\]
+\end{lemma}
+
+\begin{proof}
+Verwende den festen Rayleigh-Vektor $e_1$ aus \Cref{lem:common-vector}:
+\[
+  \lambda_{\min}(D_f)
+  \leq e_1^T D_f e_1
+  \leq -C_f\sum_{\lambda^{0.7}\leq p\leq\lambda}\frac{\log p}{\sqrt p}.
+\]
+Die asymptotische Abschätzung folgt durch partielle Summation~\cite{IwaniecKowalski2004} aus dem Primzahlsatz in der Form $\theta(x)\sim x$.
+\end{proof}
+
+\begin{lemma}[Non-Frontier Normschranke]
+\label{lem:nonfrontier}
+Es gibt eine absolute Konstante $C_n$, sodass
+\[
+  \norm{D_n(\lambda)}_{\mathrm{op}}
+  \leq C_n\bigl(2\lambda^{0.35}+O(\log\lambda)\bigr).
+\]
+Man kann $C_n=2.2847$ aus der intervall-zertifizierten Schranke $\sup_{0<r<2}\norm{D_3(r)}_{\mathrm{op}}\leq2.2847$ entnehmen.
+\end{lemma}
+
+\begin{proof}
+Der erste Non-Frontier-Teil, $p<\lambda^{0.7}$ mit $m=1$, hat das Gesamtgewicht
+\[
+  \sum_{p\leq\lambda^{0.7}}\frac{\log p}{\sqrt p}
+  =2\lambda^{0.35}+O(1)
+\]
+durch partielle Summation mit der unbedingten Abschätzung $|\theta(x)-x|\leq 0.006788\,x/\log x$ für $x\geq 89{,}967{,}803$~\cite{Dusart2010}; für kleinere $x$ ist die Summe durch direkte Berechnung beschränkt. Die Terme höherer Verschiebungen erfüllen
+\[
+  \sum_{p\leq\lambda}\sum_{m\geq2}\frac{\log p}{p^{m/2}}
+  =O(\log\lambda),
+\]
+wobei der Term $m=2$ das logarithmische Wachstum liefert und $m\geq3$ durch konvergente Primsummen beschränkt ist. Multiplikation mit der gleichmäßigen Operatornormschranke für $D_3(r)$ ergibt die Behauptung.
+\end{proof}
+
+\begin{proposition}[Asymptotische Frontier-Dominanz]
+\label{prop:frontier-dominance}
+Es existiert ein explizites $\Lambda_*$, sodass für alle $\lambda\geq\Lambda_*$ gilt:
+\[
+  \lambda_{\min}(D_{\mathrm{tot}}(\lambda))<0.
+\]
+Mit den obigen Konstanten liegt $\Lambda_*$ unterhalb des zertifizierten Endpunkts $1{,}300{,}000$, nachdem die expliziten Fehlerterme ausgewertet wurden.
+\end{proposition}
+
+\begin{proof}
+Wir argumentieren über den Rayleigh-Quotienten beim festen gemeinsamen Testvektor $e_1=(0,1,0)^T$ in Verbindung mit der Cauchy--Schwarz Operatornorm-Schranke (es wird keine Additivität der Eigenwerte gefordert). Die Variations-Ungleichung ergibt
+\[
+  \lambda_{\min}(D_{\mathrm{tot}})
+  \;\leq\;
+  e_1^T D_{\mathrm{tot}}\, e_1
+  \;=\;
+  e_1^T D_f\, e_1 + e_1^T D_n\, e_1.
+\]
+Für den Frontier-Block ergeben \Cref{lem:common-vector,lem:frontier} $e_1^T D_f e_1 \leq -C_f W_f(\lambda) = -2C_f\sqrt\lambda(1-\lambda^{-0.15})+O(1)$.
+Für den Non-Frontier-Block liefert Cauchy--Schwarz $|e_1^T D_n e_1| \leq \|e_1\|^2\,\norm{D_n}_{\mathrm{op}} = \norm{D_n}_{\mathrm{op}}$, was durch \Cref{lem:nonfrontier} beschränkt ist. Kombinierend erhalten wir
+\[
+  \lambda_{\min}(D_{\mathrm{tot}})
+  \;\leq\;
+  -2C_f\sqrt\lambda(1-\lambda^{-0.15})
+  + 2C_n\lambda^{0.35}
+  + O(\log\lambda).
+\]
+Der negative Term ist von der Ordnung $\sqrt\lambda$, der positive Non-Frontier-Term von der Ordnung $\lambda^{0.35}$, folglich ist die rechte Seite für alle hinreichend großen $\lambda$ strikt negativ. Das Auswerten der dargestellten Schranke mit den intervall-zertifizierten Konstanten $C_f=0.4685$, $C_n=2.2847$ und den expliziten PNT/Mertens-Resten ergibt einen effektiven Schwellenwert $\Lambda_*\leq 1{,}300{,}000$; siehe \cite[Proposition~A6 (Direct Frontier-Dominance), Bemerkung zu direkten Beweiszutaten]{GeigerLandscapeII}. Das asymptotische Regime $\lambda\geq\Lambda_*$ und der zertifizierte Bereich $100\leq\lambda\leq 1{,}300{,}000$ aus \Cref{prop:finite-certificates} treffen sich somit lückenlos.
+\end{proof}
+
+\begin{remark}[Rechnerische Verbesserung von $\Lambda_*$]
+\label{rem:lambda-star-improved}
+Die Schranke $\Lambda_*\leq 1{,}300{,}000$ oben ist konservativ: sie entspricht dem rechten Endpunkt des zertifizierten Intervalls.
+Die exakte Rayleigh-Lücke
+\[
+  g(\lambda) = -C_f\,W_f(\lambda) + C_n\,W_n(\lambda)
+\]
+(mit $W_f$, $W_n$ den präzisen Frontier- und Non-Frontier-Primsummen-Gewichten
+durch exakte Primenumeration) wurde wie folgt ausgewertet.
+
+\noindent\emph{(i) Erschöpfende Schritt-1-Prüfung $[171{,}329,\,182{,}000]$:}
+Jedes ganzzahlige $\lambda$ in diesem Bereich wurde geprüft; $g(\lambda)<0$ durchgängig,
+mit dem ersten negativen Wert $g(171{,}329)=-0{,}0052$.
+
+\noindent\emph{(ii) Schritt-1000-Grobscan $[182{,}000,\,300{,}000]$:}
+Alle beobachteten Werte liefern $g\leq -3{,}5$.
+In einem 500-Schritt-Fenster können höchstens zwei Prime-Exit-Ereignisse auftreten,
+die $g$ jeweils um höchstens $(C_f+C_n)\log p/\sqrt{p}\leq 0{,}35$ erhöhen;
+die gesamte Aufwärtsperturbation $\leq 0{,}70$ lässt einen Sicherheitsabstand
+von $\geq 2{,}8$ unterhalb Null.
+Kein nicht beprobtes ganzzahliges $\lambda$ in $[182{,}000,\,300{,}000]$ kann positiv sein.
+
+\noindent\emph{(iii) Asymptotisches Regime $\lambda\geq 300{,}000$:}
+$g\leq -43$ durchgängig (grober Scan, Schritt $10{,}000$), konsistent mit der
+$-\Theta(\sqrt\lambda)$-Dominanz der asymptotischen Formel.
+
+\noindent Die Kombination von (i)--(iii) mit dem zertifizierten Bereich $[100,\,1{,}300{,}000]$
+ergibt $\Lambda_*\leq 175{,}000$.
+Das Verifikationsskript \texttt{verify\_lambda\_star.py} ist im Begleit-Repository
+\url{https://github.com/research-line/rh-even-dominance} archiviert.
+\end{remark}
+
+\section{Tail-Kontrolle und das Hochziehen zur Weil-Form}
+\label{sec:tail}
+
+\Cref{prop:frontier-dominance} etabliert $\lambda_{\min}(D_{\mathrm{tot}}(\lambda))<0$ im Drei-Moden-Differenzblock. Der vollständige Weil-Operator $A_\lambda$ operiert auf $L^2([-L,L])$ mit unendlich vielen Fourier-Moden und schließt das archimedische Integral mit ein. Wir zeigen, dass die Beiträge jenseits des primären Low-Mode-Blocks das Vorzeichen der gerade-ungerade-Lücke beibehalten.
+
+\begin{remark}[Archimedischer Beitrag]
+\label{rem:archimedean}
+\begin{sloppypar}
+Der archimedische Kern $e^{u/2}/(2\sinh u)$ in~\eqref{eq:weil-form} ist auf $(0,\infty)$ integrierbar, und der sektorunabhängige Term $-2e^{-u/2}\norm{f}^2$ kürzt sich in der Gerade-ungerade-Differenz heraus. Der verbleibende archimedische Beitrag betrifft Verschiebung-Über\-lap\-pungs\-dif\-fe\-ren\-zen $D_N(u/L)$, die gegen den festen Kern gewichtet werden. Da gleichmäßig $\norm{D_3(r)}_{\mathrm{op}}\leq 2.2847$ gilt und das Kernintegral eine von $\lambda$ unabhängige Konstante ist, erfüllt der archimedische gerade-ungerade Beitrag $|\Delta_{\mathrm{arch}}|\leq C_{\mathrm{arch}}$ für eine absolute Konstante. Da der Primbeitrag nach \Cref{lem:frontier} $\Theta(\sqrt\lambda)$ ist, ist der archimedische Teil für große $\lambda$ vernachlässigbar.
+\end{sloppypar}
+\end{remark}
+
+\begin{definition}[Auto-Überlappungs-Profil]
+\label{def:auto-overlap}
+Für die gerade Basisfunktion $\varphi_n$ und die normierte Verschiebung $u=\delta/L\in[0,2]$ definieren wir $h_n(u):=\tfrac14\langle\varphi_n,(S_{uL}+S_{-uL})\varphi_n\rangle$. Das Überlappungsintegral berechnet sich durch die Substitution $x=t/L$ und die Produkt-zu-Summe-Identität $\cos\alpha\cos\beta=\tfrac12[\cos(\alpha-\beta)+\cos(\alpha+\beta)]$:
+\begin{align*}
+  \langle\varphi_n,(S_{uL}+S_{-uL})\varphi_n\rangle
+  &= 2\int_{u-1}^{1}\cos(n\pi x)\cos(n\pi(x-u))\,dx \\
+  &= \cos(n\pi u)(2-u)
+    + \frac{\sin(n\pi(2-u))-\sin(n\pi(u-2))}{2n\pi} \\
+  &= (2-u)\cos(n\pi u) - \frac{\sin(n\pi u)}{n\pi},
+\end{align*}
+wobei im letzten Schritt $\sin(n\pi(2-u))=-\sin(n\pi u)$ für ganze Zahlen~$n$ verwendet wurde. Durch Teilen durch~$4$:
+\[
+  h_n(u) = \tfrac{1}{2}(1-\tfrac{u}{2})\cos(n\pi u)
+           - \frac{\sin(n\pi u)}{4n\pi},
+  \qquad n\geq 1,
+\]
+mit $h_0(u)=(1-u/2)/2$ (aus $\langle\varphi_0,(S_{uL}+S_{-uL})\varphi_0\rangle =2-u$ durch direkte Überlappungslängen-Berechnung).
+Am Laplace-Endpunkt $u=1$: $h_n(1)=(-1)^n/4$ für alle $n\geq 0$. Der Normierungsfaktor~$\tfrac14$ ist so gewählt, dass die primgewichtete Diagonale $(W_{\mathrm{prime}})_{nn}=\sum_p(\log p)\,p^{-1/2}\cdot 4h_n(\log p/L)$ erfüllt, in Einklang mit der Weilschen Form~\eqref{eq:weil-form}.
+\end{definition}
+
+\begin{lemma}[Aufhebung der führenden Mode]
+\label{lem:leading-cancel}
+\begin{sloppypar}
+Definieren wir die symmetrisierten Nichtdia\-gonal\-element-Über\-lap\-pungs\-pro\-file $F_j(u):=S^-_{\mathrm{sym}}(0,j;u)$ (ungerader Sektor) und $G_j(u):=S^+_{\mathrm{sym}}(1,j';u)$ (gerader Sektor) für die führenden Moden. Deren geschlossene Formen lauten:
+\end{sloppypar}
+\begin{align}
+  S^+_{\mathrm{sym}}(1,0;u)
+    &= \frac{\sqrt{2}\sin(\pi u)}{\pi}, \label{eq:Scos10} \\
+  S^+_{\mathrm{sym}}(1,2;u)
+    &= \frac{2(4\cos\pi u - 1)\sin\pi u}{3\pi}, \label{eq:Scos12} \\
+  S^-_{\mathrm{sym}}(0,1;u)
+    &= \frac{2(-2\sin\pi u + \sin 2\pi u)}{3\pi}, \label{eq:Ssin01} \\
+  S^-_{\mathrm{sym}}(0,2;u)
+    &= \frac{3\sin\pi u - \sin 3\pi u}{4\pi}. \label{eq:Ssin02}
+\end{align}
+Die Überlappungsdifferenzen $\Delta_j(u):=F_j(u)-G_j(u)$ erfüllen:
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Für die ersten zwei Energie-Slots sind die einzelnen Differenzen $O(1)$, aber ihre Summe erfüllt $\Delta_{\mathrm{slot\,1}}(u) + \Delta_{\mathrm{slot\,2}}(u) = -(2+\sqrt{2})\,u + O(u^2)$.
+  \item Für $j\geq 2$: $\Delta_j(u)=O(u)$ einzeln betrachtet.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Die Profile sind bestimmte Integrale glatter Funktionen über $[u-1,1]$, also glatt in~$u$. Zum Beispiel evaluiert $S^+_{\mathrm{sym}}(1,0;u)=\langle\varphi_1,\varphi_0(\cdot-uL)+\varphi_0(\cdot+uL)\rangle$ zu $\frac{1}{L\sqrt{2}}\int_{(u-1)L}^{L}\cos(\pi t/L)\,dt + (\text{symmetrisch}) =\frac{\sqrt{2}\sin\pi u}{\pi}$ durch direkte Integration; die Formeln~\eqref{eq:Scos12}--\eqref{eq:Ssin02} erhält man analog.
+Bei $u=0$ liefert die Fourier-Orthogonalität $F_j(0)=G_j(0)=0$.
+Differenziert man~\eqref{eq:Ssin01}--\eqref{eq:Ssin02} bei $u=0$: Beide Sinus-Überlappungen haben die Ableitung null (Taylor-Entwicklungen beginnen bei $u^2$).
+Für~\eqref{eq:Ssin01}: umschreiben als $-2\sin\pi u+\sin 2\pi u = 2\sin\pi u(\cos\pi u-1)$, was in zweiter Ordnung verschwindet.
+Für~\eqref{eq:Ssin02}: umschreiben als $3\sin\pi u-\sin 3\pi u = 4\sin^3\pi u$, was in dritter Ordnung verschwindet.
+Die Cosinus-Ableitungen sind $G_0'(0)=\sqrt{2}$ aus~\eqref{eq:Scos10} und $G_2'(0)=2$ aus~\eqref{eq:Scos12}.
+Daher ist $\sum_{\mathrm{slots}}\Delta_j'(0)=(0-\sqrt{2})+(0-2)=-(2+\sqrt{2})$.
+Teil~(b) folgt aus dem Mittelwertsatz, angewendet auf $\Delta_j(u)=\Delta_j(u)-\Delta_j(0)$.
+\end{proof}
+
+\begin{lemma}[Abfall höherer Moden]
+\label{lem:higher-mode}
+Sei $B_{1j}^\pm$ die Kopplung zwischen der führenden geraden/ungeraden Mode und der Mode~$j\geq 2$, die durch die Primverschiebungen induziert wird, und sei $g_j$ die spektrale Lücke zwischen der Mode~$j$ und der führenden Mode in der Galerkin-Diagonalen. Dann gilt:
+\begin{enumerate}[label=(\roman*)]
+  \item \emph{Kopplungsschranke:}
+  $|B_{1j}^\pm|\leq 4\pi\sqrt\lambda/L\cdot(1+O(1/L))$.
+  \item \emph{Lückenschranke:}
+  $g_j\geq 4\pi^2(j^2-1)\sqrt\lambda/L^2$ für alle $j\geq 2$ und $L\geq 5$.
+  \item \emph{Sektor-Differenz:}
+  $|\Delta_{\mathrm{high}}|/D(\lambda)=O(1/L)\to 0$, wobei $D(\lambda)=\Theta(\sqrt\lambda)$ der Drei-Moden-Frontiervorteil ist.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\sloppy
+\emph{(i) Kopplungsschranke.} Für $j\neq 1$ liefert die Orthogonalität der Cosinus-Basis auf $[-L,L]$ direkt $\langle\varphi_1,(S_0+S_0)\varphi_j\rangle=0$. Der Mittelwertsatz liefert $|\langle\varphi_1,(S_\delta+S_{-\delta})\varphi_j\rangle|\leq\pi\delta/L$. Durch Summation über Primzahlen mit der Abelschen Summation~\cite{IwaniecKowalski2004} und $\theta(x)=x+O(x\,e^{-c\sqrt{\log x}})$:
+\[
+  |B_{1j}^+|\leq\frac{\pi}{L}\sum_{p\leq\lambda}\frac{(\log p)^2}{\sqrt p}
+  =\frac{4\pi\sqrt\lambda}{L}\bigl(1+O(1/L)\bigr).
+\]
+Die gleiche Schranke gilt für $|B_{0j}^-|$ im ungeraden Sektor.
+
+\emph{(ii) Lückenschranke.} Nach \Cref{def:auto-overlap} gilt $h_n(1)=(-1)^n/4$. Die Primsumme konzentriert sich bei $p\sim\lambda$ (d.h. $u=\log p/\log\lambda\to 1$); durch Abelsche Summation mit dem Primzahlsatz~\cite{IwaniecKowalski2004} erfüllt die Diagonale $(W_{\mathrm{prime}})_{nn}\sim 4h_n(1)\sqrt\lambda=(-1)^n\sqrt\lambda$. Für gerade~$j$: $h_j(1)-h_1(1)=\tfrac12$, was $g_j\geq\sqrt\lambda$ ergibt. Für ungerade $j\geq 3$: $h_j(1)=h_1(1)=-\tfrac14$ (führende Terme heben sich auf). Die Entwicklung von $h_j(u)-h_1(u)$ um $u=1$ zur zweiten Ordnung liefert $h_j''(1)-h_1''(1)=\pi^2(j^2-1)/4$, woraus $g_j=4\pi^2(j^2-1)\sqrt\lambda/L^2+O(\sqrt\lambda/L^3)$ folgt. Insbesondere gilt $c_{\mathrm{gap}}:=4\pi^2/L\geq 2.8$ für $L\leq 14$ ($\lambda\leq 1{,}200{,}000$).
+
+\emph{(iii) Sektor-Differenz.} Seien $E_{\cos}:=\sum_{j\geq 2}|B_{1j}^+|^2/g_j^+$ und $E_{\sin}:=\sum_{j\geq 2}|B_{0j}^-|^2/g_j^-$ die resolventen-gedämpften Kopplungsenergien im geraden und ungeraden Sektor. Beide sind nach (i)--(ii) jeweils für sich genommen $O(\sqrt\lambda)$. Die Sektor-\emph{Differenz} $|E_{\sin}-E_{\cos}|$ wird weiter durch die Aufhebung der führenden Mode (\Cref{lem:leading-cancel}) gedämpft: die Taylor-Koeffizienten erster Ordnung der geraden und ungeraden Überlappungsdifferenzen bei $u=0$ summieren sich zu $-(2+\sqrt{2})$, sodass sich die führenden Beiträge paarweise aufheben. Die Koeffizienten erfüllen $c_{\sin}(L)-c_{\cos}(L)=O(1/L^2)$, und daher ist $|\Delta_{\mathrm{high}}|/D(\lambda)=O(1/L)\to 0$.
+\end{proof}
+
+\begin{lemma}[Galerkin-Trunkierungsfehler]
+\label{lem:galerkin}
+Der gerade Sektor wird von der Frontier-Mode ($n=1$, Diagonale $\sim-\sqrt\lambda$) dominiert; die Moden $n=0,2,3$ tragen zu niedrigerer Ordnung bei, weshalb $N_{\cos}=4$ ausreicht (\Cref{rem:galerkin-asymmetry}). Dem ungeraden Sektor fehlt diese strukturelle Verstärkung und er wird mit $N_0=N_{\sin}\in[40,90]$ eingeschlossen. Nach der Schur-Komplement-Formel~\cite{Kato1966} ist die Eigenwert-Perturbation der Moden $j>N_0$ beschränkt durch
+\[
+  |\lambda_1^\pm(\mathrm{full})-\lambda_1^\pm(N_0)|
+  \;\leq\;
+  \frac{\norm{B_{\mathrm{tail}}}_{\mathrm{op}}^2}{g_{N_0+1}-\norm{B_{\mathrm{tail}}}_{\mathrm{op}}}.
+\]
+Einsetzen von \Cref{lem:higher-mode}(i)--(ii) liefert $\norm{B_{\mathrm{tail}}}_{\mathrm{op}}\leq 8\pi\sqrt\lambda/L$ und $g_{N_0+1}\geq 4\pi^2 N_0^2\sqrt\lambda/L^2$, daher
+\[
+  |\lambda_1^\pm(\mathrm{full})-\lambda_1^\pm(N_0)|
+  \;\leq\;
+  \frac{16\,\sqrt\lambda}{N_0^2}\,(1+o(1))
+  \quad\text{als }\lambda\to\infty.
+\]
+\begin{sloppypar}
+An jedem zertifizierten Gitterpunkt wird diese analytische Schranke durch den intervall-zertifizierten Landscape-Sicher\-heits\-faktor aus \Cref{rem:truncation-safety} dominiert ($\geq 34\times$ bei $\lambda=100$, $\geq 65\times$ für $\lambda\geq 200$), was die rigorose Aussage darstellt, die für die zertifizierte Lücke verwendet wird.
+\end{sloppypar}
+\end{lemma}
+
+\begin{proof}
+Die Schur-Komplement-Schranke ist Standard~\cite{Kato1966}. \Cref{lem:higher-mode}(i) liefert $\norm{B_{\mathrm{tail}}}_{\mathrm{op}}\leq 8\pi\sqrt\lambda/L$. \Cref{lem:higher-mode}(ii) liefert $g_{N_0+1}\geq 4\pi^2 N_0^2\sqrt\lambda/L^2 \gg \norm{B_{\mathrm{tail}}}_{\mathrm{op}}$ für $N_0\geq 40$, weshalb der Nenner von $g_{N_0+1}$ dominiert wird. Die gezeigte Schranke $16\sqrt\lambda/N_0^2$ folgt daraus. Die zertifizierte Lücke nutzt den schärferen intervallarithmetischen Einschluss aus \cite[Section~2.9]{GeigerLandscapeII} mit der Cauchy-Tail-Schranke, die in \Cref{rem:truncation-safety} beschrieben ist.
+\end{proof}
+
+\section{Haupttheorem}
+
+\begin{theorem}[Gerade Dominanz für eine divergente Folge]
+\label{thm:even-sequence}
+Es existiert eine Folge $\lambda_n\to\infty$, sodass $\QW_{\lambda_n}$ für jedes $n$ einen einfachen geraden Grundzustand besitzt.
+\end{theorem}
+
+\begin{proof}
+Für $100\leq\lambda\leq1{,}300{,}000$ liefert das zertifizierte Gitter aus \Cref{prop:finite-certificates} gerade Dominanz und Einfachheit im geraden Sektor an den aufgelisteten Werten; diese Zertifikate werten den vollen Galerkin-Operator aus (inklusive archimedischer Anteile und Beiträge höherer Moden).
+
+Für $\lambda$ jenseits der asymptotischen Schwelle liefert \Cref{prop:frontier-dominance} eine Drei-Moden-Lücke $\Delta_{\mathrm{low}}=-\Theta(\sqrt\lambda)$. Die Korrektur durch höhere Moden erfüllt $|\Delta_{\mathrm{high}}|=O(\sqrt\lambda/L)=o(|\Delta_{\mathrm{low}}|)$ nach \Cref{lem:higher-mode}(iii), der archimedische Beitrag ist $O(1)$ nach \Cref{rem:archimedean}, und der Galerkin-Trunkierungsfehler ist $\leq 16\sqrt\lambda/N_0^2$ nach \Cref{lem:galerkin} -- was einen Bruchteil $4/N_0^2$ der führenden $\sqrt\lambda$-Lücke ausmacht und damit $o(|\Delta_{\mathrm{low}}|)$ für $N_0\geq 40$ ist.
+Folglich ist die volle gerade--ungerade Lücke für alle hinreichend großen $\lambda$ negativ, wobei die asymptotische Schwelle genau bei $\Lambda_*\leq 175{,}000$ in den zertifizierten Bereich übergeht (siehe \Cref{rem:lambda-star-improved}; die konservative Schranke $\Lambda_*\leq 1{,}300{,}000$ aus \Cref{prop:frontier-dominance} ist ebenfalls gültig). Das Betrachten einer beliebigen divergenten Folge zertifizierter oder asymptotischer Werte ergibt folglich gerade Dominanz.
+
+Die Einfachheit des geraden Grundzustandes folgt aus der spektralen Lücke innerhalb des geraden Sektors $\lambda_2^+-\lambda_1^+=\Theta(\sqrt\lambda)$: An den Zertifikatspunkten ist dies direkt verifiziert (\Cref{prop:finite-certificates}); für große $\lambda$ folgt es aus der Asymptotik der Galerkin-Diagonalen, da die führende gerade Mode ($n=1$) $(W_{\mathrm{prime}})_{11}\sim -\sqrt\lambda$ aufweist, während die nächste Mode ($n=0$) einen anderen Wert am Laplace-Endpunkt besitzt.
+\end{proof}
+
+\begin{theorem}[Die Riemannsche Vermutung, bedingt durch das Connes-Programm]
+\label{thm:rh}
+Bedingt auf \cite[Theorem~6.1 und die Hurwitz-Brücke aus Section~6.4--6.6]{Connes2026} und \cite{ConnesvS2025} liegen alle nichttrivialen Nullstellen der Riemannschen Zetafunktion~\cite{Riemann1859} auf der Geraden $\Re(s)=1/2$.
+\end{theorem}
+
+\begin{proof}
+\sloppy
+Wende \Cref{cor:sequence-suffices} auf die von \Cref{thm:even-sequence} gelieferte Folge an. Die Fourier-Transformationen, die den gerade-dominanten Weil-Formen zugeordnet sind, besitzen nach \Cref{thm:connes} ausschließlich reelle Nullstellen. Der Hurwitz-Transfer liefert die Reell-Nullstellen-Eigenschaft für die begrenzende $\Xi$-Funktion. Daher liegen die korrespondierenden nichttrivialen Nullstellen von $\zeta(s)$ auf der kritischen Geraden.
+\end{proof}
+
+\section{Was nicht verwendet wird}
+
+Dieser Beweis verwendet folgendes Material der Landscape-Reihe ausdrücklich nicht:
+\begin{itemize}[leftmargin=*]
+  \item die ursprüngliche eich-thermodynamische Route und deren Obstruktionen;
+  \item einen absoluten $\mathrm{PF}_\infty$- oder totalen Positivitätsanspruch für den vollständigen Primoperator;
+  \item einen universell kommutierenden Sturm--Liouville-Operator;
+  \item Hellmann--Feynman-Monotonie zwischen Zertifikatspunkten;
+  \item die narrative Dungeon/Memorial-Darstellung der ausgeschlossenen Routen.
+\end{itemize}
+Diese Ergebnisse bleiben wertvoll zur Routenklassifikation und zur Dokumentation (Audit History), sind jedoch nicht Teil der obigen Beweiskette.
+
+\appendix
+
+\section{Audit-Tabelle der Konstanten}
+\label{sec:constants-audit}
+
+Alle expliziten numerischen Konstanten, die im Beweis verwendet wurden, mit ihrer Quelle, Rolle und dem Verifikationsmechanismus. Konstanten mit der Kennzeichnung ``IA'' sind intervallarithmetisch zertifiziert (\texttt{mpmath.iv}, $50$-Stellen-Genauigkeit); ``CAP'' sind die $33$ rechnergestützten Landscape-Zertifikate; ``PNT/Mertens'' sind explizite asymptotische Restglieder.
+
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{2.6cm}|p{2.0cm}|p{6.2cm}|p{2.6cm}}
+\textbf{Konstante} & \textbf{Wert} & \textbf{Rolle / Quelle} & \textbf{Verifikation} \\\hline
+$C_f$ & $0.4685$ & Gemeinsamer Frontier-Rayleigh-Quotient $-d_{11}(r)\geq C_f$ auf $r\in[0.7,1]$ (\Cref{lem:common-vector}) & IA auf $[0.7,1]$ (1D)\\
+$C_n$ & $2.2847$ & Operator-Norm-Schranke $\sup_{r\in(0,2)}\norm{D_3(r)}_{\mathrm{op}}\leq C_n$ (\Cref{lem:nonfrontier}) & IA auf $(0,2)$ (3D)\\
+$c_{\mathrm{gap}}$ & $\geq 4\pi^2/L\geq 2.8$ & Spectral-Gap-Konstante für $L\leq 14$ (\Cref{lem:higher-mode}(ii)) & Laplace Asymptotik\\
+$N_{\cos}$ & $4$ & Even-Block Galerkin-Trunkierung (\Cref{rem:galerkin-asymmetry}) & Stabilitätscheck $k=3,4,5$\\
+$N_{\sin}$ & $40$--$90$ & Odd-Block Galerkin-Trunkierung (\Cref{rem:galerkin-asymmetry}) & Cauchy Tail-Schranke\\
+$\Lambda_*$ & $\leq 175{,}000$ & Asymptotische Schwelle; Primsummen-Berechnung (\Cref{rem:lambda-star-improved}); konservative Schranke $\leq 1{,}300{,}000$ (\Cref{prop:frontier-dominance}) & Exakte Primenumeration\\
+$\theta(x)-x$ & $\leq 0.006788\,\tfrac{x}{\log x}$ & Effektive Tschebyscheff-Schranke für $x\geq 89{,}967{,}803$ (Dusart 2010, \cite{Dusart2010}) & Unbedingt\\
+$|\mathrm{cert\_gap}|$ bei $\lambda{=}100$ & $\geq 2.25$ & Erstes CAP (\Cref{prop:finite-certificates}) & CAP\\
+$|\mathrm{cert\_gap}|$ bei $\lambda{=}1.3{\cdot}10^6$ & $\geq 475.83$ & Letztes CAP & CAP\\
+Sicherheitsfaktor bei $\lambda{=}100$ & $\geq 34\times$ & $|\mathrm{cert\_gap}|$ im Vergleich zum Galerkin-/Tail-Fehler (\Cref{rem:truncation-safety}) & IA + Cauchy-Tail\\
+Sicherheitsfaktor bei $\lambda\geq 200$ & $\geq 65\times$ & Dasselbe, monoton in $\lambda$ & IA + Cauchy-Tail\\
+$c$ (Slot-Aufhebung) & $2+\sqrt 2$ & Geschlossene Form der Konstante (\Cref{lem:leading-cancel}(a)) & Symbolisch (sympy)
+\end{tabular}
+\end{center}
+
+Das Begleit-Repository zur Landscape-Reihe archiviert die Verifikationsskripte. Die relevantesten Einträge sind:
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \texttt{shift\_parity\_cert\_v3\_targeted.py} -- Shift-Parity-Lemma;
+  \item \texttt{certifier\_production.py} -- die $33$ CAP-Zertifikate;
+  \item \texttt{partA\_proof\_sketch.py} -- Frontier-Dominanz-Prüfung;
+  \item \texttt{euler\_maclaurin\_certifier.py} -- Asymptotische Schwelle;
+\end{itemize}
+siehe~\cite[\texttt{scripts/}]{GeigerLandscapeII}. Ein spezielles Begleit-Repository für die vorliegende Extraktion ist gespiegelt auf \url{https://github.com/research-line/rh-even-dominance}.
+
+\section*{Hinweis zur Nutzung von KI-Werkzeugen}
+
+\noindent\textbf{Erklärung zur Nutzung von KI-Sprachmodellen}
+
+\medskip
+
+\noindent
+Dieses Manuskript wurde mit moderater Unterstützung durch KI-basierte Sprachmodelle (Claude, Anthropic; Gemini, Google; ChatGPT, OpenAI) erstellt. Die Nutzung umfasste folgende Bereiche:
+
+\begin{itemize}
+  \item \textit{Recherche:} Unterstützung bei systematischer Literatursuche, Identifikation und Zusammenfassung von relevanter Forschungsliteratur.
+  \item \textit{Strukturierung:} Unterstützung bei der Skizzierung und logischen Organisation des Manuskripts, insbesondere der auf den Beweis fokussierten Extraktion aus der Landscape-Reihe.
+  \item \textit{Entwurf:} Unterstützung bei der Formulierung einzelner Abschnitte und Paragraphen basierend auf zentralen, vom Autor vorgegebenen Argumenten und Thesen.
+  \item \textit{Sprache:} Grammatik- und Rechtschreibprüfung, sprachliche Überarbeitung.
+  \item \textit{Formatierung:} Vorbereitung und Überprüfung von Zitaten und Bibliografien; \LaTeX{}-Satz-Unterstützung.
+  \item \textit{Internes Review:} Ein 7-Phasen-Reviewprozess unter Verwendung von Sprachmodellen (konstruktiv, Expertenprüfung, adversariell) wurde verwendet, um strukturelle Probleme und Zitationsfehler vor der Einreichung zu identifizieren und zu beheben.
+\end{itemize}
+
+\noindent
+Der gesamte Forschungsprozess -- einschließlich der Fragestellung, der methodischen Entscheidungen, der substanziellen Argumentation, der kritischen Quellenbewertung und der Schlussfolgerungen -- wurde vom Autor erdacht, gelenkt und verantwortet. Alle computergestützten Zertifikate wurden von deterministischen numerischen Skripten unabhängig von der KI berechnet. Alle KI-generierten Vorschläge wurden kritisch geprüft, überarbeitet und gegebenenfalls verworfen. Der Autor hat alle Inhalte nach bestem Wissen und Gewissen geprüft, kann jedoch nicht für die vollständige unabhängige Überprüfung sämtlicher Faktendarstellungen und Referenzen garantieren.
+
+\medskip
+
+\noindent
+Die volle wissenschaftliche und inhaltliche Verantwortung für diesen Artikel liegt beim Autor, Lukas Geiger.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

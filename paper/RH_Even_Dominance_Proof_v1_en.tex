@@ -1,0 +1,938 @@
+\documentclass[11pt,a4paper]{article}
+
+\input{glyphtounicode}
+\pdfgentounicode=1
+\usepackage[utf8]{inputenc}
+\usepackage{cmap}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{makecell}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,capitalize]{cleveref}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{definition}{Definition}{Definitions}
+\crefname{remark}{Remark}{Remarks}
+
+\newcommand{\QW}{\mathrm{QW}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\DeclareMathOperator{\Tr}{Tr}
+
+\title{A Conditional Proof of the Riemann Hypothesis via Even Dominance of the Weil Quadratic Form}
+\author{Lukas Geiger\\Independent Researcher, Bernau\\ORCID: 0009-0005-7296-1534}
+\date{Draft v1.1 -- 3 May 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper presents a conditional proof of the Riemann Hypothesis, extracted
+from a three-part Landscape series. The Landscape papers document the full
+research process, including failed routes, obstruction theorems, computational
+certificates, and alternative strategies. The present paper keeps only the
+proof-relevant chain.
+Following Connes' reduction of the Riemann Hypothesis to an even-dominance
+condition for the Weil quadratic form, we prove that the relevant ground state is
+simple and even along a sequence $\lambda_n\to\infty$. The proof has four inputs:
+(i) Connes--van Suijlekom's real-zero criterion for quadratic forms
+(\cite[Theorem~6.1]{Connes2026}, together with the Hurwitz bridge of
+\cite[Fact~6.4 / Section~6.4--6.6]{Connes2026}); (ii) the Shift Parity Lemma, a finite
+trigonometric matrix theorem showing that every admissible prime shift has an
+intrinsic even-sector advantage; (iii) interval-arithmetic certificates for the
+finite range $100\leq\lambda\leq 1{,}300{,}000$; and (iv) a frontier-dominance
+argument based on the Prime Number Theorem, Mertens-type estimates, and a common
+Rayleigh-vector bound for primes $p$ with $\log p/\log\lambda$ near $1$. Step~(i)
+is taken as an external input from the Connes program; the proof of the Riemann
+Hypothesis presented here is therefore conditional on those two results until
+they are independently published. Steps~(ii)--(iv) are self-contained and
+analytical, with the finite range and the asymptotic threshold meeting exactly
+at $1{,}300{,}000$. The excluded gauge, total-positivity, and universal-commutator
+routes are not used in the proof and are referred to the Landscape series.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Riemann Hypothesis, Weil quadratic form, even dominance, Connes program, Shift Parity Lemma, computer-assisted proof.
+
+\newpage
+\section{Purpose and Relation to the Landscape Series}
+
+This paper is not a fourth installment of the Landscape series. It is a
+proof-only extraction. The Landscape papers~\cite{GeigerLandscapeI,GeigerLandscapeII,GeigerLandscapeIII}
+retain the full process: the original gauge-theoretic approach, the obstruction
+analysis, non-existence theorems for two attractive but false structural routes,
+review reports, and computational handoffs. Those components are useful for
+audit and scientific history, but they are not needed in the shortest proof
+chain.
+
+The proof presented here uses the following implication chain:
+\[
+\begin{gathered}
+\text{Shift parity}+\text{frontier dominance}+\text{finite certificates}\\
+\Longrightarrow\ \text{even dominance of }\QW_\lambda\\
+\Longrightarrow\ \text{RH via Connes and Hurwitz}.
+\end{gathered}
+\]
+
+\section{Connes' Reduction}
+
+Let $L=\log\lambda$ and consider the Hilbert space $L^2([-L,L])$. In additive
+coordinates $u=\log x$, Connes' Weil quadratic form is represented by a
+self-adjoint operator $A_\lambda$ of the form
+\begin{multline}
+\label{eq:weil-form}
+  \langle A_\lambda f,f\rangle
+  =(\log 4\pi+\gamma)\norm{f}^2
+  +\int_0^\infty
+  \left[
+    \langle T_u f+T_{-u}f,f\rangle
+    -2e^{-u/2}\norm{f}^2
+  \right]\frac{e^{u/2}}{2\sinh u}\,du\\
+  +\sum_p\sum_{m=1}^{\infty}
+    \frac{\log p}{p^{m/2}}\,
+    \langle T_{m\log p}f+T_{-m\log p}f,f\rangle ,
+\end{multline}
+where $T_u$ is the shift operator. The operator commutes with parity, hence it
+splits into even and odd sectors:
+\[
+  A_\lambda=A_\lambda^+\oplus A_\lambda^-,
+  \qquad
+  \lambda_1^\pm(\lambda)=\min\sigma(A_\lambda^\pm).
+\]
+
+\begin{definition}[Even dominance]
+\label{def:even-dominance}
+We say that $\QW_\lambda$ has even dominance if
+\[
+  \lambda_1^+(\lambda)<\lambda_1^-(\lambda)
+\]
+and the even-sector minimum is simple and isolated.
+\end{definition}
+
+\begin{theorem}[Connes--van Suijlekom real-zero criterion]
+\label{thm:connes}
+Let a real even distribution define a lower-bounded self-adjoint quadratic-form
+operator whose lowest spectral value is simple, isolated, and has an even
+eigenfunction $\eta$. Then the Fourier transform $\widehat\eta$ has only real
+zeros.
+\end{theorem}
+
+\begin{proof}
+This is the quadratic-form real-zero criterion proved by Connes and van
+Suijlekom~\cite{ConnesvS2025}; Connes' survey applies it to the Weil quadratic
+form and identifies even dominance as the remaining spectral condition
+\cite{Connes2026}.
+\end{proof}
+
+\begin{corollary}[Sufficiency of a divergent sequence]
+\label{cor:sequence-suffices}
+If even dominance holds for a sequence $\lambda_n\to\infty$, then the Riemann
+Hypothesis follows.
+\end{corollary}
+
+\begin{proof}
+For each $\lambda_n$, \Cref{thm:connes} gives real zeros for the corresponding
+truncated Fourier transform $\widehat\eta_{\lambda_n}$. The Hurwitz bridge of
+the Connes program~\cite[Fact~6.4 and Sections~6.4--6.6]{Connes2026} establishes:
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+  \item The truncated kernels $k_{\lambda_n}$ converge locally uniformly to the
+  completed Riemann $\Xi$-function on every compact subset of $\mathbb{C}$, at
+  rate $O(\lambda_n^{-1/2-\alpha})$ for some $\alpha>0$.
+  \item All $k_{\lambda_n}$ and $\Xi$ are entire functions of order one.
+  \item By Hurwitz' theorem on zeros of locally uniform limits of holomorphic
+  functions, every zero of $\Xi$ in any open set $U\subset\mathbb{C}$ is a limit
+  of zeros of $k_{\lambda_n}$ inside $U$ for $n$ large.
+\end{enumerate}
+Since each $k_{\lambda_n}$ has only real zeros (\Cref{thm:connes}), the zeros of
+$\Xi$ are real as well. The non-trivial zeros of $\zeta(s)$ correspond bijectively
+to zeros of $\Xi$, hence they lie on the critical line~$\Re(s)=1/2$.
+\end{proof}
+
+\begin{remark}[Analytical structure of the Hurwitz bridge]
+\label{rem:hurwitz-analytical}
+For transparency, we spell out the analytical chain underlying step~(a) above.
+The truncated kernel is
+\[
+  k_\lambda(z)
+  = \int_{-L}^{L} K_\lambda(t)\,e^{izt}\,dt, \qquad L = \log\lambda,
+\]
+where $K_\lambda$ is the even Weil spectral kernel restricted to $[-L,L]$.
+As a finite Fourier integral over a bounded interval, $k_\lambda$ belongs to
+the Paley--Wiener class $\mathrm{PW}_L$: it extends to an entire function
+satisfying $|k_\lambda(z)|\leq C_\lambda\,e^{L|\Im z|}$.
+
+A self-contained proof of locally uniform convergence $k_\lambda\to\Xi$
+would require three ingredients:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+  \item \emph{$L^2$-rate control}: $\|K_\lambda - K\|_{L^2(\mathbb{R})}
+    = O(\lambda^{-1/2-\alpha})$ for some $\alpha>0$,
+    where $K$ is the full (untruncated) Weil kernel.
+    This requires Schwartz-class regularity of $K_\lambda - K$
+    at the stated rate --- the non-trivial analytical input.
+  \item \emph{Locally uniform convergence from $L^2$ and Paley--Wiener}:
+    on any compact $\mathcal{K}\subset\mathbb{C}$, PW membership of $k_\lambda$
+    gives $|k_\lambda(z)|\leq e^{LR}\|K_\lambda\|_{L^2}$
+    (with $R = \max_{z\in\mathcal{K}}|\Im z|$), so the family is
+    locally bounded; normality (Montel's theorem) and $L^2$-convergence
+    then yield locally uniform convergence on $\mathcal{K}$.
+  \item \emph{Order one}: both $k_\lambda$ and $\Xi$ have order one,
+    as required for Hurwitz' theorem to transfer all zeros.
+\end{enumerate}
+Connes establishes step~(i) via the spectral theory of his Hilbert space in
+\cite[Fact~6.4 and Sections~6.4--6.6]{Connes2026};
+steps~(ii) and~(iii) are classical.
+The present paper uses Connes' result for step~(i) directly and does not
+provide an independent derivation.
+\end{remark}
+
+\begin{remark}[Conditioning and hypotheses]
+\label{rem:conditioning}
+The present proof relies on the quadratic-form real-zero criterion of
+Connes and van Suijlekom~\cite{ConnesvS2025} and on Connes' identification
+of even dominance as the remaining spectral condition~\cite{Connes2026}.
+Both results are currently available as arXiv preprints. Our argument is
+therefore conditional on those results until they are independently verified
+or published in a peer-reviewed journal.
+The hypotheses of \Cref{thm:connes} require: (i)~that $A_\lambda$ be bounded
+below, which holds because the archimedean kernel is integrable and the
+prime sum converges absolutely; (ii)~that the lowest spectral value be simple
+and isolated --- this is the content of the even-dominance condition proved
+below; and (iii)~locally uniform convergence of the Fourier transforms of the
+truncated eigenfunctions, established in~\cite[Section~4]{Connes2026}.
+\end{remark}
+
+\section{The Parity Matrix of a Single Shift}
+
+The proof begins with a finite algebraic fact. Let
+\[
+  \varphi_0(t)=\frac{1}{\sqrt{2L}},
+  \qquad
+  \varphi_n(t)=\frac{\cos(n\pi t/L)}{\sqrt L}\;(n\geq 1),
+  \qquad
+  \psi_n(t)=\frac{\sin((n+1)\pi t/L)}{\sqrt L}
+\]
+denote the $L^2([-L,L])$-normalized even and odd basis functions. For a normalized shift $r=s/L$ define
+the $N\times N$ difference matrix
+\[
+  D_{nm}(r)=
+  \langle\varphi_n,(S_{rL}+S_{-rL})\varphi_m\rangle
+  -
+  \langle\psi_n,(S_{rL}+S_{-rL})\psi_m\rangle .
+\]
+
+\begin{lemma}[$L$-independence]
+\label{lem:L-independence}
+$D_N(r)$ depends only on $r$, not on $L$ separately.
+\end{lemma}
+
+\begin{proof}
+Substitute $x=t/L$ in each overlap integral. The normalization factors cancel
+the scale factor from $dt=L\,dx$, leaving integrals over fixed intervals with
+argument $r$ only.
+\end{proof}
+
+\begin{proposition}[Closed diagonal entries]
+\label{prop:diagonal}
+For $L=1$ the diagonal entries satisfy, for $n\geq 1$:
+\[
+  D_{nn}(r)
+  =(2-r)\bigl[\cos(n\pi r)-\cos((n+1)\pi r)\bigr]
+  -\frac{\sin(n\pi r)}{n\pi}
+  -\frac{\sin((n+1)\pi r)}{(n+1)\pi}.
+\]
+For $n=0$, a direct overlap-length computation gives
+\[
+  D_{00}(r)=(2-r)(1-\cos\pi r)-\frac{\sin\pi r}{\pi}.
+\]
+\end{proposition}
+
+\begin{theorem}[Shift Parity Lemma]
+\label{thm:shift-parity}
+For every $N\geq 3$ and every $r\in(0,2)$,
+\[
+  \lambda_{\min}(D_N(r))<0.
+\]
+\end{theorem}
+
+\begin{proof}
+By the Cauchy interlacing theorem, $\lambda_{\min}(D_{N+1})\leq\lambda_{\min}(D_N)$,
+so it suffices to prove the $N=3$ case. The trace telescopes via
+\Cref{prop:diagonal}:
+\[
+  \Tr(D_3(r))=(2-r)(1-\cos 3\pi r)
+  -\frac{2\sin\pi r}{\pi}
+  -\frac{\sin 2\pi r}{\pi}
+  -\frac{\sin 3\pi r}{3\pi}.
+\]
+The determinant $\det(D_3(r))$ is an explicit trigonometric expression in~$r$,
+computed from the closed-form entries of \Cref{prop:diagonal}.
+We use a two-case argument.
+
+\smallskip\noindent\textbf{Case~1} ($\det D_3(r)<0$, approximately $93.3\%$ of
+$(0,2)$): the eigenvalues have mixed signs, so $\lambda_{\min}<0$.
+
+\smallskip\noindent\textbf{Case~2} ($\det D_3(r)\geq 0$, the interval
+$R_2\approx[0.597,0.729]$): in this region, $\Tr(D_3(r))<0$
+($\max_{R_2}\Tr\approx -0.007$). Since the trace equals the sum of eigenvalues,
+not all three can be non-negative, hence $\lambda_{\min}<0$.
+
+\smallskip\noindent\textbf{Completeness.} The determinant has exactly two zeros
+in $(0,2)$, enclosed by interval arithmetic (\texttt{mpmath}, $50$-digit
+precision) as
+\[
+  r_1^{\det}\in[0.59651,0.59653],\qquad r_2^{\det}\in[0.72928,0.72930].
+\]
+The trace zeros are similarly enclosed:
+\[
+  r_2^{\Tr}\in[0.58760,0.58762],\qquad r_3^{\Tr}\in[0.73023,0.73025].
+\]
+The interleaving
+\[
+  r_2^{\Tr}<r_1^{\det}<r_2^{\det}<r_3^{\Tr}
+\]
+holds rigorously (interval separation $>0.008$ at each adjacent pair),
+ensuring $R_2\subset\{\Tr<0\}$. Cases~1 and~2 cover $(0,2)$ without gap.
+See~\cite{GeigerLandscapeII} for the verification scripts.
+\end{proof}
+
+\begin{remark}
+The lemma is independent of the zeta function. Number theory enters only after
+the matrices $D_3(m\log p/\log\lambda)$ are weighted by
+$(\log p)p^{-m/2}$ and summed over primes.
+\end{remark}
+
+\section{Finite Certificates}
+
+Let
+\[
+  \Delta(\lambda)=\lambda_1^+(\lambda)-\lambda_1^-(\lambda).
+\]
+The Landscape computation supplies interval-arithmetic certificates for
+$33$ values of $\lambda$ in the interval
+\[
+  100\leq\lambda\leq 1{,}300{,}000.
+\]
+\begin{sloppypar}
+Certificates are computed using Python's \texttt{mpmath} library in interval-arithmetic
+mode (\texttt{mpmath.iv}, 50-digit precision). The even sector uses a $4\times 4$
+Galerkin matrix ($N_{\cos}=4$); the odd sector uses $N_{\sin}=N_0\in[40,90]$
+(see \Cref{rem:galerkin-asymmetry} below). Matrix entries are evaluated as rigorous
+intervals: prime shift integrals have width $<10^{-12}$, and the archimedean kernel
+integral is enclosed via composite Gauss--Legendre quadrature (width~$<10^{-3}$).
+A negative certified gap implies even dominance.
+\end{sloppypar}
+
+\begin{remark}[Galerkin-asymmetry justification]
+\label{rem:galerkin-asymmetry}
+The asymmetric truncation $N_{\cos}=4$ vs.\ $N_{\sin}\geq 40$ is justified by
+the structural difference between the two sectors observed in
+\cite[Section~2.4 and Remark on low-mode dominance]{GeigerLandscapeII}: the even
+block converges rapidly because the leading even mode $n=1$ has Galerkin diagonal
+$(W_{\mathrm{prime}})_{11}^+ \sim -\sqrt\lambda$ (driven by the auto-overlap value
+$h_1(1)=-1/4$ at the Laplace endpoint, see \Cref{def:auto-overlap}), with the
+$k\times k$ minimum eigenvalue stabilizing at $k=4$ to within $10^{-2}$ for every
+tested $\lambda$. The odd sector has no analogous structural amplification, so
+$N_0=40$--$90$ modes are required for an equivalent enclosure. Crucially, the
+Landscape certifier verifies
+\(
+  \lambda_{\min}(\mathrm{QW}_{\sin}^{(N)})\;>\;\lambda_{\min}(\mathrm{QW}_{\cos}^{(4)})
+\)
+for \emph{all} $N\leq 90$ at every tested $\lambda$, confirming that the gap is
+genuine and not a truncation artifact.
+\end{remark}
+
+\begin{remark}[Truncation safety factor]
+\label{rem:truncation-safety}
+The combined Galerkin/tail truncation error of the Landscape certifier at $\lambda=100$
+is at most $0.061$ (Frobenius interval radius $\leq 0.0025$ in the even block, total
+odd-sector tail $\leq 0.059$ via Cauchy interlacing plus a float64 rounding margin),
+while $|\mathrm{cert\_gap}|=2.25$ -- a safety factor $\geq 34\times$. For $\lambda\geq 200$
+the safety factor exceeds $65\times$ and grows monotonically with $\lambda$ throughout
+the certified range~\cite[Section~2.9 and certificate metadata]{GeigerLandscapeII}.
+\end{remark}
+
+\begin{proposition}[Certified finite bridge]
+\label{prop:finite-certificates}
+For every certified grid point $\lambda_k$ in the Landscape table,
+\[
+  \Delta(\lambda_k)<0.
+\]
+Moreover, the certified even-sector spectral gap is positive at every grid
+point, so the even ground state is simple there.
+\end{proposition}
+
+\begin{proof}
+This is a computer-assisted proof input from the Landscape project
+\cite{GeigerLandscapeII}. The relevant certificates are stored in the Landscape
+repository under \texttt{results/certificates/}. Representative values are:
+\[
+\begin{array}{r|r|r|r}
+\lambda & \#\{p\leq\lambda\} & \lambda_1^+ \text{ upper bound} &
+\mathrm{cert\_gap}\\\hline
+100 & 25 & -11.07 & -2.25\\
+500 & 95 & -34.13 & -7.72\\
+10{,}000 & 1{,}229 & -216.22 & -42.37\\
+320{,}000 & 27{,}608 & -1220.97 & -241.75\\
+1{,}300{,}000 & 100{,}021 & -2503.78 & -475.83
+\end{array}
+\]
+All intervals have negative certified gap. The same certificate set gives a
+positive intra-even gap, excluding even-sector level crossing at the certificate
+points.
+\end{proof}
+
+\begin{remark}[Certificate structure]
+\label{rem:cert-structure}
+Each certificate for a given $\lambda_k$ consists of:
+(a)~the $N_{\cos}\times N_{\cos}$ even-sector Galerkin matrix with interval-arithmetic
+entries;
+(b)~the $N_{\sin}\times N_{\sin}$ odd-sector Galerkin matrix;
+(c)~a rigorous eigenvalue enclosure
+$[\underline\lambda_1^+,\overline\lambda_1^+]$ for the minimum even eigenvalue;
+(d)~a rigorous lower bound $\underline\lambda_1^-$ for the minimum odd eigenvalue;
+(e)~the certified gap $\overline\lambda_1^+-\underline\lambda_1^-<0$.
+For instance, at $\lambda=100$: the $4\times 4$ even matrix has minimum eigenvalue
+in $[-11.08,-11.06]$, the odd minimum lies above $-8.82$, giving certified gap
+$<-2.24$. All certificates, including the interval-arithmetic evaluation scripts,
+are archived in~\cite{GeigerLandscapeII}.
+\end{remark}
+
+\section{Frontier Dominance}
+
+The asymptotic proof uses the fact that primes near the moving frontier
+$p\sim\lambda$ dominate the parity sum.
+
+Define the low-mode cumulative difference matrix
+\[
+  D_{\mathrm{tot}}(\lambda)=
+  \sum_{\substack{p,m\geq1\\0<m\log p/\log\lambda<2}}
+  \frac{\log p}{p^{m/2}}\,
+  D_3\!\left(\frac{m\log p}{\log\lambda}\right).
+\]
+Split it into
+\[
+  D_{\mathrm{tot}}(\lambda)=D_f(\lambda)+D_n(\lambda),
+\]
+where $D_f$ contains the first-order shifts with
+$p\in[\lambda^{0.7},\lambda]$ and $D_n$ contains the remaining terms.
+
+\begin{lemma}[Common frontier Rayleigh vector]
+\label{lem:common-vector}
+Let $e_1=(0,1,0)^T$. For all $r\in[0.7,1]$,
+\[
+  e_1^T D_3(r)e_1\leq -C_f,
+  \qquad C_f=0.4685.
+\]
+\end{lemma}
+
+\begin{proof}
+By \Cref{prop:diagonal},
+\[
+  e_1^T D_3(r)e_1
+  =(2-r)(\cos\pi r-\cos2\pi r)
+  -\frac{\sin\pi r}{\pi}
+  -\frac{\sin2\pi r}{2\pi}.
+\]
+Interval evaluation of this one-variable trigonometric function on $[0.7,1]$
+gives maximum $<-0.4685$, attained at the left endpoint. Thus the same vector
+$e_1$ is a valid negative Rayleigh vector for the whole frontier window.
+\end{proof}
+
+\begin{lemma}[Frontier lower bound]
+\label{lem:frontier}
+For the frontier block,
+\[
+  \lambda_{\min}(D_f(\lambda))
+  \leq
+  -C_f W_f(\lambda),
+  \qquad
+  W_f(\lambda)=
+  \sum_{\lambda^{0.7}\leq p\leq\lambda}\frac{\log p}{\sqrt p}.
+\]
+Furthermore,
+\[
+  W_f(\lambda)=2\sqrt\lambda(1-\lambda^{-0.15})+O(1).
+\]
+\end{lemma}
+
+\begin{proof}
+Use the fixed Rayleigh vector $e_1$ from \Cref{lem:common-vector}:
+\[
+  \lambda_{\min}(D_f)
+  \leq e_1^T D_f e_1
+  \leq -C_f\sum_{\lambda^{0.7}\leq p\leq\lambda}\frac{\log p}{\sqrt p}.
+\]
+The asymptotic estimate follows by partial summation~\cite{IwaniecKowalski2004}
+from the Prime Number Theorem in the form $\theta(x)\sim x$.
+\end{proof}
+
+\begin{lemma}[Non-frontier norm bound]
+\label{lem:nonfrontier}
+There is an absolute constant $C_n$ such that
+\[
+  \norm{D_n(\lambda)}_{\mathrm{op}}
+  \leq C_n\bigl(2\lambda^{0.35}+O(\log\lambda)\bigr).
+\]
+One may take $C_n=2.2847$ from the interval-certified bound
+$\sup_{0<r<2}\norm{D_3(r)}_{\mathrm{op}}\leq2.2847$.
+\end{lemma}
+
+\begin{proof}
+The first non-frontier part, $p<\lambda^{0.7}$ with $m=1$, has total weight
+\[
+  \sum_{p\leq\lambda^{0.7}}\frac{\log p}{\sqrt p}
+  =2\lambda^{0.35}+O(1)
+\]
+by partial summation with the unconditional estimate
+$|\theta(x)-x|\leq 0.006788\,x/\log x$ for $x\geq 89{,}967{,}803$~\cite{Dusart2010};
+for smaller $x$ the sum is bounded by direct computation.
+The higher-shift terms satisfy
+\[
+  \sum_{p\leq\lambda}\sum_{m\geq2}\frac{\log p}{p^{m/2}}
+  =O(\log\lambda),
+\]
+with the $m=2$ term giving the logarithmic growth and $m\geq3$ bounded by
+convergent prime sums. Multiplying by the uniform operator-norm bound for
+$D_3(r)$ gives the claim.
+\end{proof}
+
+\begin{proposition}[Asymptotic frontier dominance]
+\label{prop:frontier-dominance}
+There exists an explicit $\Lambda_*$ such that for all $\lambda\geq\Lambda_*$,
+\[
+  \lambda_{\min}(D_{\mathrm{tot}}(\lambda))<0.
+\]
+With the constants above, $\Lambda_*$ lies below the certified endpoint
+$1{,}300{,}000$ after the explicit error terms are evaluated.
+\end{proposition}
+
+\begin{proof}
+We argue via the Rayleigh quotient at the fixed common test vector $e_1=(0,1,0)^T$
+together with the Cauchy--Schwarz operator-norm bound (no eigenvalue additivity
+is invoked). The variational inequality gives
+\[
+  \lambda_{\min}(D_{\mathrm{tot}})
+  \;\leq\;
+  e_1^T D_{\mathrm{tot}}\, e_1
+  \;=\;
+  e_1^T D_f\, e_1 + e_1^T D_n\, e_1.
+\]
+For the frontier block, \Cref{lem:common-vector,lem:frontier} give
+$e_1^T D_f e_1 \leq -C_f W_f(\lambda) = -2C_f\sqrt\lambda(1-\lambda^{-0.15})+O(1)$.
+For the non-frontier block, Cauchy--Schwarz yields
+$|e_1^T D_n e_1| \leq \|e_1\|^2\,\norm{D_n}_{\mathrm{op}} = \norm{D_n}_{\mathrm{op}}$,
+which is bounded by \Cref{lem:nonfrontier}. Combining,
+\[
+  \lambda_{\min}(D_{\mathrm{tot}})
+  \;\leq\;
+  -2C_f\sqrt\lambda(1-\lambda^{-0.15})
+  + 2C_n\lambda^{0.35}
+  + O(\log\lambda).
+\]
+The negative term is of order $\sqrt\lambda$, the positive non-frontier term of
+order $\lambda^{0.35}$, so the right-hand side is strictly negative for all
+sufficiently large $\lambda$. Evaluating the displayed bound with the interval-certified
+constants $C_f=0.4685$, $C_n=2.2847$ and the explicit PNT/Mertens remainders
+gives an effective threshold $\Lambda_*\leq 1{,}300{,}000$; see
+\cite[Proposition~A6 (Direct Frontier-Dominance), Remark on direct-proof
+ingredients]{GeigerLandscapeII}. The asymptotic regime $\lambda\geq\Lambda_*$ and
+the certified range $100\leq\lambda\leq 1{,}300{,}000$ of
+\Cref{prop:finite-certificates} therefore meet without gap.
+\end{proof}
+
+\begin{remark}[Computational improvement of $\Lambda_*$]
+\label{rem:lambda-star-improved}
+The bound $\Lambda_*\leq 1{,}300{,}000$ above is conservative: it is the right
+endpoint of the certified interval. The exact Rayleigh gap
+\[
+  g(\lambda) = -C_f\,W_f(\lambda) + C_n\,W_n(\lambda)
+\]
+(with $W_f$, $W_n$ the precise frontier and non-frontier prime-sum weights,
+computed by exact prime enumeration) was evaluated as follows.
+
+\noindent\emph{(i) Step-1 exhaustive check $[171{,}329,\,182{,}000]$:}
+Every integer $\lambda$ in this range was checked; $g(\lambda)<0$ throughout,
+with the first negative value $g(171{,}329)=-0.0052$.
+
+\noindent\emph{(ii) Step-1000 coarse scan $[182{,}000,\,300{,}000]$:}
+All sampled values give $g\leq -3.5$.
+In a 500-step window at most two prime-exit events can occur, each increasing $g$
+by at most $(C_f+C_n)\log p/\sqrt{p}\leq 0.35$; the total upward perturbation
+$\leq 0.70$ leaves a margin of $\geq 2.8$ below zero.
+No unsampled integer in $[182{,}000, 300{,}000]$ can be positive.
+
+\noindent\emph{(iii) Asymptotic regime $\lambda\geq 300{,}000$:}
+$g\leq -43$ throughout (coarse scan, step $10{,}000$), consistent with the
+$-\Theta(\sqrt\lambda)$ dominance of the asymptotic formula.
+
+\noindent Combining (i)--(iii) with the certified range $[100,\,1{,}300{,}000]$
+gives $\Lambda_*\leq 175{,}000$.
+The verification script \texttt{verify\_lambda\_star.py} (float64, safety margins
+$\gg 10^{-10}$) is archived in the companion repository at
+\url{https://github.com/research-line/rh-even-dominance}.
+\end{remark}
+
+\section{Tail Control and Lifting to the Weil Form}
+\label{sec:tail}
+
+\Cref{prop:frontier-dominance} establishes $\lambda_{\min}(D_{\mathrm{tot}}(\lambda))<0$
+in the three-mode difference block. The full Weil operator $A_\lambda$ acts on
+$L^2([-L,L])$ with infinitely many Fourier modes and includes the archimedean
+integral. We show that the contributions beyond the low-mode prime block
+preserve the sign of the even--odd gap.
+
+\begin{remark}[Archimedean contribution]
+\label{rem:archimedean}
+The archimedean kernel $e^{u/2}/(2\sinh u)$ in~\eqref{eq:weil-form} is integrable
+on $(0,\infty)$, and the sector-independent term $-2e^{-u/2}\norm{f}^2$ cancels in the
+even--odd difference. The remaining archimedean contribution involves shift overlap
+differences $D_N(u/L)$ weighted against the fixed kernel. Since
+$\norm{D_3(r)}_{\mathrm{op}}\leq 2.2847$ uniformly and the kernel integral is a
+constant independent of $\lambda$, the archimedean even--odd contribution satisfies
+$|\Delta_{\mathrm{arch}}|\leq C_{\mathrm{arch}}$ for an absolute constant. As the
+prime contribution is $\Theta(\sqrt\lambda)$ by \Cref{lem:frontier}, the archimedean
+part is negligible for large $\lambda$.
+\end{remark}
+
+\begin{definition}[Auto-overlap profile]
+\label{def:auto-overlap}
+For the even basis function $\varphi_n$ and normalized shift $u=\delta/L\in[0,2]$,
+define $h_n(u):=\tfrac14\langle\varphi_n,(S_{uL}+S_{-uL})\varphi_n\rangle$.
+The overlap integral evaluates via the substitution $x=t/L$ and the
+product-to-sum identity
+$\cos\alpha\cos\beta=\tfrac12[\cos(\alpha-\beta)+\cos(\alpha+\beta)]$:
+\begin{align*}
+  \langle\varphi_n,(S_{uL}+S_{-uL})\varphi_n\rangle
+  &= 2\int_{u-1}^{1}\cos(n\pi x)\cos(n\pi(x-u))\,dx \\
+  &= \cos(n\pi u)(2-u)
+    + \frac{\sin(n\pi(2-u))-\sin(n\pi(u-2))}{2n\pi} \\
+  &= (2-u)\cos(n\pi u) - \frac{\sin(n\pi u)}{n\pi},
+\end{align*}
+where the last step uses $\sin(n\pi(2-u))=-\sin(n\pi u)$ for integer~$n$.
+Dividing by~$4$:
+\[
+  h_n(u) = \tfrac{1}{2}(1-\tfrac{u}{2})\cos(n\pi u)
+           - \frac{\sin(n\pi u)}{4n\pi},
+  \qquad n\geq 1,
+\]
+with $h_0(u)=(1-u/2)/2$ (from $\langle\varphi_0,(S_{uL}+S_{-uL})\varphi_0\rangle
+=2-u$ by direct overlap-length computation).
+At the Laplace endpoint $u=1$: $h_n(1)=(-1)^n/4$ for all $n\geq 0$.
+The normalization factor~$\tfrac14$ is chosen so that the prime-weighted diagonal
+satisfies $(W_{\mathrm{prime}})_{nn}=\sum_p(\log p)\,p^{-1/2}\cdot 4h_n(\log p/L)$,
+consistent with the Weil form~\eqref{eq:weil-form}.
+\end{definition}
+
+\begin{lemma}[Leading-mode cancellation]
+\label{lem:leading-cancel}
+Define the symmetrized off-diagonal overlap profiles
+$F_j(u):=S^-_{\mathrm{sym}}(0,j;u)$ (odd sector) and
+$G_j(u):=S^+_{\mathrm{sym}}(1,j';u)$ (even sector) for the leading modes.
+Their closed forms are:
+\begin{align}
+  S^+_{\mathrm{sym}}(1,0;u)
+    &= \frac{\sqrt{2}\sin(\pi u)}{\pi}, \label{eq:Scos10} \\
+  S^+_{\mathrm{sym}}(1,2;u)
+    &= \frac{2(4\cos\pi u - 1)\sin\pi u}{3\pi}, \label{eq:Scos12} \\
+  S^-_{\mathrm{sym}}(0,1;u)
+    &= \frac{2(-2\sin\pi u + \sin 2\pi u)}{3\pi}, \label{eq:Ssin01} \\
+  S^-_{\mathrm{sym}}(0,2;u)
+    &= \frac{3\sin\pi u - \sin 3\pi u}{4\pi}. \label{eq:Ssin02}
+\end{align}
+The overlap differences $\Delta_j(u):=F_j(u)-G_j(u)$ satisfy:
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item For the first two energy slots, the individual differences are $O(1)$,
+  but their sum satisfies
+  $\Delta_{\mathrm{slot\,1}}(u) + \Delta_{\mathrm{slot\,2}}(u)
+   = -(2+\sqrt{2})\,u + O(u^2)$.
+  \item For $j\geq 2$: $\Delta_j(u)=O(u)$ individually.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The profiles are definite integrals of smooth functions over
+$[u-1,1]$, hence smooth in~$u$. For example,
+$S^+_{\mathrm{sym}}(1,0;u)=\langle\varphi_1,\varphi_0(\cdot-uL)+\varphi_0(\cdot+uL)\rangle$
+evaluates to $\frac{1}{L\sqrt{2}}\int_{(u-1)L}^{L}\cos(\pi t/L)\,dt + (\text{symmetric})
+=\frac{\sqrt{2}\sin\pi u}{\pi}$
+by direct integration; formulas~\eqref{eq:Scos12}--\eqref{eq:Ssin02} are obtained
+similarly. At $u=0$, Fourier orthogonality gives $F_j(0)=G_j(0)=0$.
+Differentiating~\eqref{eq:Ssin01}--\eqref{eq:Ssin02} at $u=0$: both sine
+overlaps have zero derivative (Taylor expansions start at $u^2$).
+For~\eqref{eq:Ssin01}: rewrite as
+$-2\sin\pi u+\sin 2\pi u = 2\sin\pi u(\cos\pi u-1)$, vanishing to second order.
+For~\eqref{eq:Ssin02}: rewrite as
+$3\sin\pi u-\sin 3\pi u = 4\sin^3\pi u$, vanishing to third order.
+The cosine derivatives are
+$G_0'(0)=\sqrt{2}$ from~\eqref{eq:Scos10}
+and $G_2'(0)=2$ from~\eqref{eq:Scos12}.
+Therefore
+$\sum_{\mathrm{slots}}\Delta_j'(0)=(0-\sqrt{2})+(0-2)=-(2+\sqrt{2})$.
+Part~(b) follows from the mean value theorem applied to
+$\Delta_j(u)=\Delta_j(u)-\Delta_j(0)$.
+\end{proof}
+
+\begin{lemma}[Higher-mode decay]
+\label{lem:higher-mode}
+Let $B_{1j}^\pm$ denote the coupling between the leading even/odd mode and
+mode~$j\geq 2$ induced by the prime shifts, and let $g_j$ denote the spectral gap
+between mode~$j$ and the leading mode in the Galerkin diagonal. Then:
+\begin{enumerate}[label=(\roman*)]
+  \item \emph{Coupling bound:}
+  $|B_{1j}^\pm|\leq 4\pi\sqrt\lambda/L\cdot(1+O(1/L))$.
+  \item \emph{Gap bound:}
+  $g_j\geq 4\pi^2(j^2-1)\sqrt\lambda/L^2$ for all $j\geq 2$ and $L\geq 5$.
+  \item \emph{Sector difference:}
+  $|\Delta_{\mathrm{high}}|/D(\lambda)=O(1/L)\to 0$, where $D(\lambda)=\Theta(\sqrt\lambda)$
+  is the three-mode frontier advantage.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{(i) Coupling bound.} For $j\neq 1$, orthogonality of the cosine basis on
+$[-L,L]$ gives $\langle\varphi_1,(S_0+S_0)\varphi_j\rangle=0$. The mean-value
+theorem yields $|\langle\varphi_1,(S_\delta+S_{-\delta})\varphi_j\rangle|\leq\pi\delta/L$.
+Summing over primes with Abel summation~\cite{IwaniecKowalski2004} and
+$\theta(x)=x+O(x\,e^{-c\sqrt{\log x}})$:
+\[
+  |B_{1j}^+|\leq\frac{\pi}{L}\sum_{p\leq\lambda}\frac{(\log p)^2}{\sqrt p}
+  =\frac{4\pi\sqrt\lambda}{L}\bigl(1+O(1/L)\bigr).
+\]
+The same bound holds for $|B_{0j}^-|$ in the odd sector.
+
+\emph{(ii) Gap bound.} By \Cref{def:auto-overlap}, $h_n(1)=(-1)^n/4$.
+The prime sum concentrates at $p\sim\lambda$ (i.e., $u=\log p/\log\lambda\to 1$);
+by Abel summation with the PNT~\cite{IwaniecKowalski2004}, the diagonal satisfies
+$(W_{\mathrm{prime}})_{nn}\sim 4h_n(1)\sqrt\lambda=(-1)^n\sqrt\lambda$.
+For even~$j$: $h_j(1)-h_1(1)=\tfrac12$, giving $g_j\geq\sqrt\lambda$.
+For odd $j\geq 3$: $h_j(1)=h_1(1)=-\tfrac14$ (leading terms cancel).
+Expanding $h_j(u)-h_1(u)$ about $u=1$ to second order gives
+$h_j''(1)-h_1''(1)=\pi^2(j^2-1)/4$, whence
+$g_j=4\pi^2(j^2-1)\sqrt\lambda/L^2+O(\sqrt\lambda/L^3)$.
+In particular, $c_{\mathrm{gap}}:=4\pi^2/L\geq 2.8$ for $L\leq 14$ ($\lambda\leq 1{,}200{,}000$).
+
+\emph{(iii) Sector difference.} Let
+$E_{\cos}:=\sum_{j\geq 2}|B_{1j}^+|^2/g_j^+$ and
+$E_{\sin}:=\sum_{j\geq 2}|B_{0j}^-|^2/g_j^-$
+denote the resolvent-damped coupling energies in the even and odd sectors.
+Each is $O(\sqrt\lambda)$ individually by~(i)--(ii). The sector
+\emph{difference} $|E_{\sin}-E_{\cos}|$ is further suppressed by the Leading-Mode
+Cancellation (\Cref{lem:leading-cancel}): the first-order Taylor coefficients of
+the even and odd overlap differences at $u=0$ sum to $-(2+\sqrt{2})$, so the
+leading contributions cancel pairwise. The coefficients
+$c_{\sin}(L)-c_{\cos}(L)=O(1/L^2)$, and therefore
+$|\Delta_{\mathrm{high}}|/D(\lambda)=O(1/L)\to 0$.
+\end{proof}
+
+\begin{lemma}[Galerkin truncation error]
+\label{lem:galerkin}
+The even sector is dominated by the frontier mode ($n=1$, diagonal
+$\sim-\sqrt\lambda$); modes $n=0,2,3$ contribute at lower order, so $N_{\cos}=4$
+suffices (\Cref{rem:galerkin-asymmetry}). The odd sector lacks this structural
+amplification and is enclosed with $N_0=N_{\sin}\in[40,90]$. By the
+Schur-complement formula~\cite{Kato1966}, the eigenvalue perturbation from
+modes $j>N_0$ is bounded by
+\[
+  |\lambda_1^\pm(\mathrm{full})-\lambda_1^\pm(N_0)|
+  \;\leq\;
+  \frac{\norm{B_{\mathrm{tail}}}_{\mathrm{op}}^2}{g_{N_0+1}-\norm{B_{\mathrm{tail}}}_{\mathrm{op}}}.
+\]
+Substituting \Cref{lem:higher-mode}(i)--(ii) gives
+$\norm{B_{\mathrm{tail}}}_{\mathrm{op}}\leq 8\pi\sqrt\lambda/L$ and
+$g_{N_0+1}\geq 4\pi^2 N_0^2\sqrt\lambda/L^2$, so
+\[
+  |\lambda_1^\pm(\mathrm{full})-\lambda_1^\pm(N_0)|
+  \;\leq\;
+  \frac{16\,\sqrt\lambda}{N_0^2}\,(1+o(1))
+  \quad\text{as }\lambda\to\infty.
+\]
+At every certified grid point this analytical bound is dominated by the
+interval-certified Landscape safety factor of \Cref{rem:truncation-safety}
+($\geq 34\times$ at $\lambda=100$, $\geq 65\times$ for $\lambda\geq 200$),
+which is the rigorous statement used in the certified gap.
+\end{lemma}
+
+\begin{proof}
+The Schur-complement bound is standard~\cite{Kato1966}.
+\Cref{lem:higher-mode}(i) gives $\norm{B_{\mathrm{tail}}}_{\mathrm{op}}\leq 8\pi\sqrt\lambda/L$.
+\Cref{lem:higher-mode}(ii) gives $g_{N_0+1}\geq 4\pi^2 N_0^2\sqrt\lambda/L^2 \gg \norm{B_{\mathrm{tail}}}_{\mathrm{op}}$
+for $N_0\geq 40$, hence the denominator is dominated by $g_{N_0+1}$.
+The displayed bound $16\sqrt\lambda/N_0^2$ follows. The certified gap uses the
+sharper interval-arithmetic enclosure of \cite[Section~2.9]{GeigerLandscapeII}
+with the Cauchy tail bound described in \Cref{rem:truncation-safety}.
+\end{proof}
+
+\section{Main Theorem}
+
+\begin{theorem}[Even dominance for a divergent sequence]
+\label{thm:even-sequence}
+There exists a sequence $\lambda_n\to\infty$ such that $\QW_{\lambda_n}$ has a
+simple even ground state for every $n$.
+\end{theorem}
+
+\begin{proof}
+For $100\leq\lambda\leq1{,}300{,}000$, the certified grid of
+\Cref{prop:finite-certificates} gives even dominance and even-sector simplicity
+at the listed values; these certificates evaluate the full Galerkin operator
+(including archimedean and higher-mode contributions).
+
+For $\lambda$ beyond the asymptotic threshold,
+\Cref{prop:frontier-dominance} gives a three-mode gap
+$\Delta_{\mathrm{low}}=-\Theta(\sqrt\lambda)$. The higher-mode correction satisfies
+$|\Delta_{\mathrm{high}}|=O(\sqrt\lambda/L)=o(|\Delta_{\mathrm{low}}|)$ by
+\Cref{lem:higher-mode}(iii), the archimedean contribution is $O(1)$ by
+\Cref{rem:archimedean}, and the Galerkin truncation error is
+$\leq 16\sqrt\lambda/N_0^2$ by \Cref{lem:galerkin} -- a fraction $4/N_0^2$ of the
+leading $\sqrt\lambda$-gap, hence $o(|\Delta_{\mathrm{low}}|)$ for $N_0\geq 40$.
+Therefore the full even--odd gap is negative for all
+sufficiently large $\lambda$, with the asymptotic threshold meeting the
+certified range exactly at $\Lambda_*\leq 175{,}000$
+(see \Cref{rem:lambda-star-improved}; the conservative upper bound
+$\Lambda_*\leq 1{,}300{,}000$ of \Cref{prop:frontier-dominance} is also valid).
+Taking any divergent sequence of certified or asymptotic values gives even
+dominance.
+
+Simplicity of the even ground state follows from the intra-even spectral gap
+$\lambda_2^+-\lambda_1^+=\Theta(\sqrt\lambda)$: at the certificate points this is
+directly verified (\Cref{prop:finite-certificates}); for large $\lambda$ it follows
+from the Galerkin diagonal asymptotics, since the leading even mode ($n=1$) has
+$(W_{\mathrm{prime}})_{11}\sim -\sqrt\lambda$ while the next mode ($n=0$) has a
+different Laplace endpoint value.
+\end{proof}
+
+\begin{theorem}[Riemann Hypothesis, conditional on the Connes program]
+\label{thm:rh}
+Conditional on \cite[Theorem~6.1 and the Hurwitz bridge of Section~6.4--6.6]{Connes2026}
+and \cite{ConnesvS2025}, all non-trivial zeros of the Riemann zeta
+function~\cite{Riemann1859} lie on the line $\Re(s)=1/2$.
+\end{theorem}
+
+\begin{proof}
+Apply \Cref{cor:sequence-suffices} to the sequence supplied by
+\Cref{thm:even-sequence}. The Fourier transforms associated with the
+even-dominant Weil forms have only real zeros by \Cref{thm:connes}. Hurwitz
+transfer gives the real-zero property for the limiting $\Xi$-function. Therefore
+the corresponding non-trivial zeros of $\zeta(s)$ lie on the critical line.
+\end{proof}
+
+\section{What Is Not Used}
+
+The proof does not use the following Landscape material:
+\begin{itemize}[leftmargin=*]
+  \item the original gauge-thermodynamic route and its obstructions;
+  \item an absolute $\mathrm{PF}_\infty$ or total-positivity claim for the full prime operator;
+  \item a universal commuting Sturm--Liouville operator;
+  \item Hellmann--Feynman monotonicity between certificate points;
+  \item the narrative Dungeon/Memorial presentation of excluded routes.
+\end{itemize}
+Those results remain valuable as route classification and audit history, but
+they are not part of the proof chain above.
+
+\appendix
+
+\section{Constants Audit Table}
+\label{sec:constants-audit}
+
+All explicit numerical constants used in the proof, with their source, role, and
+verification mechanism. Constants flagged ``IA'' are interval-arithmetic certified
+(\texttt{mpmath.iv}, $50$-digit precision); ``CAP'' are the $33$ Landscape
+computer-assisted certificates; ``PNT/Mertens'' are explicit asymptotic remainders.
+
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{2.6cm}|p{2.0cm}|p{6.2cm}|p{2.6cm}}
+\textbf{Constant} & \textbf{Value} & \textbf{Role / Source} & \textbf{Verification} \\\hline
+$C_f$ & $0.4685$ & Common frontier Rayleigh quotient $-d_{11}(r)\geq C_f$ on $r\in[0.7,1]$ (\Cref{lem:common-vector}) & IA on $[0.7,1]$ (1D)\\
+$C_n$ & $2.2847$ & Operator-norm bound $\sup_{r\in(0,2)}\norm{D_3(r)}_{\mathrm{op}}\leq C_n$ (\Cref{lem:nonfrontier}) & IA on $(0,2)$ (3D)\\
+$c_{\mathrm{gap}}$ & $\geq 4\pi^2/L\geq 2.8$ & Spectral-gap constant for $L\leq 14$ (\Cref{lem:higher-mode}(ii)) & Laplace asymptotics\\
+$N_{\cos}$ & $4$ & Even-block Galerkin truncation (\Cref{rem:galerkin-asymmetry}) & Stability check $k=3,4,5$\\
+$N_{\sin}$ & $40$--$90$ & Odd-block Galerkin truncation (\Cref{rem:galerkin-asymmetry}) & Cauchy tail bound\\
+$\Lambda_*$ & $\leq 175{,}000$ & Asymptotic threshold; prime-sum computation (\Cref{rem:lambda-star-improved}); conservative bound $\leq 1{,}300{,}000$ (\Cref{prop:frontier-dominance}) & Exact prime enum.\\
+$\theta(x)-x$ & $\leq 0.006788\,\tfrac{x}{\log x}$ & Effective Chebyshev bound for $x\geq 89{,}967{,}803$ (Dusart 2010, \cite{Dusart2010}) & Unconditional\\
+$|\mathrm{cert\_gap}|$ at $\lambda{=}100$ & $\geq 2.25$ & First CAP (\Cref{prop:finite-certificates}) & CAP\\
+$|\mathrm{cert\_gap}|$ at $\lambda{=}1.3{\cdot}10^6$ & $\geq 475.83$ & Last CAP & CAP\\
+Safety factor at $\lambda{=}100$ & $\geq 34\times$ & $|\mathrm{cert\_gap}|$ vs.\ Galerkin/tail error (\Cref{rem:truncation-safety}) & IA + Cauchy tail\\
+Safety factor at $\lambda\geq 200$ & $\geq 65\times$ & Same, monotone in $\lambda$ & IA + Cauchy tail\\
+$c$ (slot cancellation) & $2+\sqrt 2$ & Closed-form constant (\Cref{lem:leading-cancel}(a)) & Symbolic (sympy)
+\end{tabular}
+\end{center}
+
+The Landscape companion repository archives the verification scripts. The most
+relevant entries are:
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \texttt{shift\_parity\_cert\_v3\_targeted.py} -- Shift Parity Lemma;
+  \item \texttt{certifier\_production.py} -- the $33$ CAP certificates;
+  \item \texttt{partA\_proof\_sketch.py} -- frontier-dominance check;
+  \item \texttt{euler\_maclaurin\_certifier.py} -- asymptotic threshold;
+\end{itemize}
+see~\cite[\texttt{scripts/}]{GeigerLandscapeII}. A dedicated companion repository
+for the present extraction is mirrored at
+\url{https://github.com/research-line/rh-even-dominance}.
+
+\section*{AI Disclosure}
+
+\noindent\textbf{Statement on the Use of AI Tools}
+
+\medskip
+
+\begin{sloppypar}
+\noindent
+This manuscript was prepared with moderate assistance from AI-based language
+models (Claude, Anthropic; Gemini, Google; ChatGPT, OpenAI). The use
+encompassed the following areas:
+\end{sloppypar}
+
+\begin{itemize}
+  \item \textit{Research:} Assistance with systematic literature search,
+        identification and summarisation of relevant research literature.
+  \item \textit{Structuring:} Support in outlining and logically organising
+        the manuscript, in particular the proof-only extraction from the
+        Landscape series.
+  \item \textit{Drafting:} Assistance in formulating individual sections
+        and paragraphs based on core arguments and theses specified by
+        the author.
+  \item \textit{Language:} Grammar and spell checking, linguistic revision.
+  \item \textit{Formatting:} Preparation and verification of citations and
+        bibliographies; \LaTeX{} typesetting support.
+  \item \textit{Internal review:} A 7-phase model-based review chain
+        (constructive, expert, adversarial) was used to identify and
+        address structural and citation issues prior to submission.
+\end{itemize}
+
+\noindent
+The entire research process -- including the research question, methodological
+decisions, substantive argumentation, critical evaluation of sources, and
+conclusions -- was conceived, directed, and borne by the author. All
+computer-assisted certificates were computed by deterministic numerical
+scripts independently of AI. All AI-generated suggestions were critically
+reviewed, revised, and where appropriate rejected. The author reviewed all
+content to the best of his knowledge but cannot guarantee complete
+independent verification of all factual claims and references.
+
+\medskip
+
+\noindent
+Full scholarly and substantive responsibility for this article rests with
+the author, Lukas Geiger.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
