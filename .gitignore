@@ -49,6 +49,7 @@ SCIPOST.txt
 
 # Translation helper (internal)
 scripts/_translate_rh2.py
+scripts/gemini_verification/server_localroot_*/
 
 # Server logs (not results)
 scripts/*.log

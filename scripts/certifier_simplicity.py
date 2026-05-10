@@ -30,6 +30,7 @@ from sympy import primerange
 import time
 import json
 import sys
+from pathlib import Path
 
 mp.dps = 50  # 50-digit precision for interval arithmetic
 
@@ -242,6 +243,8 @@ if __name__ == "__main__":
 
     certificates = []
     all_proved = True
+    results_path = Path(__file__).resolve().parents[1] / 'results' / 'certificates' / 'simplicity_certificates.json'
+    results_path.parent.mkdir(parents=True, exist_ok=True)
 
     for idx, lam in enumerate(ALL_LAMBDAS):
         print(f"{'='*78}")
@@ -323,8 +326,7 @@ if __name__ == "__main__":
                 'max_gap_certified': max(c['gap_certified'] for c in certificates),
             }
         }
-        results_dir = 'C:\\Users\\User\\OneDrive\\.RESEARCH\\Natur&Technik\\1 Musterbeweise\\RH\\scripts\\_results'
-        with open(f'{results_dir}\\simplicity_certificates.json', 'w') as f:
+        with results_path.open('w', encoding='utf-8') as f:
             json.dump(output, f, indent=2)
         print()
 
@@ -351,5 +353,5 @@ if __name__ == "__main__":
         failed = [c['lambda'] for c in certificates if not c['is_simple']]
         print(f"\n*** WARNING: Simplicity NOT proved for lambda = {failed} ***")
 
-    print(f"\nResults saved to: {results_dir}\\simplicity_certificates.json")
+    print(f"\nResults saved to: {results_path}")
     print("=" * 78)
