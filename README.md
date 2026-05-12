@@ -1,14 +1,20 @@
-# The Riemann Hypothesis: A Three-Part Investigation via Even Dominance of the Weil Quadratic Form
+# From Landscape to Proof: The Even-Dominance Route to the Riemann Hypothesis
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19035640.svg)](https://doi.org/10.5281/zenodo.19035640)
 
-A three-part research series establishing the Riemann Hypothesis via Connes'
-spectral program (arXiv:2602.04022). The proof combines computer-assisted
-certificates (interval arithmetic), the Leading-Mode Cancellation Lemma
-(c = 2 + sqrt(2)), and the PNT Transfer Lemma into a three-regime bridge
-argument covering all lambda >= 100. Version 2.1 adds a robust Direct
-Frontier-Dominance proof using a common Rayleigh test vector and finite CAP
-coverage up to the explicit asymptotic threshold.
+A three-part Landscape and audit-trail series for the even-dominance route to
+the Riemann Hypothesis via Connes' spectral program (arXiv:2602.04022). It
+documents the proof path, failed routes, obstruction analysis, computational
+certificates, and the transition from the broader research landscape to the
+separately published proof-only extraction.
+
+Proof-only extraction: https://doi.org/10.5281/zenodo.20011910
+
+This public repository is the curated reproducibility package for the
+Landscape series. It intentionally includes the paper sources, public scripts,
+and certificate outputs, while internal proof notebooks (`BEWEISNOTIZ*.md`,
+`_proof-notes/`, handoffs, local server-root captures, and credentials) remain
+private until a full project closeout permits release.
 
 **Submitted to:** Communications in Mathematics (cm:17829, 2026-03-27)
 
@@ -86,6 +92,7 @@ Combined English version: `paper/RH_Complete_Series_EN.pdf` (76 pages).
 | `endpoint_degeneracy.py` | Endpoint degeneracy analysis |
 | `subleading_gap.py` | Subleading spectral gap analysis |
 | `verify_H1_schranke.py` | H1 bound verification |
+| `verify_lambda_star.py` | Exhaustive check of the lambda* threshold logic |
 | `weighted_compactness_test.py` | Weighted compactness test |
 | `weighted_compactness_server.py` | Server version of compactness test |
 
@@ -98,6 +105,8 @@ Combined English version: `paper/RH_Complete_Series_EN.pdf` (76 pages).
 | `results/certificates/certificates_gap_closure.json` | 3 gap-closure certificates (700K, 1.05M, 1.3M) |
 | `results/certificates/euler_maclaurin_results.json` | Euler-Maclaurin interval-arithmetic certification |
 | `results/certificates/largeN_results.json` | Large-N certificate output |
+| `results/certificates/rigorous_results.json` | Earlier rigorous certificate bundle |
+| `results/certificates/rigorous_v3_lam100.json` | v3 lambda=100 certificate |
 | `results/certificates/rigorous_v3_results.json` | v3 rigorous certificate summary |
 | `results/certificates/rigorous_v4_lam100.json` | v4 lambda=100 certificate |
 | `results/certificates/rigorous_v4_lam200.json` | v4 lambda=200 certificate |
@@ -107,6 +116,10 @@ Combined English version: `paper/RH_Complete_Series_EN.pdf` (76 pages).
 | `results/gap_analysis/hellmann_feynman_results.json` | Hellmann-Feynman derivative analysis |
 | `results/gap_analysis/lipschitz_analysis.json` | Gap-continuity Lipschitz analysis |
 | `results/gap_analysis/resolvent_analysis.json` | Dense-grid resolvent energy analysis |
+
+Historical exploration code in `scripts/_exploration/` and raw runtime logs in
+`results/**/*.log` stay local-only on purpose; the tracked files are the
+curated scripts and reproducible outputs needed for the public package.
 
 ### Gemini Verification (`scripts/gemini_verification/`)
 

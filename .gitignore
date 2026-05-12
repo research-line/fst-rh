@@ -11,6 +11,7 @@
 
 # Internal / private (not for publication)
 BEWEISNOTIZ.md
+BEWEISNOTIZ*.md
 BEWEISNOTIZ_LANG_ALT.md
 MEILENSTEINE.md
 PUBLIKATIONSSTRATEGIE.md
@@ -18,6 +19,9 @@ ZENODO_DRAFT.md
 TODO.md
 Plan.txt
 ZENODO_CREDENTIALS.md
+_proof-notes/
+proof-notes/
+proof_notes/
 _copilot/
 _handoff/
 archive/
