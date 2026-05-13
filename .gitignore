@@ -13,17 +13,26 @@
 BEWEISNOTIZ.md
 BEWEISNOTIZ*.md
 BEWEISNOTIZ_LANG_ALT.md
+KONZEPT.md
+AKTIONSPLAN.md
+PUBLIKATIONSPLAN.md
+POSTRELEASE-PR.md
 MEILENSTEINE.md
 PUBLIKATIONSSTRATEGIE.md
 ZENODO_DRAFT.md
 TODO.md
+DONE.md
 Plan.txt
 ZENODO_CREDENTIALS.md
+FORSCHUNGSSTAND*.md
+GAPS*.md
 _proof-notes/
 proof-notes/
 proof_notes/
 _copilot/
 _handoff/
+_reviews/
+_private/
 archive/
 _archive/
 _partners/
@@ -31,6 +40,8 @@ _partners/
 *BRIEFING*
 CORE.txt
 removed_sections/
+LINKEDIN.txt
+PUBLICATION_STRATEGY.txt
 .env
 *.env
 *.key
@@ -50,6 +61,9 @@ secrets*
 # Internal temp files
 _zenodo_draft_id.txt
 SCIPOST.txt
+REVIEW.txt
+REVIEW_CHAIN*.md
+REVIEW_CYCLE*.md
 
 # Translation helper (internal)
 scripts/_translate_rh2.py
