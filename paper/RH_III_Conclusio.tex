@@ -38,7 +38,26 @@
 \maketitle
 
 \begin{abstract}
-This final paper in a three-part series draws together the results of the preceding papers into a unified picture. We catalog the proven structural results (R1--R9), the excluded paths (K1--K4), and the new contributions: the Shift Parity Lemma, the computer-assisted proof of even dominance for $33$ values of $\lambda$ up to $1{,}300{,}000$, the resolvent-damped M1$''$ framework, the Leading-Mode Cancellation Lemma with exact constant $c = 2 + \sqrt{2}$, and the Euler--Maclaurin Proposition establishing $\rho^{\mathrm{EM}}(L) < 0$ for $L \geq 14$ ($\lambda \geq 1{,}200{,}000$). Combined with the computer-assisted certificates (now covering $\lambda$ up to $1{,}300{,}000$ with no gap) and the PNT Transfer Lemma, this yields M1$''$ (resolvent subdominance) as proved. Part~III also accounts for the v2.0 non-existence theorems (NE-A, NE-B in Part~II), which restructure the comparative analysis of proof strategies and confirm that even dominance is not reducible to total-positivity or Sturm--Liouville-type arguments. We present the complete proof architecture from Connes' Theorem~6.1 through even dominance to the Riemann Hypothesis, formulate open problems, and discuss connections to the wider landscape of analytic number theory. In v2.1, a robust Direct Frontier-Dominance proof (Part~II, Proposition~\emph{prop:direct-frontier}) is added; it uses a common Rayleigh test vector on the frontier window and a finite CAP bridge to bypass both caveats of the v2.0 three-regime bridge, rendering the Riemann Hypothesis proof unconditional.
+This final paper in a three-part series draws together the results of the preceding papers into a unified picture. We catalog the proven structural results (R1--R9), the excluded paths (K1--K4), and the new contributions: the Shift Parity Lemma, the computer-assisted proof of even dominance for $33$ values of $\lambda$ up to $1{,}300{,}000$, the resolvent-damped M1$''$ framework, the Leading-Mode Cancellation Lemma with exact constant $c = 2 + \sqrt{2}$, and the Euler--Maclaurin Proposition establishing $\rho^{\mathrm{EM}}(L) < 0$ for $L \geq 14$ ($\lambda \geq 1{,}200{,}000$). Combined with the computer-assisted certificates (now covering $\lambda$ up to $1{,}300{,}000$ with no gap), the present series gives even dominance rigorously on the certified range. Part~III also accounts for the v2.0 non-existence theorems (NE-A, NE-B in Part~II), which restructure the comparative analysis of proof strategies and confirm that even dominance is not reducible to total-positivity or Sturm--Liouville-type arguments. We present the proof architecture from Connes' Theorem~6.1 through even dominance to the Riemann Hypothesis, formulate open problems, and discuss connections to the wider landscape of analytic number theory.
+
+\medskip\noindent
+\textbf{Status correction (v2.2, 2026-05-14).}
+The v2.1 claim that the Direct Frontier-Dominance argument renders the
+A1--A8 reduction unconditional has been revised after external critical
+review.  The Direct Frontier-Dominance argument establishes
+$\lambda_{\min}(W^+-W^-)=-\Theta(\sqrt\lambda)$ asymptotically via a
+common Rayleigh test vector, which is a variational statement, not
+$\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$.  A separate quantitative
+lower bound on $\lambda_1^-(\lambda)$ is required and is currently
+formulated as the \emph{Asymptotic Variational Gap Conjecture} in the
+companion paper~\cite{Geiger2026evendom}; see Part~II ``Status of the
+proof'' remark (v2.2 revision) for the revised wording.  Status of the
+A1--A8 chain: \textbf{conditional reduction}.  Even dominance is
+unconditional on the certified range $100 \le \lambda \le 1{,}300{,}000$;
+asymptotic even dominance is conditional on the Asymptotic Variational
+Gap Conjecture; RH itself is additionally conditional on the Connes
+program.  Drafts and preprints in this series evolve continuously; the
+present v2.2 abstract is the current honest position.
 \end{abstract}
 
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
@@ -179,29 +198,55 @@ A3 & Even dominance at $33$ values, $\lambda \leq 1{,}300{,}000$ & proven & Part
 A4 & Shift Parity Lemma: each prime favors even & proven & Part~II \\
 A5 & Frontier-prime mechanism & proven & Part~II \\
 A5b & Euler--Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (certified by interval arithmetic) & proven & Part~II \\
-\textbf{A6} & \textbf{Cumulative step: $\sum_p W_p$ preserves even preference} & \textbf{proved (v2.1)}${}^\dagger$ & Part~II \\
-A7 & Even dominance for all $\lambda \geq \lambda_0$ & proved (v2.1) & Part~II \\
-A8 & All zeros on $\Re(s) = 1/2$ (RH) & proved (v2.1) & A1+A2+A7
+\textbf{A6} & \textbf{Cumulative step: $\sum_p W_p$ preserves even preference} & \textbf{variational, v2.2}${}^\ddagger$ & Part~II \\
+A7 & Even dominance for $\lambda_n\to\infty$ (eigenvalue inequality) & conditional (v2.2)${}^\ddagger$ & Part~II \\
+A8 & All zeros on $\Re(s) = 1/2$ (RH) & conditional reduction (v2.2) & A1+A2+A7
 \end{tabular}
+
+\medskip
+\noindent\textsuperscript{$\ddagger$}\,\textbf{v2.2 revision (2026-05-14).} The
+v2.1 Direct Frontier-Dominance argument establishes
+$\lambda_{\min}(W^+-W^-)=-\Theta(\sqrt\lambda)$ asymptotically (variational), but
+not the eigenvalue inequality $\lambda_1^+<\lambda_1^-$.  A separate lower
+bound on $\lambda_1^-(\lambda)$ is needed and is currently the
+\emph{Asymptotic Variational Gap Conjecture} \cite{Geiger2026evendom}.
+Steps A3 (33 CAP certificates) and A4 (Shift Parity Lemma) remain
+unconditional.
 \end{center}
 
-\noindent${}^\dagger$\textbf{Status of Proposition~A6} (Part~II, Proposition~A6): In v2.1 a robust Direct Frontier-Dominance proof (Part~II, Proposition~\emph{prop:direct-frontier}) is added. It uses a common Rayleigh test vector on the frontier window $r\in[0.7,1]$, PNT partial summation, Mertens' theorem, and finite CAP coverage up to the explicit asymptotic threshold. Both v2.0 caveats (Regime~1 interpolation and the PNT-transfer constant) are obviated. The status labels ``proved'' above are therefore unconditional in v2.1.
+\noindent\textbf{Historical note on Proposition~A6.} The v2.1 draft presented
+the Direct Frontier-Dominance argument as an unconditional closure of A6. The
+v2.2 revision withdraws that claim: the frontier argument proves the
+asymptotic variational statement
+$\lambda_{\min}(W^+-W^-)=-\Theta(\sqrt\lambda)$, while the eigenvalue
+inequality $\lambda_1^+<\lambda_1^-$ beyond the certified range remains
+conditional on the \emph{Asymptotic Variational Gap Conjecture}; see
+Part~II, the revised ``Status of the proof'' remark.
 
-\subsection{The Cumulative Step (A6) --- Resolved}
+\subsection{The Cumulative Step (A6) --- Conditional Reduction}
 
 The cumulative step was the central challenge: showing that the sum $\sum_{p \leq \lambda} W_p$ preserves the individual-prime even preference established by the Shift Parity Lemma. This is nontrivial because eigenvalue inequalities are not additive for sums of matrices.
 
-Part~II (Proposition~A6) resolves this challenge via a \emph{three-regime argument}:
+Part~II (Proposition~A6) now separates this challenge into a rigorous finite
+bridge and an asymptotic variational problem:
 
 \begin{enumerate}
-  \item \textbf{Regime~1} ($\lambda \in [100, 1{,}300{,}000]$): $33$ computer-assisted certificates, computed with interval arithmetic (50-digit precision), provide rigorous even-dominance proofs at each value.
-  \item \textbf{Regime~2} ($\lambda \geq 442{,}413$, conditional on the effective PNT-transfer constant $C < 2$): The M1$''$ resolvent framework shows $\rho(\lambda) < 0$ (the coupling ratio stays below~$1$). Three subsidiary results control the approximation quality:
+  \item \textbf{Regime~1} ($\lambda \in [100, 1{,}300{,}000]$): $33$
+    computer-assisted certificates, computed with interval arithmetic
+    (50-digit precision), provide rigorous even-dominance proofs at the
+    certified values via separate upper/lower bounds for $\lambda_1^\pm$.
+  \item \textbf{Regime~2} (asymptotic): the M1$''$ resolvent framework and
+    the Direct Frontier-Dominance route identify the correct asymptotic
+    variational sign, i.e.\ $\lambda_{\min}(W^+-W^-)=-\Theta(\sqrt\lambda)$.
+    Three subsidiary results control the approximation quality:
   \begin{itemize}
     \item \emph{Higher-mode decay} (Part~II, Lemma~B): modes $j \geq 2$ contribute $O(D/L) = o(D)$, via the mean value theorem applied to overlap functions plus PNT-controlled prime sums.
     \item \emph{Resolvent truncation} (Part~II, Lemma~C): the Neumann series converges ($\|R_0 K\| < 1$ for both sectors when $\lambda \geq 500$), so the truncation error is $o(D)$.
     \item \emph{PNT transfer} (Part~II, Lemma~PNT): $|\rho(\lambda) - \rho^{\mathrm{EM}}(\lambda)| = O(L\,e^{-c\sqrt{L}})$, exponentially small relative to $|\rho^{\mathrm{EM}}|$.
   \end{itemize}
-  \item \textbf{Overlap}: Regimes~1 and~2 cover $[442{,}413,\, 1{,}300{,}000]$ simultaneously.
+  \item \textbf{Overlap}: the certified range overlaps the explicit
+    asymptotic threshold, so the remaining gap is no longer a coverage gap
+    but a spectral-direction gap for $\lambda_1^-$.
 \end{enumerate}
 
 \noindent The key structural ingredients that make A6 work are:
@@ -212,7 +257,20 @@ Part~II (Proposition~A6) resolves this challenge via a \emph{three-regime argume
 \end{itemize}
 
 \smallskip
-\noindent\textbf{v2.1 addition --- Direct Frontier-Dominance.} In v2.1 (Part~II, Section on Direct Frontier-Dominance) a second independent proof of A6 is given. Its robust form uses the variational inequality $\lambda_{\min}(D_{\mathrm{total}})\leq e_1^\top D_{\mathrm{frontier}}e_1+\|D_{\mathrm{non}}\|$ with the common vector $e_1=(0,1,0)^\top$, rather than adding individual minimum eigenvalues. On $r\in[0.7,1]$ the scalar frontier quotient satisfies $e_1^\top D_3(r)e_1\leq -0.4685$; PNT partial summation gives a negative frontier contribution of order $\sqrt{\lambda}$, while Mertens-type estimates bound the non-frontier norm by $O(\lambda^{0.35}+\log\lambda)$. The asymptotic threshold lies within the existing CAP range, so the finite bridge plus the frontier estimate proves A6 for all $\lambda\geq100$. Both v2.0 caveats are obviated by this argument.
+\noindent\textbf{v2.1 addition --- Direct Frontier-Dominance.} In v2.1
+(Part~II, Section on Direct Frontier-Dominance) a second asymptotic route for
+A6 is given. Its robust form uses the variational inequality
+$\lambda_{\min}(D_{\mathrm{total}})\leq e_1^\top D_{\mathrm{frontier}}e_1+\|D_{\mathrm{non}}\|$
+with the common vector $e_1=(0,1,0)^\top$, rather than adding individual
+minimum eigenvalues. On $r\in[0.7,1]$ the scalar frontier quotient satisfies
+$e_1^\top D_3(r)e_1\leq -0.4685$; PNT partial summation gives a negative
+frontier contribution of order $\sqrt{\lambda}$, while Mertens-type
+estimates bound the non-frontier norm by $O(\lambda^{0.35}+\log\lambda)$.
+The asymptotic threshold lies within the existing CAP range, so the finite
+bridge plus the frontier estimate establishes the variational statement
+$\lambda_{\min}(W^+-W^-)<0$ beyond the threshold and obviates the two earlier
+v2.0 caveats. What remains is the separate odd-sector lower bound needed to
+upgrade this to $\lambda_1^+<\lambda_1^-$.
 
 \subsection{Proof Strategies for A6: Comparative Analysis}
 
@@ -368,16 +426,36 @@ Cross-disciplinary catalog & Regularization & $11$ fields share trace-class obst
 \label{sec:open-problems}
 % =============================================================================
 
-With OP1 (cumulative even dominance) conditionally resolved, we formulate four concrete open problems:
+With OP1 sharply reduced but not yet fully closed, we formulate four concrete
+open problems:
 
-\begin{remark}[OP1: Cumulative Even Dominance --- unconditionally resolved (v2.1)]
+\begin{remark}[OP1: Cumulative Even Dominance --- reduced to the odd-sector lower bound (v2.2)]
 \label{rem:OP1-resolved}
-The cumulative even dominance (A6) is resolved by Proposition~A6 (Part~II) via two independent arguments: the v2.0 three-regime proof and the v2.1 Direct Frontier-Dominance proof (Part~II, Proposition~\emph{prop:direct-frontier}). The v2.0 three-regime argument (see \Cref{sec:architecture}) combines Regime~1 ($33$ rigorously certified grid points with a perturbative interpolation between them) and Regime~2 (the M1$''$ resolvent framework). The spectral gap constant is derived analytically: $c_{\mathrm{gap}} \geq 4\pi^2/L \geq 2.8$ for $L \leq 14$ (Part~II, Corollary after Lemma~B, Step~3). The v2.1 Direct Frontier-Dominance proof uses a common Rayleigh test vector on the frontier window, PNT partial summation, Mertens' theorem, and finite CAP coverage up to the explicit asymptotic threshold; this argument obviates both v2.0 caveats (Regime~1 interpolation and the PNT-transfer constant) and confirms the reduction is unconditional.
+The cumulative even dominance problem is no longer viewed as a missing
+coverage argument. Proposition~A6 (Part~II) now isolates the remaining gap to
+a single spectral question: after the certified range, both the v2.0
+three-regime route and the v2.1 Direct Frontier-Dominance route establish the
+correct asymptotic variational sign, but a separate quantitative lower bound
+for $\lambda_1^-(\lambda)$ is still needed to conclude
+$\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ for all sufficiently large
+$\lambda$. This remaining step is formulated in Part~II and in the companion
+extract \cite{Geiger2026evendom} as the \emph{Asymptotic Variational Gap
+Conjecture}.
 \end{remark}
 
 \begin{remark}[OP2 resolved: Simplicity of $\lambda_1^+$]
 \label{rem:OP2-resolved}
-The minimum eigenvalue $\lambda_1^+$ of $\mathrm{QW}_\lambda^+$ is certified as simple for all $33$ certificate values $\lambda \in [100, 1{,}300{,}000]$ by interval arithmetic on the $4 \times 4$ even Galerkin block (Part~II, Simplicity Lemma). The intra-even gap $\lambda_2^+ - \lambda_1^+$ grows monotonically from $8.69$ ($\lambda = 100$) to $\geq 731$ ($\lambda = 320{,}000$), scaling as $\sim\!\sqrt{\lambda}$. For Regime~2 ($\lambda \geq 442{,}413$), the analytical gap follows from the Galerkin diagonal asymptotics: $W_{11}^+$ is the unique most-negative diagonal entry. Combined with even dominance ($\lambda_1^+ < \lambda_1^-$), this certifies that the global ground state of $A_\lambda$ is simple and even, as required by Connes' Theorem~6.1.
+The minimum eigenvalue $\lambda_1^+$ of $\mathrm{QW}_\lambda^+$ is certified
+as simple for all $33$ certificate values $\lambda \in [100, 1{,}300{,}000]$
+by interval arithmetic on the $4 \times 4$ even Galerkin block (Part~II,
+Simplicity Lemma). The intra-even gap $\lambda_2^+ - \lambda_1^+$ grows
+monotonically from $8.69$ ($\lambda = 100$) to $\geq 731$
+($\lambda = 320{,}000$), scaling as $\sim\!\sqrt{\lambda}$. For the
+asymptotic regime, the analytical gap follows from the Galerkin diagonal
+asymptotics: $W_{11}^+$ is the unique most-negative diagonal entry. On the
+certified range this identifies the global ground state of $A_\lambda$ as
+simple and even; asymptotically it supplies the even-sector half of the
+remaining spectral gap problem.
 \end{remark}
 
 \begin{conjecture}[OP3: Analytical Proof of Index Rigidity]
@@ -395,7 +473,9 @@ Construct a separable Hilbert space $\mathcal{V}$ and a nuclear family $s \mapst
 Is $\log\det_2(I - zR)$ a Nevanlinna function (positive imaginary part in the upper half-plane) if and only if all zeros lie on the real axis? This would be a new RH-equivalent criterion in the $\det_2$-framework (Part~I, \S6).
 \end{conjecture}
 
-\noindent With OP1 and OP2 resolved, the proof architecture A1--A8 is complete including the simplicity requirement. OP3--OP5 are structural questions that may provide alternative approaches or deeper understanding.
+\noindent OP2 is resolved and OP1 has been reduced to a single asymptotic
+odd-sector lower-bound problem. OP3--OP5 remain structural questions that may
+either close this last spectral step or provide a deeper conceptual route.
 
 
 % =============================================================================
@@ -444,7 +524,16 @@ A Yang--Mills analogy exists: Kirk's zero-free strip for Selberg zeta (via Ruell
 
   \item A \textbf{computer-assisted proof} of even dominance at $33$ values ($\lambda = 100$ to $1{,}300{,}000$), providing rigorous verification of Connes' spectral hypothesis across more than $4$ orders of magnitude.
 
-  \item The \textbf{resolution of the cumulative step (A6/E6)}, via two independent proofs: (i) the v2.0 three-regime argument combining computer-assisted certificates ($\lambda \leq 1{,}300{,}000$), the M1$''$ resolvent framework with PNT transfer ($\lambda \geq 1{,}200{,}000$), and three control lemmas (higher-mode decay, resolvent truncation, PNT error transfer); and (ii) the v2.1 Direct Frontier-Dominance argument (Part~II, Proposition~\emph{prop:direct-frontier}), which uses a common Rayleigh test vector, PNT+Mertens partial summation, and finite CAP coverage up to the explicit asymptotic threshold, obviating the two caveats of the v2.0 argument. Together these complete the proof architecture A1--A8 \emph{unconditionally}.
+  \item The \textbf{conditional reduction of the cumulative step (A6/E6)}:
+    (i) the v2.0 three-regime argument combines computer-assisted
+    certificates ($\lambda \leq 1{,}300{,}000$), the M1$''$ resolvent
+    framework with PNT transfer, and three control lemmas (higher-mode
+    decay, resolvent truncation, PNT error transfer); (ii) the v2.1 Direct
+    Frontier-Dominance argument (Part~II, Proposition~\emph{prop:direct-frontier})
+    uses a common Rayleigh test vector, PNT+Mertens partial summation, and
+    finite CAP coverage up to the explicit asymptotic threshold. Together
+    they isolate the remaining asymptotic gap to the
+    \emph{Asymptotic Variational Gap Conjecture} for $\lambda_1^-$.
 
   \item The \textbf{Euler--Maclaurin Proposition}, establishing that $\rho^{\mathrm{EM}} < 0$ for $\lambda \geq 1{,}200{,}000$, providing the analytical backbone for Regime~2 of the bridge argument.
 
@@ -454,14 +543,28 @@ A Yang--Mills analogy exists: Kirk's zero-free strip for Selberg zeta (via Ruell
 \subsection{The Gap-Closure Path}
 \label{sec:gap-closure-path}
 
-The Euler--Maclaurin Proposition (Part~II, Proposition~4.11) establishes that the PNT-continuous approximation yields $\rho^{\mathrm{EM}}(L) < 0$ for $L \geq 13$, i.e., for $\lambda \geq e^{13} \approx 442{,}413$. This is certified by interval arithmetic (mpmath.iv, 60-digit precision); the zero-crossing occurs at $L \approx 12.57$. This means that in the continuous (prime-replaced-by-integral) limit, even dominance holds unconditionally for all sufficiently large $\lambda$. To transfer this to the actual prime sums, three components are needed:
+The Euler--Maclaurin Proposition (Part~II, Proposition~4.11) establishes that
+the PNT-continuous approximation yields $\rho^{\mathrm{EM}}(L) < 0$ for
+$L \geq 13$, i.e., for $\lambda \geq e^{13} \approx 442{,}413$. This is
+certified by interval arithmetic (mpmath.iv, 60-digit precision); the
+zero-crossing occurs at $L \approx 12.57$. This means that in the continuous
+(prime-replaced-by-integral) limit, the leading variational balance favors the
+even sector for all sufficiently large $\lambda$. To transfer this to the
+actual prime sums, two components are needed:
 
 \begin{enumerate}
   \item \textbf{Computer-assisted certificates ($\lambda \leq 1{,}300{,}000$):} Already proved for $33$ values (Part~II, \S3).
   \item \textbf{PNT Transfer Lemma (Part~II):} By Abel summation with the Chebyshev function error $\theta(x) - x = O(x\exp(-c\sqrt{\log x}))$, the actual resolvent ratio satisfies $\rho(\lambda) = \rho^{\mathrm{EM}}(\lambda) + O(L\,e^{-c\sqrt{L}}) \to \rho^{\mathrm{EM}}(\lambda)$ as $\lambda \to \infty$. Since $\rho^{\mathrm{EM}} < 0$ for $L \geq 13$ (interval-arithmetic certified), there exists $\lambda_0$ such that $\rho(\lambda) < 0$ for all $\lambda \geq \lambda_0$.
 \end{enumerate}
 
-\noindent The status of M1$''$ (resolvent subdominance) is therefore: \textbf{proved.} In v2.1 the robust Direct Frontier-Dominance proof also bypasses the M1$''$ route by using a common frontier Rayleigh vector plus finite CAP coverage. Combined with the higher-mode decay bound (Lemma~B), the resolvent truncation control (Lemma~C), and the $33$ computer-assisted certificates, this yields Proposition~A6 (Part~II): even dominance holds for all $\lambda \geq 100$. Via Connes' Theorem~6.1 and Hurwitz sufficiency, RH follows.
+\noindent The status of M1$''$ (resolvent subdominance) is therefore:
+\textbf{proved as an asymptotic variational framework}. In v2.1 the robust
+Direct Frontier-Dominance proof also bypasses the M1$''$ route by using a
+common frontier Rayleigh vector plus finite CAP coverage. Combined with the
+higher-mode decay bound (Lemma~B), the resolvent truncation control
+(Lemma~C), and the $33$ computer-assisted certificates, this yields the
+current Part~II status: rigorous even dominance on the certified range and a
+conditional asymptotic reduction beyond it.
 
 \subsection{Analytical Status of the Control Lemmas (v1.1)}
 
@@ -474,7 +577,16 @@ No numerical constants remain in the proof of Regime~2. For explicit references:
 
 \subsection{The Remaining Distance}
 
-The reduction chain A1--A8 (\Cref{sec:architecture}) is now \emph{complete}. The cumulative step~A6, previously the single remaining challenge, is resolved in Part~II (Proposition~A6) via a three-regime argument combining computer-assisted certificates (Regime~1, $\lambda \leq 1{,}300{,}000$), the M1$''$ resolvent framework with PNT transfer (Regime~2, $\lambda \geq 1{,}200{,}000$), and three control lemmas: higher-mode decay (Lemma~B), resolvent truncation (Lemma~C), and PNT error transfer (Lemma~PNT). The two regimes overlap, providing a gap-free bridge from $\lambda = 100$ to infinity. In v2.1 an independent Direct Frontier-Dominance proof (Part~II, Proposition~\emph{prop:direct-frontier}) is added that bypasses the interpolation and PNT-transfer caveats by using a common frontier Rayleigh vector and finite CAP coverage.
+The reduction chain A1--A8 (\Cref{sec:architecture}) is now sharply
+localized. Steps A1--A5 are established, and the certified bridge for A3 is
+rigorous at the $33$ interval-arithmetic values. The remaining distance is no
+longer a broad proof-architecture problem but a single asymptotic odd-sector
+lower-bound problem: upgrading the variational negativity of $W^+-W^-$ to the
+eigenvalue inequality $\lambda_1^+<\lambda_1^-$. In v2.1 an independent
+Direct Frontier-Dominance proof (Part~II, Proposition~\emph{prop:direct-frontier})
+was added that bypasses the interpolation and PNT-transfer caveats by using a
+common frontier Rayleigh vector and finite CAP coverage; the v2.2 revision
+clarifies exactly what this argument proves and what it still leaves open.
 
 \subsection{Philosophical Reflection: Genesis of the Proof Architecture}
 
@@ -488,7 +600,13 @@ A critical review of earlier work (BI-10) identified three durable building bloc
 
 The breakthrough came with Connes' 2026 survey \cite{Connes2026} (BI-11), which provided a completely different framework. Instead of density arguments or global positivity, the Weil form is treated as a finite operator on a Paley--Wiener space. Connes' Theorem~6.1 reduces RH to an even-dominance condition, and a Hurwitz argument shows this condition is needed only along a sequence $\lambda_n \to \infty$. This precisely realized the ``positivity on a restricted subspace'' anticipated by BI-8.
 
-The proof architecture of Part~II is the direct implementation of these insights. The Shift Parity Lemma formalizes the constructive interference of even modes and destructive interference of odd modes under prime shifts. The resolvent analysis (M1$''$) and the subsidiary lemmas on mode decay and truncation show that this local even preference remains stable under summation. Proposition~A6 closes the bridge to the full Weil form.
+The proof architecture of Part~II is the direct implementation of these
+insights. The Shift Parity Lemma formalizes the constructive interference of
+even modes and destructive interference of odd modes under prime shifts. The
+resolvent analysis (M1$''$) and the subsidiary lemmas on mode decay and
+truncation show that this local even preference has the correct asymptotic
+variational sign under summation. Proposition~A6 closes the finite bridge and
+isolates the remaining asymptotic spectral step.
 
 In retrospect, BI-8 correctly predicted the architecture but misidentified the mechanism. The ``entropy'' of the Riemann Hypothesis is not thermodynamic but geometric-arithmetic: it arises from the trigonometric structure of prime shifts and the non-coordinability of their phases. The present work can therefore be understood as a distillation of this development, in which all heuristic elements have been replaced by formal, verifiable arguments.
 
@@ -518,16 +636,27 @@ Leading-Mode Cancellation ($c = 2+\sqrt{2}$) & proven & II \\
 Euler--Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (interval-arithmetic certified) & proven & II \\
 Resolvent M1$''$: $(E_{\sin}-E_{\cos})/D = O(1/L)$ & proven & II \\
 Gap asymptotics: $|\mathrm{cert\_gap}| \sim c\sqrt{\lambda}$ & numerical & II \\
-\textbf{M1$''$ (resolvent subdominance)} & \textbf{proved (v2.1 Direct proof bypasses it)} & II \\
+\textbf{M1$''$ (resolvent subdominance)} & \textbf{proved (variational framework)} & II \\
 Higher-mode decay (Lemma~B) & proved & II \\
 Tail truncation (Lemma~C) & proved (analytical) & II \\
 PNT transfer error (Lemma~PNT) & proved with effective $C$ & II \\
-\textbf{Cumulative step (A6)} & \textbf{proved (v2.1)} & II \\
-\textbf{Riemann Hypothesis} & \textbf{proved (v2.1, unconditional)} & I+II+III
+\textbf{Cumulative step (A6)} & \textbf{conditional reduction (v2.2)} & II \\
+\textbf{Riemann Hypothesis} & \textbf{conditional reduction (v2.2)} & I+II+III
 \end{tabular}
 \end{center}
 
-\noindent The proof of A6 (and hence RH) rests on the three-regime bridge argument (Part~II, Proposition~A6): computer-assisted certificates for $\lambda \leq 1{,}300{,}000$ (Regime~1, with perturbative inter-certificate interpolation) and the M1$''$/PNT analytical argument for $\lambda \geq 442{,}413$ (Regime~2, conditional on the effective PNT-transfer constant $C < 2$), with overlap. In v1.1, Lemma~B was upgraded to a parity-split gap bound (analytical) and Lemma~C was reformulated as a sector-difference control (replacing the stronger but unnecessary $\|R_0 K\| < 1$ condition). In v2.1 (Part~II, Proposition~\emph{prop:direct-frontier}) a robust Direct Frontier-Dominance proof is added: the frontier is evaluated on a common Rayleigh vector, the complement is norm-bounded, and the existing CAP certificates cover the finite range up to the explicit asymptotic threshold. Both caveats of the v2.0 three-regime argument are obviated, and the proof of the Riemann Hypothesis is therefore unconditional.
+\noindent The current status of A6 and RH rests on the three-regime bridge
+argument (Part~II, Proposition~A6) together with the v2.1 Direct
+Frontier-Dominance analysis: computer-assisted certificates cover
+$\lambda \leq 1{,}300{,}000$ (Regime~1), and the asymptotic M1$''$/PNT and
+frontier analyses identify the correct variational sign beyond the explicit
+threshold. In v1.1, Lemma~B was upgraded to a parity-split gap bound
+(analytical) and Lemma~C was reformulated as a sector-difference control
+(replacing the stronger but unnecessary $\|R_0 K\| < 1$ condition). In v2.1
+the robust Direct Frontier-Dominance proof removed the two older v2.0
+caveats. The v2.2 revision clarifies that the remaining task is a separate
+lower bound for $\lambda_1^-(\lambda)$; RH is therefore currently a
+\emph{conditional reduction}, not an unconditional closure.
 
 \bigskip
 \noindent\textbf{Acknowledgments.} Computations were performed on a Hetzner CCX13 cloud server (2~dedicated vCPU, 8~GB RAM). The interval arithmetic library mpmath was developed by Fredrik Johansson.
@@ -545,6 +674,9 @@ L.~Geiger, \emph{The Riemann Hypothesis: Foundations, Obstructions, and Reorient
 
 \bibitem{Geiger2026partII}
 L.~Geiger, \emph{The Riemann Hypothesis: Even Dominance of the Weil Quadratic Form}, 2026.
+
+\bibitem{Geiger2026evendom}
+L.~Geiger, \emph{A conditional proof of the Riemann hypothesis via even dominance of the Weil quadratic form}, Zenodo, 2026, DOI: 10.5281/zenodo.20011910.
 
 \bibitem{Connes2026}
 A.~Connes, \emph{The Riemann Hypothesis: Past, Present and a Letter Through Time}, arXiv:2602.04022v1, 2026.

@@ -32,6 +32,7 @@ proof_notes/
 _copilot/
 _handoff/
 _reviews/
+_META/
 _private/
 archive/
 _archive/
@@ -64,6 +65,7 @@ SCIPOST.txt
 REVIEW.txt
 REVIEW_CHAIN*.md
 REVIEW_CYCLE*.md
+IDEEN_AUS_DISKUSSION*.md
 
 # Translation helper (internal)
 scripts/_translate_rh2.py

@@ -36,7 +36,14 @@
 \maketitle
 
 \begin{abstract}
-This is the second paper in a three-part series (Part~I: Foundations and Obstructions \cite{Geiger2026partI}; Part~III: Conclusio \cite{Geiger2026partIII}). We address the open problem identified in Connes' 2026 survey \cite{Connes2026}: whether the minimum eigenvalue of the Weil quadratic form~$\mathrm{QW}_\lambda$ is simple with even eigenfunction. We establish three main results. First, the \emph{Shift Parity Lemma}: the difference matrix between even and odd shift operators has strictly negative minimum eigenvalue for all $N \geq 3$ modes and all normalized shifts $r \in (0,2)$, implying that every prime individually favors even eigenfunctions. Second, we rigorously certify even dominance via computer-assisted proof using interval arithmetic for $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$, with certified gaps growing monotonically as~$\sim\!\sqrt{\lambda}$. Third, we prove the \emph{Leading-Mode Cancellation Lemma}: the overlap differences between even and odd sectors cancel pairwise with exact constant $c = 2 + \sqrt{2}$, yielding $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$. This resolvent-damped framework reduces the remaining analytical step (M1$''$) to classical Fourier analysis and the Prime Number Theorem. In v2.0 we add two non-existence theorems (Theorems~\ref{thm:NE-A} and~\ref{thm:NE-B}) that formally rule out the absolute total-positivity and universal-commuting-operator routes, establishing that even dominance is necessarily an arithmetic-statistical rather than a purely algebraic phenomenon. In v2.1 we add a robust Direct Frontier-Dominance proof (\Cref{sec:direct-frontier}, \Cref{prop:direct-frontier}) based on a common Rayleigh test vector on the frontier window $r \in [0.7,1]$. This formulation avoids any additivity claim for individual minimum eigenvalues; PNT partial summation supplies the $\sqrt{\lambda}$ frontier scale, Mertens-type estimates bound the non-frontier part, and the existing CAP range provides the finite bridge to the explicit asymptotic threshold. Both v2.0 caveats on Regime~1 interpolation and the PNT-transfer constant are obviated, rendering the Even Dominance proof and hence the reduction chain A1--A8 unconditional.
+This is the second paper in a three-part series (Part~I: Foundations and Obstructions \cite{Geiger2026partI}; Part~III: Conclusio \cite{Geiger2026partIII}). We address the open problem identified in Connes' 2026 survey \cite{Connes2026}: whether the minimum eigenvalue of the Weil quadratic form~$\mathrm{QW}_\lambda$ is simple with even eigenfunction. We establish three main results. First, the \emph{Shift Parity Lemma}: the difference matrix between even and odd shift operators has strictly negative minimum eigenvalue for all $N \geq 3$ modes and all normalized shifts $r \in (0,2)$, implying that every prime individually favors even eigenfunctions. Second, we rigorously certify even dominance via computer-assisted proof using interval arithmetic for $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$, with certified gaps growing monotonically as~$\sim\!\sqrt{\lambda}$. Third, we prove the \emph{Leading-Mode Cancellation Lemma}: the overlap differences between even and odd sectors cancel pairwise with exact constant $c = 2 + \sqrt{2}$, yielding $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$. In v2.0 we add two non-existence theorems (Theorems~\ref{thm:NE-A} and~\ref{thm:NE-B}) that formally rule out the absolute total-positivity and universal-commuting-operator routes, establishing that even dominance is necessarily an arithmetic-statistical rather than a purely algebraic phenomenon. In v2.1 we add a robust Direct Frontier-Dominance argument (\Cref{sec:direct-frontier}, \Cref{prop:direct-frontier}) based on a common Rayleigh test vector on the frontier window $r \in [0.7,1]$.
+
+\medskip\noindent
+\textbf{Status correction (v2.2, 2026-05-14).}
+External critical review of the v2.1 manuscript and the companion proof-only extract \cite{Geiger2026evendom} identified a structural gap in the asymptotic argument that was hidden by the previous wording. The Direct Frontier-Dominance proposition establishes
+$\lambda_{\min}(W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}})=-\Theta(\sqrt\lambda)$
+via Rayleigh evaluation at a common test vector. This is a \emph{variational} statement: there exists a vector $v$ with $v^T W^+ v < v^T W^- v$. It does \emph{not} establish $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ asymptotically, because $\lambda_1^-(\lambda)\le v^T W^- v$ runs in the same direction; a separate quantitative lower bound for $\lambda_1^-$ is required. The simple $2\times 2$ counter-example $A=\mathrm{diag}(0,10)$, $B=\mathrm{diag}(5,-5)$ illustrates the gap.
+The status of the A1--A8 reduction chain is therefore revised from ``unconditional'' (v2.1) back to \textbf{conditional reduction}: even dominance is rigorously proved on the certified range $100\le\lambda\le 1{,}300{,}000$ via separate interval-arithmetic upper/lower bounds for $\lambda_1^\pm$, and asymptotic even dominance is reduced to the \emph{Asymptotic Variational Gap Conjecture} (a quantitative lower bound for $\lambda_1^-(\lambda)$). A proposed approach via degenerate perturbation theory on the asymmetric three-mode diagonal structure is sketched in the companion paper~\cite{Geiger2026evendom}. The non-existence theorems NE-A and NE-B, the Shift Parity Lemma, the Leading-Mode Cancellation Lemma, and the 33 IA certificates remain unaffected by this revision.
 \end{abstract}
 
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
@@ -994,11 +1001,34 @@ The Hilbert--P\'olya conjecture seeks a self-adjoint operator whose eigenvalues 
 \section{Conclusion}
 % =============================================================================
 
-This paper establishes even dominance of the Weil quadratic form $\mathrm{QW}_\lambda$ for all $\lambda \geq 100$. The proof combines three ingredients: (1)~the Shift Parity Lemma, showing that each prime individually favors even eigenfunctions; (2)~33 computer-assisted certificates providing rigorous verification via interval arithmetic; and (3)~the M1$''$ resolvent framework with PNT transfer, establishing even dominance analytically for all sufficiently large $\lambda$. The three-regime bridge argument (Proposition~A6) unifies these ingredients into a gap-free proof covering all $\lambda \geq 100$.
+This paper rigorously establishes even dominance of the Weil quadratic form
+$\mathrm{QW}_\lambda$ on the certified range and isolates the remaining
+asymptotic step. The proof combines three ingredients: (1)~the Shift Parity
+Lemma, showing that each prime individually favors even eigenfunctions;
+(2)~33 computer-assisted certificates providing rigorous interval-arithmetic
+upper/lower bounds for $\lambda_1^\pm$ at $\lambda=100,\dots,1{,}300{,}000$;
+and (3)~the M1$''$ resolvent framework together with the v2.1 Direct
+Frontier-Dominance argument, both of which establish the asymptotic
+variational statement $\lambda_{\min}(W^+-W^-)=-\Theta(\sqrt\lambda)$. The
+remaining step from this variational statement to
+$\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ for all sufficiently large
+$\lambda$ is formulated in v2.2 as the \emph{Asymptotic Variational Gap
+Conjecture}.
 
 The central analytical insight is the Leading-Mode Cancellation Lemma: the coupling difference between even and odd sectors is bounded by $O(1)$ while the diagonal advantage $D(\lambda)$ grows as $\sqrt{\lambda}$, producing a ratio $\rho(\lambda) \to 0$. Combined with the Euler--Maclaurin Proposition ($\rho^{\mathrm{EM}} < 0$ for $L \geq 13$, certified by interval arithmetic) and the PNT Transfer Lemma, this yields M1$''$ (resolvent subdominance) for all $\lambda \geq \lambda_0$.
 
-In v1.1, both Lemma~B and Lemma~C have been upgraded to fully analytical arguments: the parity-split gap (Lemma~B, Steps~3--4) derives $c_{\mathrm{gap}} \geq 4\pi^2/L$ from Laplace asymptotics, and the sector-difference control (Lemma~C) replaces the global Neumann condition $\|R_0 K\| < 1$ by the tail-symmetry bound $|E_{\sin}^{\mathrm{tail}} - E_{\cos}^{\mathrm{tail}}|/D \leq C/N_0^2$. No numerical constants remain in the proof of Regime~2. Version~2.1 adds a robust Direct Frontier-Dominance proof (\Cref{prop:direct-frontier}) that uses a common Rayleigh vector rather than eigenvalue-additivity and renders the proof unconditional.
+In v1.1, both Lemma~B and Lemma~C have been upgraded to fully analytical
+arguments: the parity-split gap (Lemma~B, Steps~3--4) derives
+$c_{\mathrm{gap}} \geq 4\pi^2/L$ from Laplace asymptotics, and the
+sector-difference control (Lemma~C) replaces the global Neumann condition
+$\|R_0 K\| < 1$ by the tail-symmetry bound
+$|E_{\sin}^{\mathrm{tail}} - E_{\cos}^{\mathrm{tail}}|/D \leq C/N_0^2$. No
+numerical constants remain in the asymptotic variational analysis of
+Regime~2. Version~2.1 adds a robust Direct Frontier-Dominance proof
+(\Cref{prop:direct-frontier}) that uses a common Rayleigh vector rather than
+eigenvalue-additivity and removes the two earlier v2.0 caveats; the v2.2
+revision clarifies that this still yields a conditional reduction rather than
+an unconditional closure of A6.
 
 % =============================================================================
 \appendix
@@ -2009,14 +2039,49 @@ This remark documents the rigorous status of the three-regime proof as it stood 
 The CAP certificates rigorously establish $\mathrm{cert\_gap}(\lambda_k) < 0$ at the $33$ grid points $\lambda_k$. Extending this to every $\lambda \in [\lambda_k, \lambda_{k+1}]$ uses three ingredients (i)--(iii) above. Of these, (i) (Rayleigh-quotient perturbation under rank-one updates) and (iii) (eigenvector stability via the certified intra-sector gap) are rigorous \emph{provided} $\|W_p\|_{\mathrm{op}} < 0.46$ remains bounded on the interval and the intra-even gap remains above the interval-valued perturbation radius; both are certified at the grid points, not continuously. Between certificate points the argument is therefore \emph{quasi-rigorous}: it rests on the assumption that the certified intra-sector gap varies continuously and does not collapse on the (finitely primed) segments $[\lambda_k, \lambda_{k+1}]$ --- a property that is numerically confirmed at the dense-grid resolvent level but not derived as a closed-form inequality. Ingredient~(ii) (Hellmann--Feynman on $L$-variation between consecutive primes) is analytically derivable from the kernel structure but has been tabulated only up to $\lambda = 200$ in Table~\ref{tab:hf-results}; its extrapolation to $\lambda \leq 1{,}300{,}000$ relies on the kernel's smooth $L$-dependence. In v2.0 Regime~1 is therefore \emph{certificate-anchored with perturbative interpolation}. The Regime~2 argument (via \Cref{cor:M1-proved}) is independent of this interpolation and provides rigorous coverage beyond $\lambda_0 = 442{,}413$; the v2.1 Direct Frontier-Dominance proof is independent of the interpolation and of the Regime~2 PNT-transfer constant, while still using the CAP certificates as a finite bridge below its explicit asymptotic threshold.
 \end{remark}
 
-\begin{remark}[Status of the proof]
+\begin{remark}[Status of the proof, revised v2.2]
 \label{rem:M1-status}
-\Cref{prop:A6} now admits \emph{two independent proofs}:
+\Cref{prop:A6} provides \emph{two parallel arguments}, both of which establish
+the variational statement $\lambda_{\min}(W^+-W^-)=-\Theta(\sqrt\lambda)$
+asymptotically but not, by themselves, the eigenvalue inequality
+$\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$:
 \begin{itemize}
   \item \textbf{v2.0 three-regime proof} (above): combines the $33$ CAP certificates (Regime~1), the M1$''$ resolvent framework with PNT transfer (Regime~2), and the higher-mode / truncation control (\Cref{lem:higher-mode-decay,lem:resolvent-truncation}). Two technical caveats (\Cref{rem:regime1-caveat,rem:C-constant-caveat}) describe the minor rigorous gaps in this argument.
   \item \textbf{v2.1 Direct Frontier-Dominance proof} (\Cref{prop:direct-frontier}, \Cref{sec:direct-frontier}): uses a common Rayleigh test vector on $r\in[0.7,1]$, PNT partial summation, Mertens's theorem, the variational inequality, and finite CAP coverage up to the explicit asymptotic threshold. Both v2.0 caveats are obviated (\Cref{rem:direct-proof-ingredients}).
 \end{itemize}
-Together with Connes' Theorem~6.1 (A1), Hurwitz sufficiency (A2), the Shift Parity Lemma (A4), and the frontier-prime mechanism (A5), the proof architecture~A1--A8 for the Riemann Hypothesis is complete and unconditional. All steps are either externally established results (A1, A2), computer-assisted certificates for the finite bridge (A3), or analytical proofs in this paper (A4, A5, A6 via Direct Frontier-Dominance).
+
+\medskip\noindent
+\textbf{v2.2 correction: variational direction gap.}  Both proofs above
+work with $\lambda_{\min}(W^+-W^-)$, equivalently with the Rayleigh
+quotient $v^T(W^+-W^-)v$ at a test vector~$v$ (e.g.\ $v=e_1$ in v2.1).
+This shows the existence of a vector $v$ with $v^T W^+ v < v^T W^- v$,
+but not $\lambda_{\min}(W^+) < \lambda_{\min}(W^-)$, because the
+Rayleigh inequality $\lambda_{\min}(W^-) \le v^T W^- v$ runs in the same
+(upper-bound) direction.  The companion paper \cite{Geiger2026evendom}
+formulates the missing lower bound on $\lambda_1^-(\lambda)$ as the
+\emph{Asymptotic Variational Gap Conjecture} and sketches a proposed
+route via degenerate perturbation theory on the asymmetric three-mode
+diagonal structure.
+
+\textbf{Revised status of the A1--A8 chain.}
+Together with Connes' Theorem~6.1 (A1), Hurwitz sufficiency (A2), the
+Shift Parity Lemma (A4), the IA-certified finite-range even dominance
+(A3), and the frontier-prime mechanism (A5), the present paper
+establishes a \emph{conditional reduction} of RH:
+\begin{itemize}
+  \item \textbf{Unconditional outputs:} Shift Parity Lemma; 33 IA
+    certificates for even dominance on $100 \le \lambda \le 1{,}300{,}000$
+    via separate upper/lower bounds for $\lambda_1^\pm$; Leading-Mode
+    Cancellation Lemma; non-existence theorems NE-A and NE-B.
+  \item \textbf{Conditional outputs:} Asymptotic even dominance for
+    $\lambda \ge \Lambda_*$ is conditional on the Asymptotic Variational
+    Gap Conjecture for the odd-sector minimum eigenvalue.  RH itself is
+    additionally conditional on the Connes program (Theorem~6.1 and
+    Hurwitz bridge in~\cite{Connes2026, ConnesvS2025}).
+\end{itemize}
+The status claim of v2.1 (``unconditional A1--A8'') is hereby revised.
+Drafts and preprints are continuously evolving artefacts; v2.2 is the
+current honest position.
 
 The spectral gap bound in \Cref{lem:higher-mode-decay} is derived analytically via the parity-split Laplace asymptotics (Step~3): $c_{\mathrm{gap}} \geq 4\pi^2/L \geq 2.8$ for $L \leq 14$, conservative by a factor $\geq 5$ compared to the earlier numerical estimate $c_{\mathrm{gap}} \geq 0.5$. Combined with the sector-difference control (\Cref{lem:resolvent-truncation}), no numerical constants remain in the Regime~2 argument. In the v2.1 Direct Frontier-Dominance proof, the numerical inputs are fixed-domain interval certificates independent of $\lambda$: $C_{\mathrm{front}} = 0.4685$ for the common frontier Rayleigh quotient and $C_{\mathrm{norm}} = 2.2847$ for the non-frontier norm bound.
 \end{remark}

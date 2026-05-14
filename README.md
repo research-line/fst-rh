@@ -18,16 +18,26 @@ private until a full project closeout permits release.
 
 **Submitted to:** Communications in Mathematics (cm:17829, 2026-03-27)
 
+## Current Status (v2.2, 2026-05-14)
+
+The public paper package now reflects the v2.2 status correction. The
+certified range `100 <= lambda <= 1,300,000` remains rigorously established
+via separate interval-arithmetic bounds for `lambda_1^+` and `lambda_1^-`,
+while the asymptotic step is reduced to the `Asymptotic Variational Gap
+Conjecture`. The Direct Frontier-Dominance argument remains part of the
+package as the asymptotic variational route, but it no longer by itself closes
+the eigenvalue inequality `lambda_1^+ < lambda_1^-`.
+
 ## Paper Series (3 Parts, EN + DE)
 
 | Paper | File | Pages | Content |
 |-------|------|-------|---------|
-| **Part I** | `RH_I_Foundations` | 14 | Foundations and Obstructions: thermodynamic landscape (R1-R9), dead ends (K1-K4), reorientation to Connes |
-| **Part II** | `RH_II_Even_Dominance` | 44 | **Main paper.** Shift Parity Lemma, 33 CAP certificates, resolvent M1'' framework, Leading-Mode Cancellation (c=2+sqrt(2)), Higher-Mode Decay (Lemma B), Resolvent Truncation (Lemma C), PNT Transfer, Euler-Maclaurin Proposition, **Proposition A6 (cumulative step)**, v2.1 Direct Frontier-Dominance |
-| **Part III** | `RH_III_Conclusio` | 18 | Synthesis: proof architecture (A1-A8, all closed), explored alternatives (BI-1..11), independent results, assessment, v2.1 status reconciliation |
+| **Part I** | `RH_I_Foundations` | 15 | Foundations and Obstructions: thermodynamic landscape (R1-R9), dead ends (K1-K4), reorientation to Connes |
+| **Part II** | `RH_II_Even_Dominance` | 52 | **Main paper.** Shift Parity Lemma, 33 CAP certificates, the M1'' variational framework, Leading-Mode Cancellation (c=2+sqrt(2)), Higher-Mode Decay (Lemma B), Resolvent Truncation (Lemma C), PNT Transfer, Euler-Maclaurin Proposition, Direct Frontier-Dominance, and the v2.2 status revision |
+| **Part III** | `RH_III_Conclusio` | 19 | Synthesis of the proof architecture, revised v2.2 status table, explored alternatives (BI-1..11), independent results, and the remaining asymptotic gap problem |
 
 All papers are available in English and German (DE suffix).
-Combined English version: `paper/RH_Complete_Series_EN.pdf` (76 pages).
+Combined English version: `paper/RH_Complete_Series_EN.pdf` (86 pages).
 
 ## Proof Architecture
 
@@ -38,9 +48,9 @@ Combined English version: `paper/RH_Complete_Series_EN.pdf` (76 pages).
 | A3 | Even dominance at 33 values (lambda=100..1.3M) | **proven (CAP)** |
 | A4 | Shift Parity Lemma | **proven** |
 | A5 | Frontier-prime mechanism | proven |
-| **A6** | **Cumulative step** | **closed (Prop. A6)** |
-| A7 | Even dominance for all lambda >= 100 | proven (from A6) |
-| A8 | RH | proven (from A1+A2+A7) |
+| **A6** | **Cumulative step** | **variational, v2.2** |
+| A7 | Even dominance along `lambda_n -> infinity` | conditional (v2.2) |
+| A8 | RH | conditional reduction (v2.2) |
 
 ## Key Results
 
@@ -53,18 +63,25 @@ Combined English version: `paper/RH_Complete_Series_EN.pdf` (76 pages).
 3. **Leading-Mode Cancellation Lemma**: Overlap differences cancel pairwise with
    exact constant c = 2 + sqrt(2).
 
-4. **M1'' (Resolvent Subdominance)**: Proved via PNT Transfer Lemma with explicit
-   threshold lambda_0 = 442,413 (Dusart bound).
+4. **M1'' Variational Framework**: The resolvent-damped comparison yields the
+   asymptotic variational sign with explicit threshold lambda_0 = 442,413
+   (Dusart bound).
 
-5. **Proposition A6 (Cumulative Step)**: Three-regime argument:
-   - Regime 1 (lambda in [100, 1.3M]): 33 CAP certificates + structural interpolation
-     (Shift Parity + Hellmann-Feynman + OP2 simplicity, safety factor >= 18)
-   - Regime 2 (lambda >= 442,413): M1'' + PNT Transfer + Lemma B + Lemma C
-   - Overlap at [442k, 1.3M] (nearly one order of magnitude)
+5. **Current v2.2 status of Proposition A6**:
+   - Regime 1 (lambda in [100, 1.3M]): 33 CAP certificates give rigorous
+     even dominance on the certified values via separate bounds for
+     `lambda_1^+` and `lambda_1^-`.
+   - Regime 2 (asymptotic): M1'' + PNT Transfer + Lemma B + Lemma C identify
+     the correct variational sign.
+   - Remaining gap: asymptotic even dominance is reduced to the
+     `Asymptotic Variational Gap Conjecture` for `lambda_1^-`.
 
-6. **v2.1 Direct Frontier-Dominance**: independent robust route for A6 using
-   a common frontier Rayleigh vector, PNT partial summation, Mertens bounds, and
-   finite CAP coverage through the explicit asymptotic threshold.
+6. **v2.1 Direct Frontier-Dominance**: independent asymptotic variational route
+   using a common frontier Rayleigh vector, PNT partial summation, Mertens
+   bounds, and finite CAP coverage through the explicit asymptotic threshold.
+   It removes the earlier interpolation/PNT-constant caveats, but still
+   requires a separate odd-sector lower bound to close the eigenvalue
+   inequality.
 
 7. **OP2 Simplicity**: Intra-even spectral gap certified by interval arithmetic
    at all 33 values (gap >= 8.69 at lambda=100, growing to >= 731 at lambda=320k).
@@ -136,6 +153,7 @@ even block and float64 with Cauchy tail bounds for the odd block.
 
 ## Version History
 
+- **2.2** (2026-05-14): Status correction from unconditional closure to conditional reduction; public EN paper package synced to the variational-gap revision
 - **2.1** (2026-04-30): Robust Direct Frontier-Dominance route, Gemini N=200 server-script archival, repo hygiene audit
 - **1.4** (2026-03-27): Reviewer-driven clarifications (Prop A6 interpolation, M1'' explicit threshold, Lemma B Step 3/4 separation, Lemma L3 superseded, Galerkin safety margins, Connes2026 reference key)
 - **1.3** (2026-03-17): Bibliographic corrections (Connes title, Deninger journal, Keiper type)
