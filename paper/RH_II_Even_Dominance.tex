@@ -2083,6 +2083,37 @@ The status claim of v2.1 (``unconditional A1--A8'') is hereby revised.
 Drafts and preprints are continuously evolving artefacts; v2.2 is the
 current honest position.
 
+\medskip\noindent
+\textbf{v2.3 update (15 May 2026): Connes-2026 Fact~6.4 conditioning
+clarified.}  A close reading of Connes 2026 §6.5 \cite{Connes2026}
+clarifies that the Hurwitz-bridge (A2) is presented there as
+\emph{Fact~6.4}, an analytical consequence of the classical
+Slepian--Pollak prolate spheroidal wave function convergence theory
+\cite[Theorem~1 of reference~47]{Connes2026}, not as a conjecture or
+unproven strategy.  The ``proof strategy'' language in the abstract
+of \cite{Connes2026} refers to the global RH-architecture
+(combining Fact 6.4 with the two remaining steps in §6.6:
+even-ground-state simplicity and approximation quality
+$k_\Lambda\approx\xi_\Lambda$), not to Fact 6.4 itself.  Therefore the
+correct conditioning for the A1--A8 chain is:
+\begin{itemize}
+  \item \emph{External established input:} Connes--van Suijlekom
+    real-zero criterion \cite{ConnesvS2025} (proved); Fact~6.4
+    Fourier convergence \cite[§6.5]{Connes2026} (established via
+    Slepian--Pollak).
+  \item \emph{Internal open question:} simple even ground state of
+    $QW_\Lambda$ (Connes 2026 §6.6 item (i)) = Asymptotic Even
+    Dominance --- the central goal of the present paper and of the
+    companion \cite{Geiger2026evendom}.
+  \item \emph{Internal open question (separate route):}
+    approximation quality $k_\Lambda \approx \xi_\Lambda$
+    (Connes 2026 §6.6 item (ii)) = MS2, addressed in the companion
+    Zookeeper paper \cite{Geiger2026zookeeper}.
+\end{itemize}
+The two ``remaining steps'' Connes identifies in \cite[§6.6]{Connes2026}
+are therefore exactly the two open questions our two main papers
+attempt to discharge.
+
 The spectral gap bound in \Cref{lem:higher-mode-decay} is derived analytically via the parity-split Laplace asymptotics (Step~3): $c_{\mathrm{gap}} \geq 4\pi^2/L \geq 2.8$ for $L \leq 14$, conservative by a factor $\geq 5$ compared to the earlier numerical estimate $c_{\mathrm{gap}} \geq 0.5$. Combined with the sector-difference control (\Cref{lem:resolvent-truncation}), no numerical constants remain in the Regime~2 argument. In the v2.1 Direct Frontier-Dominance proof, the numerical inputs are fixed-domain interval certificates independent of $\lambda$: $C_{\mathrm{front}} = 0.4685$ for the common frontier Rayleigh quotient and $C_{\mathrm{norm}} = 2.2847$ for the non-frontier norm bound.
 \end{remark}
 

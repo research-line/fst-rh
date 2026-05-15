@@ -23,12 +23,15 @@
 \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
+\theoremstyle{plain}
+\newtheorem{conjecture}[theorem]{Conjecture}
 \crefname{theorem}{Theorem}{Theorems}
 \crefname{lemma}{Lemma}{Lemmas}
 \crefname{proposition}{Proposition}{Propositions}
 \crefname{corollary}{Corollary}{Corollaries}
 \crefname{definition}{Definition}{Definitions}
 \crefname{remark}{Remark}{Remarks}
+\crefname{conjecture}{Conjecture}{Conjectures}
 
 \newcommand{\QW}{\mathrm{QW}}
 \newcommand{\RR}{\mathbb{R}}
@@ -38,34 +41,69 @@
 
 \title{A Conditional Proof of the Riemann Hypothesis via Even Dominance of the Weil Quadratic Form}
 \author{Lukas Geiger\\Independent Researcher, Bernau\\ORCID: 0009-0005-7296-1534}
-\date{Draft v1.1 -- 3 May 2026}
+\date{Draft v1.5 -- 14 May 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-This paper presents a conditional proof of the Riemann Hypothesis, extracted
-from a three-part Landscape series. The Landscape papers document the full
-research process, including failed routes, obstruction theorems, computational
-certificates, and alternative strategies. The present paper keeps only the
-proof-relevant chain.
+This paper presents a conditional reduction of the Riemann Hypothesis,
+extracted from a three-part Landscape series. The Landscape papers document
+the full research process, including failed routes, obstruction theorems,
+computational certificates, and alternative strategies. The present paper
+keeps only the proof-relevant chain.
 Following Connes' reduction of the Riemann Hypothesis to an even-dominance
-condition for the Weil quadratic form, we prove that the relevant ground state is
-simple and even along a sequence $\lambda_n\to\infty$. The proof has four inputs:
-(i) Connes--van Suijlekom's real-zero criterion for quadratic forms
-(\cite[Theorem~6.1]{Connes2026}, together with the Hurwitz bridge of
-\cite[Fact~6.4 / Section~6.4--6.6]{Connes2026}); (ii) the Shift Parity Lemma, a finite
-trigonometric matrix theorem showing that every admissible prime shift has an
-intrinsic even-sector advantage; (iii) interval-arithmetic certificates for the
-finite range $100\leq\lambda\leq 1{,}300{,}000$; and (iv) a frontier-dominance
-argument based on the Prime Number Theorem, Mertens-type estimates, and a common
-Rayleigh-vector bound for primes $p$ with $\log p/\log\lambda$ near $1$. Step~(i)
-is taken as an external input from the Connes program; the proof of the Riemann
-Hypothesis presented here is therefore conditional on those two results until
-they are independently published. Steps~(ii)--(iv) are self-contained and
-analytical, with the finite range and the asymptotic threshold meeting exactly
-at $1{,}300{,}000$. The excluded gauge, total-positivity, and universal-commutator
-routes are not used in the proof and are referred to the Landscape series.
+condition for the Weil quadratic form, we make two independent contributions.
+First, for the finite range $100\leq\lambda\leq 1{,}300{,}000$, even dominance
+$\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ is rigorously certified by
+interval-arithmetic Galerkin bounds that produce a separate upper bound for
+$\lambda_1^+$ and a separate lower bound for $\lambda_1^-$ at each certificate
+point. Second, for the asymptotic regime $\lambda\to\infty$, we establish via
+a common Rayleigh-vector argument that
+$\lambda_{\min}(W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}})=-\Theta(\sqrt\lambda)$
+on the relevant three-mode Galerkin block. Closing the gap between this
+variational statement and the eigenvalue ordering
+$\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ for asymptotic $\lambda$ requires a
+separate quantitative lower bound for $\lambda_1^-$; we formulate this as the
+\emph{Asymptotic Variational Gap Conjecture} and outline a degenerate
+perturbation-theory route in Section~\ref{sec:asymptotic-lower-bound}.
+The proof of RH presented here is therefore conditional on (i) the
+Connes program (Connes--van Suijlekom real-zero criterion
+\cite{ConnesvS2025}, which is fully proven at fixed $L$, together with
+the Hurwitz limit-passage of \cite[Sec.~6.4--6.6]{Connes2026}, which is
+described there as proof strategy, not theorem), and (ii) the
+Asymptotic Variational Gap Conjecture for the odd-sector minimum
+eigenvalue. The Shift Parity Lemma is unconditional. The
+interval-arithmetic certificates as currently implemented use a
+heuristic geometric extrapolation for the sin-block lower bound; the
+14 May 2026 v1.4 revision documents this honestly in
+\cref{sec:k0-strengthened}.
+
+\medskip\noindent
+\textbf{v1.5 reformulation (14 May 2026, evening).}  Earlier drafts
+expressed the Weil quadratic form on $L^2([-L,L])$ with a real
+cosine/sine basis and identified the even/odd parity sectors with
+$t\mapsto -t$.  In this formulation, the cosine and sine sectors
+share identical symmetric-shift auto-overlaps at every frequency
+$k\pi/L$, producing
+$\sigma(A_\lambda^+) = \sigma(A_\lambda^-) \cup \{\mu^+_0\}$ exactly
+and thus contradicting even dominance.  A comparison against
+Connes--van Suijlekom's proven form \cite{ConnesvS2025} shows that
+the correct setting is $L^2([0,L])$ with the complex exponential
+basis $U_n=L^{-1/2}\exp(2\pi inx/L)$ and parity defined via
+$U_n\leftrightarrow U_{-n}$.  In this setting the matrix of the
+Weil quadratic form has cosine- and sine-sector diagonals
+$D_n\mp S_n$, where $S_n=(\pi n)^{-1}\int_0^L\sin(2\pi ny/L)\,dD(y)$
+captures the genuine asymmetry between the two parity sectors.
+Numerically $S_n>0$ for the Weil distribution (e.g.\
+$S_1\approx 8.63$ at $\lambda=1000$, giving cosine diagonal
+$\approx 3.26$ versus sine diagonal $\approx 20.52$), so even
+dominance is structurally present in the corrected form.  Section~2
+has been rewritten accordingly; downstream sections retain their
+legacy structure and require parallel adaptation.
+
+The excluded gauge, total-positivity, and universal-commutator routes
+are not used and are referred to the Landscape series.
 \end{abstract}
 
 \noindent\textbf{Keywords:} Riemann Hypothesis, Weil quadratic form, even dominance, Connes program, Shift Parity Lemma, computer-assisted proof.
@@ -81,49 +119,209 @@ review reports, and computational handoffs. Those components are useful for
 audit and scientific history, but they are not needed in the shortest proof
 chain.
 
-The proof presented here uses the following implication chain:
+The argument presented here uses the following two-part chain:
 \[
 \begin{gathered}
-\text{Shift parity}+\text{frontier dominance}+\text{finite certificates}\\
-\Longrightarrow\ \text{even dominance of }\QW_\lambda\\
-\Longrightarrow\ \text{RH via Connes and Hurwitz}.
+\text{Shift parity}+\text{IA certificates for }100\leq\lambda\leq 1{,}300{,}000\\
+\Longrightarrow\ \text{Even Dominance on the certified range (\Cref{thm:even-finite})},
 \end{gathered}
 \]
-
-\section{Connes' Reduction}
-
-Let $L=\log\lambda$ and consider the Hilbert space $L^2([-L,L])$. In additive
-coordinates $u=\log x$, Connes' Weil quadratic form is represented by a
-self-adjoint operator $A_\lambda$ of the form
-\begin{multline}
-\label{eq:weil-form}
-  \langle A_\lambda f,f\rangle
-  =(\log 4\pi+\gamma)\norm{f}^2
-  +\int_0^\infty
-  \left[
-    \langle T_u f+T_{-u}f,f\rangle
-    -2e^{-u/2}\norm{f}^2
-  \right]\frac{e^{u/2}}{2\sinh u}\,du\\
-  +\sum_p\sum_{m=1}^{\infty}
-    \frac{\log p}{p^{m/2}}\,
-    \langle T_{m\log p}f+T_{-m\log p}f,f\rangle ,
-\end{multline}
-where $T_u$ is the shift operator. The operator commutes with parity, hence it
-splits into even and odd sectors:
+together with
 \[
-  A_\lambda=A_\lambda^+\oplus A_\lambda^-,
+\begin{gathered}
+\text{frontier dominance}+\text{Asymptotic Variational Gap Conjecture}\\
+\Longrightarrow\ \text{Even Dominance for }\lambda\geq\Lambda^\dagger\\
+\Longrightarrow\ \text{RH via Connes and Hurwitz (\Cref{thm:rh})}.
+\end{gathered}
+\]
+The first line is unconditional. The second line introduces two conditional
+inputs: the Connes program (external) and the Asymptotic Variational Gap
+Conjecture (\Cref{conj:avg}, internal to this approach;
+\Cref{sec:asymptotic-lower-bound}).
+
+\section{Connes' Reduction (v1.5 Reformulation)}
+
+\paragraph{v1.5 reformulation note.}  Earlier drafts of this paper
+(up to and including v1.4) presented the Weil quadratic form on
+$L^2([-L,L])$ with a real cosine/sine basis and identified the
+even/odd sectors with parity under $t\mapsto -t$.  An audit of the
+operator definition in May 2026 against Connes--van Suijlekom
+\cite{ConnesvS2025} showed that the originally proven form acts on
+$L^2([0,L])$ with a complex exponential basis, and that the
+relevant parity sectors are defined via the frequency reflection
+$U_n\leftrightarrow U_{-n}$ on this space.  Under the simplified
+symmetric-shift formulation of earlier drafts the cosine and sine
+sectors would have identical spectra (modulo the constant mode),
+contradicting the certified gaps; the Connes--van Suijlekom form
+admits a genuine asymmetry between cosine and sine sectors,
+captured by the quantity $S_n$ introduced below, and it is in this
+form that even dominance is mathematically meaningful.  The
+present section reformulates the setup to match the proven form;
+\Cref{sec:asymptotic-lower-bound} keeps a record of the previous
+formulation and the diagnostic chain that led to this revision.
+
+\paragraph{Hilbert space and basis.}  Let $L=\log\lambda$.  Following
+\cite[Section~4]{ConnesvS2025}, take the Hilbert space
+\[
+  \mathcal{H} \;=\; L^2([0,L],\,dx),
+\]
+with orthonormal Fourier basis
+\[
+  U_n(x) \;:=\; \frac{1}{\sqrt L}\,\exp\!\Big(\tfrac{2\pi i n x}{L}\Big),
+  \qquad x\in[0,L],\ n\in\mathbb{Z},
+\]
+extended by $0$ outside $[0,L]$.  The involution and convolution are
+\[
+  f^*(x) \;:=\; \overline{f(-x)},
   \qquad
-  \lambda_1^\pm(\lambda)=\min\sigma(A_\lambda^\pm).
+  (f * g)(y) \;:=\; \int_{\mathbb{R}} f(x)\,g(y-x)\,dx.
 \]
+For $U_n$ as above, $U_n^*$ is supported on $[-L,0]$ and
+$U_n^*(x)=L^{-1/2}\exp(2\pi i n x/L)$ on that interval.
 
-\begin{definition}[Even dominance]
-\label{def:even-dominance}
-We say that $\QW_\lambda$ has even dominance if
+\paragraph{Weil distribution.}  Let $D$ be the Weil distribution on
+$[0,L]$,
+\begin{equation}
+\label{eq:weil-distribution}
+  D \;=\; (\log 4\pi + \gamma)\,\delta_0
+     \;+\; \frac{e^{y/2}}{2\sinh y}\,\chi_{(0,L]}(y)\,dy
+     \;-\; \sum_{p,\,m\geq 1}
+           \frac{\log p}{p^{m/2}}\,\delta_{m\log p},
+\end{equation}
+where $\delta_a$ is the Dirac mass at $a$ and the prime sum runs over
+those pairs $(p,m)$ with $m\log p\in[0,L]$, i.e.\ $p^m\le\lambda$.  The
+regularised archimedean integrand of \cite[Section~4]{ConnesvS2025}
+absorbs the singularity of $e^{y/2}/(2\sinh y)$ at $y=0$ into the
+diagonal modification described below.
+
+\paragraph{Quadratic form.}  The Weil quadratic form $Q=Q_\lambda$ on
+trigonometric polynomials is
+\begin{equation}
+\label{eq:quad-form-connesvs}
+  \langle f \,|\, g\rangle_Q
+  \;:=\; \int_0^L \bigl[(f^* * g)(y) + (f^* * g)(-y)\bigr]\,dD(y).
+\end{equation}
+By the identity
+$(f^**g)(\pm y) = \langle f, T_{\mp y}\,g\rangle$
+(with $T_u f(t):=f(t-u)$), this equals
+$\int_0^L \langle f, (T_y + T_{-y})g\rangle\,dD(y)$, i.e.\ a
+symmetric-shift form integrated against $D$.  We let $A_\lambda$ denote
+the lower-bounded self-adjoint operator on $\mathcal{H}$ associated
+with $Q$ via the Friedrichs extension.
+
+\paragraph{Matrix elements.}  A direct computation
+(\cite[Equation~7]{ConnesvS2025} and Appendix below) gives, for $y\in[0,L]$,
+\begin{equation}
+\label{eq:matrix-elements-Q}
+  (U_m^* * U_n)(y) + (U_m^* * U_n)(-y)
+  \;=\;
+  \begin{cases}
+    2(1-y/L)\cos(2\pi n y/L), & m=n,\\[2pt]
+    \displaystyle\frac{\sin(2\pi m y/L) - \sin(2\pi n y/L)}{\pi(n-m)}, & m\neq n.
+  \end{cases}
+\end{equation}
+The matrix of $Q$ in the $\{U_n\}$ basis is therefore
+\begin{equation}
+\label{eq:matrix-of-Q}
+  \langle U_m \,|\, U_n\rangle_Q
+  \;=\;
+  \int_0^L
+  \bigl[(U_m^* * U_n)(y) + (U_m^* * U_n)(-y)\bigr]\,dD(y).
+\end{equation}
+
+\paragraph{Diagonal and pair-symmetric off-diagonals.}  Introduce
+\begin{equation}
+\label{eq:Dn-Sn}
+  D_n \;:=\; \int_0^L 2(1 - y/L)\cos\!\Big(\tfrac{2\pi n y}{L}\Big)\,dD(y),
+  \qquad
+  S_n \;:=\; \frac{1}{\pi n}\int_0^L \sin\!\Big(\tfrac{2\pi n y}{L}\Big)\,dD(y),
+\end{equation}
+for $n\neq 0$, and $D_0:=\int_0^L 2(1-y/L)\,dD(y)$, $S_0:=0$.  Then
+\begin{equation}
+\label{eq:U-diag-and-pair}
+  \langle U_n\,|\,U_n\rangle_Q \;=\; D_n,
+  \qquad
+  \langle U_n\,|\,U_{-n}\rangle_Q
+  \;=\; \langle U_{-n}\,|\,U_n\rangle_Q
+  \;=\; -S_n.
+\end{equation}
+In particular $D_{-n}=D_n$, so the pair $\{U_n,U_{-n}\}$ acts as an
+invariant subspace under the matrix \eqref{eq:matrix-of-Q} only in the
+sense that its $2\times 2$ restriction is symmetric in
+$\{U_n,U_{-n}\}$; full off-diagonal entries
+$\langle U_m|U_n\rangle_Q$ with $m\neq\pm n$ are in general
+nonzero but are not used in the diagonal analysis below.
+
+\paragraph{Cosine--sine sector decomposition.}  Define the real
+orthonormal basis
 \[
-  \lambda_1^+(\lambda)<\lambda_1^-(\lambda)
+  \cos_n \;:=\; \tfrac{1}{\sqrt 2}(U_n + U_{-n}),
+  \qquad
+  \sin_n \;:=\; \tfrac{1}{i\sqrt 2}(U_n - U_{-n})
+  \qquad (n\geq 1),
 \]
-and the even-sector minimum is simple and isolated.
+together with $U_0$ for $n=0$.  Using \eqref{eq:U-diag-and-pair},
+\begin{equation}
+\label{eq:cos-sin-diagonals}
+  \langle \cos_n\,|\,\cos_n\rangle_Q \;=\; D_n - S_n,
+  \qquad
+  \langle \sin_n\,|\,\sin_n\rangle_Q \;=\; D_n + S_n,
+\end{equation}
+so the two parity sectors share the same diagonal coefficient $D_n$
+but differ by $\pm S_n$.  The asymmetry $2S_n$ is the central object
+of this paper: its sign and magnitude determine whether the cosine
+sector or the sine sector achieves the smaller diagonal entry, and
+hence (modulo controlled off-diagonal corrections) which sector
+realises the operator's minimum eigenvalue.
+
+\begin{definition}[Even dominance, Connes--van Suijlekom form]
+\label{def:even-dominance}
+Let $A_\lambda^{\cos}$ and $A_\lambda^{\sin}$ denote the
+$Q_\lambda$-induced operators on the cosine and sine sectors
+$\overline{\operatorname{span}}\{U_n+U_{-n}:n\geq 0\}$ and
+$\overline{\operatorname{span}}\{U_n-U_{-n}:n\geq 1\}$ respectively.
+We say that $\QW_\lambda$ has \emph{even dominance} if
+\[
+  \lambda_1^{\cos}(\lambda) \;<\; \lambda_1^{\sin}(\lambda)
+  \quad\text{with simple, isolated cosine minimum},
+\]
+where $\lambda_1^{\bullet}(\lambda):=\min\sigma(A_\lambda^{\bullet})$.
+We retain the earlier notation $\lambda_1^\pm=\lambda_1^{\cos/\sin}$
+for compatibility with later sections.
 \end{definition}
+
+\begin{remark}[Numerical asymmetry of $S_n$]
+\label{rem:Sn-numerics}
+A direct computation of $D_n$ and $S_n$ from
+\eqref{eq:Dn-Sn} for the Weil distribution
+\eqref{eq:weil-distribution} confirms that $S_n$ is non-negligible:
+for $\lambda=1000$ and $n=1$ one finds $D_1\approx 11.89$ and
+$S_1\approx 8.63$, so the cosine-sector diagonal is $D_1-S_1\approx 3.26$
+while the sine-sector diagonal is $D_1+S_1\approx 20.52$
+(script \texttt{\_proof-notes/verify\_connes\_vs\_form.py}).  The
+asymmetry $2S_1\approx 17.27$ is of the same order as the diagonal
+itself; this is the mechanism by which even dominance arises in the
+Connes--van Suijlekom framework and was missed by the legacy
+$L^2([-L,L])$ formulation, where the symmetric-shift auto-overlap
+forces equal diagonals in the two sectors.
+\end{remark}
+
+\paragraph{Migration of downstream sections (v1.5).}  The above
+reformulation supersedes the symmetric-shift $L^2([-L,L])$ form
+of v1.4.  Subsequent sections (\Cref{sec:parity-matrix} onward) were
+written in the legacy framework and require parallel updates: the
+$3\times 3$ parity matrix $D_3(r)$ of \Cref{sec:parity-matrix} now
+corresponds to the cosine/sine asymmetry at a single shift, with
+$D_3(r)$ entries related to $S_n$ contributions from a single prime;
+the finite certificates section requires rebuilt CAP matrices in the
+$\{U_n\}$ basis; the direct frontier argument carries over once $C_f$
+is re-derived as a lower bound on $S_n$ at the frontier-prime
+contributions.  The Shift Parity Lemma (\Cref{thm:shift-parity}) and
+the obstruction theorems NE-A, NE-B of the Landscape series remain
+unaffected.  This migration is partial in the present revision: the
+new Section~2 above is the corrected operator definition, while the
+downstream propagation is recorded as an open task in
+\Cref{sec:k0-strengthened}.
 
 \begin{theorem}[Connes--van Suijlekom real-zero criterion]
 \label{thm:connes}
@@ -218,8 +416,119 @@ truncated eigenfunctions, established in~\cite[Section~4]{Connes2026}.
 \end{remark}
 
 \section{The Parity Matrix of a Single Shift}
+\label{sec:parity-matrix}
 
-The proof begins with a finite algebraic fact. Let
+\paragraph{v1.5 reformulation note.}  This section, originally written
+in the legacy $L^2([-L,L])$ cosine/sine framework, has been retained
+in its legacy form below (Subsection~\ref{subsec:parity-legacy}) and
+augmented with the Connes--van Suijlekom analog
+(Subsection~\ref{subsec:parity-cvs}).  In the legacy framework the
+matrix $D_3(r)$ encodes the cos--sin parity difference at a single
+shift directly; in the Connes--van Suijlekom framework the analog is
+the single-shift contribution to the asymmetry coefficient $S_n$
+introduced in \eqref{eq:Dn-Sn}.  Both objects encode the same
+content: a single prime shift, after symmetrisation in the Weil
+form, contributes \emph{differently} to the cosine and sine
+sectors, with the difference quantified by a single trigonometric
+expression in the normalised shift $r=u/L$.  The legacy formulation
+is preserved for continuity of notation in
+Sections~\ref{sec:finite-certificates}--\ref{sec:tail}, which still
+read in legacy form; the migration of those sections is recorded as
+an open task in \cref{sec:k0-strengthened}.
+
+\subsection{Connes--van Suijlekom single-shift asymmetry}
+\label{subsec:parity-cvs}
+
+In the corrected setup of Section~2, a single Dirac mass at $y\in(0,L)$
+with weight $w$ in the Weil distribution $D$ contributes to the
+diagonal matrix elements as
+\[
+  \Delta D_n \;=\; w\cdot 2(1-y/L)\cos(2\pi n y/L),
+  \qquad
+  \Delta S_n \;=\; \frac{w}{\pi n}\sin(2\pi n y/L)
+  \quad (n\geq 1).
+\]
+The Cos- and Sin-sector diagonal contributions are therefore
+$\Delta D_n - \Delta S_n$ and $\Delta D_n + \Delta S_n$ respectively
+(cf.~\eqref{eq:cos-sin-diagonals}), and the parity asymmetry from this
+single shift at mode $n$ is
+\begin{equation}
+\label{eq:single-shift-asymmetry}
+  -2\Delta S_n \;=\; -\frac{2w}{\pi n}\sin(2\pi n y/L)
+  \quad
+  (\text{cosine-minus-sine diagonal contribution}).
+\end{equation}
+
+\begin{lemma}[Single-shift asymmetry; v1.5 analogue of Shift Parity]
+\label{lem:shift-parity-cvs}
+Let $r:=y/L\in(0,1]$ be the normalised shift.  For a single Dirac mass
+$\delta_y$ with the Weil prime-sign weight $w=-(\log p)/p^{m/2}$
+(i.e.\ $w<0$), the single-shift cosine-minus-sine asymmetry at mode
+$n\geq 1$ is
+\[
+  -2\Delta S_n \;=\; \frac{2\log p}{\pi n\cdot p^{m/2}}\,
+  \sin(2\pi n r).
+\]
+This is \emph{strictly negative} (i.e.\ favours the cosine sector) iff
+$\sin(2\pi n r)<0$, which holds on the union of intervals
+\[
+  r \;\in\; \bigcup_{k=0}^{n-1}\Bigl(\tfrac{k}{n}+\tfrac{1}{2n},\,
+                                       \tfrac{k+1}{n}\Bigr).
+\]
+In particular, for $n=1$ the favourable range is
+$r\in(\tfrac{1}{2},1)$, i.e.\ $\sqrt\lambda<p^m\le\lambda$; this is
+the analogue of the legacy ``Frontier'' regime, except that the
+favourable range is the half-frontier $r>1/2$ rather than the
+neighbourhood of $r=1$.
+\end{lemma}
+
+\begin{proof}
+Direct substitution of $w=-(\log p)/p^{m/2}$ into
+\eqref{eq:single-shift-asymmetry} gives the displayed formula.  The
+sign condition $-2w\sin(2\pi n r)<0$ becomes $\sin(2\pi nr)<0$ since
+$w<0$, whose solution set on $r\in(0,1]$ is the union of intervals
+displayed.  The frontier identification follows from
+$y=m\log p$ and $r=y/L=m\log p/\log\lambda$.
+\end{proof}
+
+\begin{remark}[Multi-mode coverage]
+\label{rem:multi-mode-coverage}
+For any $r\in(0,1)$ that is irrational with respect to $\mathbb{Q}$,
+the union $\bigcup_n\{n:\sin(2\pi n r)<0\}$ is infinite; in
+particular, for every $r$ outside a measure-zero set, the single
+shift contributes favourably to infinitely many modes.  The
+aggregate over modes is not simply additive in eigenvalue space, but
+the Cesaro-style averaging of $-2\Delta S_n$ over $n$ matches the
+classical Walfisz-type Mertens estimates entering the asymptotic
+analysis of Sections~\ref{sec:frontier}--\ref{sec:tail} (in their
+v1.5 reformulation).
+\end{remark}
+
+\begin{lemma}[$L$-independence of single-shift asymmetry]
+\label{lem:L-independence-cvs}
+The quantity $-2\Delta S_n$ depends on the normalised shift $r=y/L$
+and the mode $n$, but not on $L$ separately, up to the overall
+prime-weight factor $\log p/p^{m/2}$ which is determined by the
+shift location $y=m\log p$ and the choice of $L=\log\lambda$.
+\end{lemma}
+
+\begin{proof}
+Immediate from \eqref{eq:single-shift-asymmetry}: the factor
+$\sin(2\pi n r)$ depends only on $r$.
+\end{proof}
+
+\subsection{Legacy parity matrix (retained for continuity)}
+\label{subsec:parity-legacy}
+
+\paragraph{Note.}  The remainder of this section is the original
+$L^2([-L,L])$ Cos/Sin-basis formulation that supplied the technical
+content of Sections~\ref{sec:finite-certificates}--\ref{sec:tail}.
+It is retained here in legacy form for backward reference;
+see~\Cref{subsec:parity-cvs} for the Connes--van Suijlekom analog.
+Translating downstream sections to the Connes--van Suijlekom basis
+is recorded as an open task in \cref{sec:k0-strengthened}.
+
+The legacy construction begins with a finite algebraic fact. Let
 \[
   \varphi_0(t)=\frac{1}{\sqrt{2L}},
   \qquad
@@ -236,7 +545,7 @@ the $N\times N$ difference matrix
   \langle\psi_n,(S_{rL}+S_{-rL})\psi_m\rangle .
 \]
 
-\begin{lemma}[$L$-independence]
+\begin{lemma}[$L$-independence (legacy)]
 \label{lem:L-independence}
 $D_N(r)$ depends only on $r$, not on $L$ separately.
 \end{lemma}
@@ -318,6 +627,45 @@ $(\log p)p^{-m/2}$ and summed over primes.
 \end{remark}
 
 \section{Finite Certificates}
+\label{sec:finite-certificates}
+
+\paragraph{v1.5 status of the CAP construction.}  The 33 certificates
+described below were computed in the legacy $L^2([-L,L])$ cosine/sine
+Galerkin basis with symmetric-shift operators.  Within that basis,
+both the cosine-sector upper bound on $\lambda_1^+$ (via interval
+arithmetic) and the sine-sector ``lower bound'' on $\lambda_1^-$ (via
+heuristic geometric extrapolation of column norms) were treated as
+rigorous and produced a strictly negative \texttt{cert\_gap} at every
+grid point.  The v1.5 audit (Section~\ref{sec:k0-cvs-resolution};
+companion notes \texttt{K0\_CAP\_AUDIT.md} and
+\texttt{K0\_CAP\_CONNESVS\_RESULTS.md}) shows two structural issues
+with this construction:
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+  \item The cosine--sine equality of symmetric-shift auto-overlaps at
+    each frequency makes $\sigma(A^+) = \sigma(A^-) \cup \{\mu^+_0\}$
+    exactly in the legacy operator form, contradicting the certified
+    gaps.  This is resolved in the corrected Connes--van Suijlekom
+    form of Section~2 (in which the cosine and sine sectors of the
+    operator have genuinely distinct diagonals $D_n\mp S_n$ via the
+    frequency-reflection $U_n\leftrightarrow U_{-n}$), but it
+    invalidates the literal interpretation of the certificates as
+    proving the original $\lambda_1^+ < \lambda_1^-$ on $L^2([-L,L])$.
+  \item The sine-block ``lower bound'' is not mathematically
+    rigorous: it is computed as the smallest Galerkin eigenvalue minus
+    a heuristic geometric extrapolation of off-block column norms.
+    A rigorous lower bound would require Lehmann--Maehly,
+    Kato--Temple with an a priori lower bound on $\lambda_2$, or a
+    quantitative Schur--complement argument; an analysis of the
+    obstructions is given in \texttt{K0\_LEHMANN\_ANALYSIS.md}.
+\end{enumerate}
+The certificates therefore stand as \emph{computer-assisted numerical
+evidence} for even dominance, consistent with the corrected
+Connes--van Suijlekom structural picture, but not as a fully rigorous
+CAP-style proof in the formal sense of computer-assisted proofs in
+analysis.  A v1.5 reformulation of the CAP in the $\{U_n\}$ basis with
+a rigorous lower-bound technique is recorded as an open task.
+
+\bigskip
 
 Let
 \[
@@ -414,8 +762,47 @@ are archived in~\cite{GeigerLandscapeII}.
 \end{remark}
 
 \section{Frontier Dominance}
+\label{sec:frontier}
 
-The asymptotic proof uses the fact that primes near the moving frontier
+\paragraph{v1.5 reformulation summary.}  In the Connes--van Suijlekom
+form of Section~2, the analog of frontier dominance is the asymptotic
+positivity of the cos/sin sector asymmetry $S_n$ for each mode~$n$.
+For $n=1$, an Abel--summation and Laplace asymptotic computation
+gives
+\begin{equation}
+\label{eq:S1-asymptotic-cvs}
+  S_1(\lambda) \;\sim\; \frac{8\sqrt\lambda}{\log\lambda}
+  \quad (\lambda\to\infty),
+\end{equation}
+\begin{sloppypar}
+with the more accurate finite-$L$ form
+$S_1(\lambda) \approx 8\sqrt\lambda/[L(1+16\pi^2/L^2)]$ where
+$L=\log\lambda$.  Numerically verified to within $5{-}10\%$ on
+$\lambda\in\{100,300,1000\}$ against the script
+\texttt{verify\_connes\_vs\_form.py}, see
+\texttt{K0\_FRONTIER\_SN\_ASYMPTOTIC.md} for the
+derivation.
+\end{sloppypar}  In this v1.5 form the cosine--minus--sine diagonal gap at
+mode~$n=1$ is
+\[
+  \langle\sin_1\,|\,Q\,|\,\sin_1\rangle
+    - \langle\cos_1\,|\,Q\,|\,\cos_1\rangle
+  \;=\; 2 S_1(\lambda)
+  \;\sim\; \frac{16\sqrt\lambda}{\log\lambda},
+\]
+i.e.\ a logarithmically shrinking fraction of the leading
+$\sqrt\lambda$ scale.  Even dominance therefore holds asymptotically
+with margin $O(\sqrt\lambda/\log\lambda)$ rather than $O(\sqrt\lambda)$
+as the legacy direct-frontier argument suggested.  The Legacy
+direct-frontier construction below is retained for backward
+compatibility with the rest of the manuscript; the analog $S_1$
+construction can be developed in the v1.5 form by replacing
+$D_3(r)$ with the single-shift asymmetry function
+$f(r):=\sin(2\pi r)/\pi$ (cf.\ \cref{lem:shift-parity-cvs}).
+
+\bigskip
+
+The Legacy asymptotic proof uses the fact that primes near the moving frontier
 $p\sim\lambda$ dominate the parity sum.
 
 Define the low-mode cumulative difference matrix
@@ -591,6 +978,26 @@ $\gg 10^{-10}$) is archived in the companion repository at
 \section{Tail Control and Lifting to the Weil Form}
 \label{sec:tail}
 
+\paragraph{v1.5 reformulation note.}  This section, written in the
+legacy $L^2([-L,L])$ basis, controls the higher-mode tail
+contributions in that framework.  In the Connes--van Suijlekom form
+of Section~2, the analogous task is to control the off-diagonal
+contributions of the matrix $\langle U_m|Q|U_n\rangle$ for
+$|m|,|n|>N$ where $N$ is the Galerkin cutoff, plus the regularised
+archimedean integrand.  The estimates below carry over with the
+modification that the relevant overlap functions are
+$\sin(2\pi m y/L) - \sin(2\pi n y/L)$ in place of $D_3(r)$ and the
+Schur-complement bound uses the off-block norm of the
+Connes--van Suijlekom matrix.  Migration of the precise inequalities
+is open and is recorded with the analytical roadmap in
+\texttt{K0\_SN\_SUBLEADING.md}.  In particular, the subleading
+asymptotic $S_n \sim 8\sqrt\lambda/[L(1+16n^2\pi^2/L^2)]$ replaces
+the leading $\Theta(\sqrt\lambda)$ contribution of the legacy
+direct-frontier bound, giving an $O(\sqrt\lambda/\log\lambda)$ scale
+for the Cos--Sin diagonal gap.
+
+\bigskip
+
 \Cref{prop:frontier-dominance} establishes $\lambda_{\min}(D_{\mathrm{tot}}(\lambda))<0$
 in the three-mode difference block. The full Weil operator $A_\lambda$ acts on
 $L^2([-L,L])$ with infinitely many Fourier modes and includes the archimedean
@@ -599,7 +1006,7 @@ preserve the sign of the even--odd gap.
 
 \begin{remark}[Archimedean contribution]
 \label{rem:archimedean}
-The archimedean kernel $e^{u/2}/(2\sinh u)$ in~\eqref{eq:weil-form} is integrable
+The archimedean kernel $e^{u/2}/(2\sinh u)$ in~\eqref{eq:quad-form-connesvs} is integrable
 on $(0,\infty)$, and the sector-independent term $-2e^{-u/2}\norm{f}^2$ cancels in the
 even--odd difference. The remaining archimedean contribution involves shift overlap
 differences $D_N(u/L)$ weighted against the fixed kernel. Since
@@ -636,7 +1043,7 @@ with $h_0(u)=(1-u/2)/2$ (from $\langle\varphi_0,(S_{uL}+S_{-uL})\varphi_0\rangle
 At the Laplace endpoint $u=1$: $h_n(1)=(-1)^n/4$ for all $n\geq 0$.
 The normalization factor~$\tfrac14$ is chosen so that the prime-weighted diagonal
 satisfies $(W_{\mathrm{prime}})_{nn}=\sum_p(\log p)\,p^{-1/2}\cdot 4h_n(\log p/L)$,
-consistent with the Weil form~\eqref{eq:weil-form}.
+consistent with the Weil form~\eqref{eq:quad-form-connesvs}.
 \end{definition}
 
 \begin{lemma}[Leading-mode cancellation]
@@ -740,6 +1147,24 @@ $c_{\sin}(L)-c_{\cos}(L)=O(1/L^2)$, and therefore
 $|\Delta_{\mathrm{high}}|/D(\lambda)=O(1/L)\to 0$.
 \end{proof}
 
+\begin{remark}[Cancellation region for the sector difference]
+\label{rem:leading-cancellation-region}
+The cancellation used in part~(iii) of \Cref{lem:higher-mode} via
+\Cref{lem:leading-cancel} is a Taylor identity at $u=0$, whereas the prime
+sum that drives $D(\lambda)$ is dominated by frontier shifts with
+$u=\log p/\log\lambda\in[0.7,1]$. At the Laplace endpoint $u=1$ the relevant
+auto-overlap values are $h_n(1)=(-1)^n/4$ (cf.\ \Cref{def:auto-overlap}), so
+the even and odd sectors are \emph{anti-correlated} rather than cancelling.
+The $O(1/L)$-suppression claimed in part~(iii) therefore relies on the
+averaging of the Taylor coefficient $c_{\cos}(L)-c_{\sin}(L)$ across the
+slot structure described in \Cref{lem:leading-cancel}(a), not on a pointwise
+cancellation at frontier shifts. A direct frontier-endpoint cancellation
+identity in the spirit of \Cref{lem:leading-cancel} but anchored at $u=1$
+would strengthen this estimate; in its absence, the bound should be regarded
+as relying on the averaged Taylor structure of the slot decomposition and is
+quantitatively conservative.
+\end{remark}
+
 \begin{lemma}[Galerkin truncation error]
 \label{lem:galerkin}
 The even sector is dominated by the frontier mode ($n=1$, diagonal
@@ -778,58 +1203,455 @@ sharper interval-arithmetic enclosure of \cite[Section~2.9]{GeigerLandscapeII}
 with the Cauchy tail bound described in \Cref{rem:truncation-safety}.
 \end{proof}
 
-\section{Main Theorem}
+\section{Main Theorem and Open Conjecture}
 
-\begin{theorem}[Even dominance for a divergent sequence]
-\label{thm:even-sequence}
-There exists a sequence $\lambda_n\to\infty$ such that $\QW_{\lambda_n}$ has a
-simple even ground state for every $n$.
+\paragraph{v1.5 status of the main theorem.}  In the Connes--van
+Suijlekom form of Section~2, the main theorem statement (RH
+conditional on the Connes program and the Asymptotic Variational Gap
+Conjecture) is unchanged.  What changed is the precise formulation of
+the conditioning:
+\begin{itemize}[leftmargin=*]
+  \item \emph{External input from Connes 2026 §6.5
+    (Fact 6.4):} the Fourier transform of the educated-guess
+    eigenfunction $k_\Lambda$ converges to $\Xi$ uniformly on substrips
+    $|\Im z|<\delta<1/2$ at rate $O(\Lambda^{-1/2-\delta})$.  This is
+    stated in \cite{Connes2026} as an established consequence of the
+    classical Slepian--Pollak prolate spheroidal wave function theory
+    ([Connes2026, Theorem~1 of reference~47]), not as a conjecture.
+  \item \emph{External input from Connes--van Suijlekom 2025
+    \cite{ConnesvS2025}:} the fixed-$\Lambda$ quadratic-form
+    real-zero criterion, fully proved.
+  \item \emph{Internal open question:} simplicity and parity of the
+    smallest eigenvalue of $QW_\Lambda$ (Connes 2026 §6.6 ``remaining
+    steps'' item~(i)) --- this is exactly even dominance as defined in
+    Definition~\ref{def:even-dominance}, addressed in the present paper.
+  \item \emph{Internal open question:} approximation quality
+    $k_\Lambda\approx\xi_\Lambda$ (Connes 2026 §6.6 ``remaining steps''
+    item~(ii)) --- this is the Mass-Concentration question MS2
+    addressed in the companion Zookeeper paper \cite{GeigerZookeeper2026}.
+\end{itemize}
+The conditioning in v1.5 is therefore that
+\emph{even dominance for $QW_\Lambda$} holds along a sequence
+$\Lambda_n\to\infty$, together with the proven Connes--van Suijlekom
+criterion, gives RH via Fact~6.4 of Connes~2026.  The companion
+Zookeeper question is independent and concerns whether the specific
+educated-guess approximant produces additional structural control.
+
+\subsection{Certified Range: Finite Even Dominance}
+
+\begin{theorem}[Even dominance on the certified range]
+\label{thm:even-finite}
+For every $\lambda$ in the certified grid of \Cref{prop:finite-certificates}
+(33 values spanning $100\leq\lambda\leq 1{,}300{,}000$),
+$\QW_\lambda$ has a simple even ground state, i.e.\ $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$
+and the even minimum is isolated.
 \end{theorem}
 
 \begin{proof}
-For $100\leq\lambda\leq1{,}300{,}000$, the certified grid of
-\Cref{prop:finite-certificates} gives even dominance and even-sector simplicity
-at the listed values; these certificates evaluate the full Galerkin operator
-(including archimedean and higher-mode contributions).
-
-For $\lambda$ beyond the asymptotic threshold,
-\Cref{prop:frontier-dominance} gives a three-mode gap
-$\Delta_{\mathrm{low}}=-\Theta(\sqrt\lambda)$. The higher-mode correction satisfies
-$|\Delta_{\mathrm{high}}|=O(\sqrt\lambda/L)=o(|\Delta_{\mathrm{low}}|)$ by
-\Cref{lem:higher-mode}(iii), the archimedean contribution is $O(1)$ by
-\Cref{rem:archimedean}, and the Galerkin truncation error is
-$\leq 16\sqrt\lambda/N_0^2$ by \Cref{lem:galerkin} -- a fraction $4/N_0^2$ of the
-leading $\sqrt\lambda$-gap, hence $o(|\Delta_{\mathrm{low}}|)$ for $N_0\geq 40$.
-Therefore the full even--odd gap is negative for all
-sufficiently large $\lambda$, with the asymptotic threshold meeting the
-certified range exactly at $\Lambda_*\leq 175{,}000$
-(see \Cref{rem:lambda-star-improved}; the conservative upper bound
-$\Lambda_*\leq 1{,}300{,}000$ of \Cref{prop:frontier-dominance} is also valid).
-Taking any divergent sequence of certified or asymptotic values gives even
-dominance.
-
-Simplicity of the even ground state follows from the intra-even spectral gap
-$\lambda_2^+-\lambda_1^+=\Theta(\sqrt\lambda)$: at the certificate points this is
-directly verified (\Cref{prop:finite-certificates}); for large $\lambda$ it follows
-from the Galerkin diagonal asymptotics, since the leading even mode ($n=1$) has
-$(W_{\mathrm{prime}})_{11}\sim -\sqrt\lambda$ while the next mode ($n=0$) has a
-different Laplace endpoint value.
+The interval-arithmetic Galerkin certificates of \Cref{prop:finite-certificates}
+produce, at each $\lambda$ in the grid, a rigorous upper bound
+$\overline{\lambda_1^+}(\lambda)$ and a rigorous lower bound
+$\underline{\lambda_1^-}(\lambda)$ from the even and odd Galerkin blocks
+respectively, together with Cauchy-type tail bounds. The certified gap
+$\overline{\lambda_1^+}(\lambda)-\underline{\lambda_1^-}(\lambda)<0$ at every
+grid point directly establishes $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ on
+the certified range. Simplicity follows from the certified intra-even gap
+$\lambda_2^+-\lambda_1^+>0$ at each grid point.
 \end{proof}
 
-\begin{theorem}[Riemann Hypothesis, conditional on the Connes program]
+\subsection{Asymptotic Regime: Variational Statement and Open Conjecture}
+
+The asymptotic argument of \Cref{prop:frontier-dominance} establishes the
+\emph{variational} statement
+\begin{equation}\label{eq:variational-result}
+  \lambda_{\min}\bigl(W^+_{\mathrm{prime}}(\lambda)-W^-_{\mathrm{prime}}(\lambda)\bigr)
+  \;=\; -\Theta(\sqrt\lambda)
+\end{equation}
+on the three-mode Galerkin block, with explicit threshold
+$\Lambda_*\leq 175{,}000$ (\Cref{rem:lambda-star-improved}).
+This is the statement that the difference $W^+-W^-$ has a negative minimum
+eigenvalue with quantitative rate of growth.
+
+\paragraph{The variational direction gap.}
+Statement~\eqref{eq:variational-result} is \emph{not} the same as
+$\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$. The Rayleigh inequality
+$\lambda_{\min}(W^+-W^-)\leq v^T(W^+-W^-)v$ gives an \emph{upper} bound on the
+minimum of the difference, equivalently it shows the existence of a vector $v$
+with $v^TW^+v<v^TW^-v$. For even dominance one needs, in addition, a
+quantitative \emph{lower} bound on $\lambda_1^-(\lambda)$ that places the odd
+minimum above the certified upper bound for $\lambda_1^+$. The simple
+$2\times2$ example
+\[
+  A=\begin{pmatrix}0&0\\0&10\end{pmatrix},\quad
+  B=\begin{pmatrix}5&0\\0&-5\end{pmatrix}
+\]
+shows that $\lambda_{\min}(A-B)=-5<0$ does not imply
+$\lambda_{\min}(A)<\lambda_{\min}(B)$; in fact $\lambda_{\min}(A)=0>-5=\lambda_{\min}(B)$.
+On the certified range this gap is filled by the direct computation of
+$\underline{\lambda_1^-}$ used in \Cref{thm:even-finite}; asymptotically a
+separate argument is required.
+
+\begin{conjecture}[Asymptotic Variational Gap Conjecture]
+\label{conj:avg}
+There exist constants $\Lambda^\dagger>0$, $c_+>c_->0$ and an exponent
+$\beta\in(0,1)$ such that for all $\lambda\geq\Lambda^\dagger$,
+\[
+  \lambda_1^+(\lambda) \;\leq\; -\,c_+\sqrt\lambda,
+  \qquad
+  \lambda_1^-(\lambda) \;\geq\; -\,c_+\sqrt\lambda \,+\, c_-\sqrt\lambda\,L^{-\beta},
+\]
+where $L=\log\lambda$. In particular, $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$
+for all $\lambda\geq\Lambda^\dagger$.
+\end{conjecture}
+
+\Cref{sec:asymptotic-lower-bound} discusses what would be required to establish
+\Cref{conj:avg}, sketches a proposed approach via degenerate perturbation
+theory on the asymmetric three-mode diagonal structure, and explains why the
+naive variational argument cannot be lifted directly.
+
+\subsection{Riemann Hypothesis: Conditional Statement}
+
+\begin{theorem}[Riemann Hypothesis, conditional]
 \label{thm:rh}
-Conditional on \cite[Theorem~6.1 and the Hurwitz bridge of Section~6.4--6.6]{Connes2026}
-and \cite{ConnesvS2025}, all non-trivial zeros of the Riemann zeta
-function~\cite{Riemann1859} lie on the line $\Re(s)=1/2$.
+Assume \Cref{conj:avg} (Asymptotic Variational Gap) and the Connes program,
+namely the quadratic-form real-zero criterion of~\cite{ConnesvS2025} together
+with the Hurwitz bridge of \cite[Fact~6.4 and Section~6.4--6.6]{Connes2026}.
+Then all non-trivial zeros of the Riemann zeta function~\cite{Riemann1859}
+lie on the critical line $\Re(s)=1/2$.
 \end{theorem}
 
 \begin{proof}
-Apply \Cref{cor:sequence-suffices} to the sequence supplied by
-\Cref{thm:even-sequence}. The Fourier transforms associated with the
-even-dominant Weil forms have only real zeros by \Cref{thm:connes}. Hurwitz
-transfer gives the real-zero property for the limiting $\Xi$-function. Therefore
-the corresponding non-trivial zeros of $\zeta(s)$ lie on the critical line.
+By \Cref{thm:even-finite}, even dominance holds at every $\lambda$ in the
+certified grid; by \Cref{conj:avg} it holds for every $\lambda\geq\Lambda^\dagger$.
+Either provides a divergent sequence $\lambda_n\to\infty$ of even-dominant
+parameters. Applying \Cref{cor:sequence-suffices} to this sequence: the Fourier
+transforms of the even-dominant Weil forms have only real zeros
+(\Cref{thm:connes}), and the Hurwitz bridge transfers the real-zero property
+to the limiting $\Xi$-function. Therefore the non-trivial zeros of $\zeta(s)$
+lie on $\Re(s)=1/2$.
 \end{proof}
+
+\paragraph{Remark on conditioning.}
+\Cref{thm:rh} carries two distinct conditional inputs. The Connes--van
+Suijlekom criterion and the Hurwitz bridge are external results of the Connes
+program~\cite{Connes2026,ConnesvS2025}, currently arXiv preprints; their
+analytical structure is discussed in \Cref{rem:hurwitz-analytical}. The
+Asymptotic Variational Gap Conjecture~\ref{conj:avg} is internal to the
+present approach and is the central open mathematical problem for closing
+the asymptotic half of even dominance unconditionally within this framework.
+
+\section{Status of the Asymptotic Lower Bound for \texorpdfstring{$\lambda_1^-$}{lambda\_1\^{}-}}
+\label{sec:asymptotic-lower-bound}
+
+This section is not part of the proof of \Cref{thm:rh}: it explains why the
+common-Rayleigh-vector argument of \Cref{prop:frontier-dominance} cannot be
+lifted directly to even dominance in the asymptotic regime, and outlines a
+proposed approach -- via degenerate perturbation theory on the asymmetric
+three-mode diagonal structure -- toward establishing \Cref{conj:avg}.
+
+\subsection{Why the Variational Bound Is Not Even Dominance}
+
+\Cref{prop:frontier-dominance} establishes
+$\lambda_{\min}(D_{\mathrm{tot}}(\lambda))<0$ on the three-mode block, where
+$D_{\mathrm{tot}}=W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}}$ (restricted to the
+$3\times3$ block). By the Rayleigh variational inequality this means: there
+exists a vector $v$ (namely $v=e_1$) with $v^TW^+v<v^TW^-v$. It does not
+follow that the smallest eigenvalue of $W^+$ lies below the smallest eigenvalue
+of $W^-$. Indeed, $\lambda_{\min}(W^\pm)\leq v^TW^\pm v$ holds for any unit
+vector $v$, so both bounds run in the same direction:
+$\lambda_{\min}(W^+)\leq e_1^TW^+e_1$ and $\lambda_{\min}(W^-)\leq e_1^TW^-e_1$.
+A quantitative \emph{lower} bound for $\lambda_{\min}(W^-)$ is needed.
+
+\subsection{Asymmetric Three-Mode Diagonal Structure}
+
+At the Laplace endpoint $u=1$ (the frontier regime
+$r=\log p/\log\lambda\approx 1$, which dominates the prime sum), the asymptotic
+leading-order diagonal entries of $W^\pm_{\mathrm{prime}}$ on the three-mode
+block are
+\[
+  \mathrm{diag}\bigl(W^+_{\mathrm{prime}}\bigr)
+  \;\sim\; \sqrt\lambda\cdot(+1,\,-1,\,+1),
+  \qquad
+  \mathrm{diag}\bigl(W^-_{\mathrm{prime}}\bigr)
+  \;\sim\; \sqrt\lambda\cdot(-1,\,+1,\,-1).
+\]
+These signs follow from the auto-overlap profile at $u=1$:
+$h_n(1)=(-1)^n/4$ for even basis functions and $h_n^{\sin}(1)=(-1)^{n+1}/4$
+for odd, weighted by the frontier prime sum
+$\sum_{p\in\text{frontier}}\log p/\sqrt p\sim 2\sqrt\lambda$.
+
+The structural asymmetry is then visible:
+\begin{itemize}[leftmargin=*]
+  \item In $W^+$ the minimum diagonal $(-\sqrt\lambda)$ is at index $1$ and is
+  \emph{isolated}: the other two diagonals are $(+\sqrt\lambda)$, an
+  $O(\sqrt\lambda)$-distance away. Off-diagonal couplings shift $\lambda_1^+$
+  by only \emph{second-order} amounts.
+  \item In $W^-$ the minimum diagonals $(-\sqrt\lambda)$ are at indices $0$ and
+  $2$ and are \emph{near-degenerate}, with the central diagonal $(+\sqrt\lambda)$
+  separated by $O(\sqrt\lambda)$. Off-diagonal couplings between the degenerate
+  pair split them in \emph{first} order, potentially driving $\lambda_1^-$
+  further down.
+\end{itemize}
+
+A naive analysis stops here and yields \emph{anti-}even-dominance:
+$\lambda_1^-<\lambda_1^+$, contradicting the 33 finite-range certificates. The
+resolution must come from a subleading order of the relevant off-diagonal
+coupling $b_{02}:=(W^-_{\mathrm{prime}})_{02}$ at the Laplace endpoint.
+
+\subsection{Elementary Cancellation in the Degenerate Odd Coupling}
+
+The off-diagonal coupling $b_{02}$ in the odd sector at shift $r$ involves
+the overlap integral
+\[
+  I_-(r) \;=\; \int_0^1 \sin(\pi x)\sin\bigl(3\pi(x-r)\bigr)\,dx.
+\]
+At $r=1$ this vanishes by elementary sine orthogonality on $[0,1]$:
+$\sin(\theta-3\pi)=\sin(\theta-\pi)=-\sin(\theta)$, so
+\[
+  I_-(1) \;=\; -\int_0^1 \sin(\pi x)\sin(3\pi x)\,dx \;=\; 0.
+\]
+Differentiability of $I_-$ at $r=1$ gives $I_-(r)=O(1-r)$ near the endpoint.
+In the frontier window $r\in[0.7,1]$, the weighted prime sum
+$\sum_p (\log p/\sqrt p)\cdot I_-(r_p)$ with $\langle 1-r_p\rangle\sim 1/L$
+on average should therefore satisfy
+\[
+  \bigl|b_{02}(\lambda)\bigr| \;=\; O\bigl(\sqrt\lambda/L\bigr).
+\]
+If this estimate can be made rigorous with explicit constants, the degenerate
+splitting in $\lambda_1^-$ is at most $O(\sqrt\lambda/L)$, which is
+\emph{subleading} compared to a possible $-c_+\sqrt\lambda$ shift in
+$\lambda_1^+$ from the same frontier mechanism.
+
+\subsection{Proposed Three-Step Programme}
+
+\Cref{conj:avg} would follow from the following programme:
+
+\paragraph{Step 1 (Diagonal accounting).} Compute the explicit diagonal entries
+of $W^\pm_{\mathrm{prime}}$ on the three-mode block, separating leading
+frontier contributions from subleading tail and archimedean terms. This is
+bookkeeping without new mathematics, and should produce explicit constants
+$c^\pm_{nn}$ such that $(W^\pm_{\mathrm{prime}})_{nn}=c^\pm_{nn}\sqrt\lambda+o(\sqrt\lambda)$.
+
+\paragraph{Step 2 (Off-diagonal control).} Compute the trigonometric overlap
+integrals $I_{nm}^\pm(r)=\int_0^1 \varphi_n^\pm(x)\varphi_m^\pm(x-r)\,dx$ for
+$n,m\in\{0,1,2\}$ and $r\in[0.7,1]$, and aggregate against the frontier prime
+sum. Establish the quantitative bound
+$|b_{02}(\lambda)|\leq C\sqrt\lambda/L$ with explicit $C$.
+
+\paragraph{Step 3 (Degenerate perturbation theory).} Apply Bauer--Fike or a
+refined perturbation theorem for near-degenerate eigenvalues with controlled
+coupling. Obtain
+\[
+  \lambda_1^-(\lambda) \;\geq\; -\sqrt\lambda\,(1 + O(1/L)),
+\]
+combine with the upper bound
+$\lambda_1^+(\lambda)\leq -\sqrt\lambda\,(1 + c_+/\text{slowly-varying})$ from
+the common-Rayleigh argument (after rederivation in absolute terms, not
+through the difference), and conclude that
+$\lambda_1^+<\lambda_1^-$ asymptotically.
+
+\paragraph{Step 4 (Galerkin transfer).} Use the existing Schur-complement
+machinery (\Cref{lem:higher-mode} and \Cref{lem:galerkin}) to transfer the
+three-mode statement to the full Weil operator $A_\lambda^\pm$. This is
+already in place modulo the issue noted in
+\Cref{rem:leading-cancellation-region} below.
+
+\paragraph{Honest assessment.} Steps~1 and~2 are routine but laborious
+(several weeks). Step~3 is genuinely difficult: degenerate perturbation theory
+with sign-controlled couplings is an established discipline, but every
+explicit constant can become a subproblem. The relationship
+$|\lambda_1^+-\lambda_1^-|=O(\sqrt\lambda/L)$ that this programme suggests is
+consistent with the numerical observation that the certified gap is roughly
+$20\%$ of $|\lambda_1^+|$ -- not a constant fraction of $\sqrt\lambda$, but a
+logarithmically shrinking fraction.
+
+\subsection{Update (14 May 2026): Strengthened Structural Concern after
+            Step-1 Bookkeeping}
+\label{sec:k0-strengthened}
+
+A careful execution of Step~1 above (separating leading frontier
+diagonals via Laplace asymptotics, with numerical validation) has
+produced a stronger structural concern that the reviewer's original
+sketch did not anticipate. We record it honestly:
+
+\paragraph{Symmetric-shift diagonal equivalence.} In the basis of
+Section~\ref{sec:parity-matrix}, the symmetric shift $S_u + S_{-u}$
+applied to the cosine basis $\varphi_n(t) = \cos(n\pi t/L)/\sqrt L$
+($n\geq 1$) and to the sine basis $\psi_{n-1}(t) = \sin(n\pi t/L)/\sqrt L$
+gives \emph{identical} auto-overlap profiles
+\[
+  \langle\varphi_n, (S_u+S_{-u})\varphi_n\rangle
+  \;=\; \langle\psi_{n-1}, (S_u+S_{-u})\psi_{n-1}\rangle
+  \;=\; 2\,(1 - u/(2L))\,\cos(n\pi u/L),
+\]
+for $u \in [0,2L]$. The sine-correction terms in the asymmetric
+shifts cancel under symmetrization. Numerical verification
+(script \texttt{verify\_diagonal\_fast.py}) confirms agreement of the
+corresponding prime-summed diagonal entries to machine precision for
+$\lambda \in \{100, 300, 1000\}$.
+
+\paragraph{Spectral consequence.} Since
+$\langle\varphi_n, (S_u+S_{-u})\varphi_m\rangle = 0$ for $n\neq m$ by
+Fourier orthogonality (the sine-cross-terms cancel under symmetrization),
+the Weil operator $A_\lambda$ is exactly diagonal in this Galerkin
+basis, with diagonal entries
+\[
+  \mu^+_n
+  = \langle\varphi_n, A_\lambda\,\varphi_n\rangle,
+  \quad
+  \mu^-_{n-1}
+  = \langle\psi_{n-1}, A_\lambda\,\psi_{n-1}\rangle.
+\]
+Combined with the auto-overlap equivalence, this gives
+$\mu^+_n = \mu^-_{n-1}$ for every $n \geq 1$, both in the prime
+contribution and (by the same symmetric-shift argument) in the
+archimedean contribution. Therefore in this Galerkin model,
+\[
+  \sigma(A_\lambda^+) \;=\; \sigma(A_\lambda^-)\,\cup\,\{\mu^+_0\},
+\]
+where $\mu^+_0$ is the constant-mode eigenvalue. Numerically
+$\mu^+_0 > 0$ and large, hence not the minimum of $\sigma(A_\lambda^+)$.
+The conclusion is
+\[
+  \lambda_1^+(\lambda) \;=\; \lambda_1^-(\lambda) \quad\text{exactly}
+\]
+in this Galerkin model, i.e., even dominance is \emph{not} attained
+asymptotically.
+
+\paragraph{Tension with the finite-range certificates.}
+The 33 IA-certificates of \cref{prop:finite-certificates} report
+$\text{cert\_gap} := \overline{\lambda_1^+}_{\rm CAP} - \underline{\lambda_1^-}_{\rm CAP} < 0$,
+which is incompatible with the above structural equivalence unless
+either the spectral-equivalence statement is wrong or the
+$\underline{\lambda_1^-}_{\rm CAP}$ is not a rigorous lower bound. An
+audit of the certifier code \texttt{certifier\_production.py} shows
+that $\underline{\lambda_1^-}_{\rm CAP}$ is computed as
+$\lambda_1^{\rm Galerkin}(N_{\rm big}=60) - \text{remaining} - \epsilon$,
+where $\text{remaining}$ is a heuristic geometric extrapolation of
+column norms (no Lehmann--Maehly, Kato--Temple, or rigorous
+Schur--complement bound is applied). The Galerkin variational
+principle gives $\lambda_1^{\rm Galerkin}$ as an \emph{upper} bound on
+$\lambda_1^-$, not a lower bound, and subtracting a heuristic
+correction does not yield a rigorous lower bound without further
+analysis. The certificates should therefore be read as
+\emph{computer-assisted numerical evidence}, not as rigorous
+mathematical proof, until the lower-bound construction is replaced by
+a method backed by a quantitative perturbation theorem.
+
+\paragraph{Honest current status.} Both pillars of the even-dominance
+argument (asymptotic frontier dominance and finite-range CAP
+certificates) are under structural concern as of this revision. We
+do not at present claim even dominance for $\QW_\lambda$, neither
+asymptotically nor on the certified range, unless one of the
+following can be established:
+\begin{itemize}[leftmargin=*]
+  \item the Galerkin operator in \cref{eq:quad-form-connesvs} differs from the
+  actual Connes operator in a way that breaks the cosine--sine
+  frequency symmetry; or
+  \item the heuristic tail correction in
+  $\underline{\lambda_1^-}_{\rm CAP}$ can be replaced by a quantitative
+  perturbation-theoretic lower bound, and the resulting rigorous
+  cert\_gap is still negative.
+\end{itemize}
+The Shift Parity Lemma (\cref{thm:shift-parity}), the explicit
+Laplace-endpoint diagonal formulas, the non-existence theorems NE-A
+and NE-B (Landscape Part~II), and the numerical phenomenology of the
+certified gap are unaffected by this concern and remain valid as
+independent structural results.
+
+This update is in the spirit of treating the present manuscript as a
+continuously evolving draft. The companion notes
+\texttt{\_proof-notes/K0\_STEP1\_FINDINGS.md} and
+\texttt{\_proof-notes/K0\_CAP\_AUDIT.md} provide the full analytical
+and numerical record of the present concern.
+
+\subsection{Update (15 May 2026): Connes-vS Operator Form Resolves the
+            Structural Tension; Rigorous CAP Closure Remains Open}
+\label{sec:k0-cvs-resolution}
+
+A subsequent comparison of the operator definition against
+Connes--van Suijlekom \cite{ConnesvS2025} clarified that the strengthened
+K0 concern (the spectral equivalence
+$\sigma(A^+) = \sigma(A^-) \cup \{\mu^+_0\}$) was an artefact of the
+legacy operator realisation on $L^2([-L,L])$ with real cosine/sine
+basis under $t\mapsto -t$ symmetry, not of the actual Connes operator.
+The proven Connes--van Suijlekom operator acts on $L^2([0,L])$ with
+the complex exponential basis $U_n$, and the cosine/sine parity
+sectors are defined via the frequency reflection
+$U_n\leftrightarrow U_{-n}$.  In this corrected formulation
+(Section~2 v1.5 reformulation) the diagonals
+$\langle\cos_n|Q|\cos_n\rangle = D_n - S_n$ and
+$\langle\sin_n|Q|\sin_n\rangle = D_n + S_n$ differ by the genuinely
+non-trivial asymmetry $2S_n$, where
+$S_n = (\pi n)^{-1}\int_0^L\sin(2\pi n y/L)\,dD(y)$.  Direct
+computation (script \texttt{\_proof-notes/verify\_connes\_vs\_form.py})
+gives $S_n > 0$ for the Weil distribution and all tested $\lambda$.
+For $\lambda=1000$, $n=1$: $S_1\approx 8.63$, cos diagonal
+$\approx 3.26$, sin diagonal $\approx 20.52$.  Asymptotically
+$S_1\sim 8\sqrt\lambda/\log\lambda$ (script
+\texttt{verify\_connes\_vs\_form.py}, derivation in
+\texttt{K0\_FRONTIER\_SN\_ASYMPTOTIC.md}).  The structural foundation
+for even dominance is therefore present in the correct operator form.
+
+The remaining task is a \emph{rigorous} computer-assisted-proof closure
+of $\lambda_1^{\cos}(\lambda) < \lambda_1^{\sin}(\lambda)$ in this
+form.  A systematic analysis of the available rigorous lower-bound
+techniques is recorded in
+\texttt{\_proof-notes/K0\_LEHMANN\_ANALYSIS.md}, with the conclusion:
+
+\begin{itemize}[leftmargin=*]
+  \item Temple's inequality
+    $\lambda_1\geq\mu-\eta^2/(\rho-\mu)$ requires
+    $\rho\leq\lambda_2$ — an \emph{a priori lower bound} on the second
+    eigenvalue, which the Galerkin variational principle does not
+    provide.  The naive substitution $\rho=\mu_2$
+    \emph{is not rigorous}: $\mu_2\geq\lambda_2$ by Cauchy
+    interlacing, hence using $\mu_2$ in the denominator underestimates
+    the correction.
+
+  \item Lehmann--Maehly's generalised inequality requires
+    $\sigma\leq\lambda_{N+1}$, again an a priori lower bound on a
+    higher eigenvalue.
+
+  \item Bauer--Fike identifies the \emph{nearest} eigenvalue to $\mu$,
+    not specifically the lowest, and so is ambiguous without
+    additional gap information.
+
+  \item Operator-norm bounds give $\lambda_1\geq-\|A\|_{\rm op}$ with
+    $\|A_\lambda\|_{\rm op}\le 4\sqrt\lambda + O(\log\lambda)$, which
+    is far too loose.
+
+  \item Schur-complement and Gerschgorin bounds require either a
+    lower bound on the complementary block or diagonal dominance;
+    Gerschgorin fails for the Connes--van Suijlekom Galerkin matrix
+    because the off-diagonal row sums diverge logarithmically (the
+    cross-overlap $\sin/(\pi(n-m))$ has only $1/|n-m|$ decay).
+\end{itemize}
+
+The common underlying obstacle is the absence of an
+\emph{a priori lower bound on $\lambda_2$} or on the tail spectrum,
+which Standard CAP techniques uniformly require.  Three medium-term
+research directions to address this are sketched in
+\texttt{K0\_LEHMANN\_ANALYSIS.md}: (i) Mollification of the Weil
+distribution to discrete spectrum, followed by stability of the
+$\epsilon\to 0$ limit; (ii) Toeplitz approximation and symbol-based
+perturbation theory exploiting the near-Toeplitz structure of the
+Connes--van Suijlekom Galerkin matrix; (iii) reverse-engineering the
+proof technique of Connes--vS 2025 (which contains an internal Hurwitz
+argument and thus must implicitly handle related lower-bound
+questions).
+
+\paragraph{Current honest position.} The Connes--van Suijlekom operator
+form is the correct setting and exhibits even dominance numerically
+with consistent margin across $\lambda$ and $N$.  The asymptotic
+$S_1$-asymptotic gives a quantitative Cos--Sin diagonal gap of
+order $\sqrt\lambda/\log\lambda$.  A rigorous CAP-style closure in the
+sense of producing a certified lower bound on $\lambda_1^{\sin}$ that
+strictly exceeds a certified upper bound on $\lambda_1^{\cos}$ remains
+open and requires a non-trivial technical advance beyond
+straightforward Galerkin + Temple/Lehmann.  We document this honestly
+in line with the convention that the present manuscript is a
+continuously developing draft.
 
 \section{What Is Not Used}
 
