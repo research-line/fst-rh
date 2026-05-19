@@ -41,7 +41,7 @@ Foundations, Obstructions, and Reorientation}
 \begin{abstract}
 This paper, the first in a three-part series on the Riemann Hypothesis, establishes the mathematical landscape and documents the systematic exploration---and ultimately the failure---of a gauge-theoretic approach. In the first part, we develop the analytical framework: the Riemann Hypothesis as a stability problem, the Li criterion as the central tool, and the Bombieri--Lagarias decomposition of the Li coefficients into archimedean and finite-part contributions. Starting from a thermodynamic formalism (Prime Hub Graphs and Ruelle transfer operators), we prove several unconditional structural results: the archimedean--finite decomposition, the archimedean dominance paradox, OS reflection positivity, the arithmetic uncertainty relation, and the spectral census of the arithmetic kernel.
 
-In the second part, we identify four critical obstructions (K1--K4) that individually and collectively doom the original proof strategy: the Gibbs normalization gap, the sign change of the target functional, the wrong monotonicity direction, and the trace-class obstruction. We localize the difficulty precisely through a nine-step logical chain, showing that the \emph{entire} content of RH concentrates in a single step (S5: the unconditional positivity of the Li coefficients). We formulate five concrete open problems and identify the reorientation toward Connes' spectral program as the path forward. Part~II develops this new direction via the Shift Parity Lemma and computer-assisted proofs of even dominance; Part~III draws the final conclusions. In v2.0, two non-existence theorems in Part~II (NE-A, NE-B) formally rule out the absolute total-positivity and universal-commuting-operator routes, reinforcing the arithmetic-statistical nature of even dominance.
+In the second part, we identify four critical obstructions (K1--K4) that individually and collectively doom the original proof strategy: the Gibbs normalization gap, the sign change of the target functional, the wrong monotonicity direction, and the trace-class obstruction. We localize the difficulty precisely through a nine-step logical chain, showing that the \emph{entire} content of RH concentrates in a single step (S5: the unconditional positivity of the Li coefficients). We formulate five concrete open problems and identify the reorientation toward Connes' spectral program as the path forward. Part~II develops this new direction via the Shift Parity Lemma, finite-range diagnostics, and a conditional even-dominance reduction; Part~III draws the final conclusions. In v2.0, two non-existence theorems in Part~II (NE-A, NE-B) formally rule out the absolute total-positivity and universal-commuting-operator routes, reinforcing the arithmetic-statistical nature of even dominance.
 
 \medskip\noindent
 \textbf{Series status (v2.2, 2026-05-14).}
@@ -55,7 +55,7 @@ and the eigenvalue inequality $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$
 asymptotically remains conditional on the \emph{Asymptotic Variational
 Gap Conjecture} for $\lambda_1^-$ (Part~II, ``Status of the proof''
 remark, v2.2 revision; companion paper~\cite{Geiger2026evendom}).  The Shift Parity Lemma,
-Leading-Mode Cancellation, the 33 CAP certificates, and the
+Leading-Mode Cancellation, the 33 finite-range diagnostics, and the
 non-existence theorems NE-A and NE-B are unaffected by this revision.
 The series is a continuously evolving draft/preprint; v2.2 is the
 current honest position.
@@ -94,7 +94,7 @@ where $\lambda_n = \sum_\rho [1 - (1-1/\rho)^n]$ and the sum runs over the non-t
 This paper is the first in a three-part series:
 \begin{itemize}
   \item \textbf{Part~I} (this paper): Foundations, obstructions, and reorientation --- mathematical foundations, analytical tools, structural results, the documentation of four dead ends, the localization of difficulty, and the reorientation toward Connes' spectral program.
-  \item \textbf{Part~II} \cite{Geiger2026partII}: Even dominance --- the Shift Parity Lemma, computer-assisted proofs, and the new proof architecture.
+  \item \textbf{Part~II} \cite{Geiger2026partII}: Even dominance --- the Shift Parity Lemma, computer-assisted finite-range diagnostics, and the conditional proof architecture.
   \item \textbf{Part~III} \cite{Geiger2026partIII}: Conclusio --- what is proven, what is excluded, and what remains.
 \end{itemize}
 
@@ -567,7 +567,7 @@ If the minimum eigenvalue of $A_\lambda$ is simple with even eigenfunction, then
 
 Connes' Section~6.6 identifies the verification of this \emph{even dominance} property as the remaining open step. Crucially, Connes' Hurwitz argument requires even dominance only along a sequence $\lambda_n \to \infty$, not for all $\lambda$.
 
-This is where the thermodynamic insight pays off in an unexpected way: the decomposition analysis from the landscape sections (the prime-sum functionals, the trigonometric structure of shift operators) becomes the key to understanding \emph{why} even dominance holds. Part~II develops this completely, establishing the Shift Parity Lemma, the frontier-prime mechanism, and computer-assisted proofs of even dominance for $33$ values of $\lambda$ up to $1{,}300{,}000$.
+This is where the thermodynamic insight pays off in an unexpected way: the decomposition analysis from the landscape sections (the prime-sum functionals, the trigonometric structure of shift operators) becomes the key to understanding the even-dominance route. Part~II establishes the Shift Parity Lemma, the frontier-prime mechanism, and finite-range computer-assisted gap diagnostics for $33$ values of $\lambda$ up to $1{,}300{,}000$, now treated as a conditional finite bridge until the odd-sector lower bound is independently validated.
 
 \begin{remark}[From despair to hope]
 The gauge-theoretic approach failed because it tried to prove a \emph{global} statement ($\lambda_n \geq 0$ for all $n$) via a \emph{local} tool (the Gibbs measure near $\sigma = 1$). The Connes approach succeeds where the gauge approach fails because it works directly in the spectral domain of $A_\lambda$, where the even-odd decomposition provides a natural structure. The Shift Parity Lemma (Part~II) shows that this structure is fundamentally algebraic, not analytic.
@@ -589,7 +589,7 @@ However, the failure is productive:
   \item The understanding that even dominance is driven by prime contributions, not archimedean effects, emerged directly from the decomposition analysis.
 \end{enumerate}
 
-Part~II takes up the new thread: the Shift Parity Lemma, the computer-assisted proof of even dominance, and the identification of the cumulative step as the remaining challenge. Part~III draws the final conclusions on what has been proven, what has been excluded, and what remains open.
+Part~II takes up the new thread: the Shift Parity Lemma, the computer-assisted finite-range diagnostics, and the identification of the cumulative eigenvalue-ordering step as the remaining challenge. Part~III draws the final conclusions on what has been proven, what has been excluded, and what remains open.
 
 
 \section*{AI Disclosure}

@@ -11,10 +11,12 @@
 \usepackage{enumitem}
 \usepackage{geometry}
 \usepackage{makecell}
+\usepackage{xurl}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[nameinlink,capitalize]{cleveref}
 
 \geometry{margin=1in}
+\setlength{\emergencystretch}{2em}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -37,11 +39,20 @@
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\projectrepo}{\href{https://github.com/research-line/rh-even-dominance}{\path{github.com/research-line/rh-even-dominance}}}
 \DeclareMathOperator{\Tr}{Tr}
 
-\title{A Conditional Proof of the Riemann Hypothesis via Even Dominance of the Weil Quadratic Form}
+\title{A Conditional Reduction of the Riemann Hypothesis to Even Dominance of the Weil Quadratic Form}
 \author{Lukas Geiger\\Independent Researcher, Bernau\\ORCID: 0009-0005-7296-1534}
-\date{Draft v1.5 -- 14 May 2026}
+\date{Draft v1.6 -- 19 May 2026}
+
+\hypersetup{
+  unicode=true,
+  pdftitle={A Conditional Reduction of the Riemann Hypothesis to Even Dominance of the Weil Quadratic Form},
+  pdfauthor={Lukas Geiger},
+  pdfsubject={Conditional reduction, diagnostic programme, and numerical evidence toward the Riemann Hypothesis},
+  pdfkeywords={Riemann Hypothesis, Weil quadratic form, even dominance, conditional reduction, Connes program}
+}
 
 \begin{document}
 \maketitle
@@ -54,11 +65,13 @@ computational certificates, and alternative strategies. The present paper
 keeps only the proof-relevant chain.
 Following Connes' reduction of the Riemann Hypothesis to an even-dominance
 condition for the Weil quadratic form, we make two independent contributions.
-First, for the finite range $100\leq\lambda\leq 1{,}300{,}000$, even dominance
-$\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ is rigorously certified by
-interval-arithmetic Galerkin bounds that produce a separate upper bound for
-$\lambda_1^+$ and a separate lower bound for $\lambda_1^-$ at each certificate
-point. Second, for the asymptotic regime $\lambda\to\infty$, we establish via
+First, for the finite range $100\leq\lambda\leq 1{,}300{,}000$, the Landscape
+computation reports negative interval-enclosed Galerkin gaps at 33 grid points.
+A 15 May 2026 audit shows that the current sine-block lower-bound construction
+still contains a heuristic geometric tail extrapolation; the finite-range data
+are therefore treated here as computer-assisted numerical evidence, not as a
+theorem-level CAP proof. Second, for the asymptotic regime $\lambda\to\infty$,
+we establish via
 a common Rayleigh-vector argument that
 $\lambda_{\min}(W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}})=-\Theta(\sqrt\lambda)$
 on the relevant three-mode Galerkin block. Closing the gap between this
@@ -70,8 +83,9 @@ perturbation-theory route in Section~\ref{sec:asymptotic-lower-bound}.
 The proof of RH presented here is therefore conditional on (i) the
 Connes program (Connes--van Suijlekom real-zero criterion
 \cite{ConnesvS2025}, which is fully proven at fixed $L$, together with
-the Hurwitz limit-passage of \cite[Sec.~6.4--6.6]{Connes2026}, which is
-described there as proof strategy, not theorem), and (ii) the
+the Hurwitz limit-passage of \cite[Sec.~6.4--6.6]{Connes2026}, whose
+Fact~6.4 convergence is presented there as a Slepian--Pollak consequence),
+and (ii) the
 Asymptotic Variational Gap Conjecture for the odd-sector minimum
 eigenvalue. The Shift Parity Lemma is unconditional. The
 interval-arithmetic certificates as currently implemented use a
@@ -106,7 +120,7 @@ The excluded gauge, total-positivity, and universal-commutator routes
 are not used and are referred to the Landscape series.
 \end{abstract}
 
-\noindent\textbf{Keywords:} Riemann Hypothesis, Weil quadratic form, even dominance, Connes program, Shift Parity Lemma, computer-assisted proof.
+\noindent\textbf{Keywords:} Riemann Hypothesis, Weil quadratic form, even dominance, Connes program, Shift Parity Lemma, computer-assisted evidence.
 
 \newpage
 \section{Purpose and Relation to the Landscape Series}
@@ -122,8 +136,8 @@ chain.
 The argument presented here uses the following two-part chain:
 \[
 \begin{gathered}
-\text{Shift parity}+\text{IA certificates for }100\leq\lambda\leq 1{,}300{,}000\\
-\Longrightarrow\ \text{Even Dominance on the certified range (\Cref{thm:even-finite})},
+\text{Shift parity}+\text{IA diagnostics for }100\leq\lambda\leq 1{,}300{,}000\\
+\Longrightarrow\ \text{finite-range evidence; theorem-level only under \Cref{thm:even-finite}},
 \end{gathered}
 \]
 together with
@@ -134,9 +148,11 @@ together with
 \Longrightarrow\ \text{RH via Connes and Hurwitz (\Cref{thm:rh})}.
 \end{gathered}
 \]
-The first line is unconditional. The second line introduces two conditional
-inputs: the Connes program (external) and the Asymptotic Variational Gap
-Conjecture (\Cref{conj:avg}, internal to this approach;
+The first line is diagnostic: the Shift Parity Lemma is unconditional, while
+the current finite certificates still require a rigorous odd-sector lower-bound
+closure before they become theorem-level CAP. The second line introduces two
+conditional inputs: the Connes program (external) and the Asymptotic Variational
+Gap Conjecture (\Cref{conj:avg}, internal to this approach;
 \Cref{sec:asymptotic-lower-bound}).
 
 \section{Connes' Reduction (v1.5 Reformulation)}
@@ -306,7 +322,7 @@ $L^2([-L,L])$ formulation, where the symmetric-shift auto-overlap
 forces equal diagonals in the two sectors.
 \end{remark}
 
-\paragraph{Migration of downstream sections (v1.5).}  The above
+\paragraph{Downstream migration (v1.5).}  The above
 reformulation supersedes the symmetric-shift $L^2([-L,L])$ form
 of v1.4.  Subsequent sections (\Cref{sec:parity-matrix} onward) were
 written in the legacy framework and require parallel updates: the
@@ -321,7 +337,9 @@ the obstruction theorems NE-A, NE-B of the Landscape series remain
 unaffected.  This migration is partial in the present revision: the
 new Section~2 above is the corrected operator definition, while the
 downstream propagation is recorded as an open task in
-\Cref{sec:k0-strengthened}.
+\Cref{sec:k0-strengthened}.  Consequently, the legacy sections below are
+retained as diagnostics and route documentation, not as a completed proof in
+the corrected $U_n$ framework.
 
 \begin{theorem}[Connes--van Suijlekom real-zero criterion]
 \label{thm:connes}
@@ -683,7 +701,9 @@ Galerkin matrix ($N_{\cos}=4$); the odd sector uses $N_{\sin}=N_0\in[40,90]$
 (see \Cref{rem:galerkin-asymmetry} below). Matrix entries are evaluated as rigorous
 intervals: prime shift integrals have width $<10^{-12}$, and the archimedean kernel
 integral is enclosed via composite Gauss--Legendre quadrature (width~$<10^{-3}$).
-A negative certified gap implies even dominance.
+If the sine-block lower-bound construction is replaced by a rigorous bound,
+a negative reported gap would imply even dominance; at present it is recorded
+as diagnostic numerical evidence.
 \end{sloppypar}
 
 \begin{remark}[Galerkin-asymmetry justification]
@@ -697,37 +717,39 @@ $h_1(1)=-1/4$ at the Laplace endpoint, see \Cref{def:auto-overlap}), with the
 $k\times k$ minimum eigenvalue stabilizing at $k=4$ to within $10^{-2}$ for every
 tested $\lambda$. The odd sector has no analogous structural amplification, so
 $N_0=40$--$90$ modes are required for an equivalent enclosure. Crucially, the
-Landscape certifier verifies
+Landscape certifier reports
 \(
   \lambda_{\min}(\mathrm{QW}_{\sin}^{(N)})\;>\;\lambda_{\min}(\mathrm{QW}_{\cos}^{(4)})
 \)
-for \emph{all} $N\leq 90$ at every tested $\lambda$, confirming that the gap is
-genuine and not a truncation artifact.
+for \emph{all} $N\leq 90$ at every tested $\lambda$, supporting, but not yet
+proving, that the gap is genuine and not a truncation artifact.
 \end{remark}
 
 \begin{remark}[Truncation safety factor]
 \label{rem:truncation-safety}
-The combined Galerkin/tail truncation error of the Landscape certifier at $\lambda=100$
+The reported Galerkin/tail truncation error of the Landscape certifier at $\lambda=100$
 is at most $0.061$ (Frobenius interval radius $\leq 0.0025$ in the even block, total
 odd-sector tail $\leq 0.059$ via Cauchy interlacing plus a float64 rounding margin),
 while $|\mathrm{cert\_gap}|=2.25$ -- a safety factor $\geq 34\times$. For $\lambda\geq 200$
-the safety factor exceeds $65\times$ and grows monotonically with $\lambda$ throughout
-the certified range~\cite[Section~2.9 and certificate metadata]{GeigerLandscapeII}.
+the diagnostic safety factor exceeds $65\times$ and grows monotonically with $\lambda$
+throughout the sampled range~\cite[Section~2.9 and certificate metadata]{GeigerLandscapeII}.
 \end{remark}
 
-\begin{proposition}[Certified finite bridge]
+\begin{proposition}[Finite certificate diagnostic]
 \label{prop:finite-certificates}
 For every certified grid point $\lambda_k$ in the Landscape table,
 \[
-  \Delta(\lambda_k)<0.
+  \mathrm{cert\_gap}(\lambda_k)<0.
 \]
-Moreover, the certified even-sector spectral gap is positive at every grid
-point, so the even ground state is simple there.
+Moreover, the reported even-sector spectral gap is positive at every grid
+point. These data are numerical evidence; they become a rigorous finite bridge
+only after the sine-block lower-bound construction is validated or replaced in
+the corrected Connes--van Suijlekom framework.
 \end{proposition}
 
 \begin{proof}
-This is a computer-assisted proof input from the Landscape project
-\cite{GeigerLandscapeII}. The relevant certificates are stored in the Landscape
+This is a computer-assisted diagnostic output from the Landscape project
+\cite{GeigerLandscapeII}. The relevant certificate files are stored in the Landscape
 repository under \texttt{results/certificates/}. Representative values are:
 \[
 \begin{array}{r|r|r|r}
@@ -740,24 +762,25 @@ repository under \texttt{results/certificates/}. Representative values are:
 1{,}300{,}000 & 100{,}021 & -2503.78 & -475.83
 \end{array}
 \]
-All intervals have negative certified gap. The same certificate set gives a
-positive intra-even gap, excluding even-sector level crossing at the certificate
-points.
+All reported intervals have negative gap. The same certificate set gives a
+positive intra-even gap, supporting the absence of even-sector level crossing at
+the sampled points.
 \end{proof}
 
 \begin{remark}[Certificate structure]
 \label{rem:cert-structure}
-Each certificate for a given $\lambda_k$ consists of:
+Each diagnostic certificate for a given $\lambda_k$ consists of:
 (a)~the $N_{\cos}\times N_{\cos}$ even-sector Galerkin matrix with interval-arithmetic
 entries;
 (b)~the $N_{\sin}\times N_{\sin}$ odd-sector Galerkin matrix;
 (c)~a rigorous eigenvalue enclosure
 $[\underline\lambda_1^+,\overline\lambda_1^+]$ for the minimum even eigenvalue;
-(d)~a rigorous lower bound $\underline\lambda_1^-$ for the minimum odd eigenvalue;
-(e)~the certified gap $\overline\lambda_1^+-\underline\lambda_1^-<0$.
+(d)~a candidate lower bound $\underline\lambda_1^-$ for the minimum odd eigenvalue,
+currently relying on the heuristic tail extrapolation described above;
+(e)~the reported gap $\overline\lambda_1^+-\underline\lambda_1^-<0$.
 For instance, at $\lambda=100$: the $4\times 4$ even matrix has minimum eigenvalue
-in $[-11.08,-11.06]$, the odd minimum lies above $-8.82$, giving certified gap
-$<-2.24$. All certificates, including the interval-arithmetic evaluation scripts,
+in $[-11.08,-11.06]$, the odd diagnostic lower-bound output lies above $-8.82$,
+giving reported gap $<-2.24$. All certificates, including the interval-arithmetic evaluation scripts,
 are archived in~\cite{GeigerLandscapeII}.
 \end{remark}
 
@@ -791,9 +814,10 @@ mode~$n=1$ is
   \;\sim\; \frac{16\sqrt\lambda}{\log\lambda},
 \]
 i.e.\ a logarithmically shrinking fraction of the leading
-$\sqrt\lambda$ scale.  Even dominance therefore holds asymptotically
-with margin $O(\sqrt\lambda/\log\lambda)$ rather than $O(\sqrt\lambda)$
-as the legacy direct-frontier argument suggested.  The Legacy
+$\sqrt\lambda$ scale.  This is positive asymptotic evidence for even dominance
+on the $O(\sqrt\lambda/\log\lambda)$ scale, but the eigenvalue-ordering
+statement still requires the Asymptotic Variational Gap or an equivalent
+lower-bound closure.  The Legacy
 direct-frontier construction below is retained for backward
 compatibility with the rest of the manuscript; the analog $S_1$
 construction can be developed in the v1.5 form by replacing
@@ -899,7 +923,7 @@ convergent prime sums. Multiplying by the uniform operator-norm bound for
 $D_3(r)$ gives the claim.
 \end{proof}
 
-\begin{proposition}[Asymptotic frontier dominance]
+\begin{proposition}[Legacy variational frontier dominance]
 \label{prop:frontier-dominance}
 There exists an explicit $\Lambda_*$ such that for all $\lambda\geq\Lambda_*$,
 \[
@@ -939,8 +963,9 @@ constants $C_f=0.4685$, $C_n=2.2847$ and the explicit PNT/Mertens remainders
 gives an effective threshold $\Lambda_*\leq 1{,}300{,}000$; see
 \cite[Proposition~A6 (Direct Frontier-Dominance), Remark on direct-proof
 ingredients]{GeigerLandscapeII}. The asymptotic regime $\lambda\geq\Lambda_*$ and
-the certified range $100\leq\lambda\leq 1{,}300{,}000$ of
-\Cref{prop:finite-certificates} therefore meet without gap.
+the finite diagnostic range $100\leq\lambda\leq 1{,}300{,}000$ of
+\Cref{prop:finite-certificates} are numerically compatible but do not yet give
+a theorem-level bridge without the lower-bound repair.
 \end{proof}
 
 \begin{remark}[Computational improvement of $\Lambda_*$]
@@ -968,11 +993,11 @@ No unsampled integer in $[182{,}000, 300{,}000]$ can be positive.
 $g\leq -43$ throughout (coarse scan, step $10{,}000$), consistent with the
 $-\Theta(\sqrt\lambda)$ dominance of the asymptotic formula.
 
-\noindent Combining (i)--(iii) with the certified range $[100,\,1{,}300{,}000]$
-gives $\Lambda_*\leq 175{,}000$.
-The verification script \texttt{verify\_lambda\_star.py} (float64, safety margins
-$\gg 10^{-10}$) is archived in the companion repository at
-\url{https://github.com/research-line/rh-even-dominance}.
+\noindent Combining (i)--(iii) with the finite diagnostic range
+$[100,\,1{,}300{,}000]$ gives numerical support for the threshold
+$\Lambda_*\leq 175{,}000$ in the variational model.
+The verification script \path{verify_lambda_star.py} (float64, safety margins
+$\gg 10^{-10}$) is archived in the companion repository at \projectrepo.
 \end{remark}
 
 \section{Tail Control and Lifting to the Weil Form}
@@ -984,11 +1009,12 @@ contributions in that framework.  In the Connes--van Suijlekom form
 of Section~2, the analogous task is to control the off-diagonal
 contributions of the matrix $\langle U_m|Q|U_n\rangle$ for
 $|m|,|n|>N$ where $N$ is the Galerkin cutoff, plus the regularised
-archimedean integrand.  The estimates below carry over with the
-modification that the relevant overlap functions are
-$\sin(2\pi m y/L) - \sin(2\pi n y/L)$ in place of $D_3(r)$ and the
-Schur-complement bound uses the off-block norm of the
-Connes--van Suijlekom matrix.  Migration of the precise inequalities
+archimedean integrand.  The estimates below suggest the corresponding
+objects after replacing the relevant overlap functions by
+$\sin(2\pi m y/L) - \sin(2\pi n y/L)$ in place of $D_3(r)$ and replacing the
+Schur-complement bound by one for the off-block norm of the
+Connes--van Suijlekom matrix.  They are not used here as migrated
+$U_n$-proofs. Migration of the precise inequalities
 is open and is recorded with the analytical roadmap in
 \texttt{K0\_SN\_SUBLEADING.md}.  In particular, the subleading
 asymptotic $S_n \sim 8\sqrt\lambda/[L(1+16n^2\pi^2/L^2)]$ replaces
@@ -998,11 +1024,13 @@ for the Cos--Sin diagonal gap.
 
 \bigskip
 
-\Cref{prop:frontier-dominance} establishes $\lambda_{\min}(D_{\mathrm{tot}}(\lambda))<0$
-in the three-mode difference block. The full Weil operator $A_\lambda$ acts on
-$L^2([-L,L])$ with infinitely many Fourier modes and includes the archimedean
-integral. We show that the contributions beyond the low-mode prime block
-preserve the sign of the even--odd gap.
+\Cref{prop:frontier-dominance} establishes the legacy variational statement
+$\lambda_{\min}(D_{\mathrm{tot}}(\lambda))<0$ in the three-mode difference
+block. The full Weil operator $A_\lambda$ acts on infinitely many modes and
+includes the archimedean contribution. The estimates below document why the
+legacy low-mode calculation was numerically stable; in v1.5 they are not a
+completed proof that the corrected Connes--van Suijlekom $U_n$ operator
+preserves an even--odd eigenvalue gap.
 
 \begin{remark}[Archimedean contribution]
 \label{rem:archimedean}
@@ -1187,10 +1215,10 @@ $g_{N_0+1}\geq 4\pi^2 N_0^2\sqrt\lambda/L^2$, so
   \frac{16\,\sqrt\lambda}{N_0^2}\,(1+o(1))
   \quad\text{as }\lambda\to\infty.
 \]
-At every certified grid point this analytical bound is dominated by the
-interval-certified Landscape safety factor of \Cref{rem:truncation-safety}
+At every sampled grid point this analytical bound is dominated by the
+reported Landscape safety factor of \Cref{rem:truncation-safety}
 ($\geq 34\times$ at $\lambda=100$, $\geq 65\times$ for $\lambda\geq 200$),
-which is the rigorous statement used in the certified gap.
+which is a consistency check for the reported gap, not a lower-bound proof.
 \end{lemma}
 
 \begin{proof}
@@ -1198,9 +1226,9 @@ The Schur-complement bound is standard~\cite{Kato1966}.
 \Cref{lem:higher-mode}(i) gives $\norm{B_{\mathrm{tail}}}_{\mathrm{op}}\leq 8\pi\sqrt\lambda/L$.
 \Cref{lem:higher-mode}(ii) gives $g_{N_0+1}\geq 4\pi^2 N_0^2\sqrt\lambda/L^2 \gg \norm{B_{\mathrm{tail}}}_{\mathrm{op}}$
 for $N_0\geq 40$, hence the denominator is dominated by $g_{N_0+1}$.
-The displayed bound $16\sqrt\lambda/N_0^2$ follows. The certified gap uses the
+The displayed bound $16\sqrt\lambda/N_0^2$ follows. The reported gap uses the
 sharper interval-arithmetic enclosure of \cite[Section~2.9]{GeigerLandscapeII}
-with the Cauchy tail bound described in \Cref{rem:truncation-safety}.
+with the diagnostic Cauchy tail bound described in \Cref{rem:truncation-safety}.
 \end{proof}
 
 \section{Main Theorem and Open Conjecture}
@@ -1211,16 +1239,16 @@ conditional on the Connes program and the Asymptotic Variational Gap
 Conjecture) is unchanged.  What changed is the precise formulation of
 the conditioning:
 \begin{itemize}[leftmargin=*]
-  \item \emph{External input from Connes 2026 §6.5
+  \item \emph{External preprint input from Connes 2026 §6.5
     (Fact 6.4):} the Fourier transform of the educated-guess
     eigenfunction $k_\Lambda$ converges to $\Xi$ uniformly on substrips
     $|\Im z|<\delta<1/2$ at rate $O(\Lambda^{-1/2-\delta})$.  This is
-    stated in \cite{Connes2026} as an established consequence of the
+    stated in \cite{Connes2026} as a consequence of the
     classical Slepian--Pollak prolate spheroidal wave function theory
     ([Connes2026, Theorem~1 of reference~47]), not as a conjecture.
-  \item \emph{External input from Connes--van Suijlekom 2025
+  \item \emph{External preprint input from Connes--van Suijlekom 2025
     \cite{ConnesvS2025}:} the fixed-$\Lambda$ quadratic-form
-    real-zero criterion, fully proved.
+    real-zero criterion, proved within that preprint.
   \item \emph{Internal open question:} simplicity and parity of the
     smallest eigenvalue of $QW_\Lambda$ (Connes 2026 §6.6 ``remaining
     steps'' item~(i)) --- this is exactly even dominance as defined in
@@ -1232,30 +1260,36 @@ the conditioning:
 \end{itemize}
 The conditioning in v1.5 is therefore that
 \emph{even dominance for $QW_\Lambda$} holds along a sequence
-$\Lambda_n\to\infty$, together with the proven Connes--van Suijlekom
-criterion, gives RH via Fact~6.4 of Connes~2026.  The companion
+$\Lambda_n\to\infty$, together with the Connes--van Suijlekom
+preprint criterion, gives RH via the Fact~6.4 bridge stated by
+Connes~2026.  The companion
 Zookeeper question is independent and concerns whether the specific
 educated-guess approximant produces additional structural control.
 
 \subsection{Certified Range: Finite Even Dominance}
 
-\begin{theorem}[Even dominance on the certified range]
+\begin{theorem}[Finite even dominance under lower-bound validation]
 \label{thm:even-finite}
-For every $\lambda$ in the certified grid of \Cref{prop:finite-certificates}
-(33 values spanning $100\leq\lambda\leq 1{,}300{,}000$),
-$\QW_\lambda$ has a simple even ground state, i.e.\ $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$
-and the even minimum is isolated.
+Assume that the finite certificate matrices are recomputed in the corrected
+Connes--van Suijlekom framework and that the quantities reported as
+$\underline{\lambda_1^-}(\lambda)$ in \Cref{prop:finite-certificates} are
+validated as rigorous odd-sector lower bounds at each grid point.
+Then for every $\lambda$ in that grid (33 values spanning
+$100\leq\lambda\leq 1{,}300{,}000$), $\QW_\lambda$ has a simple even ground state,
+i.e.\ $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ and the even minimum is
+isolated.
 \end{theorem}
 
 \begin{proof}
-The interval-arithmetic Galerkin certificates of \Cref{prop:finite-certificates}
-produce, at each $\lambda$ in the grid, a rigorous upper bound
+Under the additional lower-bound validation hypothesis, the interval-arithmetic
+Galerkin diagnostics of \Cref{prop:finite-certificates} produce, at each
+$\lambda$ in the grid, a rigorous upper bound
 $\overline{\lambda_1^+}(\lambda)$ and a rigorous lower bound
 $\underline{\lambda_1^-}(\lambda)$ from the even and odd Galerkin blocks
-respectively, together with Cauchy-type tail bounds. The certified gap
+respectively, together with validated tail bounds. The resulting gap
 $\overline{\lambda_1^+}(\lambda)-\underline{\lambda_1^-}(\lambda)<0$ at every
 grid point directly establishes $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ on
-the certified range. Simplicity follows from the certified intra-even gap
+the grid. Simplicity follows from the validated intra-even gap
 $\lambda_2^+-\lambda_1^+>0$ at each grid point.
 \end{proof}
 
@@ -1287,8 +1321,8 @@ $2\times2$ example
 \]
 shows that $\lambda_{\min}(A-B)=-5<0$ does not imply
 $\lambda_{\min}(A)<\lambda_{\min}(B)$; in fact $\lambda_{\min}(A)=0>-5=\lambda_{\min}(B)$.
-On the certified range this gap is filled by the direct computation of
-$\underline{\lambda_1^-}$ used in \Cref{thm:even-finite}; asymptotically a
+The finite-range data support this picture but do not close the gap at
+theorem level until the odd-sector lower bound is validated; asymptotically a
 separate argument is required.
 
 \begin{conjecture}[Asymptotic Variational Gap Conjecture]
@@ -1321,10 +1355,11 @@ lie on the critical line $\Re(s)=1/2$.
 \end{theorem}
 
 \begin{proof}
-By \Cref{thm:even-finite}, even dominance holds at every $\lambda$ in the
-certified grid; by \Cref{conj:avg} it holds for every $\lambda\geq\Lambda^\dagger$.
-Either provides a divergent sequence $\lambda_n\to\infty$ of even-dominant
-parameters. Applying \Cref{cor:sequence-suffices} to this sequence: the Fourier
+By \Cref{conj:avg}, even dominance holds for every
+$\lambda\geq\Lambda^\dagger$, hence along a divergent sequence
+$\lambda_n\to\infty$. If the finite certificate lower bounds are later validated,
+\Cref{thm:even-finite} adds a finite-range bridge, but it is not needed for this
+divergent sequence. Applying \Cref{cor:sequence-suffices} to the sequence: the Fourier
 transforms of the even-dominant Weil forms have only real zeros
 (\Cref{thm:connes}), and the Hurwitz bridge transfers the real-zero property
 to the limiting $\Xi$-function. Therefore the non-trivial zeros of $\zeta(s)$
@@ -1426,8 +1461,8 @@ $\lambda_1^+$ from the same frontier mechanism.
 
 \Cref{conj:avg} would follow from the following programme:
 
-\paragraph{Step 1 (Diagonal accounting).} Compute the explicit diagonal entries
-of $W^\pm_{\mathrm{prime}}$ on the three-mode block, separating leading
+\paragraph{Step 1. Diagonal accounting.}
+Compute the explicit diagonal entries of $W^\pm_{\mathrm{prime}}$ on the three-mode block, separating leading
 frontier contributions from subleading tail and archimedean terms. This is
 bookkeeping without new mathematics, and should produce explicit constants
 $c^\pm_{nn}$ such that $(W^\pm_{\mathrm{prime}})_{nn}=c^\pm_{nn}\sqrt\lambda+o(\sqrt\lambda)$.
@@ -1461,7 +1496,7 @@ already in place modulo the issue noted in
 with sign-controlled couplings is an established discipline, but every
 explicit constant can become a subproblem. The relationship
 $|\lambda_1^+-\lambda_1^-|=O(\sqrt\lambda/L)$ that this programme suggests is
-consistent with the numerical observation that the certified gap is roughly
+consistent with the numerical observation that the reported gap is roughly
 $20\%$ of $|\lambda_1^+|$ -- not a constant fraction of $\sqrt\lambda$, but a
 logarithmically shrinking fraction.
 
@@ -1542,7 +1577,7 @@ a method backed by a quantitative perturbation theorem.
 argument (asymptotic frontier dominance and finite-range CAP
 certificates) are under structural concern as of this revision. We
 do not at present claim even dominance for $\QW_\lambda$, neither
-asymptotically nor on the certified range, unless one of the
+asymptotically nor on the finite diagnostic range, unless one of the
 following can be established:
 \begin{itemize}[leftmargin=*]
   \item the Galerkin operator in \cref{eq:quad-form-connesvs} differs from the
@@ -1551,18 +1586,18 @@ following can be established:
   \item the heuristic tail correction in
   $\underline{\lambda_1^-}_{\rm CAP}$ can be replaced by a quantitative
   perturbation-theoretic lower bound, and the resulting rigorous
-  cert\_gap is still negative.
+  reported \texttt{cert\_gap} is still negative.
 \end{itemize}
 The Shift Parity Lemma (\cref{thm:shift-parity}), the explicit
 Laplace-endpoint diagonal formulas, the non-existence theorems NE-A
 and NE-B (Landscape Part~II), and the numerical phenomenology of the
-certified gap are unaffected by this concern and remain valid as
+reported gap are unaffected by this concern and remain valid as
 independent structural results.
 
 This update is in the spirit of treating the present manuscript as a
 continuously evolving draft. The companion notes
-\texttt{\_proof-notes/K0\_STEP1\_FINDINGS.md} and
-\texttt{\_proof-notes/K0\_CAP\_AUDIT.md} provide the full analytical
+\path{_proof-notes/K0_STEP1_FINDINGS.md} and
+\path{_proof-notes/K0_CAP_AUDIT.md} provide the full analytical
 and numerical record of the present concern.
 
 \subsection{Update (15 May 2026): Connes-vS Operator Form Resolves the
@@ -1584,20 +1619,20 @@ $\langle\cos_n|Q|\cos_n\rangle = D_n - S_n$ and
 $\langle\sin_n|Q|\sin_n\rangle = D_n + S_n$ differ by the genuinely
 non-trivial asymmetry $2S_n$, where
 $S_n = (\pi n)^{-1}\int_0^L\sin(2\pi n y/L)\,dD(y)$.  Direct
-computation (script \texttt{\_proof-notes/verify\_connes\_vs\_form.py})
+computation (script \path{_proof-notes/verify_connes_vs_form.py})
 gives $S_n > 0$ for the Weil distribution and all tested $\lambda$.
 For $\lambda=1000$, $n=1$: $S_1\approx 8.63$, cos diagonal
 $\approx 3.26$, sin diagonal $\approx 20.52$.  Asymptotically
 $S_1\sim 8\sqrt\lambda/\log\lambda$ (script
-\texttt{verify\_connes\_vs\_form.py}, derivation in
-\texttt{K0\_FRONTIER\_SN\_ASYMPTOTIC.md}).  The structural foundation
+\path{verify_connes_vs_form.py}, derivation in
+\path{K0_FRONTIER_SN_ASYMPTOTIC.md}). The structural foundation
 for even dominance is therefore present in the correct operator form.
 
 The remaining task is a \emph{rigorous} computer-assisted-proof closure
 of $\lambda_1^{\cos}(\lambda) < \lambda_1^{\sin}(\lambda)$ in this
 form.  A systematic analysis of the available rigorous lower-bound
 techniques is recorded in
-\texttt{\_proof-notes/K0\_LEHMANN\_ANALYSIS.md}, with the conclusion:
+\path{_proof-notes/K0_LEHMANN_ANALYSIS.md}, with the conclusion:
 
 \begin{itemize}[leftmargin=*]
   \item Temple's inequality
@@ -1622,10 +1657,10 @@ techniques is recorded in
     is far too loose.
 
   \item Schur-complement and Gerschgorin bounds require either a
-    lower bound on the complementary block or diagonal dominance;
+    lower bound on the complementary block or diagonal dominance.
     Gerschgorin fails for the Connes--van Suijlekom Galerkin matrix
-    because the off-diagonal row sums diverge logarithmically (the
-    cross-overlap $\sin/(\pi(n-m))$ has only $1/|n-m|$ decay).
+    because the off-diagonal row sums diverge logarithmically: the
+    cross-overlap $\sin/(\pi(n-m))$ has only $1/|n-m|$ decay.
 \end{itemize}
 
 The common underlying obstacle is the absence of an
@@ -1704,9 +1739,8 @@ relevant entries are:
   \item \texttt{partA\_proof\_sketch.py} -- frontier-dominance check;
   \item \texttt{euler\_maclaurin\_certifier.py} -- asymptotic threshold;
 \end{itemize}
-see~\cite[\texttt{scripts/}]{GeigerLandscapeII}. A dedicated companion repository
-for the present extraction is mirrored at
-\url{https://github.com/research-line/rh-even-dominance}.
+see~\cite[\path{scripts/}]{GeigerLandscapeII}. A dedicated companion repository
+for the present extraction is mirrored at \projectrepo.
 
 \section*{AI Disclosure}
 

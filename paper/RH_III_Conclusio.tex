@@ -38,7 +38,7 @@
 \maketitle
 
 \begin{abstract}
-This final paper in a three-part series draws together the results of the preceding papers into a unified picture. We catalog the proven structural results (R1--R9), the excluded paths (K1--K4), and the new contributions: the Shift Parity Lemma, the computer-assisted proof of even dominance for $33$ values of $\lambda$ up to $1{,}300{,}000$, the resolvent-damped M1$''$ framework, the Leading-Mode Cancellation Lemma with exact constant $c = 2 + \sqrt{2}$, and the Euler--Maclaurin Proposition establishing $\rho^{\mathrm{EM}}(L) < 0$ for $L \geq 14$ ($\lambda \geq 1{,}200{,}000$). Combined with the computer-assisted certificates (now covering $\lambda$ up to $1{,}300{,}000$ with no gap), the present series gives even dominance rigorously on the certified range. Part~III also accounts for the v2.0 non-existence theorems (NE-A, NE-B in Part~II), which restructure the comparative analysis of proof strategies and confirm that even dominance is not reducible to total-positivity or Sturm--Liouville-type arguments. We present the proof architecture from Connes' Theorem~6.1 through even dominance to the Riemann Hypothesis, formulate open problems, and discuss connections to the wider landscape of analytic number theory.
+This final paper in a three-part series draws together the results of the preceding papers into a unified picture. We catalog the proven structural results (R1--R9), the excluded paths (K1--K4), and the new contributions: the Shift Parity Lemma, the computer-assisted finite-range gap diagnostics for $33$ values of $\lambda$ up to $1{,}300{,}000$, the resolvent-damped M1$''$ framework, the Leading-Mode Cancellation Lemma with exact constant $c = 2 + \sqrt{2}$, and the Euler--Maclaurin Proposition establishing $\rho^{\mathrm{EM}}(L) < 0$ for $L \geq 14$ ($\lambda \geq 1{,}200{,}000$). The finite-range diagnostics are theorem-level only conditional on a validated odd-sector lower bound. Part~III also accounts for the v2.0 non-existence theorems (NE-A, NE-B in Part~II), which restructure the comparative analysis of proof strategies and confirm that even dominance is not reducible to total-positivity or Sturm--Liouville-type arguments. We present the proof architecture from Connes' Theorem~6.1 through even dominance to the Riemann Hypothesis as a conditional reduction, formulate open problems, and discuss connections to the wider landscape of analytic number theory.
 
 \medskip\noindent
 \textbf{Status correction (v2.2, 2026-05-14).}
@@ -52,11 +52,12 @@ lower bound on $\lambda_1^-(\lambda)$ is required and is currently
 formulated as the \emph{Asymptotic Variational Gap Conjecture} in the
 companion paper~\cite{Geiger2026evendom}; see Part~II ``Status of the
 proof'' remark (v2.2 revision) for the revised wording.  Status of the
-A1--A8 chain: \textbf{conditional reduction}.  Even dominance is
-unconditional on the certified range $100 \le \lambda \le 1{,}300{,}000$;
-asymptotic even dominance is conditional on the Asymptotic Variational
-Gap Conjecture; RH itself is additionally conditional on the Connes
-program.
+A1--A8 chain: \textbf{conditional reduction}.  The finite range
+$100 \le \lambda \le 1{,}300{,}000$ supplies strong numerical evidence and a
+conditional bridge, but theorem-level finite even dominance still requires
+the odd-sector tail lower bound.  Asymptotic even dominance is conditional on
+the Asymptotic Variational Gap Conjecture; RH itself is therefore conditional
+on this internal eigenvalue-ordering step.
 
 \medskip\noindent
 \textbf{v2.3 (15 May 2026): Conditioning clarified.}  A close reading of Connes
@@ -88,11 +89,11 @@ continuously; the present v2.3 abstract is the current honest position.
 This paper concludes a three-part investigation of the Riemann Hypothesis through gauge theory, spectral analysis, and arithmetic thermodynamics:
 \begin{description}[font=\bfseries,leftmargin=2em]
   \item[Part~I \cite{Geiger2026partI}:] Foundations and Obstructions --- structural results (R1--R9), four critical obstructions (K1--K4), reorientation to Connes' spectral program.
-  \item[Part~II \cite{Geiger2026partII}:] Even Dominance --- Shift Parity Lemma, computer-assisted proof ($33$ certificates, $\lambda$ up to $1{,}300{,}000$), resolvent-damped M1$''$ framework, Leading-Mode Cancellation ($c = 2 + \sqrt{2}$), Euler--Maclaurin Proposition ($\rho^{\mathrm{EM}} < 0$ for $\lambda \geq 1{,}200{,}000$).
+  \item[Part~II \cite{Geiger2026partII}:] Even Dominance --- Shift Parity Lemma, computer-assisted finite-range diagnostics ($33$ values, $\lambda$ up to $1{,}300{,}000$), resolvent-damped M1$''$ framework, Leading-Mode Cancellation ($c = 2 + \sqrt{2}$), Euler--Maclaurin Proposition ($\rho^{\mathrm{EM}} < 0$ for $\lambda \geq 1{,}200{,}000$).
   \item[Part~III (this paper):] Conclusio --- synthesis, proof architecture, open problems.
 \end{description}
 
-The key message is that the Riemann Hypothesis, when approached through the Li criterion and the Weil quadratic form, reduces to a well-characterized analytical condition: the \emph{resolvent subdominance} of the coupling differential, which the Leading-Mode Cancellation Lemma (Part~II) reduces to classical Fourier analysis and the Prime Number Theorem. The Euler--Maclaurin Proposition (Part~II, Proposition~4.11) closes this analytically for $\lambda \geq 1{,}200{,}000$; combined with computer-assisted certificates and a standard PNT error estimate, M1 is reduced to routine computations.
+The key message is that the Riemann Hypothesis, when approached through the Li criterion and the Weil quadratic form, reduces to a well-characterized analytical condition: an asymptotic variational/gap structure of the coupling differential. The Euler--Maclaurin Proposition (Part~II, Proposition~4.11) identifies the correct variational sign for large $\lambda$; combined with $33$ computer-assisted finite-range diagnostics up to $\lambda = 1{,}300{,}000$, it gives a strong conditional bridge. The theorem-level transfer from this variational diagnostic to the eigenvalue ordering $\lambda_1^+<\lambda_1^-$ remains the open odd-sector lower-bound step.
 
 
 % =============================================================================
@@ -134,7 +135,7 @@ The following results are unconditional (they do not assume RH):
   \[ \lambda_1(D_N(r)) < 0, \]
   where $D_N(r) = S_N^+(r) - S_N^-(r)$ is the difference between even- and odd-sector shift matrices. Proved analytically (two-case det/Tr argument for $N=3$, monotonicity reduction for $N \geq 4$) and certified by interval arithmetic (55,000 subintervals, 60-digit precision, Gershgorin disk bounds).
 
-  \item \textbf{Computer-Assisted Proof of Even Dominance} (Part~II). For $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$, even dominance is rigorously certified via interval arithmetic (mpmath.iv, 50-digit precision). The certified gap grows monotonically as $\sim\!\sqrt{\lambda}$, from $-2.25$ at $\lambda = 100$ to $-475.83$ at $\lambda = 1{,}300{,}000$. No failure across more than $4$ orders of magnitude.
+  \item \textbf{Computer-assisted finite-range diagnostics} (Part~II). For $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$, interval arithmetic documents a strong negative gap diagnostic (mpmath.iv, 50-digit precision). The reported gap grows monotonically as $\sim\!\sqrt{\lambda}$, from $-2.25$ at $\lambda = 100$ to $-475.83$ at $\lambda = 1{,}300{,}000$. As theorem-level even dominance this remains conditional on a validated odd-sector lower bound.
 
   \item \textbf{Universal Even Preference of Individual Primes} (Part~II, Corollary~2.5). For every prime $p$ with $r = \log p / \log\lambda \in (0,2)$:
   \[ \lambda_1(W_p^+) \leq \lambda_1(W_p^-) + \lambda_1(D_N(r)) < \lambda_1(W_p^-), \]
@@ -156,7 +157,7 @@ The following results are unconditional (they do not assume RH):
   \]
   so that $\mathrm{cert\_gap}^{\mathrm{EM}}(\lambda) < 0$.
 
-  \item \textbf{PNT Transfer Lemma and M1$''$ Closure} (Part~II). By Abel summation with the Chebyshev function $\theta(x) = x + O(x\,e^{-c\sqrt{\log x}})$, the resolvent ratio satisfies $\rho(\lambda) = \rho^{\mathrm{EM}}(\lambda) + O(L\,e^{-c\sqrt{L}})$. Since $\rho^{\mathrm{EM}} < 0$ for $L \geq 14$ and the error vanishes, there exists $\lambda_0$ such that $\rho(\lambda) < 0$ for all $\lambda \geq \lambda_0$. \textbf{M1$''$ (resolvent subdominance) is proved.}
+  \item \textbf{PNT Transfer Lemma and M1$''$ Reduction} (Part~II). By Abel summation with the Chebyshev function $\theta(x) = x + O(x\,e^{-c\sqrt{\log x}})$, the resolvent ratio satisfies $\rho(\lambda) = \rho^{\mathrm{EM}}(\lambda) + O(L\,e^{-c\sqrt{L}})$. Since $\rho^{\mathrm{EM}} < 0$ for $L \geq 14$ and the error vanishes, this gives an asymptotic variational reduction for the resolvent subdominance mechanism. The remaining theorem-level step is still the odd-sector lower bound needed to convert the variational sign into the eigenvalue inequality $\lambda_1^+ < \lambda_1^-$.
 \end{enumerate}
 
 
@@ -206,7 +207,7 @@ We present the logical chain from known mathematics to the Riemann Hypothesis, i
 \textbf{Step} & \textbf{Statement} & \textbf{Status} & \textbf{Source} \\\hline
 A1 & Connes' Theorem~6.1: even dominance $\Rightarrow$ zeros of $\hat{\eta}$ real & proven & \cite{ConnesvS2025, Connes2026} \\
 A2 & Hurwitz: even dominance for $\lambda_n \to \infty$ suffices & proven & \cite{Connes2026} \\
-A3 & Even dominance at $33$ values, $\lambda \leq 1{,}300{,}000$ & proven & Part~II \\
+A3 & Even dominance at $33$ values, $\lambda \leq 1{,}300{,}000$ & numerical evidence / conditional finite bridge & Part~II \\
 A4 & Shift Parity Lemma: each prime favors even & proven & Part~II \\
 A5 & Frontier-prime mechanism & proven & Part~II \\
 A5b & Euler--Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (certified by interval arithmetic) & proven & Part~II \\
@@ -222,8 +223,9 @@ $\lambda_{\min}(W^+-W^-)=-\Theta(\sqrt\lambda)$ asymptotically (variational), bu
 not the eigenvalue inequality $\lambda_1^+<\lambda_1^-$.  A separate lower
 bound on $\lambda_1^-(\lambda)$ is needed and is currently the
 \emph{Asymptotic Variational Gap Conjecture} \cite{Geiger2026evendom}.
-Steps A3 (33 CAP certificates) and A4 (Shift Parity Lemma) remain
-unconditional.
+Step A4 (Shift Parity Lemma) remains unconditional. Step A3 remains a
+conditional finite bridge until the odd-sector lower-bound construction is
+validated.
 \end{center}
 
 \noindent\textbf{Historical note on Proposition~A6.} The v2.1 draft presented
@@ -244,9 +246,10 @@ bridge and an asymptotic variational problem:
 
 \begin{enumerate}
   \item \textbf{Regime~1} ($\lambda \in [100, 1{,}300{,}000]$): $33$
-    computer-assisted certificates, computed with interval arithmetic
-    (50-digit precision), provide rigorous even-dominance proofs at the
-    certified values via separate upper/lower bounds for $\lambda_1^\pm$.
+    computer-assisted finite-range diagnostics, computed with interval
+    arithmetic (50-digit precision), provide strong negative gap evidence at
+    the certified values, theorem-level only after validation of the
+    odd-sector lower bound for $\lambda_1^-$.
   \item \textbf{Regime~2} (asymptotic): the M1$''$ resolvent framework and
     the Direct Frontier-Dominance route identify the correct asymptotic
     variational sign, i.e.\ $\lambda_{\min}(W^+-W^-)=-\Theta(\sqrt\lambda)$.
@@ -298,7 +301,7 @@ Four candidate strategies for the cumulative step were identified during the res
 \textbf{B} & Sturm--Liouville structure from a commuting operator & If found: ground state rigidity makes A6 mechanical & SVD over 13 samples of $r$ shows the universal commutator kernel is trivial ($T = c\cdot I$) for $N$ up to 15; $\sigma_2$ bounded below, independent of $N$ & Excluded for $N \leq 15$ (Thm.\ NE-B); full-space open \\[4pt]
 \textbf{C} & Stability of even ground state as perturbation of prolate operator & Connes' natural route; ``primes = small structured perturbation'' & Quantitative perturbation control in the relevant spectral gap regime & \textbf{Backup} \\[4pt]
 \textbf{D} & Global bound on odd spectral mass via $\mathrm{Tr}(M^k)$ & Traces are additive --- fits the cumulative nature of A6 & From moments to lowest eigenvalue requires sharp concentration & \textbf{Backup} \\[4pt]\hline
-\textbf{M1$''$} & Resolvent-damped energy decomposition + PNT transfer & Directly leverages Shift Parity, Leading-Mode Cancellation, and 33~CAP certificates & Requires higher-mode decay (Lemma~B) and truncation control (Lemma~C) & \textbf{Chosen}
+\textbf{M1$''$} & Resolvent-damped energy decomposition + PNT transfer & Directly leverages Shift Parity, Leading-Mode Cancellation, and 33~finite-range diagnostics & Requires higher-mode decay (Lemma~B), truncation control (Lemma~C), and the odd-sector lower bound & \textbf{Chosen}
 \end{tabular}}
 \end{center}
 
@@ -308,7 +311,7 @@ These ruling-outs are not failures of the proof but structural discoveries: even
 
 \begin{itemize}
   \item \emph{Analytical backbone:} M1$''$ shows $\rho(\lambda) \to 0$ via the Leading-Mode Cancellation (Lemma~A) and PNT Transfer.
-  \item \emph{Rigorous numerics:} 33~CAP certificates cover the finite range where the analytical asymptotics have not yet taken hold.
+  \item \emph{Finite-range numerics:} 33~diagnostics cover the finite range conditionally, pending the odd-sector lower-bound validation.
   \item \emph{Error control:} Lemma~B (higher-mode decay) and Lemma~C (Neumann convergence) ensure that the resolvent approximation is faithful.
 \end{itemize}
 
@@ -334,7 +337,7 @@ S1 & Define $\xi(s)$, functional equation & proven & definition \\
 S2 & Li coefficients via Bombieri--Lagarias & proven & \cite{BombieriLagarias1999} \\
 S3 & Decomposition $\lambda_n = \lambda_n^{(\infty)} + \lambda_n^{(\mathrm{fin})}$ & proven & Part~I \\
 S4 & Archimedean dominance: $\lambda_n^{(\infty)} \sim \frac{n}{2}\log n$ & proven & Stirling \\
-\textbf{S5} & \textbf{$\lambda_n \geq 0$ for all $n \geq 1$} & \textbf{OPEN}\footnote{S5 is equivalent to RH (Li, 1997). Since RH is proved via the even dominance route (A6$\to$A7$\to$A8), S5 follows as a corollary. It is marked ``open'' here only in the sense that no \emph{direct} proof of Li coefficient positivity is given in this series.} & \textbf{$\Longleftrightarrow$ RH} \\
+\textbf{S5} & \textbf{$\lambda_n \geq 0$ for all $n \geq 1$} & \textbf{OPEN}\footnote{S5 is equivalent to RH (Li, 1997). The present even-dominance route gives only a conditional reduction pending the odd-sector lower bound / AVG step, so S5 is not closed here.} & \textbf{$\Longleftrightarrow$ RH} \\
 S6 & All zeros on $\Re(s) = 1/2$ & $\Leftrightarrow$ S5 & Li (1997) \\
 S7 & Prime counting: $\pi(x) = \mathrm{Li}(x) + O(\sqrt{x}\log x)$ & $\Leftarrow$ S6 & von Koch
 \end{tabular}
@@ -352,10 +355,10 @@ E1 & Weil explicit formula & proven & Weil (1952) \\
 E2 & Weil quadratic form $\mathrm{QW}_\lambda$ & proven & Connes (2026) \\
 E3 & Even/odd decomposition of $\mathrm{QW}_\lambda$ & proven & Part~II \\
 E4 & Shift Parity Lemma: each prime favors even & proven & Part~II \\
-E5 & Even dominance at $33$ values, $\lambda \leq 1{,}300{,}000$ & proven & Part~II (CAP) \\
+E5 & Gap diagnostics at $33$ values, $\lambda \leq 1{,}300{,}000$ & evidence / conditional & Part~II (finite-range diagnostics) \\
 E5b & Euler--Maclaurin: $\rho^{\mathrm{EM}} < 0$ for $\lambda \geq 1.2\mathrm{M}$ & proven & Part~II \\
-\textbf{E6} & \textbf{Cumulative step: even dominance for all $\lambda$} & \textbf{proved} & \textbf{= A6} \\
-E7 & Connes' Theorem~6.1 $\Rightarrow$ RH & proven & \cite{Connes2026}
+\textbf{E6} & \textbf{Cumulative step: even dominance for all $\lambda$} & \textbf{conditional reduction} & \textbf{= A6} \\
+E7 & Connes' Theorem~6.1 + Hurwitz bridge $\Rightarrow$ RH & conditional on E6 & \cite{Connes2026}
 \end{tabular}
 \end{center}
 
@@ -410,11 +413,11 @@ Several results obtained during this program are of independent interest, regard
 Shift Parity Lemma & Arithmetic trigonometry & Every prime individually favors even eigenfunctions & Proved \\
 No-Coordination Lemma & Multiplicative independence & Arithmetic substitute for entropy term & Proved \\
 Leading-Mode Cancellation ($c = 2+\sqrt{2}$) & Resolvent analysis & Universal pairwise cancellation constant & Proved \\
-OS Reflection Positivity (A7) & Spectral theory & Bochner + contractive semigroup & Proved \\
+OS Reflection Positivity & Spectral theory & Bochner + contractive semigroup & Proved as structural input \\
 Euler--Maclaurin: $\rho^{\mathrm{EM}} < 0$ & PNT asymptotics & Global stability anchor & Proved \\
 Hellmann--Feynman: $\partial\Delta/\partial L > 0$ & Sensitivity analysis & Gap deepening driven by new primes, not~$L$ & Proved \\
-Decomposition: primes drive even dominance & Spectral decomposition & Archimedean kernel is parity-neutral & Proved \\
-$33$ CAP certificates & Interval arithmetic & Rigorous even dominance across $4$~decades & Proved \\[4pt]
+Decomposition: primes drive variational even preference & Spectral decomposition & Archimedean kernel is parity-neutral & Variational / conditional \\
+$33$ finite-range CAP diagnostics & Interval arithmetic & Conditional bridge pending odd lower bound & Evidence / conditional \\[4pt]
 \multicolumn{4}{l}{\emph{Negative results (obstructions and impossibilities)}} \\[2pt]
 Obstructions K1--K4 & Dead-end analysis & Maps the space of impossible strategies & Documented \\
 Convexity Trap & Variational methods & KL positivity $\not\Rightarrow$ Li positivity & Proved \\
@@ -497,7 +500,7 @@ either close this last spectral step or provide a deeper conceptual route.
 
 \subsection{Connes' Program}
 
-The work in Part~II fits directly into Connes' spectral approach to RH \cite{Connes2026}. The Shift Parity Lemma provides the first analytical evidence for the even dominance hypothesis that Connes assumes in Theorem~6.1. The computer-assisted proof at $33$ values of $\lambda$ up to $1{,}300{,}000$ provides rigorous verification across more than $4$ orders of magnitude, closing the gap between the certificates and the Euler--Maclaurin threshold at $\lambda \geq 1{,}200{,}000$. The resolvent M1$''$ framework and the Leading-Mode Cancellation Lemma narrow the remaining challenge to a specific analytical problem reducible to Fourier analysis and the Prime Number Theorem. The PNT Transfer Lemma (Part~II) then establishes M1$''$ (resolvent subdominance) as proved for all sufficiently large $\lambda$.
+The work in Part~II fits directly into Connes' spectral approach to RH \cite{Connes2026}. The Shift Parity Lemma provides analytical evidence for the even dominance hypothesis that Connes uses in Theorem~6.1. The computer-assisted diagnostics at $33$ values of $\lambda$ up to $1{,}300{,}000$ provide strong finite-range evidence across more than $4$ orders of magnitude, conditional on the odd-sector lower-bound validation. The resolvent M1$''$ framework, the Leading-Mode Cancellation Lemma, and the PNT Transfer Lemma establish the asymptotic variational sign; the remaining challenge is the eigenvalue-ordering/lower-bound step.
 
 \subsection{Nyman--Beurling--Baez-Duarte}
 
@@ -534,16 +537,16 @@ A Yang--Mills analogy exists: Kirk's zero-free strip for Selberg zeta (via Ruell
 
   \item The \textbf{Shift Parity Lemma}, a purely algebraic result about trigonometric shift matrices, establishing universal even preference of individual primes.
 
-  \item A \textbf{computer-assisted proof} of even dominance at $33$ values ($\lambda = 100$ to $1{,}300{,}000$), providing rigorous verification of Connes' spectral hypothesis across more than $4$ orders of magnitude.
+  \item A \textbf{computer-assisted finite-range diagnostic} of even dominance at $33$ values ($\lambda = 100$ to $1{,}300{,}000$), providing strong evidence for Connes' spectral hypothesis across more than $4$ orders of magnitude, conditional on the odd-sector lower-bound validation.
 
   \item The \textbf{conditional reduction of the cumulative step (A6/E6)}:
     (i) the v2.0 three-regime argument combines computer-assisted
-    certificates ($\lambda \leq 1{,}300{,}000$), the M1$''$ resolvent
+    finite-range diagnostics ($\lambda \leq 1{,}300{,}000$), the M1$''$ resolvent
     framework with PNT transfer, and three control lemmas (higher-mode
     decay, resolvent truncation, PNT error transfer); (ii) the v2.1 Direct
     Frontier-Dominance argument (Part~II, Proposition~\emph{prop:direct-frontier})
     uses a common Rayleigh test vector, PNT+Mertens partial summation, and
-    finite CAP coverage up to the explicit asymptotic threshold. Together
+    finite diagnostic coverage up to the explicit asymptotic threshold. Together
     they isolate the remaining asymptotic gap to the
     \emph{Asymptotic Variational Gap Conjecture} for $\lambda_1^-$.
 
@@ -565,18 +568,19 @@ even sector for all sufficiently large $\lambda$. To transfer this to the
 actual prime sums, two components are needed:
 
 \begin{enumerate}
-  \item \textbf{Computer-assisted certificates ($\lambda \leq 1{,}300{,}000$):} Already proved for $33$ values (Part~II, \S3).
+  \item \textbf{Computer-assisted diagnostics ($\lambda \leq 1{,}300{,}000$):} Strong conditional bridge at $33$ values, pending the odd-sector lower-bound validation (Part~II, \S3).
   \item \textbf{PNT Transfer Lemma (Part~II):} By Abel summation with the Chebyshev function error $\theta(x) - x = O(x\exp(-c\sqrt{\log x}))$, the actual resolvent ratio satisfies $\rho(\lambda) = \rho^{\mathrm{EM}}(\lambda) + O(L\,e^{-c\sqrt{L}}) \to \rho^{\mathrm{EM}}(\lambda)$ as $\lambda \to \infty$. Since $\rho^{\mathrm{EM}} < 0$ for $L \geq 13$ (interval-arithmetic certified), there exists $\lambda_0$ such that $\rho(\lambda) < 0$ for all $\lambda \geq \lambda_0$.
 \end{enumerate}
 
 \noindent The status of M1$''$ (resolvent subdominance) is therefore:
 \textbf{proved as an asymptotic variational framework}. In v2.1 the robust
-Direct Frontier-Dominance proof also bypasses the M1$''$ route by using a
-common frontier Rayleigh vector plus finite CAP coverage. Combined with the
-higher-mode decay bound (Lemma~B), the resolvent truncation control
-(Lemma~C), and the $33$ computer-assisted certificates, this yields the
-current Part~II status: rigorous even dominance on the certified range and a
-conditional asymptotic reduction beyond it.
+Direct Frontier-Dominance proof also bypasses the M1$''$ route for the
+variational statement by using a common frontier Rayleigh vector plus finite
+diagnostic coverage. Combined with the higher-mode decay bound (Lemma~B), the
+resolvent truncation control (Lemma~C), and the $33$ computer-assisted
+diagnostics, this yields the current Part~II status: a conditional finite
+bridge and a conditional asymptotic reduction pending the odd-sector lower
+bound.
 
 \subsection{Analytical Status of the Control Lemmas (v1.1)}
 
@@ -590,14 +594,15 @@ No numerical constants remain in the proof of Regime~2. For explicit references:
 \subsection{The Remaining Distance}
 
 The reduction chain A1--A8 (\Cref{sec:architecture}) is now sharply
-localized. Steps A1--A5 are established, and the certified bridge for A3 is
-rigorous at the $33$ interval-arithmetic values. The remaining distance is no
+localized. Steps A1--A5 are established, and A3 gives a strong
+finite-range diagnostic bridge at the $33$ interval-arithmetic values, but it
+is theorem-level only after an odd-sector lower-bound validation. The remaining distance is no
 longer a broad proof-architecture problem but a single asymptotic odd-sector
 lower-bound problem: upgrading the variational negativity of $W^+-W^-$ to the
 eigenvalue inequality $\lambda_1^+<\lambda_1^-$. In v2.1 an independent
 Direct Frontier-Dominance proof (Part~II, Proposition~\emph{prop:direct-frontier})
 was added that bypasses the interpolation and PNT-transfer caveats by using a
-common frontier Rayleigh vector and finite CAP coverage; the v2.2 revision
+common frontier Rayleigh vector and finite diagnostic coverage; the v2.2 revision
 clarifies exactly what this argument proves and what it still leaves open.
 
 \subsection{Philosophical Reflection: Genesis of the Proof Architecture}
@@ -617,10 +622,11 @@ insights. The Shift Parity Lemma formalizes the constructive interference of
 even modes and destructive interference of odd modes under prime shifts. The
 resolvent analysis (M1$''$) and the subsidiary lemmas on mode decay and
 truncation show that this local even preference has the correct asymptotic
-variational sign under summation. Proposition~A6 closes the finite bridge and
-isolates the remaining asymptotic spectral step.
+variational sign under summation. Proposition~A6 isolates the finite bridge
+and the remaining asymptotic spectral step; it does not by itself close the
+odd-sector eigenvalue-ordering problem.
 
-In retrospect, BI-8 correctly predicted the architecture but misidentified the mechanism. The ``entropy'' of the Riemann Hypothesis is not thermodynamic but geometric-arithmetic: it arises from the trigonometric structure of prime shifts and the non-coordinability of their phases. The present work can therefore be understood as a distillation of this development, in which all heuristic elements have been replaced by formal, verifiable arguments.
+In retrospect, BI-8 correctly predicted the architecture but misidentified the mechanism. The ``entropy'' of the Riemann Hypothesis is not thermodynamic but geometric-arithmetic: it arises from the trigonometric structure of prime shifts and the non-coordinability of their phases. The present work can therefore be understood as a distillation of this development, in which the heuristic elements have been separated from the formal, verifiable arguments and the remaining odd-sector lower-bound problem is now explicit.
 
 The v1.4 ruling-outs of Routes~A and~B sharpen this picture further. One might have expected the primes, acting through $A_\lambda$, to obey either an absolute smoothing principle (total positivity) or a hidden symmetry principle (commuting operator). Neither holds: the Fourier multiplier $M(\xi)$ of the prime shift operator oscillates through zero because the non-trivial zeros of $\zeta$ are its poles, and no fixed algebraic structure coordinates the shifts at different scales. What remains is the pointwise Shift Parity Lemma---an algebraic identity of trigonometric overlaps---combined with the statistical concentration of prime weight at the frontier $p \sim \lambda$. The absence of a global smoothing or symmetry principle is not a gap to be filled; it is the correct structure. Even dominance arises because the primes are multiplicatively independent, not despite that fact.
 
@@ -641,14 +647,14 @@ Thermodynamic formalism for $\zeta$ & established & I \\
 4 excluded paths (K1--K4) & proven & I \\
 Localization: all of RH $\equiv$ Step S5 & proven & I \\
 Shift Parity Lemma & proven (analytic) & II \\
-Even dominance ($33$ values, $\lambda \leq 1{,}300{,}000$) & proven (CAP) & II \\
+Gap diagnostics ($33$ values, $\lambda \leq 1{,}300{,}000$) & evidence / conditional & II \\
 Frontier-prime mechanism & proven & II \\
 Hellmann--Feynman: prime-counting drives gap & proven & II \\
 Leading-Mode Cancellation ($c = 2+\sqrt{2}$) & proven & II \\
 Euler--Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (interval-arithmetic certified) & proven & II \\
 Resolvent M1$''$: $(E_{\sin}-E_{\cos})/D = O(1/L)$ & proven & II \\
 Gap asymptotics: $|\mathrm{cert\_gap}| \sim c\sqrt{\lambda}$ & numerical & II \\
-\textbf{M1$''$ (resolvent subdominance)} & \textbf{proved (variational framework)} & II \\
+\textbf{M1$''$ (resolvent subdominance)} & \textbf{variational reduction} & II \\
 Higher-mode decay (Lemma~B) & proved & II \\
 Tail truncation (Lemma~C) & proved (analytical) & II \\
 PNT transfer error (Lemma~PNT) & proved with effective $C$ & II \\

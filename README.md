@@ -20,20 +20,21 @@ private until a full project closeout permits release.
 
 ## Current Status (v2.2, 2026-05-14)
 
-The public paper package now reflects the v2.2 status correction. The
-certified range `100 <= lambda <= 1,300,000` remains rigorously established
-via separate interval-arithmetic bounds for `lambda_1^+` and `lambda_1^-`,
-while the asymptotic step is reduced to the `Asymptotic Variational Gap
-Conjecture`. The Direct Frontier-Dominance argument remains part of the
-package as the asymptotic variational route, but it no longer by itself closes
-the eigenvalue inequality `lambda_1^+ < lambda_1^-`.
+The public paper package now reflects the v2.3 status correction. The finite
+range `100 <= lambda <= 1,300,000` remains strong numerical evidence and a
+conditional finite bridge; theorem-level finite even dominance still depends
+on validating the odd-sector tail lower bound for `lambda_1^-`. The asymptotic
+step is reduced to the `Asymptotic Variational Gap Conjecture`. The Direct
+Frontier-Dominance argument remains part of the package as the asymptotic
+variational route, but it no longer by itself closes the eigenvalue inequality
+`lambda_1^+ < lambda_1^-`.
 
 ## Paper Series (3 Parts, EN + DE)
 
 | Paper | File | Pages | Content |
 |-------|------|-------|---------|
 | **Part I** | `RH_I_Foundations` | 15 | Foundations and Obstructions: thermodynamic landscape (R1-R9), dead ends (K1-K4), reorientation to Connes |
-| **Part II** | `RH_II_Even_Dominance` | 52 | **Main paper.** Shift Parity Lemma, 33 CAP certificates, the M1'' variational framework, Leading-Mode Cancellation (c=2+sqrt(2)), Higher-Mode Decay (Lemma B), Resolvent Truncation (Lemma C), PNT Transfer, Euler-Maclaurin Proposition, Direct Frontier-Dominance, and the v2.2 status revision |
+| **Part II** | `RH_II_Even_Dominance` | 52 | **Main paper.** Shift Parity Lemma, 33 finite-range diagnostics, the M1'' variational framework, Leading-Mode Cancellation (c=2+sqrt(2)), Higher-Mode Decay (Lemma B), Resolvent Truncation (Lemma C), PNT Transfer, Euler-Maclaurin Proposition, Direct Frontier-Dominance, and the v2.3 status revision |
 | **Part III** | `RH_III_Conclusio` | 19 | Synthesis of the proof architecture, revised v2.2 status table, explored alternatives (BI-1..11), independent results, and the remaining asymptotic gap problem |
 
 All papers are available in English and German (DE suffix).
@@ -45,7 +46,7 @@ Combined English version: `paper/RH_Complete_Series_EN.pdf` (86 pages).
 |------|-----------|--------|
 | A1 | Connes' Theorem 6.1 | proven (external) |
 | A2 | Hurwitz sufficiency | proven (external) |
-| A3 | Even dominance at 33 values (lambda=100..1.3M) | **proven (CAP)** |
+| A3 | Even dominance at 33 values (lambda=100..1.3M) | numerical evidence / conditional finite bridge |
 | A4 | Shift Parity Lemma | **proven** |
 | A5 | Frontier-prime mechanism | proven |
 | **A6** | **Cumulative step** | **variational, v2.2** |
@@ -57,8 +58,9 @@ Combined English version: `paper/RH_Complete_Series_EN.pdf` (86 pages).
 1. **Shift Parity Lemma**: Every prime individually favors even eigenfunctions.
    Proved analytically (det/trace argument, Cauchy interlacing).
 
-2. **33 Even Dominance Certificates**: lambda = 100 to 1,300,000, all rigorously
-   verified via interval arithmetic (mpmath.iv, 50-digit precision).
+2. **33 finite-range gap diagnostics**: lambda = 100 to 1,300,000, with
+   interval-arithmetic even upper bounds and a currently conditional odd
+   lower-bound component.
 
 3. **Leading-Mode Cancellation Lemma**: Overlap differences cancel pairwise with
    exact constant c = 2 + sqrt(2).
@@ -67,10 +69,10 @@ Combined English version: `paper/RH_Complete_Series_EN.pdf` (86 pages).
    asymptotic variational sign with explicit threshold lambda_0 = 442,413
    (Dusart bound).
 
-5. **Current v2.2 status of Proposition A6**:
-   - Regime 1 (lambda in [100, 1.3M]): 33 CAP certificates give rigorous
-     even dominance on the certified values via separate bounds for
-     `lambda_1^+` and `lambda_1^-`.
+5. **Current v2.3 status of Proposition A6**:
+   - Regime 1 (lambda in [100, 1.3M]): 33 CAP diagnostics give strong
+     finite-range evidence; theorem-level even dominance on the certified
+     values requires validation of the odd-sector tail lower bound.
    - Regime 2 (asymptotic): M1'' + PNT Transfer + Lemma B + Lemma C identify
      the correct variational sign.
    - Remaining gap: asymptotic even dominance is reduced to the
@@ -78,7 +80,7 @@ Combined English version: `paper/RH_Complete_Series_EN.pdf` (86 pages).
 
 6. **v2.1 Direct Frontier-Dominance**: independent asymptotic variational route
    using a common frontier Rayleigh vector, PNT partial summation, Mertens
-   bounds, and finite CAP coverage through the explicit asymptotic threshold.
+   bounds, and finite diagnostic coverage through the explicit asymptotic threshold.
    It removes the earlier interpolation/PNT-constant caveats, but still
    requires a separate odd-sector lower bound to close the eigenvalue
    inequality.

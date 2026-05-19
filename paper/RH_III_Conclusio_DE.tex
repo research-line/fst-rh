@@ -38,7 +38,7 @@
 \maketitle
 
 \begin{abstract}
-Diese abschließende Arbeit in einer dreiteiligen Serie führt die Ergebnisse der vorangegangenen Arbeiten zu einem einheitlichen Bild zusammen. Wir katalogisieren die bewiesenen strukturellen Ergebnisse (R1--R9), die ausgeschlossenen Wege (K1--K4) und die neuen Beiträge: das Shift-Parity-Lemma, den computergestützten Beweis der geraden Dominanz für 33 Werte von $\lambda$ bis zu $1{,}300{,}000$, den Resolventen-gedämpften M1$''$-Rahmen, das Leading-Mode-Cancellation-Lemma mit der exakten Konstanten $c = 2 + \sqrt{2}$ und die Euler-Maclaurin-Proposition, die $\rho^{\mathrm{EM}}(L) < 0$ für $L \geq 14$ ($\lambda \geq 1{,}200{,}000$) etabliert. In Kombination mit den computergestützten Zertifikaten (nun lückenlos bis $\lambda = 1{,}300{,}000$) und dem PNT-Transfer-Lemma ergibt sich M1$''$ (Resolventen-Subdominanz) als bewiesen. Teil~III berücksichtigt außerdem die in v2.0 eingeführten Nicht-Existenz-Theoreme (NE-A, NE-B in Teil~II), welche die vergleichende Analyse der Beweisstrategien neu strukturieren und bestätigen, dass sich gerade Dominanz nicht auf Totalpositivität oder Sturm--Liouville-artige Argumente reduzieren lässt. Wir präsentieren die vollständige Beweisarchitektur von Connes' Theorem 6.1 über die gerade Dominanz bis zur Riemannschen Vermutung, formulieren offene Probleme und diskutieren Verbindungen zur weiteren Landschaft der analytischen Zahlentheorie. In v2.1 wird ein robuster direkter Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}) hinzugefügt; er verwendet einen gemeinsamen Rayleigh-Testvektor im Frontier-Fenster und eine endliche CAP-Brücke, um beide Caveats der v2.0-Drei-Regime-Brücke zu umgehen und den Beweis der Riemannschen Vermutung unbedingt zu machen.
+Diese abschließende Arbeit in einer dreiteiligen Serie führt die Ergebnisse der vorangegangenen Arbeiten zu einem einheitlichen Bild zusammen. Wir katalogisieren die bewiesenen strukturellen Ergebnisse (R1--R9), die ausgeschlossenen Wege (K1--K4) und die neuen Beiträge: das Shift-Parity-Lemma, die computergestützte finite-range Gap-Diagnostik für 33 Werte von $\lambda$ bis zu $1{,}300{,}000$, den Resolventen-gedämpften M1$''$-Rahmen, das Leading-Mode-Cancellation-Lemma mit der exakten Konstanten $c = 2 + \sqrt{2}$ und die Euler-Maclaurin-Proposition, die $\rho^{\mathrm{EM}}(L) < 0$ für $L \geq 14$ ($\lambda \geq 1{,}200{,}000$) etabliert. Die finite-range Diagnostik bleibt theoremstark bedingt auf eine validierte untere Schranke für den ungeraden Sektor. Teil~III berücksichtigt außerdem die in v2.0 eingeführten Nicht-Existenz-Theoreme (NE-A, NE-B in Teil~II), welche die vergleichende Analyse der Beweisstrategien neu strukturieren und bestätigen, dass sich gerade Dominanz nicht auf Totalpositivität oder Sturm--Liouville-artige Argumente reduzieren lässt. Wir präsentieren die Beweisarchitektur von Connes' Theorem 6.1 über die gerade Dominanz bis zur Riemannschen Vermutung als \emph{conditional reduction}, formulieren offene Probleme und diskutieren Verbindungen zur weiteren Landschaft der analytischen Zahlentheorie. In v2.1 wird ein robuster direkter Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}) hinzugefügt; in der v2.3-Lesart beweist er das asymptotische Variationsvorzeichen, aber nicht allein die Eigenwertordnung $\lambda_1^+<\lambda_1^-$.
 \end{abstract}
 
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
@@ -56,11 +56,11 @@ Diese abschließende Arbeit in einer dreiteiligen Serie führt die Ergebnisse de
 Diese Arbeit schließt eine dreiteilige Untersuchung der Riemannschen Vermutung durch Eichtheorie, Spektralanalyse und arithmetische Thermodynamik ab:
 \begin{description}[font=\bfseries,leftmargin=2em]
   \item[Teil~I \cite{Geiger2026partI}:] Grundlagen und Hindernisse --- strukturelle Ergebnisse (R1--R9), vier kritische Hindernisse (K1--K4), Neuausrichtung auf das Spektralprogramm von Connes.
-  \item[Teil~II \cite{Geiger2026partII}:] Gerade Dominanz --- Shift-Parity-Lemma, computergestützter Beweis ($33$ Zertifikate, $\lambda$ bis zu $1{,}300{,}000$), Resolventen-gedämpfter M1$''$-Rahmen, Leading-Mode-Cancellation ($c = 2 + \sqrt{2}$), Euler-Maclaurin-Proposition ($\rho^{\mathrm{EM}} < 0$ für $\lambda \geq 1{,}200{,}000$).
+  \item[Teil~II \cite{Geiger2026partII}:] Gerade Dominanz --- Shift-Parity-Lemma, computergestützte finite-range Diagnostik ($33$ Werte, $\lambda$ bis zu $1{,}300{,}000$), Resolventen-gedämpfter M1$''$-Rahmen, Leading-Mode-Cancellation ($c = 2 + \sqrt{2}$), Euler-Maclaurin-Proposition ($\rho^{\mathrm{EM}} < 0$ für $\lambda \geq 1{,}200{,}000$).
   \item[Teil~III (diese Arbeit):] Conclusio --- Synthese, Beweisarchitektur, offene Probleme.
 \end{description}
 
-Die Kernbotschaft ist, dass die Riemannsche Vermutung, wenn sie über das Li-Kriterium und die quadratische Weil-Form angegangen wird, auf eine gut charakterisierte analytische Bedingung reduziert wird: die \emph{Resolventen-Subdominanz} des Kopplungsdifferenzials, welche durch das Leading-Mode-Cancellation-Lemma (Teil~II) auf die klassische Fourier-Analyse und den Primzahlsatz reduziert wird. Die Euler-Maclaurin-Proposition (Teil~II, Proposition~4.11) schließt dies analytisch für $\lambda \geq 1{,}200{,}000$; zusammen mit den $33$ computergestützten Zertifikaten (bis $\lambda = 1{,}300{,}000$), die die Lücke vollständig schließen, ist M1 bewiesen.
+Die Kernbotschaft ist, dass die Riemannsche Vermutung, wenn sie über das Li-Kriterium und die quadratische Weil-Form angegangen wird, auf eine gut charakterisierte analytische Bedingung reduziert wird: eine asymptotische Variations-/Gap-Struktur des Kopplungsdifferenzials. Die Euler-Maclaurin-Proposition (Teil~II, Proposition~4.11) identifiziert das korrekte Variationsvorzeichen für großes $\lambda$; zusammen mit den $33$ computergestützten finite-range Diagnostiken (bis $\lambda = 1{,}300{,}000$) entsteht eine starke bedingte Brücke. Der noch offene Schritt ist die theoremstarke Übertragung dieser Variationsdiagnostik auf die Eigenwertordnung $\lambda_1^+<\lambda_1^-$.
 
 
 % =============================================================================
@@ -93,7 +93,7 @@ Die folgenden Ergebnisse sind unbedingt (sie setzen RH nicht voraus):
   \[ \lambda_1(D_N(r)) < 0, \]
   wobei $D_N(r) = S_N^+(r) - S_N^-(r)$ die Differenz zwischen den Shift-Matrizen des geraden und ungeraden Sektors ist. Analytisch bewiesen (Zwei-Fall-det/Spur-Argument für $N=3$, Monotoniereduktion für $N \geq 4$) und durch Intervallarithmetik zertifiziert (55.000 Teilintervalle, 60-stellige Präzision, Gerschgorin-Kreisschranken).
 
-  \item \textbf{Computergestützter Beweis der geraden Dominanz} (Teil~II). Für $33$ Werte von $\lambda$ von $100$ bis $1{,}300{,}000$ ist die gerade Dominanz rigoros durch Intervallarithmetik zertifiziert (mpmath.iv, 50-stellige Präzision). Die zertifizierte Lücke wächst monoton als $\sim\!\sqrt{\lambda}$, von $-2{,}25$ bei $\lambda = 100$ bis $-475{,}83$ bei $\lambda = 1{,}300{,}000$. Kein Versagen über mehr als $4$ Größenordnungen.
+  \item \textbf{Computergestützte finite-range Diagnostik} (Teil~II). Für $33$ Werte von $\lambda$ von $100$ bis $1{,}300{,}000$ ist eine starke negative Gap-Diagnostik durch Intervallarithmetik dokumentiert (mpmath.iv, 50-stellige Präzision). Die Lücke wächst monoton als $\sim\!\sqrt{\lambda}$, von $-2{,}25$ bei $\lambda = 100$ bis $-475{,}83$ bei $\lambda = 1{,}300{,}000$. Als theoremstarke gerade Dominanz bleibt dies bedingt auf die validierte untere Schranke für den ungeraden Sektor.
 
   \item \textbf{Universelle gerade Präferenz einzelner Primzahlen} (Teil~II, Korollar~2.5). Für jede Primzahl $p$ mit $r = \log p / \log\lambda \in (0,2)$:
   \[ \lambda_1(W_p^+) \leq \lambda_1(W_p^-) + \lambda_1(D_N(r)) < \lambda_1(W_p^-), \]
@@ -115,7 +115,7 @@ Die folgenden Ergebnisse sind unbedingt (sie setzen RH nicht voraus):
   \]
   so dass $\mathrm{cert\_gap}^{\mathrm{EM}}(\lambda) < 0$.
 
-  \item \textbf{PNT-Transfer-Lemma und M1$''$-Abschluss} (Teil~II). Durch Abel-Summation mit der Chebyshev-Funktion $\theta(x) = x + O(x\,e^{-c\sqrt{\log x}})$ erfüllt das Resolventen-Verhältnis $\rho(\lambda) = \rho^{\mathrm{EM}}(\lambda) + O(L\,e^{-c\sqrt{L}})$. Da $\rho^{\mathrm{EM}} < 0$ für $L \geq 14$ und der Fehler verschwindet, existiert $\lambda_0$ mit $\rho(\lambda) < 0$ für alle $\lambda \geq \lambda_0$. \textbf{M1$''$ (Resolventen-Subdominanz) ist bewiesen.}
+  \item \textbf{PNT-Transfer-Lemma und M1$''$-Reduktion} (Teil~II). Durch Abel-Summation mit der Chebyshev-Funktion $\theta(x) = x + O(x\,e^{-c\sqrt{\log x}})$ erfüllt das Resolventen-Verhältnis $\rho(\lambda) = \rho^{\mathrm{EM}}(\lambda) + O(L\,e^{-c\sqrt{L}})$. Da $\rho^{\mathrm{EM}} < 0$ für $L \geq 14$ und der Fehler verschwindet, liefert dies eine asymptotische Variationsreduktion des Resolventen-Subdominanz-Mechanismus. Der theoremstarke Restschritt bleibt die Odd-Sektor-Lower-Bound-Schließung, die das Variationsvorzeichen in die Eigenwertungleichung $\lambda_1^+ < \lambda_1^-$ überführt.
 \end{enumerate}
 
 
@@ -161,35 +161,35 @@ Wir präsentieren die logische Kette vom bekannten Wissen zur Riemannschen Vermu
 \textbf{Schritt} & \textbf{Aussage} & \textbf{Status} & \textbf{Quelle} \\\hline
 A1 & Connes' Theorem~6.1: gerade Dominanz $\Rightarrow$ Nullstellen von $\hat{\eta}$ reell & bewiesen & \cite{ConnesvS2025, Connes2026} \\
 A2 & Hurwitz: gerade Dominanz für $\lambda_n \to \infty$ genügt & bewiesen & \cite{Connes2026} \\
-A3 & Gerade Dominanz bei $33$ Werten, $\lambda \leq 1{,}300{,}000$ & bewiesen & Teil~II \\
+A3 & Gerade Dominanz bei $33$ Werten, $\lambda \leq 1{,}300{,}000$ & numerische Evidenz / bedingte finite Brücke & Teil~II \\
 A4 & Shift-Parity-Lemma: jede Primzahl bevorzugt gerade & bewiesen & Teil~II \\
 A5 & Frontier-Primzahl-Mechanismus & bewiesen & Teil~II \\
 A5b & Euler-Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (intervallarithmetisch zertifiziert) & bewiesen & Teil~II \\
-\textbf{A6} & \textbf{Kumulativer Schritt: $\sum_p W_p$ erhält die gerade Präferenz} & \textbf{bewiesen (v2.1)}${}^\dagger$ & Teil~II \\
-A7 & Gerade Dominanz für alle $\lambda \geq \lambda_0$ & bewiesen (v2.1) & Teil~II \\
-A8 & Alle Nullstellen auf $\Re(s) = 1/2$ (RH) & bewiesen (v2.1) & A1+A2+A7
+\textbf{A6} & \textbf{Kumulativer Schritt: $\sum_p W_p$ erhält die gerade Präferenz} & \textbf{variational / bedingt}${}^\dagger$ & Teil~II \\
+A7 & Gerade Dominanz für $\lambda_n\to\infty$ & bedingt auf AVG / Odd-Lower-Bound & Teil~II \\
+A8 & Alle Nullstellen auf $\Re(s) = 1/2$ (RH) & conditional reduction & A1+A2+A7
 \end{tabular}
 \end{center}
 
-\noindent${}^\dagger$\textbf{Status von Proposition~A6} (Teil~II, Proposition~A6): In v2.1 wird ein robuster direkter Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}) hinzugefügt. Er verwendet einen gemeinsamen Rayleigh-Testvektor auf dem Frontier-Fenster $r\in[0.7,1]$, PNT-Partialsummation, den Satz von Mertens und endliche CAP-Abdeckung bis zur expliziten asymptotischen Schwelle. Beide v2.0-Caveats (Regime-1-Interpolation und PNT-Transfer-Konstante) entfallen. Die Status-Bezeichnungen ``bewiesen'' oben sind in v2.1 daher unbedingt.
+\noindent${}^\dagger$\textbf{Status von Proposition~A6} (Teil~II, Proposition~A6): In v2.1 wurde ein robuster direkter Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}) hinzugefügt. Er verwendet einen gemeinsamen Rayleigh-Testvektor auf dem Frontier-Fenster $r\in[0.7,1]$, PNT-Partialsummation, den Satz von Mertens und finite-range CAP-Evidenz bis zur expliziten asymptotischen Schwelle. In der v2.3-Lesart beweist dies $\lambda_{\min}(W^+-W^-)<0$ asymptotisch, aber nicht automatisch $\lambda_1^+<\lambda_1^-$. Der Eigenwertordnungsschritt bleibt bedingt auf eine validierte untere Schranke für $\lambda_1^-$.
 
-\subsection{Der kumulative Schritt (A6) --- Gelöst}
+\subsection{Der kumulative Schritt (A6) --- bedingte Reduktion}
 
-Der kumulative Schritt war die zentrale Herausforderung: zu zeigen, dass die Summe $\sum_{p \leq \lambda} W_p$ die individuelle gerade Präferenz (Shift-Parity-Lemma) beibehält. Teil~II (Proposition~A6) löst dies durch ein \emph{Drei-Regime-Argument}:
+Der kumulative Schritt war die zentrale Herausforderung: zu zeigen, dass die Summe $\sum_{p \leq \lambda} W_p$ die individuelle gerade Präferenz (Shift-Parity-Lemma) als echte Eigenwertordnung beibehält. Teil~II trennt inzwischen die bewiesene Variationsdiagnostik von der noch offenen Eigenwertordnung:
 
 \begin{enumerate}
-  \item \textbf{Regime~1} ($\lambda \in [100, 1{,}300{,}000]$): $33$ computergestützte Zertifikate mit Intervallarithmetik (50-Digit Präzision).
-  \item \textbf{Regime~2} ($\lambda \geq 442{,}413$, bedingt auf die effektive PNT-Transfer-Konstante $C < 2$): Das M1$''$-Resolventen-Framework zeigt $\rho(\lambda) < 0$. Drei Hilfsresultate kontrollieren die Approximationsqualität:
+  \item \textbf{Regime~1} ($\lambda \in [100, 1{,}300{,}000]$): $33$ computergestützte finite-range Diagnostiken mit Intervallarithmetik (50-Digit Präzision), theoremstark bedingt auf den Odd-Sektor-Tail-Lower-Bound.
+  \item \textbf{Regime~2} (asymptotisch): Das M1$''$-Resolventen-Framework zeigt das korrekte Variationsvorzeichen. Drei Hilfsresultate kontrollieren die Approximationsqualität:
   \begin{itemize}
     \item \emph{Höhere-Moden-Abkling} (Lemma~B): Moden $j \geq 2$ tragen $O(D/L) = o(D)$ bei.
     \item \emph{Resolventen-Trunkierung} (Lemma~C): Neumann-Reihe konvergiert ($\|R_0 K\| < 1$ für $\lambda \geq 500$).
     \item \emph{PNT-Transfer} (Lemma~PNT): $|\rho - \rho^{\mathrm{EM}}| = O(L\,e^{-c\sqrt{L}})$.
   \end{itemize}
-  \item \textbf{Überlappung}: Beide Regime decken $[442{,}413,\, 1{,}300{,}000]$ gleichzeitig ab.
+  \item \textbf{Überlappung}: Beide Regime treffen im Bereich $[442{,}413,\, 1{,}300{,}000]$ zusammen; die Restlücke ist eine Spektralrichtungs-Lücke, keine Abdeckungslücke.
 \end{enumerate}
 
 \smallskip
-\noindent\textbf{v2.1-Ergänzung --- Direkte Frontier-Dominanz.} In v2.1 (Teil~II, Abschnitt zur direkten Frontier-Dominanz) wird ein zweiter unabhängiger Beweis von A6 gegeben. Seine robuste Fassung verwendet die Variationsungleichung $\lambda_{\min}(D_{\mathrm{total}})\leq e_1^\top D_{\mathrm{frontier}}e_1+\|D_{\mathrm{non}}\|$ mit dem gemeinsamen Vektor $e_1=(0,1,0)^\top$, statt einzelne Minimum-Eigenwerte zu addieren. Auf $r\in[0.7,1]$ erfüllt der skalare Frontier-Quotient $e_1^\top D_3(r)e_1\leq -0{,}4685$; PNT-Partialsummation liefert einen negativen Frontier-Beitrag der Ordnung $\sqrt{\lambda}$, während Mertens-artige Abschätzungen die Non-Frontier-Norm durch $O(\lambda^{0.35}+\log\lambda)$ begrenzen. Die asymptotische Schwelle liegt im vorhandenen CAP-Bereich, sodass endliche Brücke plus Frontier-Schätzung A6 für alle $\lambda\geq100$ beweisen. Beide v2.0-Caveats werden durch dieses Argument obviiert.
+\noindent\textbf{v2.1-Ergänzung --- Direkte Frontier-Dominanz.} In v2.1 (Teil~II, Abschnitt zur direkten Frontier-Dominanz) wurde ein zweites Argument eingefügt. Seine robuste Fassung verwendet die Variationsungleichung $\lambda_{\min}(D_{\mathrm{total}})\leq e_1^\top D_{\mathrm{frontier}}e_1+\|D_{\mathrm{non}}\|$ mit dem gemeinsamen Vektor $e_1=(0,1,0)^\top$, statt einzelne Minimum-Eigenwerte zu addieren. Auf $r\in[0.7,1]$ erfüllt der skalare Frontier-Quotient $e_1^\top D_3(r)e_1\leq -0{,}4685$; PNT-Partialsummation liefert einen negativen Frontier-Beitrag der Ordnung $\sqrt{\lambda}$, während Mertens-artige Abschätzungen die Non-Frontier-Norm durch $O(\lambda^{0.35}+\log\lambda)$ begrenzen. Dieses Argument beweist die asymptotische Variationsaussage, aber nicht ohne weitere untere Schranke die Eigenwertordnung.
 
 \subsection{Beweisstrategien für A6: Vergleichende Analyse}
 
@@ -215,7 +215,7 @@ Diese Ausschlüsse sind keine Beweisfehler, sondern strukturelle Entdeckungen: d
 
 \begin{itemize}
   \item \emph{Analytisches Rückgrat:} M1$''$ zeigt $\rho(\lambda) \to 0$ via Leading-Mode-Cancellation (Lemma~A) und PNT-Transfer.
-  \item \emph{Rigorose Numerik:} 33 CAP-Zertifikate decken den endlichen Bereich ab, in dem die analytische Asymptotik noch nicht greift.
+  \item \emph{Numerische Brücke:} 33 finite-range Diagnostiken decken den endlichen Bereich bedingt ab, in dem die analytische Asymptotik noch nicht greift.
   \item \emph{Fehlerkontrolle:} Lemma~B (Höhere-Moden-Abkling) und Lemma~C (Neumann-Konvergenz) stellen sicher, dass die Resolventen-Approximation treu ist.
 \end{itemize}
 
@@ -241,7 +241,7 @@ S1 & Definition von $\xi(s)$, Funktionalgleichung & bewiesen & Definition \\
 S2 & Li-Koeffizienten via Bombieri-Lagarias & bewiesen & \cite{BombieriLagarias1999} \\
 S3 & Zerlegung $\lambda_n = \lambda_n^{(\infty)} + \lambda_n^{(\mathrm{fin})}$ & bewiesen & Teil~I \\
 S4 & Archimedische Dominanz: $\lambda_n^{(\infty)} \sim \frac{n}{2}\log n$ & bewiesen & Stirling \\
-\textbf{S5} & \textbf{$\lambda_n \geq 0$ für alle $n \geq 1$} & \textbf{OFFEN}\footnote{S5 ist äquivalent zu RH (Li, 1997). Da RH über den Weg der geraden Dominanz bewiesen wird (A6$\to$A7$\to$A8), folgt S5 als Korollar. Es ist hier nur in dem Sinne als ,,offen'' markiert, dass kein \emph{direkter} Beweis der Li-Koeffizienten-Positivität in dieser Serie gegeben wird.} & \textbf{$\Longleftrightarrow$ RH} \\
+\textbf{S5} & \textbf{$\lambda_n \geq 0$ für alle $n \geq 1$} & \textbf{OFFEN}\footnote{S5 ist äquivalent zu RH (Li, 1997). Der vorliegende Weg der geraden Dominanz liefert nur eine bedingte Reduktion bis zur Odd-Sektor-Lower-Bound-/AVG-Schließung; S5 ist hier daher nicht geschlossen.} & \textbf{$\Longleftrightarrow$ RH} \\
 S6 & Alle Nullstellen auf $\Re(s) = 1/2$ & $\Leftrightarrow$ S5 & Li (1997) \\
 S7 & Primzahlzählung: $\pi(x) = \mathrm{Li}(x) + O(\sqrt{x}\log x)$ & $\Leftarrow$ S6 & von Koch
 \end{tabular}
@@ -259,10 +259,10 @@ E1 & Explizite Weil-Formel & bewiesen & Weil (1952) \\
 E2 & Quadratische Weil-Form $\mathrm{QW}_\lambda$ & bewiesen & Connes (2026) \\
 E3 & Gerade/ungerade Zerlegung von $\mathrm{QW}_\lambda$ & bewiesen & Teil~II \\
 E4 & Shift-Parity-Lemma: jede Primzahl bevorzugt gerade & bewiesen & Teil~II \\
-E5 & Gerade Dominanz bei $33$ Werten, $\lambda \leq 1{,}300{,}000$ & bewiesen & Teil~II (CAP) \\
+E5 & Finite-range Gap-Diagnostik bei $33$ Werten, $\lambda \leq 1{,}300{,}000$ & Evidenz / bedingt & Teil~II (Diagnostik) \\
 E5b & Euler-Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (intervallarithmetisch zertifiziert) & bewiesen & Teil~II \\
-\textbf{E6} & \textbf{Kumulativer Schritt: gerade Dominanz für alle $\lambda$} & \textbf{bewiesen} (= A6) & \textbf{= A6} \\
-E7 & Connes' Theorem~6.1 $\Rightarrow$ RH & bewiesen & \cite{Connes2026}
+\textbf{E6} & \textbf{Kumulativer Schritt: gerade Dominanz für alle $\lambda$} & \textbf{offen / bedingt} (= A6) & \textbf{Odd-Lower-Bound / AVG} \\
+E7 & Connes' Theorem~6.1 + Hurwitz-Brücke $\Rightarrow$ RH & bedingt auf E6 & \cite{Connes2026}
 \end{tabular}
 \end{center}
 
@@ -317,11 +317,11 @@ Mehrere Ergebnisse dieses Programms sind unabhängig vom Hauptbeweis von Interes
 Shift-Parity-Lemma & Arithm. Trigonometrie & Jede Primzahl bevorzugt individuell gerade Eigenfunktionen & Bewiesen \\
 No-Coordination-Lemma & Multipl. Unabhängigkeit & Arithmetischer Ersatz für den Entropie-Term & Bewiesen \\
 Leading-Mode-Cancellation ($c = 2+\sqrt{2}$) & Resolvent-Analyse & Universelle paarweise Cancellation-Konstante & Bewiesen \\
-OS-Reflexionspositivität (A7) & Spektraltheorie & Bochner + kontraktive Halbgruppe & Bewiesen \\
+OS-Reflexionspositivität & Spektraltheorie & Bochner + kontraktive Halbgruppe & Bewiesen als struktureller Input \\
 Euler--Maclaurin: $\rho^{\mathrm{EM}} < 0$ & PNT-Asymptotik & Globaler Stabilitätsanker & Bewiesen \\
 Hellmann--Feynman: $\partial\Delta/\partial L > 0$ & Sensitivitätsanalyse & Lückenvertiefung durch neue Primzahlen, nicht durch~$L$ & Bewiesen \\
-Zerlegung: Primzahlen treiben gerade Dominanz & Spektralzerlegung & Archimedischer Kern ist paritätsneutral & Bewiesen \\
-$33$ CAP-Zertifikate & Intervallarithmetik & Rigorose gerade Dominanz über $4$~Größenordnungen & Bewiesen \\[4pt]
+Zerlegung: Primzahlen treiben die variationsmäßige gerade Präferenz & Spektralzerlegung & Archimedischer Kern ist paritätsneutral & Variational / bedingt \\
+$33$ finite-range Diagnostiken & Intervallarithmetik & Bedingte Brücke bis zur Odd-Lower-Bound-Validierung & Evidenz / bedingt \\[4pt]
 \multicolumn{4}{l}{\emph{Negative Resultate (Obstruktionen und Unmöglichkeiten)}} \\[2pt]
 Obstruktionen K1--K4 & Sackgassen-Analyse & Kartiert den Raum unmöglicher Strategien & Dokumentiert \\
 Convexity Trap & Variationsmethoden & KL-Positivität $\not\Rightarrow$ Li-Positivität & Bewiesen \\
@@ -345,16 +345,16 @@ Interdisziplinärer Katalog & Regularisierung & $11$ Felder teilen die Spurklass
 \label{sec:open-problems}
 % =============================================================================
 
-Mit OP1 (kumulative gerade Dominanz) gelöst formulieren wir drei verbleibende offene Probleme:
+Da OP1 nach v2.3 nur bedingt auf Odd-Lower-Bound/AVG reduziert ist, formulieren wir die verbleibenden offenen Probleme:
 
-\begin{remark}[OP1: Kumulative gerade Dominanz --- unbedingt gelöst (v2.1)]
+\begin{remark}[OP1: Kumulative gerade Dominanz --- bedingt auf Odd-Lower-Bound (v2.3)]
 \label{rem:OP1-resolved}
-Die kumulative gerade Dominanz (A6) ist durch Proposition~A6 (Teil~II) via zwei unabhängige Argumente gelöst: den v2.0-Drei-Regime-Beweis und den v2.1-direkten Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}). Das v2.0-Drei-Regime-Argument (siehe \Cref{sec:architecture}) kombiniert Regime~1 ($33$ rigoros zertifizierte Gitterpunkte plus perturbative Interpolation zwischen ihnen) und Regime~2 (M1$''$-Resolventen-Framework). Die Spektrallückenkonstante ist analytisch abgeleitet: $c_{\mathrm{gap}} \geq 4\pi^2/L \geq 2{,}8$ für $L \leq 14$ (Teil~II, Korollar nach Lemma~B, Schritt~3). Der v2.1-direkte Frontier-Dominanz-Beweis verwendet einen gemeinsamen Rayleigh-Testvektor auf dem Frontier-Fenster, PNT-Partialsummation, den Satz von Mertens und endliche CAP-Abdeckung bis zur expliziten asymptotischen Schwelle; dieses Argument umgeht beide v2.0-Caveats (Regime-1-Interpolation und PNT-Transfer-Konstante) und bestätigt, dass die Reduktion unbedingt ist.
+Die kumulative gerade Dominanz (A6) ist nach v2.3 nicht als Eigenwertordnung geschlossen. Teil~II liefert zwei starke Bausteine: die v2.0-Drei-Regime-Diagnostik und den v2.1-direkten Frontier-Variationsbeweis (Teil~II, Proposition~\emph{prop:direct-frontier}). Das v2.0-Drei-Regime-Argument (siehe \Cref{sec:architecture}) kombiniert Regime~1 ($33$ finite-range Gap-Diagnostiken, bedingt auf den Odd-Sektor-Tail-Lower-Bound) und Regime~2 (M1$''$-Resolventen-Framework). Die Spektrallückenkonstante ist analytisch motiviert: $c_{\mathrm{gap}} \geq 4\pi^2/L \geq 2{,}8$ für $L \leq 14$ (Teil~II, Korollar nach Lemma~B, Schritt~3). Der v2.1-direkte Frontier-Dominanz-Beweis verwendet einen gemeinsamen Rayleigh-Testvektor auf dem Frontier-Fenster, PNT-Partialsummation, den Satz von Mertens und finite-range CAP-Evidenz bis zur expliziten asymptotischen Schwelle; dieses Argument beweist das Variationsvorzeichen, lässt den Schluss auf $\lambda_1^+<\lambda_1^-$ aber offen.
 \end{remark}
 
 \begin{remark}[OP2: Einfachheit von $\lambda_1^+$ --- Gelöst]
 \label{rem:OP2-resolved}
-Der kleinste Eigenwert $\lambda_1^+$ von $\mathrm{QW}_\lambda^+$ ist als einfach zertifiziert für alle $33$ Zertifikatwerte $\lambda \in [100,\, 1{,}300{,}000]$ mittels Intervallarithmetik auf dem $4 \times 4$ geraden Galerkin-Block (Teil~II, Lemma~Einfachheit). Die Intra-Even-Lücke $\lambda_2^+ - \lambda_1^+$ wächst monoton von $8{,}69$ ($\lambda = 100$) bis $\geq 731$ ($\lambda = 320{,}000$), skalierend als $\sim\!\sqrt{\lambda}$. Für Regime~2 ($\lambda \geq 442{,}413$) folgt die analytische Lücke aus der Galerkin-Diagonal-Asymptotik: $W_{11}^+$ ist der eindeutig negativste Diagonaleintrag. Kombiniert mit gerader Dominanz ($\lambda_1^+ < \lambda_1^-$) zertifiziert dies, dass der globale Grundzustand von $A_\lambda$ einfach und gerade ist, wie von Connes' Theorem~6.1 gefordert.
+Der kleinste Eigenwert $\lambda_1^+$ von $\mathrm{QW}_\lambda^+$ ist als einfach zertifiziert für alle $33$ Zertifikatwerte $\lambda \in [100,\, 1{,}300{,}000]$ mittels Intervallarithmetik auf dem $4 \times 4$ geraden Galerkin-Block (Teil~II, Lemma~Einfachheit). Die Intra-Even-Lücke $\lambda_2^+ - \lambda_1^+$ wächst monoton von $8{,}69$ ($\lambda = 100$) bis $\geq 731$ ($\lambda = 320{,}000$), skalierend als $\sim\!\sqrt{\lambda}$. Für Regime~2 ($\lambda \geq 442{,}413$) folgt die analytische Lücke aus der Galerkin-Diagonal-Asymptotik: $W_{11}^+$ ist der eindeutig negativste Diagonaleintrag. Sobald die Odd-Sektor-Lower-Bound-Schließung die Eigenwertordnung $\lambda_1^+ < \lambda_1^-$ liefert, zertifiziert dies, dass der globale Grundzustand von $A_\lambda$ einfach und gerade ist, wie von Connes' Theorem~6.1 gefordert.
 \end{remark}
 
 \begin{conjecture}[OP3: Analytischer Beweis der Indexstarre]
@@ -372,7 +372,7 @@ Man konstruiere einen separablen Hilbert-Raum $\mathcal{V}$ und eine nukleare Fa
 Ist $\log\det_2(I - zR)$ eine Nevanlinna-Funktion (positiver Imaginärteil in der oberen Halbebene) genau dann, wenn alle Nullstellen auf der reellen Achse liegen? Dies wäre ein neues RH-äquivalentes Kriterium im $\det_2$-Rahmen (Teil~I, \S6).
 \end{conjecture}
 
-\noindent Mit OP1 und OP2 gelöst ist die Beweisarchitektur A1--A8 einschließlich der Einfachheitsanforderung vollständig. OP3--OP5 sind strukturelle Fragen, die alternative Ansätze oder tieferes Verständnis liefern könnten.
+\noindent OP1 bleibt damit der zentrale offene Eigenwertordnungsschritt. OP2 ist finite-range bzw. strukturell diagnostiziert, aber für die asymptotische RH-Reduktion ebenfalls an die Odd-Lower-Bound-/AVG-Schließung gekoppelt. OP3--OP5 sind strukturelle Fragen, die alternative Ansätze oder tieferes Verständnis liefern könnten.
 
 
 % =============================================================================
@@ -382,7 +382,7 @@ Ist $\log\det_2(I - zR)$ eine Nevanlinna-Funktion (positiver Imaginärteil in de
 
 \subsection{Connes' Programm}
 
-Die Arbeit in Teil~II fügt sich direkt in Connes' spektralen Ansatz zur Riemannschen Vermutung ein \cite{Connes2026}. Das Shift-Parity-Lemma liefert die erste analytische Evidenz für die Hypothese der geraden Dominanz, die Connes in Theorem~6.1 voraussetzt. Der computergestützte Beweis an $33$ Werten von $\lambda$ bis $1{,}300{,}000$ bietet rigorose Verifikation über mehr als $4$ Größenordnungen. Der Resolventen-M1$''$-Rahmen und das Leading-Mode-Cancellation-Lemma verengen die verbleibende Herausforderung auf ein spezifisches analytisches Problem, das auf Fourier-Analyse und den Primzahlsatz reduzierbar ist. Die Euler-Maclaurin-Proposition (Teil~II, Proposition~4.11) schließt dieses Problem analytisch für $\lambda \geq 1{,}200{,}000$; die $33$ computergestützten Zertifikate (bis $\lambda = 1{,}300{,}000$) schließen die Lücke zwischen den endlichen Verifikationen und dem analytischen Regime vollständig.
+Die Arbeit in Teil~II fügt sich direkt in Connes' spektralen Ansatz zur Riemannschen Vermutung ein \cite{Connes2026}. Das Shift-Parity-Lemma liefert analytische Evidenz für die Hypothese der geraden Dominanz, die Connes in Theorem~6.1 voraussetzt. Die computergestützten Diagnostiken an $33$ Werten von $\lambda$ bis $1{,}300{,}000$ bieten starke finite-range Evidenz über mehr als $4$ Größenordnungen, bedingt auf die Odd-Sektor-Lower-Bound-Validierung. Der Resolventen-M1$''$-Rahmen, das Leading-Mode-Cancellation-Lemma und das PNT-Transfer-Lemma etablieren das asymptotische Variationsvorzeichen; die verbleibende Herausforderung ist die Eigenwertordnungs-/Lower-Bound-Schließung.
 
 \subsection{Nyman-Beurling-Baez-Duarte}
 
@@ -419,9 +419,9 @@ Eine Yang--Mills-Analogie existiert: Kirks nullstellenfreier Streifen für Selbe
 
   \item Das \textbf{Shift-Parity-Lemma}, ein rein algebraisches Ergebnis über trigonometrische Shift-Matrizen, das die universelle gerade Präferenz einzelner Primzahlen etabliert.
 
-  \item Einen \textbf{computergestützten Beweis} der geraden Dominanz an $33$ Werten ($\lambda = 100$ bis $1{,}300{,}000$), der eine rigorose Verifikation von Connes' spektraler Hypothese über mehr als $4$ Größenordnungen liefert.
+  \item Eine \textbf{computergestützte finite-range Diagnostik} der geraden Dominanz an $33$ Werten ($\lambda = 100$ bis $1{,}300{,}000$), die starke Evidenz für Connes' spektrale Hypothese über mehr als $4$ Größenordnungen liefert und theoremstark auf die Odd-Sektor-Lower-Bound-Validierung angewiesen ist.
 
-  \item Die \textbf{Lösung des kumulativen Schritts (A6/E6)} via zwei unabhängige Beweise: (i) das v2.0-Drei-Regime-Argument, welches computergestützte Zertifikate ($\lambda \leq 1{,}300{,}000$), das M1$''$-Resolventen-Framework mit PNT-Transfer ($\lambda \geq 1{,}200{,}000$) und drei Kontroll-Lemmata (Höhere-Moden-Abkling, Resolventen-Trunkierung, PNT-Fehler-Transfer) kombiniert; und (ii) das v2.1-Argument der direkten Frontier-Dominanz (Teil~II, Proposition~\emph{prop:direct-frontier}), das einen gemeinsamen Rayleigh-Testvektor, PNT+Mertens-Partialsummation und endliche CAP-Abdeckung bis zur expliziten asymptotischen Schwelle verwendet und die beiden Caveats des v2.0-Arguments obviiert. Zusammen vervollständigen diese die Beweisarchitektur A1--A8 \emph{unbedingt}.
+  \item Die \textbf{präzise Reduktion des kumulativen Schritts (A6/E6)} auf eine Variationsdiagnostik plus Odd-Sektor-Lower-Bound: (i) das v2.0-Drei-Regime-Argument kombiniert computergestützte finite-range Diagnostik ($\lambda \leq 1{,}300{,}000$), das M1$''$-Resolventen-Framework mit PNT-Transfer und drei Kontroll-Lemmata; (ii) das v2.1-Argument der direkten Frontier-Dominanz (Teil~II, Proposition~\emph{prop:direct-frontier}) verwendet einen gemeinsamen Rayleigh-Testvektor, PNT+Mertens-Partialsummation und finite-range CAP-Evidenz. Zusammen lokalisieren diese die verbleibende Lücke als Eigenwertordnungsproblem, nicht als fehlende Frontier- oder PNT-Skala.
 
   \item Die \textbf{Euler-Maclaurin-Proposition}, die $\rho^{\mathrm{EM}}(13) < 0$ etabliert (intervallarithmetisch zertifiziert) und damit das analytische Rückgrat für Regime~2 des Brückenarguments liefert.
 
@@ -431,14 +431,14 @@ Eine Yang--Mills-Analogie existiert: Kirks nullstellenfreier Streifen für Selbe
 \subsection{Der Weg zum Abschluss der Beweislücke}
 \label{sec:gap-closure-path}
 
-Die Euler-Maclaurin-Proposition (Teil~II, Proposition~4.11) etabliert, dass die PNT-kontinuierliche Approximation $\rho^{\mathrm{EM}}(L) < 0$ für $L \geq 13$, d.\,h. für $\lambda \geq e^{13} \approx 442{,}413$, gilt (intervallarithmetisch zertifiziert). Dies bedeutet, dass im kontinuierlichen (Primzahlen-durch-Integrale-ersetzten) Limes die gerade Dominanz unbedingt für alle hinreichend großen $\lambda$ gilt. Um dies auf die tatsächlichen Primsummen zu übertragen, werden zwei Komponenten benötigt:
+Die Euler-Maclaurin-Proposition (Teil~II, Proposition~4.11) etabliert, dass die PNT-kontinuierliche Approximation $\rho^{\mathrm{EM}}(L) < 0$ für $L \geq 13$, d.\,h. für $\lambda \geq e^{13} \approx 442{,}413$, gilt (intervallarithmetisch zertifiziert). Dies bedeutet, dass im kontinuierlichen (Primzahlen-durch-Integrale-ersetzten) Limes das relevante Variationsvorzeichen für alle hinreichend großen $\lambda$ gilt. Um dies als Eigenwertordnung für die tatsächlichen Primsummen zu nutzen, werden zwei Komponenten benötigt:
 
 \begin{enumerate}
-  \item \textbf{Computergestützte Zertifikate ($\lambda \leq 1{,}300{,}000$):} Bereits bewiesen für $33$ Werte (Teil~II, \S3).
+  \item \textbf{Computergestützte Diagnostik ($\lambda \leq 1{,}300{,}000$):} Starke bedingte Brücke für $33$ Werte, bis der Odd-Sektor-Lower-Bound validiert ist (Teil~II, \S3).
   \item \textbf{PNT-Transfer-Lemma (Teil~II):} Durch Abel-Summation mit dem Chebyshev-Funktionsfehler $\theta(x) - x = O(x\exp(-c\sqrt{\log x}))$ erfüllt das tatsächliche Resolventen-Verhältnis $\rho(\lambda) = \rho^{\mathrm{EM}}(\lambda) + O(L\,e^{-c\sqrt{L}}) \to \rho^{\mathrm{EM}}(\lambda)$ für $\lambda \to \infty$. Da $\rho^{\mathrm{EM}} < 0$ für $L \geq 14$ (intervallarithmetisch zertifiziert), existiert $\lambda_0$ mit $\rho(\lambda) < 0$ für alle $\lambda \geq \lambda_0$.
 \end{enumerate}
 
-\noindent Der Status von M1$''$ (Resolventen-Subdominanz) ist somit: \textbf{bewiesen}, und in v2.1 wird die M1$''$-Route zusätzlich durch den robusten direkten Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}) umgangen. Kombiniert mit der Höhere-Moden-Abklingschranke (Lemma~B), der Resolventen-Trunkierungskontrolle (Lemma~C) und den $33$ computergestützten Zertifikaten ergibt sich Proposition~A6 (Teil~II): Die gerade Dominanz gilt unbedingt für alle $\lambda \geq 100$. Via Connes' Theorem~6.1 und Hurwitz-Suffizienz folgt RH unbedingt.
+\noindent Der Status von M1$''$ (Resolventen-Subdominanz) ist somit: Es liefert das richtige asymptotische Variationsvorzeichen. In v2.1 wird diese Variationsroute zusätzlich durch den robusten direkten Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}) gestützt. Kombiniert mit der Höhere-Moden-Abklingschranke (Lemma~B), der Resolventen-Trunkierungskontrolle (Lemma~C) und den $33$ computergestützten finite-range Diagnostiken ergibt sich Proposition~A6 als conditional reduction: Gerade Dominanz als Eigenwertordnung bleibt bedingt auf die Asymptotische Variationsgap-Vermutung bzw. eine validierte untere Schranke für $\lambda_1^-$.
 
 \subsection{Analytischer Status der Kontroll-Lemmata (v1.1)}
 
@@ -451,7 +451,7 @@ Keine numerischen Konstanten verbleiben im Beweis von Regime~2. Für präzise Ve
 
 \subsection{Die verbleibende Distanz}
 
-Die Reduktionskette A1--A8 (\Cref{sec:architecture}) ist nun \emph{vollständig}. Der kumulative Schritt~A6, zuvor die einzige verbleibende Herausforderung, ist in Teil~II (Proposition~A6) durch ein Drei-Regime-Argument gelöst, das computergestützte Zertifikate (Regime~1, $\lambda \leq 1{,}300{,}000$), das M1$''$-Resolventen-Framework mit PNT-Transfer (Regime~2, $\lambda \geq 1{,}200{,}000$) und drei Kontroll-Lemmata kombiniert: Höhere-Moden-Abkling (Lemma~B), Resolventen-Trunkierung (Lemma~C) und PNT-Fehler-Transfer (Lemma~PNT). Die zwei Regime überlappen und liefern eine lückenfreie Brücke von $\lambda = 100$ bis unendlich. In v2.1 wird ein unabhängiger direkter Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}) hinzugefügt, der die Interpolations- und PNT-Transfer-Caveats durch einen gemeinsamen Frontier-Rayleigh-Vektor und endliche CAP-Abdeckung umgeht.
+Die Reduktionskette A1--A8 (\Cref{sec:architecture}) ist als \emph{conditional reduction} vollständig lokalisiert. Der kumulative Schritt~A6, zuvor die einzige verbleibende Herausforderung, ist in Teil~II (Proposition~A6) nicht als Eigenwertordnung gelöst, sondern auf eine Variationsdiagnostik plus Odd-Sektor-Lower-Bound reduziert. Das Drei-Regime-Argument kombiniert computergestützte finite-range Diagnostik (Regime~1, $\lambda \leq 1{,}300{,}000$), das M1$''$-Resolventen-Framework mit PNT-Transfer (Regime~2) und drei Kontroll-Lemmata: Höhere-Moden-Abkling (Lemma~B), Resolventen-Trunkierung (Lemma~C) und PNT-Fehler-Transfer (Lemma~PNT). In v2.1 wird ein direkter Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}) hinzugefügt, der die Interpolations- und PNT-Transfer-Caveats für die Variationsaussage durch einen gemeinsamen Frontier-Rayleigh-Vektor umgeht.
 
 \subsection{Philosophische Reflexion: Genese der Beweisarchitektur}
 
@@ -465,7 +465,7 @@ Eine kritische Überprüfung früherer Arbeiten (BI-10) identifizierte drei daue
 
 Der Durchbruch kam mit Connes' 2026-Übersichtsarbeit \cite{Connes2026} (BI-11), die einen völlig anderen Rahmen lieferte. Anstelle von Dichteargumenten oder globaler Positivität wird die Weil-Form als endlicher Operator auf einem Paley--Wiener-Raum behandelt. Connes' Theorem~6.1 reduziert RH auf eine Gerade-Dominanz-Bedingung, und ein Hurwitz-Argument zeigt, dass diese Bedingung nur entlang einer Folge $\lambda_n \to \infty$ benötigt wird. Dies realisierte präzise die von BI-8 antizipierte ``Positivität auf einem eingeschränkten Unterraum''.
 
-Die Beweisarchitektur von Teil~II ist die direkte Umsetzung dieser Erkenntnisse. Das Shift-Parity-Lemma formalisiert die konstruktive Interferenz gerader Moden und destruktive Interferenz ungerader Moden unter Primzahl-Shifts. Die Resolventenanalyse (M1$''$) und die Hilfslemmata über Modenabkling und Trunkierung zeigen, dass diese lokale gerade Präferenz unter Summation stabil bleibt. Proposition~A6 schließt die Brücke zur vollständigen Weil-Form.
+Die Beweisarchitektur von Teil~II ist die direkte Umsetzung dieser Erkenntnisse. Das Shift-Parity-Lemma formalisiert die konstruktive Interferenz gerader Moden und destruktive Interferenz ungerader Moden unter Primzahl-Shifts. Die Resolventenanalyse (M1$''$) und die Hilfslemmata über Modenabkling und Trunkierung zeigen, dass diese lokale gerade Präferenz das richtige Variationsvorzeichen unter Summation hat. Proposition~A6 lokalisiert die Brücke zur vollständigen Weil-Form, schließt aber den Odd-Sektor-Eigenwertordnungsschritt noch nicht.
 
 Rückblickend sagte BI-8 die Architektur korrekt voraus, identifizierte aber den Mechanismus falsch. Die ``Entropie'' der Riemannschen Vermutung ist nicht thermodynamisch, sondern geometrisch-arithmetisch: sie entsteht aus der trigonometrischen Struktur der Primzahl-Shifts und der Nicht-Koordinierbarkeit ihrer Phasen. Die vorliegende Arbeit kann daher als Destillation dieser Entwicklung verstanden werden, in der alle heuristischen Elemente durch formale, verifizierbare Argumente ersetzt wurden.
 
@@ -488,23 +488,23 @@ Thermodynamischer Formalismus für $\zeta$ & etabliert & I \\
 4 ausgeschlossene Wege (K1--K4) & bewiesen & I \\
 Lokalisierung: gesamte RH $\equiv$ Schritt S5 & bewiesen & I \\
 Shift-Parity-Lemma & bewiesen (analytisch) & II \\
-Gerade Dominanz ($33$ Werte, $\lambda \leq 1{,}300{,}000$) & bewiesen (CAP) & II \\
+Finite-range Gap-Diagnostik ($33$ Werte, $\lambda \leq 1{,}300{,}000$) & Evidenz / bedingt & II \\
 Frontier-Primzahl-Mechanismus & bewiesen & II \\
 Hellmann-Feynman: Primzahlzählung treibt Lücke & bewiesen & II \\
 Leading-Mode-Cancellation ($c = 2+\sqrt{2}$) & bewiesen & II \\
 Euler-Maclaurin: $\rho^{\mathrm{EM}} < 0$ für $\lambda \geq 1{,}2\mathrm{M}$ & bewiesen & II \\
-Resolventen-M1$''$: $(E_{\sin}-E_{\cos})/D = O(1/L)$ & bewiesen & II \\
+Resolventen-M1$''$: $(E_{\sin}-E_{\cos})/D = O(1/L)$ & variational etabliert & II \\
 Lücken-Asymptotik: $|\mathrm{cert\_gap}| \sim c\sqrt{\lambda}$ & numerisch & II \\
-\textbf{M1$''$ (Resolventen-Subdominanz)} & \textbf{bewiesen (v2.1 Direkt-Beweis umgeht es)} & II \\
+\textbf{M1$''$ (Resolventen-Subdominanz)} & \textbf{Variationsreduktion} & II \\
 Höhere-Moden-Abkling (Lemma~B) & bewiesen & II \\
 Resolventen-Trunkierung (Lemma~C) & bewiesen (analytisch) & II \\
 PNT-Transfer-Fehler (Lemma~PNT) & bewiesen mit effektivem $C$ & II \\
-\textbf{Kumulativer Schritt (A6)} & \textbf{bewiesen (v2.1)} & II \\
-\textbf{Riemannsche Vermutung} & \textbf{bewiesen (v2.1, unbedingt)} & I+II+III
+\textbf{Kumulativer Schritt (A6)} & \textbf{variational / bedingt} & II \\
+\textbf{Riemannsche Vermutung} & \textbf{conditional reduction} & I+II+III
 \end{tabular}
 \end{center}
 
-\noindent Der Beweis von A6 (und damit von RH) beruht auf dem Drei-Regime-Brückenargument (Teil~II, Proposition~A6): computergestützte Zertifikate für $\lambda \leq 1{,}300{,}000$ (Regime~1, mit perturbativer Inter-Zertifikat-Interpolation) und das analytische M1$''$/PNT-Argument für $\lambda \geq 442{,}413$ (Regime~2, bedingt auf effektive PNT-Transfer-Konstante $C < 2$), mit Überlappung. In v1.1 wurde Lemma~B zu einer Parity-Split-Lückenschranke (analytisch) aufgewertet und Lemma~C als Sektor-Differenz-Kontrolle reformuliert (welche die stärkere, aber unnötige Bedingung $\|R_0 K\| < 1$ ersetzt). In v2.1 (Teil~II, Proposition~\emph{prop:direct-frontier}) wird ein robuster direkter Frontier-Dominanz-Beweis hinzugefügt: Die Frontier wird auf einem gemeinsamen Rayleigh-Vektor ausgewertet, das Komplement normbeschränkt, und die vorhandenen CAP-Zertifikate decken den endlichen Bereich bis zur expliziten asymptotischen Schwelle ab. Beide Caveats des v2.0-Drei-Regime-Arguments entfallen, und der Beweis der Riemannschen Vermutung ist somit unbedingt.
+\noindent A6 beruht auf dem Drei-Regime-Brückenargument (Teil~II, Proposition~A6): computergestützte finite-range Diagnostik für $\lambda \leq 1{,}300{,}000$ (Regime~1, bedingt auf Odd-Sektor-Tail-Lower-Bound) und das analytische M1$''$/PNT-Argument für das asymptotische Variationsvorzeichen. In v1.1 wurde Lemma~B zu einer Parity-Split-Lückenschranke aufgewertet und Lemma~C als Sektor-Differenz-Kontrolle reformuliert. In v2.1 (Teil~II, Proposition~\emph{prop:direct-frontier}) wird ein robuster direkter Frontier-Variationsbeweis hinzugefügt: Die Frontier wird auf einem gemeinsamen Rayleigh-Vektor ausgewertet und das Komplement normbeschränkt. Beide alten Caveats des v2.0-Drei-Regime-Arguments entfallen für die Variationsaussage; der Beweis der Riemannschen Vermutung bleibt bedingt auf die Eigenwertordnungs-Schließung.
 
 \bigskip
 \noindent\textbf{Danksagung.} Berechnungen wurden auf einem Hetzner-CCX13-Cloud-Server (2~dedizierte vCPU, 8~GB RAM) durchgeführt. Die Intervallarithmetik-Bibliothek mpmath wurde von Fredrik Johansson entwickelt.
