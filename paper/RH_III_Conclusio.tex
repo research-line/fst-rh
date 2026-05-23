@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
 \usepackage{enumitem}
@@ -37,7 +38,7 @@
 \overfullrule=0pt
 \maketitle
 
-\begin{abstract}
+\begin{abstract}\footnotesize
 This final paper in a three-part series draws together the results of the preceding papers into a unified picture. We catalog the proven structural results (R1--R9), the excluded paths (K1--K4), and the new contributions: the Shift Parity Lemma, the computer-assisted finite-range gap diagnostics for $33$ values of $\lambda$ up to $1{,}300{,}000$, the resolvent-damped M1$''$ framework, the Leading-Mode Cancellation Lemma with exact constant $c = 2 + \sqrt{2}$, and the Euler--Maclaurin Proposition establishing $\rho^{\mathrm{EM}}(L) < 0$ for $L \geq 14$ ($\lambda \geq 1{,}200{,}000$). The finite-range diagnostics are theorem-level only conditional on a validated odd-sector lower bound. Part~III also accounts for the v2.0 non-existence theorems (NE-A, NE-B in Part~II), which restructure the comparative analysis of proof strategies and confirm that even dominance is not reducible to total-positivity or Sturm--Liouville-type arguments. We present the proof architecture from Connes' Theorem~6.1 through even dominance to the Riemann Hypothesis as a conditional reduction, formulate open problems, and discuss connections to the wider landscape of analytic number theory.
 
 \medskip\noindent
@@ -60,6 +61,22 @@ the Asymptotic Variational Gap Conjecture; RH itself is therefore conditional
 on this internal eigenvalue-ordering step.
 
 \medskip\noindent
+\textbf{v2.4 (23 May 2026): Parallel programme added.}  A new
+subsection ``Parallel Programme: Connes--vS Error Collapse and I-1
+Normal-Family Reframe'' (\S\ref{sec:parallel-route-b}) presents a second
+reduction of RH, independent of the Asymptotic Variational Gap
+Conjecture~(A7), via the Connes--van~Suijlekom err-collapse route
+(Route~B) and the I-1 normal-family reframe of the companion paper
+\cite{Geiger2026evendom}, \S E.1--E.18.  Both routes are conditional on
+the same open wall, Connes' \S6.6(b)/MS2 strip bound~(ii), which the
+I-1 reframe decomposes as (ii-a) + (ii-c) and (modulo simplicity~(Z))
+absorbs into the single open bound~(ii-a).  Converged empirics at seven
+$\lambda \in \{3,5,7,9,11,13,15\}$ are tabulated, including the bit-identical
+two-dps validation at $\lambda = 11, 13, 15$.  The Even-Dominance companion
+DOI is updated from the v1.5 record to the v1.6 record
+(\texttt{10.5281/zenodo.20291994}).
+
+\medskip\noindent
 \textbf{v2.3 (15 May 2026): Conditioning clarified.}  A close reading of Connes
 2026 §6.5 \cite{Connes2026} shows that the Hurwitz-bridge (step A2) is
 presented there as \emph{Fact 6.4}, an analytical consequence of the
@@ -73,13 +90,15 @@ Zookeeper paper).  Drafts and preprints in this series evolve
 continuously; the present v2.3 abstract is the current honest position.
 \end{abstract}
 
+{\footnotesize
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
 \textbf{Keywords:} Riemann Hypothesis, Li coefficients, even dominance, Euler--Maclaurin, proof architecture, open problems
+}
 
-\newpage
+\clearpage
 \tableofcontents
 
-\newpage
+\clearpage
 
 % =============================================================================
 \section{Introduction}
@@ -203,6 +222,7 @@ We present the logical chain from known mathematics to the Riemann Hypothesis, i
 
 \begin{center}
 \renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{c|p{7cm}|l|l}
 \textbf{Step} & \textbf{Statement} & \textbf{Status} & \textbf{Source} \\\hline
 A1 & Connes' Theorem~6.1: even dominance $\Rightarrow$ zeros of $\hat{\eta}$ real & proven & \cite{ConnesvS2025, Connes2026} \\
@@ -214,7 +234,8 @@ A5b & Euler--Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (certified by interval arit
 \textbf{A6} & \textbf{Cumulative step: $\sum_p W_p$ preserves even preference} & \textbf{variational, v2.2}${}^\ddagger$ & Part~II \\
 A7 & Even dominance for $\lambda_n\to\infty$ (eigenvalue inequality) & conditional (v2.2)${}^\ddagger$ & Part~II \\
 A8 & All zeros on $\Re(s) = 1/2$ (RH) & conditional reduction (v2.2) & A1+A2+A7
-\end{tabular}
+\end{tabular}%
+}
 
 \medskip
 \noindent\textsuperscript{$\ddagger$}\,\textbf{v2.2 revision (2026-05-14).} The
@@ -331,17 +352,21 @@ From the Bombieri--Lagarias decomposition and the thermodynamic analysis:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{c|l|l|l}
 \textbf{Step} & \textbf{Statement} & \textbf{Status} & \textbf{Method} \\\hline
 S1 & Define $\xi(s)$, functional equation & proven & definition \\
 S2 & Li coefficients via Bombieri--Lagarias & proven & \cite{BombieriLagarias1999} \\
 S3 & Decomposition $\lambda_n = \lambda_n^{(\infty)} + \lambda_n^{(\mathrm{fin})}$ & proven & Part~I \\
 S4 & Archimedean dominance: $\lambda_n^{(\infty)} \sim \frac{n}{2}\log n$ & proven & Stirling \\
-\textbf{S5} & \textbf{$\lambda_n \geq 0$ for all $n \geq 1$} & \textbf{OPEN}\footnote{S5 is equivalent to RH (Li, 1997). The present even-dominance route gives only a conditional reduction pending the odd-sector lower bound / AVG step, so S5 is not closed here.} & \textbf{$\Longleftrightarrow$ RH} \\
+\textbf{S5} & \textbf{$\lambda_n \geq 0$ for all $n \geq 1$} & \textbf{OPEN}${}^{\ast}$ & \textbf{$\Longleftrightarrow$ RH} \\
 S6 & All zeros on $\Re(s) = 1/2$ & $\Leftrightarrow$ S5 & Li (1997) \\
 S7 & Prime counting: $\pi(x) = \mathrm{Li}(x) + O(\sqrt{x}\log x)$ & $\Leftarrow$ S6 & von Koch
-\end{tabular}
+\end{tabular}%
+}
 \end{center}
+
+{\footnotesize\noindent${}^{\ast}$ S5 is equivalent to RH (Li, 1997). The present even-dominance route gives only a conditional reduction pending the odd-sector lower bound / AVG step, so S5 is not closed here.\par}
 
 \subsection{Even Dominance Perspective}
 
@@ -349,6 +374,7 @@ From the Connes program and Part~II:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{c|l|l|l}
 \textbf{Step} & \textbf{Statement} & \textbf{Status} & \textbf{Method} \\\hline
 E1 & Weil explicit formula & proven & Weil (1952) \\
@@ -359,7 +385,8 @@ E5 & Gap diagnostics at $33$ values, $\lambda \leq 1{,}300{,}000$ & evidence / c
 E5b & Euler--Maclaurin: $\rho^{\mathrm{EM}} < 0$ for $\lambda \geq 1.2\mathrm{M}$ & proven & Part~II \\
 \textbf{E6} & \textbf{Cumulative step: even dominance for all $\lambda$} & \textbf{conditional reduction} & \textbf{= A6} \\
 E7 & Connes' Theorem~6.1 + Hurwitz bridge $\Rightarrow$ RH & conditional on E6 & \cite{Connes2026}
-\end{tabular}
+\end{tabular}%
+}
 \end{center}
 
 \noindent The two perspectives are related but \emph{not equivalent}: E6 (cumulative even dominance) would \emph{imply} S5 (and hence RH) via Connes' Theorem~6.1 and Hurwitz's theorem. However, the converse is unknown --- RH could hold for reasons unrelated to even dominance. E6 is a \emph{sufficient} condition, not a characterization. The Shift Parity Lemma bridges the perspectives by showing that the individual-prime structure underlying E6 is algebraically controlled.
@@ -524,6 +551,81 @@ This contrast illuminates the arithmetic difficulty: the Riemann zeta function's
 
 A Yang--Mills analogy exists: Kirk's zero-free strip for Selberg zeta (via Ruelle's theorem) mirrors the nullstellenfreie Region in prime number theory. The spectral gap in the Laplacian on $\Gamma \backslash \mathbb{H}$ plays the role of the Even--Odd gap in the Weil form. Whether the Shift Parity mechanism has a geometric counterpart for Selberg zeta is an open question of independent interest.
 
+% added 2026-05-23: Route B / I-1 reframe / E.18 empirics
+\subsection{Parallel Programme: Connes--vS Error Collapse and I-1 Normal-Family Reframe}
+\label{sec:parallel-route-b}
+
+A parallel reduction to RH, independent of the Asymptotic Variational Gap Conjecture (A7), arises from the Connes--van Suijlekom error-collapse route (Route~B).
+The starting point is the same as Route~A: Connes--vS Theorem~5.6 (= step A1) provides the finite-$N$ bound
+$\mathrm{err}_\lambda \leq C e^{-c\lambda}$ for each individual Riemann zero, verified numerically
+at $\lesssim 10^{-25\lambda}$ for $\geq 15$ zeros.
+Route~B then reframes the limit condition: one has
+$\mathrm{err} \to 0 \Longleftrightarrow \text{(i)} + \text{(ii)}$
+rigorously, where (i) is step A1 and (ii) is Connes' \S6.6(b)/MS2 condition (a
+uniform strip bound on the family $\{\hat\xi_\lambda\}$ of canonical criterion
+functions).
+Since $\text{(ii)} \Rightarrow \mathrm{RH}$ is also rigorous, Route~B
+reduces to the single open condition~(ii) \cite{Geiger2026evendom}.
+
+The I-1 normal-family reframe (\S E.1--E.18 of the companion proof notes) decomposes~(ii) into
+two sub-conditions via Montel--Vitali compactness:
+(ii-a)~a uniform growth-adapted strip bound on $\{\hat\xi_\lambda\}$, and
+(ii-c)~a limit-identification condition.
+The key algebraic step (\S E.14) shows that (ii-c) is rigorously absorbed
+into~(ii-a): the parity of $\mathrm{QW}_N$ (real-symmetric, even-parity
+projection $\Rightarrow \hat\xi_\lambda$ is even and real-on-real) together with
+a Hadamard order argument (under the standing assumption~(Z) that all
+zeros are simple) forces the Bohr--Carath\'eodory phase factor to be
+identically~$1$.
+The canonical criterion object is definitively fixed as
+$\hat\xi(z) = \tfrac{2}{\sqrt{L}}\sin\!\bigl(\tfrac{zL}{2}\bigr)F(z)$,
+where $F(z) = \sum_{n \leq N} \Lambda(n)/\sqrt{n}\cdot\cos(z\log n/2)$
+(centered, even, real-on-real, entire; deviation from numerical data
+$\leq 1.9 \times 10^{-52}$ at $\lambda = 5$, $7$, $\mathrm{dps}=50$, \S E.15).
+Route~B therefore reduces entirely to the open condition~(ii-a): a rigorous
+uniform bound derived from $\mathrm{QW}_N$-coercivity.
+
+Converged empirical data for the sup-observable
+$A_\lambda(\delta) := \sup_{x\in\mathbb{R}} |\hat\xi_\lambda(x+i\delta)|/|\hat\xi_\lambda(x)|$
+and the $L^2$-observable $B_\lambda(\delta)$ at $\delta = 0.4$, obtained on a dedicated compute node
+(Mac~Studio, $\mathrm{dps}_{\min} \approx 30\lambda$--$50\lambda$
+to control cluster near-degeneracy; two distinct dps values bit-identical at $\lambda = 11, 13, 15$),
+are summarised in Table~\ref{tab:route-b-empirics} at seven converged values
+$\lambda \in \{3, 5, 7, 9, 11, 13, 15\}$.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{r r r r r}
+\hline
+$\lambda$ & $\sup|\hat\xi_\lambda|_{\mathbb{R}}$ & $A_\lambda(0.4)$ & $B_\lambda(0.4)$ & $B_\lambda(0.4)/\lambda^{0.4}$ \\
+\hline
+ 3 & 0.858 & 1.0033  & 1.151 & 0.74 \\
+ 5 & 0.879 & 1.0037  & 1.340 & 0.70 \\
+ 7 & 0.886 & 1.0038  & 1.505 & 0.69 \\
+ 9 & 0.890 & 1.0039  & 1.649 & 0.68 \\
+11 & 0.890 & 1.0039  & 1.778 & 0.68 \\
+13 & 0.891 & 1.0039  & 1.895 & 0.68 \\
+15 & 0.892 & 1.00394 & 2.003 & 0.68 \\
+\hline
+\end{tabular}
+\caption{Converged empirics for Route~B observables at $\delta = 0.4$
+(companion proof notes, \S E.18). The sup-observable $A_\lambda(0.4)$ is
+essentially flat at $\approx 1.004$, in striking contrast to the generic
+Phragm\'en--Lindel\"of prediction $\sim \lambda^\delta$. The $B_\lambda$-ratio
+decreases from $0.74$ at $\lambda = 3$ to a stable plateau at $0.68$ for
+$\lambda \geq 9$.}
+\label{tab:route-b-empirics}
+\end{table}
+
+The observed near-flatness of $A_\lambda(0.4)$ shows that the family $\{\hat\xi_\lambda\}$ is
+strongly sub-generic, making~(ii-a) empirically plausible.
+The $L^2$-observable grows as $B_\lambda(0.4) \approx 0.68\,\lambda^{0.4}$ on the plateau,
+consistent with polynomial sub-generic behaviour.
+Earlier runs at $\mathrm{dps}=30$ (\S E.16--E.17) were retracted due to
+under-converged eigenvectors; the corrected data are documented in \S E.18
+of the companion notes \cite{Geiger2026evendom}.
+
 
 % =============================================================================
 \section{Assessment and Outlook}
@@ -640,6 +742,7 @@ The spectral gap bound (Lemma~B) and the tail truncation control (Lemma~C) have 
 
 \begin{center}
 \renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{l|c|l}
 \textbf{Contribution} & \textbf{Status} & \textbf{Paper} \\\hline
 Thermodynamic formalism for $\zeta$ & established & I \\
@@ -660,7 +763,8 @@ Tail truncation (Lemma~C) & proved (analytical) & II \\
 PNT transfer error (Lemma~PNT) & proved with effective $C$ & II \\
 \textbf{Cumulative step (A6)} & \textbf{conditional reduction (v2.2)} & II \\
 \textbf{Riemann Hypothesis} & \textbf{conditional reduction (v2.2)} & I+II+III
-\end{tabular}
+\end{tabular}%
+}
 \end{center}
 
 \noindent The current status of A6 and RH rests on the three-regime bridge
@@ -694,34 +798,16 @@ L.~Geiger, \emph{The Riemann Hypothesis: Foundations, Obstructions, and Reorient
 L.~Geiger, \emph{The Riemann Hypothesis: Even Dominance of the Weil Quadratic Form}, 2026.
 
 \bibitem{Geiger2026evendom}
-L.~Geiger, \emph{A conditional proof of the Riemann hypothesis via even dominance of the Weil quadratic form}, Zenodo, 2026, DOI: 10.5281/zenodo.20011910.
+L.~Geiger, \emph{A conditional proof of the Riemann hypothesis via even dominance of the Weil quadratic form}, Zenodo, 2026, DOI: 10.5281/zenodo.20291994. % DOI corrected to v1.6 record 2026-05-23
 
 \bibitem{Connes2026}
 A.~Connes, \emph{The Riemann Hypothesis: Past, Present and a Letter Through Time}, arXiv:2602.04022v1, 2026.
 
 \bibitem{ConnesvS2025}
-A.~Connes and W.~D. van Suijlekom, \emph{Quadratic Forms, Real Zeros and Echoes of the Spectral Action}, arXiv:2511.23257, 2025.
+A.~Connes and W.~D. van Suijlekom, \emph{Quadratic Forms, Real Zeros and Echoes of the Spectral Action}, Commun.~Math.~Phys.~\textbf{406}, Article~312 (2025), DOI: 10.1007/s00220-025-05493-1.
 
 \bibitem{BombieriLagarias1999}
 E.~Bombieri and J.~C.~Lagarias, \emph{Complements to Li's criterion for the Riemann hypothesis}, J.~Number Theory~\textbf{77} (1999), 274--287.
-
-\bibitem{Li1997}
-X.-J.~Li, \emph{The positivity of a sequence of numbers and the Riemann hypothesis}, J.~Number Theory~\textbf{65} (1997), 325--333.
-
-\bibitem{Weil1952}
-A.~Weil, \emph{Sur les ``formules explicites'' de la th\'eorie des nombres premiers}, Comm.~S\'em.~Math.~Univ.~Lund (1952), 252--265.
-
-\bibitem{Keiper1992}
-J.~B.~Keiper, \emph{Power series expansions of Riemann's $\xi$ function}, Math.~Comp.~\textbf{58} (1992), 765--773.
-
-\bibitem{Deninger2002}
-C.~Deninger, \emph{On the nature of the ``explicit formulas'' in analytic number theory}, in: Number Theoretic Methods, Developments in Mathematics, vol.~\textbf{8}, Kluwer Academic Publishers (2002), 97--118.
-
-\bibitem{Connes1999}
-A.~Connes, \emph{Trace formula in noncommutative geometry and the zeros of the Riemann zeta function}, Selecta Math.~\textbf{5} (1999), 29--106.
-
-\bibitem{ConreyLi2000}
-J.~B.~Conrey and X.-J.~Li, \emph{A note on some positivity conditions related to zeta and $L$-functions}, Int.~Math.~Res.~Not.~\textbf{2000}, no.~18, 929--940.
 
 \end{thebibliography}
 

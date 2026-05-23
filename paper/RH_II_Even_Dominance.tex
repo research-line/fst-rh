@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
 \usepackage{enumitem}
@@ -35,7 +36,7 @@
 \overfullrule=0pt
 \maketitle
 
-\begin{abstract}
+\begin{abstract}\footnotesize
 This is the second paper in a three-part series (Part~I: Foundations and Obstructions \cite{Geiger2026partI}; Part~III: Conclusio \cite{Geiger2026partIII}). We address the open problem identified in Connes' 2026 survey \cite{Connes2026}: whether the minimum eigenvalue of the Weil quadratic form~$\mathrm{QW}_\lambda$ is simple with even eigenfunction. We establish three main results. First, the \emph{Shift Parity Lemma}: the difference matrix between even and odd shift operators has strictly negative minimum eigenvalue for all $N \geq 3$ modes and all normalized shifts $r \in (0,2)$, implying that every prime individually favors even eigenfunctions. Second, we report computer-assisted finite-range gap diagnostics using interval arithmetic for $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$; these are a strong conditional bridge until the odd-sector lower bound is independently validated. Third, we prove the \emph{Leading-Mode Cancellation Lemma}: the overlap differences between even and odd sectors cancel pairwise with exact constant $c = 2 + \sqrt{2}$, yielding $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$. In v2.0 we add two non-existence theorems (Theorems~\ref{thm:NE-A} and~\ref{thm:NE-B}) that formally rule out the absolute total-positivity and universal-commuting-operator routes, establishing that even dominance is necessarily an arithmetic-statistical rather than a purely algebraic phenomenon. In v2.1 we add a robust Direct Frontier-Dominance argument (\Cref{sec:direct-frontier}, \Cref{prop:direct-frontier}) based on a common Rayleigh test vector on the frontier window $r \in [0.7,1]$.
 
 \medskip\noindent
@@ -46,12 +47,14 @@ via Rayleigh evaluation at a common test vector. This is a \emph{variational} st
 The status of the A1--A8 reduction chain is therefore revised from ``unconditional'' (v2.1) back to \textbf{conditional reduction}: the finite range $100\le\lambda\le 1{,}300{,}000$ provides strong interval-arithmetic diagnostics, but theorem-level even dominance on that range still depends on a validated lower bound for $\lambda_1^-(\lambda)$. Asymptotic even dominance is reduced to the \emph{Asymptotic Variational Gap Conjecture} (a quantitative lower bound for $\lambda_1^-(\lambda)$). A proposed approach via degenerate perturbation theory on the asymmetric three-mode diagonal structure is sketched in the companion paper~\cite{Geiger2026evendom}. The non-existence theorems NE-A and NE-B, the Shift Parity Lemma, the Leading-Mode Cancellation Lemma, and the 33 finite-range diagnostics remain unaffected by this revision.
 \end{abstract}
 
+{\footnotesize
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
 \textbf{Keywords:} Riemann Hypothesis, Weil quadratic form, even dominance, Shift Parity Lemma, computer-assisted diagnostics
+}
 
-\newpage
+\clearpage
 \tableofcontents
-\newpage
+\clearpage
 
 % =============================================================================
 \section{Introduction}
@@ -201,7 +204,7 @@ Three structural features emerge:
 
 \textbf{Implication for Connes' program:} Connes' strategy (Sections~6.4--6.6 of \cite{Connes2026}) uses Hurwitz's theorem to transfer the real-zeros property from the truncated Fourier transforms $\hat{k}_\lambda$ to the Riemann $\Xi$-function in the limit $\lambda \to \infty$. Crucially, Hurwitz's theorem requires only a \emph{sequence} $\lambda_n \to \infty$ along which the prerequisites hold---not all $\lambda > 1$. Therefore, the odd-dominant regime for small $\lambda$ (around $\lambda \approx 10$--$30$) is \emph{not} an obstruction. The remaining large-step requirement is a theorem-level lower bound for $\lambda_1^-$ that turns the finite diagnostics and asymptotic variational statement into genuine eigenvalue ordering.
 
-Our data show robust negative gap diagnostics for $\lambda \geq 50$ (with margins growing as $\sim \log(\lambda)^b$), and the gap grows monotonically for $\lambda \geq 120$. In the current v2.3 status, the formal proof that $\lambda_1^+ < \lambda_1^-$ for all $\lambda \geq 100$ remains conditional on a validated lower bound for the odd-sector minimum eigenvalue. \Cref{prop:A6} records this conditional reduction; \Cref{sec:direct-frontier} gives the robust frontier Rayleigh proof of the associated variational sign.
+Our data show robust negative gap diagnostics for $\lambda \geq 50$ (with margins growing as $\sim \log(\lambda)^b$), and the gap grows monotonically for $\lambda \geq 120$. In the current v2.4 status, the formal proof that $\lambda_1^+ < \lambda_1^-$ for all $\lambda \geq 100$ remains conditional on a validated lower bound for the odd-sector minimum eigenvalue. \Cref{prop:A6} records this conditional reduction; \Cref{sec:direct-frontier} gives the robust frontier Rayleigh proof of the associated variational sign.
 
 \subsection{Decomposition Analysis: Source of Even Dominance}
 
@@ -596,7 +599,7 @@ Moreover, $\lambda_1(\mathrm{QW}_\lambda^-[{:}N])$ remains above $\lambda_1(\mat
 \label{sec:computer-proof}
 \subsubsection{Computer-Assisted Gap Diagnostics via Interval Arithmetic}
 
-For $\lambda = 100$ and $\lambda = 200$, we have completed a computer-assisted finite-range diagnostic using interval arithmetic (mpmath.iv with 50-digit precision). In the current v2.3 status this is a conditional certificate pipeline with three components:
+For $\lambda = 100$ and $\lambda = 200$, we have completed a computer-assisted finite-range diagnostic using interval arithmetic (mpmath.iv with 50-digit precision). In the current v2.4 status this is a conditional certificate pipeline with three components:
 
 \begin{enumerate}
 \item \textbf{Upper bound on $\lambda_1^+$:} The $4 \times 4$ Galerkin matrix $\mathrm{QW}^+[{:}4]$ is computed with certified intervals: prime shift integrals are evaluated in interval arithmetic (width $< 10^{-12}$), and the archimedean kernel is integrated via composite Gauss--Legendre quadrature with interval enclosure (width $< 10^{-3}$). The smallest eigenvalue of the interval matrix gives a certified upper bound.
@@ -1520,7 +1523,7 @@ where $S^\pm_{nm}(\delta, L)$ are the shift overlaps and the dots indicate highe
 \subsection{Computer-assisted certificates}
 \label{sec:certificates}
 
-The certifier program (\texttt{certifier\_production.py}) implements the certified-gap computation for a geometric grid of $\lambda$-values. In the present v2.3 status this output is treated as a finite certificate \emph{conditional on} the odd-sector tail lower bound described below; the even-sector upper bound is interval-arithmetic rigorous, while the odd-sector lower-bound mechanism still requires an independent tail-bound validation in the Connes--van Suijlekom operator setting:
+The certifier program (\texttt{certifier\_production.py}) implements the certified-gap computation for a geometric grid of $\lambda$-values. In the present v2.4 status this output is treated as a finite certificate \emph{conditional on} the odd-sector tail lower bound described below; the even-sector upper bound is interval-arithmetic rigorous, while the odd-sector lower-bound mechanism still requires an independent tail-bound validation in the Connes--van Suijlekom operator setting:
 \begin{itemize}
   \item \textbf{Even block (upper bound on $\lambda_1^+$):} A $k \times k$ matrix ($k = 4$) computed in interval arithmetic (\texttt{mpmath.iv}, 50-digit precision). By Cauchy interlacing, $\lambda_{\min}(\mathrm{QW}_{\cos}^{(k)}) \geq \lambda_1^+$, providing a rigorous upper bound.
   \item \textbf{Odd block (candidate lower bound on $\lambda_1^-$):} Two $N_0 \times N_0$ matrices ($N_0 = 40$--$90$) computed in float64. The smaller matrix gives a core eigenvalue $\ell_{\mathrm{core}}$; the larger provides a tail correction via the eigenvalue drop $\ell_{\mathrm{core}} - \ell_{\mathrm{big}}$. The remaining tail (modes $> N_0$) is estimated by a geometric extrapolation of coupling-column norms, and a float64 rounding margin ($10 \times N_0 \times \varepsilon_{\mathrm{mach}} \times \|W\|_\infty$) is subtracted. If this tail estimate is validated, the required lower-bound direction is
@@ -1973,7 +1976,7 @@ to the same spectral-direction caveat.
 \label{sec:direct-frontier}
 % =============================================================================
 
-Version~2.1 added the direct frontier argument below. In the v2.3 status this is not a proof of A6 as an eigenvalue-ordering statement; it is a robust proof of the asymptotic variational sign that removes the old interpolation/PNT-transfer caveats. The robust form is intentionally eigenvalue-additivity-free: it does not add lower bounds for $\lambda_{\min}(D_3(r))$ across different primes. Instead it evaluates the whole frontier sum on one common Rayleigh vector and controls the complementary part by its operator norm.
+Version~2.1 added the direct frontier argument below. In the v2.4 status this is not a proof of A6 as an eigenvalue-ordering statement; it is a robust proof of the asymptotic variational sign that removes the old interpolation/PNT-transfer caveats. The robust form is intentionally eigenvalue-additivity-free: it does not add lower bounds for $\lambda_{\min}(D_3(r))$ across different primes. Instead it evaluates the whole frontier sum on one common Rayleigh vector and controls the complementary part by its operator norm.
 
 \begin{proposition}[Direct Frontier-Dominance]
 \label{prop:direct-frontier}

@@ -5,6 +5,7 @@
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage[ngerman]{babel}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
 \usepackage{enumitem}
@@ -36,16 +37,18 @@
 \overfullrule=0pt
 \maketitle
 
-\begin{abstract}
+\begin{abstract}\small
 Dies ist die zweite Arbeit in einer dreiteiligen Serie (Teil~I: Grundlagen und Hindernisse \cite{Geiger2026partI}; Teil~III: Conclusio \cite{Geiger2026partIII}). Wir befassen uns mit dem offenen Problem, das in Connes' \"Ubersicht von 2026 \cite{Connes2026} identifiziert wurde: ob der kleinste Eigenwert der quadratischen Weil-Form~$\mathrm{QW}_\lambda$ einfach ist und eine gerade Eigenfunktion besitzt. Wir etablieren drei Hauptergebnisse. Erstens das \emph{Shift-Parity-Lemma}: Die Differenzmatrix zwischen den Operatoren des geraden und ungeraden Sektors hat f\"ur alle $N \geq 3$ Moden und alle normierten Verschiebungen $r \in (0,2)$ einen streng negativen kleinsten Eigenwert, was impliziert, dass jede Primzahl individuell gerade Eigenfunktionen bevorzugt. Zweitens dokumentieren wir eine starke computergestützte finite-range Gap-Diagnostik für $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$; diese wird als bedingte endliche Brücke geführt, bis der Odd-Sektor-Tail-Lower-Bound unabhängig validiert ist. Drittens beweisen wir das \emph{Leading-Mode-Cancellation-Lemma}: Die \"Uberlappungsdifferenzen zwischen dem geraden und ungeraden Sektor heben sich paarweise mit der exakten Konstanten $c = 2 + \sqrt{2}$ auf, was $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$ ergibt. Dieser Resolventen-ged\"ampfte Rahmen reduziert den verbleibenden analytischen Schritt (M1$''$) auf klassische Fourier-Analyse und den Primzahlsatz. In v2.0 f\"ugen wir zwei Nicht-Existenz-Theoreme (Theoreme~\ref{thm:NE-A} und~\ref{thm:NE-B}) hinzu, die die L\"osungswege \"uber absolute Totalpositivit\"at und universelle kommutierende Operatoren formal ausschlie\ss{}en und damit zeigen, dass gerade Dominanz notwendigerweise ein arithmetisch-statistisches und kein rein algebraisches Ph\"anomen ist. In v2.1 f\"ugen wir einen robusten direkten Frontier-Dominanz-Beweis (Abschnitt~\ref{sec:direct-frontier}, Proposition~\ref{prop:direct-frontier}) hinzu, der auf einem gemeinsamen Rayleigh-Testvektor im Frontier-Fenster $r\in[0.7,1]$ beruht. In der v2.3-Lesart beweist diese Fassung das asymptotische Variationsvorzeichen $\lambda_{\min}(W^+-W^-)<0$, nicht jedoch allein die Eigenwertordnung $\lambda_1^+<\lambda_1^-$; die Reduktionskette A1--A8 bleibt daher bedingt auf die Asymptotische Variationsgap-Vermutung bzw. eine validierte untere Schranke für $\lambda_1^-$.
 \end{abstract}
 
+{\small
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
 \textbf{Schlagworte:} Riemannsche Vermutung, quadratische Weil-Form, gerade Dominanz, Shift-Parity-Lemma, computergestützte Diagnostik
+}
 
-\newpage
+\clearpage
 \tableofcontents
-\newpage
+\clearpage
 
 % =============================================================================
 \section{Einleitung}
@@ -196,7 +199,7 @@ Drei strukturelle Merkmale treten hervor:
 
 \textbf{Implikation für Connes' Programm:} Connes' Strategie (Abschnitte~6.4--6.6 von \cite{Connes2026}) verwendet Hurwitz' Theorem, um die Eigenschaft der reellen Nullstellen von den abgeschnittenen Fourier-Transformationen $\hat{k}_\lambda$ auf die Riemann-$\Xi$-Funktion in der Grenze $\lambda \to \infty$ zu übertragen. Entscheidenderweise verlangt Hurwitz' Theorem nur eine \emph{Folge} $\lambda_n \to \infty$, entlang der die Voraussetzungen gelten---nicht alle $\lambda > 1$. Daher ist das ungerade-dominante Regime für kleine $\lambda$ (um $\lambda \approx 10$--$30$) \emph{kein} Hindernis. Der verbleibende große Schritt ist eine theoremstarke untere Schranke für $\lambda_1^-$, welche die finite Diagnostik und die asymptotische Variationsaussage in echte Eigenwertordnung überführt.
 
-Unsere Daten zeigen robuste negative Gap-Diagnostik für $\lambda \geq 50$ (mit Spannweiten, die wie $\sim \log(\lambda)^b$ wachsen), und das Gap wächst monoton für $\lambda \geq 120$. Der formale Schluss auf $\lambda_1^+ < \lambda_1^-$ für alle $\lambda \geq 100$ in \Cref{prop:A6} bleibt nach v2.3 bedingt auf eine validierte untere Schranke für den ungeraden Sektor.
+Unsere Daten zeigen robuste negative Gap-Diagnostik für $\lambda \geq 50$ (mit Spannweiten, die wie $\sim \log(\lambda)^b$ wachsen), und das Gap wächst monoton für $\lambda \geq 120$. Der formale Schluss auf $\lambda_1^+ < \lambda_1^-$ für alle $\lambda \geq 100$ in \Cref{prop:A6} bleibt nach v2.4 bedingt auf eine validierte untere Schranke für den ungeraden Sektor.
 
 \subsection{Zerlegungsanalyse: Quelle der geraden Dominanz}
 
@@ -590,7 +593,7 @@ Darüber hinaus bleibt $\lambda_1(\mathrm{QW}_\lambda^-[{:}N])$ über $\lambda_1
 \label{sec:computer-proof}
 \subsubsection{Computergestützte Gap-Diagnostik mittels Intervallarithmetik}
 
-Für $\lambda = 100$ und $\lambda = 200$ haben wir eine computergestützte finite-range Diagnostik unter Verwendung von Intervallarithmetik (mpmath.iv mit 50-stelliger Genauigkeit) abgeschlossen. Im aktuellen v2.3-Status ist dies eine bedingte Zertifikats-Pipeline mit drei Komponenten:
+Für $\lambda = 100$ und $\lambda = 200$ haben wir eine computergestützte finite-range Diagnostik unter Verwendung von Intervallarithmetik (mpmath.iv mit 50-stelliger Genauigkeit) abgeschlossen. Im aktuellen v2.4-Status ist dies eine bedingte Zertifikats-Pipeline mit drei Komponenten:
 
 \begin{enumerate}
 \item \textbf{Oberschranke auf $\lambda_1^+$:} Die $4 \times 4$ Galerkin-Matrix $\mathrm{QW}^+[{:}4]$ wird mit zertifizierten Intervallen berechnet: Primzahl-Shift-Integrale werden in Intervallarithmetik evaluiert (Breite $< 10^{-12}$), und der archimedische Kern wird via zusammengesetzter Gauss--Legendre-Quadratur mit Interval-Einschließung integriert (Breite $< 10^{-3}$). Der kleinste Eigenwert der Interval-Matrix ergibt eine zertifizierte Oberschranke.
@@ -999,7 +1002,7 @@ Diese Arbeit etabliert nicht mehr eine unbedingte gerade Dominanz der Weil-Quadr
 
 Die zentrale analytische Einsicht ist das Führende-Mode-Auslöschungs-Lemma: die Kopplungsdifferenz zwischen geraden und ungeraden Sektoren ist beschränkt durch $O(1)$, während der diagonale Vorteil $D(\lambda)$ als $\sqrt{\lambda}$ wächst, wodurch ein Verhältnis $\rho(\lambda) \to 0$ entsteht. Kombiniert mit der Euler--Maclaurin-Proposition ($\rho^{\mathrm{EM}} < 0$ für $L \geq 13$, zertifiziert durch Intervallarithmetik) und dem PNT-Transfer-Lemma ergibt dies M1$''$ (Resolventen-Subdominanz) für alle $\lambda \geq \lambda_0$.
 
-In v1.1 wurden sowohl Lemma~B als auch Lemma~C zu analytischen Argumenten aufgewertet: der Paritäts-Split-Gap (Lemma~B, Schritte~3--4) leitet $c_{\mathrm{gap}} \geq 4\pi^2/L$ aus Laplace-Asymptotik her, und die Sektor-Differenz-Kontrolle (Lemma~C) ersetzt die globale Neumann-Bedingung $\|R_0 K\| < 1$ durch die Schwanz-Symmetrie-Schranke $|E_{\sin}^{\mathrm{tail}} - E_{\cos}^{\mathrm{tail}}|/D \leq C/N_0^2$. Version~2.1 fügt einen direkten Frontier-Dominanz-Beweis (Proposition~\ref{prop:direct-frontier}) hinzu, der die alten v2.0-Caveats für die Variationsaussage entfallen lässt; der Schluss auf einen unbedingten Beweis bleibt nach v2.3 zurückgezogen.
+In v1.1 wurden sowohl Lemma~B als auch Lemma~C zu analytischen Argumenten aufgewertet: der Paritäts-Split-Gap (Lemma~B, Schritte~3--4) leitet $c_{\mathrm{gap}} \geq 4\pi^2/L$ aus Laplace-Asymptotik her, und die Sektor-Differenz-Kontrolle (Lemma~C) ersetzt die globale Neumann-Bedingung $\|R_0 K\| < 1$ durch die Schwanz-Symmetrie-Schranke $|E_{\sin}^{\mathrm{tail}} - E_{\cos}^{\mathrm{tail}}|/D \leq C/N_0^2$. Version~2.1 fügt einen direkten Frontier-Dominanz-Beweis (Proposition~\ref{prop:direct-frontier}) hinzu, der die alten v2.0-Caveats für die Variationsaussage entfallen lässt; der Schluss auf einen unbedingten Beweis bleibt nach v2.4 zurückgezogen.
 
 % =============================================================================
 \appendix
@@ -1491,7 +1494,7 @@ where $S^\pm_{nm}(\delta, L)$ are the shift overlaps and the dots indicate highe
 \subsection{Computergest\"utzte Zertifikate}
 \label{sec:certificates}
 
-Das Zertifizierungsprogramm (\texttt{certifier\_production.py}) berechnet die Gap-Diagnostik auf einem geometrischen Gitter von $\lambda$-Werten. Im aktuellen v2.3-Status wird dieser Output als endliche Brücke \emph{bedingt auf} die unten beschriebene untere Schranke des ungeraden Sektor-Tails geführt: Die obere Schranke im geraden Sektor ist intervallarithmetisch rigoros, während der ungerade Tail-Lower-Bound im Connes--van-Suijlekom-Operatorrahmen noch unabhängig validiert werden muss.
+Das Zertifizierungsprogramm (\texttt{certifier\_production.py}) berechnet die Gap-Diagnostik auf einem geometrischen Gitter von $\lambda$-Werten. Im aktuellen v2.4-Status wird dieser Output als endliche Brücke \emph{bedingt auf} die unten beschriebene untere Schranke des ungeraden Sektor-Tails geführt: Die obere Schranke im geraden Sektor ist intervallarithmetisch rigoros, während der ungerade Tail-Lower-Bound im Connes--van-Suijlekom-Operatorrahmen noch unabhängig validiert werden muss.
 \begin{itemize}
   \item \textbf{Gerader Block (obere Schranke für $\lambda_1^+$):} Eine $k \times k$-Matrix ($k = 4$), berechnet in Intervallarithmetik (\texttt{mpmath.iv}, 50-stellige Präzision). Nach Cauchy-Interlacing gilt $\lambda_{\min}(\mathrm{QW}_{\cos}^{(k)}) \geq \lambda_1^+$; dies liefert eine rigorose obere Schranke.
   \item \textbf{Ungerader Block (Kandidat für eine untere Schranke auf $\lambda_1^-$):} Zwei $N_0 \times N_0$-Matrizen ($N_0 = 40$--$90$) werden in float64 berechnet. Die kleinere Matrix liefert einen Kern-Eigenwert $\ell_{\mathrm{core}}$; die größere eine Tail-Korrektur über den Eigenwert-Drop $\ell_{\mathrm{core}} - \ell_{\mathrm{big}}$. Der verbleibende Tail (Modi $> N_0$) wird durch geometrische Extrapolation der Kopplungs-Spaltennormen geschätzt, und eine float64-Rundungsmarge ($10 \times N_0 \times \varepsilon_{\mathrm{mach}} \times \|W\|_\infty$) wird subtrahiert. Wenn diese Tail-Schätzung validiert ist, lautet die benötigte Lower-Bound-Richtung
@@ -1938,7 +1941,7 @@ $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ benötigt die fehlende untere Schran
 \label{sec:direct-frontier}
 % =============================================================================
 
-Version~2.1 fügte das direkte Frontier-Argument unten hinzu. Im v2.3-Status ist dies kein Beweis von A6 als Eigenwertordnungs-Aussage, sondern ein robuster Beweis des asymptotischen Variationsvorzeichens, der die alten Interpolations-/PNT-Transfer-Caveats beseitigt. Die robuste Fassung ist bewusst frei von Eigenwert-Additivität: Sie addiert keine unteren Schranken für $\lambda_{\min}(D_3(r))$ über verschiedene Primzahlen hinweg. Stattdessen wird die gesamte Frontier-Summe auf einem gemeinsamen Rayleigh-Vektor ausgewertet, während der komplementäre Anteil durch seine Operatornorm kontrolliert wird.
+Version~2.1 fügte das direkte Frontier-Argument unten hinzu. Im v2.4-Status ist dies kein Beweis von A6 als Eigenwertordnungs-Aussage, sondern ein robuster Beweis des asymptotischen Variationsvorzeichens, der die alten Interpolations-/PNT-Transfer-Caveats beseitigt. Die robuste Fassung ist bewusst frei von Eigenwert-Additivität: Sie addiert keine unteren Schranken für $\lambda_{\min}(D_3(r))$ über verschiedene Primzahlen hinweg. Stattdessen wird die gesamte Frontier-Summe auf einem gemeinsamen Rayleigh-Vektor ausgewertet, während der komplementäre Anteil durch seine Operatornorm kontrolliert wird.
 
 \begin{proposition}[Direkte Frontier-Dominanz]
 \label{prop:direct-frontier}

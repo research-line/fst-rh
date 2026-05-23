@@ -44,7 +44,7 @@
 
 \title{A Conditional Reduction of the Riemann Hypothesis to Even Dominance of the Weil Quadratic Form}
 \author{Lukas Geiger\\Independent Researcher, Bernau\\ORCID: 0009-0005-7296-1534}
-\date{Draft v1.6 -- 19 May 2026}
+\date{Draft v1.7 -- 23 May 2026}
 
 \hypersetup{
   unicode=true,
@@ -1687,6 +1687,63 @@ open and requires a non-trivial technical advance beyond
 straightforward Galerkin + Temple/Lehmann.  We document this honestly
 in line with the convention that the present manuscript is a
 continuously developing draft.
+
+% added 2026-05-23: Route B parallel development reference
+\subsection{Update (May 2026): Parallel Route via Connes-vS Err-Collapse and I-1 Normal-Family Reframe}
+\label{sec:route-b-parallel}
+
+A parallel conditional closure of the Riemann Hypothesis via a
+different handling of wall~(ii) has been developed in the companion
+proof notes (see \path{_proof-notes/K0_NORMAL_FAMILY_REFRAME_2026-05-22.md}).
+Recall that the present proof delegates wall~(ii)
+(the approximation-quality condition $k_\Lambda \approx \xi_\Lambda$,
+i.e.\ the MS2 bound) to the companion Zookeeper paper.
+The parallel route --- referred to as Route~B~--- shows that the same
+spectral structure gives a second conditional closure via a
+normal-family (Montel--Vitali) argument: wall~(ii) decomposes
+rigorously into an a-priori strip bound~(ii-a) on the family
+$\{\hat\xi_\lambda\}$ (the canonical entire functions of Paley--Wiener
+type $\hat\xi(z) = (2/\sqrt L)\sin(zL/2)\cdot F(z)$, centered, even,
+real-on-real) and a limit-identification condition~(ii-c); and (ii-c)
+is absorbed into~(ii-a) rigorously via parity and Hadamard order
+(modulo a zero-coincidence assumption~(Z), \S{}E.14 of the notes).
+The remaining open blocker for Route~B is therefore the single
+a-priori uniform strip bound~(ii-a) from $QW_N$ coercivity.
+
+Converged empirical measurements on the canonical objects (Mac Studio,
+$\mathrm{dps} \approx 30\text{--}50\cdot\lambda$, $\lambda \in
+\{3,5,7,9,11,13,15\}$, \S{}E.18 of the notes; values at $\lambda=11,13$
+bit-identical across two independent dps-runs, and $\lambda=15$
+bit-identical at $\mathrm{dps}=640$ and $\mathrm{dps}=800$) yield
+$A_\lambda(0.4) \approx 1.003\text{--}1.004$ \emph{flat} across the
+seven converged $\lambda$-values
+(the SUP-observable
+$A_\lambda(\delta) := \sup_{x\in\mathbb{R}} |\hat\xi_\lambda(x)|^2 /
+(1+|x|^{2\delta})$, normalised) and $B_\lambda(0.4)/\lambda^{0.4}
+\approx 0.68$ plateau (the $L^2$-observable, sub-generic growth):
+
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{c|c|c|c|c}
+$\lambda$ & $\sup|\hat\xi|_{\mathbb{R}}$ & $A_\lambda(0.4)$ & $B_\lambda(0.4)$ & $B_\lambda/\lambda^{0.4}$ \\\hline
+ 3 & 0.858 & 1.0033 & 1.151 & 0.74 \\
+ 5 & 0.879 & 1.0037 & 1.340 & 0.70 \\
+ 7 & 0.886 & 1.0038 & 1.505 & 0.69 \\
+ 9 & 0.890 & 1.0039 & 1.649 & 0.68 \\
+11 & 0.890 & 1.0039 & 1.778 & 0.68 \\
+13 & 0.891 & 1.0039 & 1.895 & 0.68 \\
+15 & 0.892 & 1.00394 & 2.003 & 0.68
+\end{tabular}
+\end{center}
+
+The flatness of $A_\lambda$ indicates that the spectral framework is
+well-conditioned and consistent with a uniform strip bound; it does not
+constitute a proof of~(ii-a).  Earlier measurements reported in
+\S{}E.16--E.17 of the notes were retracted due to insufficient
+precision ($\mathrm{dps}=30$) near cluster near-degeneracy of the
+minimal even eigenvalue; only the converged \S{}E.18 values are
+reliable.
 
 \section{What Is Not Used}
 

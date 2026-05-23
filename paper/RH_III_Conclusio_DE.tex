@@ -5,6 +5,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
 \usepackage{enumitem}
@@ -37,16 +38,22 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
+\begin{abstract}\small
 Diese abschließende Arbeit in einer dreiteiligen Serie führt die Ergebnisse der vorangegangenen Arbeiten zu einem einheitlichen Bild zusammen. Wir katalogisieren die bewiesenen strukturellen Ergebnisse (R1--R9), die ausgeschlossenen Wege (K1--K4) und die neuen Beiträge: das Shift-Parity-Lemma, die computergestützte finite-range Gap-Diagnostik für 33 Werte von $\lambda$ bis zu $1{,}300{,}000$, den Resolventen-gedämpften M1$''$-Rahmen, das Leading-Mode-Cancellation-Lemma mit der exakten Konstanten $c = 2 + \sqrt{2}$ und die Euler-Maclaurin-Proposition, die $\rho^{\mathrm{EM}}(L) < 0$ für $L \geq 14$ ($\lambda \geq 1{,}200{,}000$) etabliert. Die finite-range Diagnostik bleibt theoremstark bedingt auf eine validierte untere Schranke für den ungeraden Sektor. Teil~III berücksichtigt außerdem die in v2.0 eingeführten Nicht-Existenz-Theoreme (NE-A, NE-B in Teil~II), welche die vergleichende Analyse der Beweisstrategien neu strukturieren und bestätigen, dass sich gerade Dominanz nicht auf Totalpositivität oder Sturm--Liouville-artige Argumente reduzieren lässt. Wir präsentieren die Beweisarchitektur von Connes' Theorem 6.1 über die gerade Dominanz bis zur Riemannschen Vermutung als \emph{conditional reduction}, formulieren offene Probleme und diskutieren Verbindungen zur weiteren Landschaft der analytischen Zahlentheorie. In v2.1 wird ein robuster direkter Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}) hinzugefügt; in der v2.3-Lesart beweist er das asymptotische Variationsvorzeichen, aber nicht allein die Eigenwertordnung $\lambda_1^+<\lambda_1^-$.
+
+\medskip\noindent
+\textbf{v2.4 (23. Mai 2026): Parallelprogramm ergänzt.}  Ein neuer Unterabschnitt ``Parallelprogramm: Connes--vS-Fehlerkollaps und I-1-Normalfamilien-Reframe'' (\S\ref{sec:parallel-route-b}) präsentiert eine zweite Reduktion der Riemannschen Vermutung, unabhängig von der Asymptotischen Variationsgap-Vermutung~(A7), über die Connes--van-Suijlekom-err-Kollaps-Route (Route~B) und den I-1-Normalfamilien-Reframe der Begleitarbeit \cite{Geiger2026evendom}, \S E.1--E.18.  Beide Routen sind bedingt auf dieselbe offene Wand, Connes' \S6.6(b)/MS2-Streifenschranke~(ii), die der I-1-Reframe als (ii-a) + (ii-c) zerlegt und (modulo Einfachheit~(Z)) auf die einzige offene Schranke~(ii-a) absorbiert.  Konvergierte Empirie an sieben $\lambda \in \{3,5,7,9,11,13,15\}$ ist tabelliert, einschließlich der bit-identischen Zwei-dps-Validierung bei $\lambda = 11, 13, 15$.  Die DOI der Even-Dominance-Begleitarbeit wird vom v1.5-Record auf den v1.6-Record aktualisiert (\texttt{10.5281/zenodo.20291994}).
 \end{abstract}
 
+{\small
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 65G20\\
 \textbf{Schlagworte:} Riemannsche Vermutung, Li-Koeffizienten, gerade Dominanz, Euler-Maclaurin, Beweisarchitektur, offene Probleme
+}
 
-\newpage
+\clearpage
 \tableofcontents
 
+\clearpage
 
 % =============================================================================
 \section{Einleitung}
@@ -157,6 +164,7 @@ Wir präsentieren die logische Kette vom bekannten Wissen zur Riemannschen Vermu
 
 \begin{center}
 \renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{c|p{7cm}|l|l}
 \textbf{Schritt} & \textbf{Aussage} & \textbf{Status} & \textbf{Quelle} \\\hline
 A1 & Connes' Theorem~6.1: gerade Dominanz $\Rightarrow$ Nullstellen von $\hat{\eta}$ reell & bewiesen & \cite{ConnesvS2025, Connes2026} \\
@@ -168,7 +176,8 @@ A5b & Euler-Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (intervallarithmetisch zerti
 \textbf{A6} & \textbf{Kumulativer Schritt: $\sum_p W_p$ erhält die gerade Präferenz} & \textbf{variational / bedingt}${}^\dagger$ & Teil~II \\
 A7 & Gerade Dominanz für $\lambda_n\to\infty$ & bedingt auf AVG / Odd-Lower-Bound & Teil~II \\
 A8 & Alle Nullstellen auf $\Re(s) = 1/2$ (RH) & conditional reduction & A1+A2+A7
-\end{tabular}
+\end{tabular}%
+}
 \end{center}
 
 \noindent${}^\dagger$\textbf{Status von Proposition~A6} (Teil~II, Proposition~A6): In v2.1 wurde ein robuster direkter Frontier-Dominanz-Beweis (Teil~II, Proposition~\emph{prop:direct-frontier}) hinzugefügt. Er verwendet einen gemeinsamen Rayleigh-Testvektor auf dem Frontier-Fenster $r\in[0.7,1]$, PNT-Partialsummation, den Satz von Mertens und finite-range CAP-Evidenz bis zur expliziten asymptotischen Schwelle. In der v2.3-Lesart beweist dies $\lambda_{\min}(W^+-W^-)<0$ asymptotisch, aber nicht automatisch $\lambda_1^+<\lambda_1^-$. Der Eigenwertordnungsschritt bleibt bedingt auf eine validierte untere Schranke für $\lambda_1^-$.
@@ -235,17 +244,21 @@ Aus der Bombieri-Lagarias-Zerlegung und der thermodynamischen Analyse:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{c|l|l|l}
 \textbf{Schritt} & \textbf{Aussage} & \textbf{Status} & \textbf{Methode} \\\hline
 S1 & Definition von $\xi(s)$, Funktionalgleichung & bewiesen & Definition \\
 S2 & Li-Koeffizienten via Bombieri-Lagarias & bewiesen & \cite{BombieriLagarias1999} \\
 S3 & Zerlegung $\lambda_n = \lambda_n^{(\infty)} + \lambda_n^{(\mathrm{fin})}$ & bewiesen & Teil~I \\
 S4 & Archimedische Dominanz: $\lambda_n^{(\infty)} \sim \frac{n}{2}\log n$ & bewiesen & Stirling \\
-\textbf{S5} & \textbf{$\lambda_n \geq 0$ für alle $n \geq 1$} & \textbf{OFFEN}\footnote{S5 ist äquivalent zu RH (Li, 1997). Der vorliegende Weg der geraden Dominanz liefert nur eine bedingte Reduktion bis zur Odd-Sektor-Lower-Bound-/AVG-Schließung; S5 ist hier daher nicht geschlossen.} & \textbf{$\Longleftrightarrow$ RH} \\
+\textbf{S5} & \textbf{$\lambda_n \geq 0$ für alle $n \geq 1$} & \textbf{OFFEN}${}^{\ast}$ & \textbf{$\Longleftrightarrow$ RH} \\
 S6 & Alle Nullstellen auf $\Re(s) = 1/2$ & $\Leftrightarrow$ S5 & Li (1997) \\
 S7 & Primzahlzählung: $\pi(x) = \mathrm{Li}(x) + O(\sqrt{x}\log x)$ & $\Leftarrow$ S6 & von Koch
-\end{tabular}
+\end{tabular}%
+}
 \end{center}
+
+{\footnotesize\noindent${}^{\ast}$ S5 ist äquivalent zu RH (Li, 1997). Der vorliegende Weg der geraden Dominanz liefert nur eine bedingte Reduktion bis zur Odd-Sektor-Lower-Bound-/AVG-Schließung; S5 ist hier daher nicht geschlossen.\par}
 
 \subsection{Gerade-Dominanz-Perspektive}
 
@@ -253,6 +266,7 @@ Aus dem Connes-Programm und Teil~II:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{c|l|l|l}
 \textbf{Schritt} & \textbf{Aussage} & \textbf{Status} & \textbf{Methode} \\\hline
 E1 & Explizite Weil-Formel & bewiesen & Weil (1952) \\
@@ -263,7 +277,8 @@ E5 & Finite-range Gap-Diagnostik bei $33$ Werten, $\lambda \leq 1{,}300{,}000$ &
 E5b & Euler-Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ (intervallarithmetisch zertifiziert) & bewiesen & Teil~II \\
 \textbf{E6} & \textbf{Kumulativer Schritt: gerade Dominanz für alle $\lambda$} & \textbf{offen / bedingt} (= A6) & \textbf{Odd-Lower-Bound / AVG} \\
 E7 & Connes' Theorem~6.1 + Hurwitz-Brücke $\Rightarrow$ RH & bedingt auf E6 & \cite{Connes2026}
-\end{tabular}
+\end{tabular}%
+}
 \end{center}
 
 \noindent Die beiden Perspektiven sind verwandt, aber \emph{nicht äquivalent}: E6 (kumulative gerade Dominanz) würde S5 (und damit RH) via Connes' Theorem~6.1 und den Satz von Hurwitz \emph{implizieren}. Die Umkehrung ist jedoch unbekannt --- RH könnte aus Gründen gelten, die nichts mit gerader Dominanz zu tun haben. E6 ist eine \emph{hinreichende} Bedingung, keine Charakterisierung. Das Shift-Parity-Lemma überbrückt die Perspektiven, indem es zeigt, dass die Struktur der individuellen Primzahlen, die E6 zugrunde liegt, algebraisch kontrolliert ist.
@@ -406,6 +421,69 @@ Dieser Kontrast beleuchtet die arithmetische Schwierigkeit: Die Primzahlzählung
 
 Eine Yang--Mills-Analogie existiert: Kirks nullstellenfreier Streifen für Selberg-Zeta (via Ruelles Theorem) spiegelt die nullstellenfreie Region in der Primzahltheorie wider. Die Spektrallücke im Laplace-Operator auf $\Gamma \backslash \mathbb{H}$ spielt die Rolle der Gerade-Ungerade-Lücke in der Weil-Form. Ob der Shift-Parity-Mechanismus ein geometrisches Gegenstück für Selberg-Zeta hat, ist eine offene Frage von eigenständigem Interesse.
 
+% added 2026-05-23: Route B / I-1 reframe / E.18 empirics
+\subsection{Parallelprogramm: Connes--vS-Fehlerkollaps und I-1-Normalfamilien-Reframe}
+\label{sec:parallel-route-b}
+
+Unabhängig von der Asymptotischen Variationsgap-Vermutung (A7) liefert die Connes--van-Suijlekom-Fehlerkollaps-Route (Route~B) eine weitere Reduktion auf die Riemannsche Vermutung.
+Ausgangspunkt ist dieselbe Aussage wie in Route~A: Connes--vS-Theorem~5.6 (= Schritt A1) liefert die finite-$N$-Schranke
+$\mathrm{err}_\lambda \leq C e^{-c\lambda}$ für jede individuelle Riemann-Nullstelle, numerisch verifiziert auf $\lesssim 10^{-25\lambda}$ für $\geq 15$ Nullstellen.
+Route~B reformuliert dann die Limitesbedingung: es gilt
+$\mathrm{err} \to 0 \Longleftrightarrow \text{(i)} + \text{(ii)}$
+rigoros, wobei (i) Schritt~A1 ist und (ii) Connes' \S6.6(b)/MS2-Bedingung bezeichnet (eine uniforme Streifenschranke an die Familie $\{\hat\xi_\lambda\}$ kanonischer Kriteriumsfunktionen).
+Da $\text{(ii)} \Rightarrow \mathrm{RH}$ ebenfalls rigoros ist, reduziert Route~B auf die einzige offene Bedingung~(ii) \cite{Geiger2026evendom}.
+
+Der I-1-Normalfamilien-Reframe (\S E.1--E.18 der Begleit-Beweisnotizen) zerlegt~(ii) über ein Montel--Vitali-Kompaktheitsargument in zwei Teilbedingungen:
+(ii-a)~eine uniforme wachstumsangepasste Streifenschranke an $\{\hat\xi_\lambda\}$ und
+(ii-c)~eine Limesidentifikationsbedingung.
+Der algebraische Kernschritt (\S E.14) zeigt, dass (ii-c) rigoros in~(ii-a) absorbiert wird: die Parität von $\mathrm{QW}_N$ (reell-symmetrisch, Gerade-Paritäts-Projektion $\Rightarrow \hat\xi_\lambda$ ist gerade und reell-auf-reell) erzwingt zusammen mit einem Hadamard-Ordnungsargument (unter der Annahme~(Z), dass alle Nullstellen einfach sind) das identische Verschwinden des Bohr--Carathéodory-Phasenfaktors.
+Das kanonische Kriteriumsobjekt ist definitiv als
+$\hat\xi(z) = \tfrac{2}{\sqrt{L}}\sin\!\bigl(\tfrac{zL}{2}\bigr)F(z)$
+festgelegt, wobei $F(z) = \sum_{n \leq N} \Lambda(n)/\sqrt{n}\cdot\cos(z\log n/2)$
+(zentriert, gerade, reell-auf-reell, ganz; Abweichung von numerischen Daten
+$\leq 1{,}9 \times 10^{-52}$ bei $\lambda = 5$, $7$, $\mathrm{dps}=50$, \S E.15).
+Route~B reduziert sich damit vollständig auf die offene Bedingung~(ii-a): eine rigorose uniforme Schranke aus $\mathrm{QW}_N$-Koerzitivität.
+
+Konvergierte empirische Daten für das Sup-Observable
+$A_\lambda(\delta) := \sup_{x\in\mathbb{R}} |\hat\xi_\lambda(x+i\delta)|/|\hat\xi_\lambda(x)|$
+und das $L^2$-Observable $B_\lambda(\delta)$ bei $\delta = 0{,}4$, erhoben auf einem dedizierten Rechenknoten
+(Mac~Studio, $\mathrm{dps}_{\min} \approx 30\lambda$--$50\lambda$
+zur Kontrolle von Cluster-Nahentartung; zwei verschiedene dps-Werte bit-identisch bei $\lambda = 11, 13, 15$),
+sind in Tabelle~\ref{tab:route-b-empirics} an sieben konvergierten Werten
+$\lambda \in \{3, 5, 7, 9, 11, 13, 15\}$ zusammengefasst.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{r r r r r}
+\hline
+$\lambda$ & $\sup|\hat\xi_\lambda|_{\mathbb{R}}$ & $A_\lambda(0{,}4)$ & $B_\lambda(0{,}4)$ & $B_\lambda(0{,}4)/\lambda^{0{,}4}$ \\
+\hline
+ 3 & 0{,}858 & 1{,}0033  & 1{,}151 & 0{,}74 \\
+ 5 & 0{,}879 & 1{,}0037  & 1{,}340 & 0{,}70 \\
+ 7 & 0{,}886 & 1{,}0038  & 1{,}505 & 0{,}69 \\
+ 9 & 0{,}890 & 1{,}0039  & 1{,}649 & 0{,}68 \\
+11 & 0{,}890 & 1{,}0039  & 1{,}778 & 0{,}68 \\
+13 & 0{,}891 & 1{,}0039  & 1{,}895 & 0{,}68 \\
+15 & 0{,}892 & 1{,}00394 & 2{,}003 & 0{,}68 \\
+\hline
+\end{tabular}
+\caption{Konvergierte Empirie der Route-B-Observablen bei $\delta = 0{,}4$
+(Begleit-Beweisnotizen, \S E.18). Das Sup-Observable $A_\lambda(0{,}4)$ ist
+im Wesentlichen flach bei $\approx 1{,}004$, im scharfen Kontrast zur
+generischen Phragmén--Lindelöf-Vorhersage $\sim \lambda^\delta$. Das
+$B_\lambda$-Verhältnis fällt von $0{,}74$ bei $\lambda = 3$ auf ein stabiles
+Plateau bei $0{,}68$ für $\lambda \geq 9$.}
+\label{tab:route-b-empirics}
+\end{table}
+
+Die beobachtete Beinahe-Flachheit von $A_\lambda(0{,}4)$ zeigt, dass die Familie $\{\hat\xi_\lambda\}$
+stark subgenerisch ist, was~(ii-a) empirisch plausibel macht.
+Das $L^2$-Observable wächst als $B_\lambda(0{,}4) \approx 0{,}68\,\lambda^{0{,}4}$ auf dem Plateau,
+konsistent mit polynomialem subgenerischen Verhalten.
+Frühere Läufe bei $\mathrm{dps}=30$ (\S E.16--E.17) wurden wegen unter-konvergierter Eigenvektoren retrahiert; die korrigierten Daten sind in \S E.18
+der Begleit-Beweisnotizen dokumentiert \cite{Geiger2026evendom}.
+
 
 % =============================================================================
 \section{Einschätzung und Ausblick}
@@ -481,6 +559,7 @@ In v1.1 wurden beide verbliebenen numerischen Inputs analytisch ersetzt: Die Par
 
 \begin{center}
 \renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{l|c|l}
 \textbf{Beitrag} & \textbf{Status} & \textbf{Arbeit} \\\hline
 Thermodynamischer Formalismus für $\zeta$ & etabliert & I \\
@@ -501,7 +580,8 @@ Resolventen-Trunkierung (Lemma~C) & bewiesen (analytisch) & II \\
 PNT-Transfer-Fehler (Lemma~PNT) & bewiesen mit effektivem $C$ & II \\
 \textbf{Kumulativer Schritt (A6)} & \textbf{variational / bedingt} & II \\
 \textbf{Riemannsche Vermutung} & \textbf{conditional reduction} & I+II+III
-\end{tabular}
+\end{tabular}%
+}
 \end{center}
 
 \noindent A6 beruht auf dem Drei-Regime-Brückenargument (Teil~II, Proposition~A6): computergestützte finite-range Diagnostik für $\lambda \leq 1{,}300{,}000$ (Regime~1, bedingt auf Odd-Sektor-Tail-Lower-Bound) und das analytische M1$''$/PNT-Argument für das asymptotische Variationsvorzeichen. In v1.1 wurde Lemma~B zu einer Parity-Split-Lückenschranke aufgewertet und Lemma~C als Sektor-Differenz-Kontrolle reformuliert. In v2.1 (Teil~II, Proposition~\emph{prop:direct-frontier}) wird ein robuster direkter Frontier-Variationsbeweis hinzugefügt: Die Frontier wird auf einem gemeinsamen Rayleigh-Vektor ausgewertet und das Komplement normbeschränkt. Beide alten Caveats des v2.0-Drei-Regime-Arguments entfallen für die Variationsaussage; der Beweis der Riemannschen Vermutung bleibt bedingt auf die Eigenwertordnungs-Schließung.
@@ -527,28 +607,13 @@ L.~Geiger, \emph{Die Riemannsche Vermutung: Gerade Dominanz der quadratischen We
 A.~Connes, \emph{The Riemann Hypothesis: Past, Present and a Letter Through Time}, arXiv:2602.04022v1, 2026.
 
 \bibitem{ConnesvS2025}
-A.~Connes und W.~D. van Suijlekom, \emph{Quadratic Forms, Real Zeros and Echoes of the Spectral Action}, arXiv:2511.23257, 2025.
+A.~Connes und W.~D. van Suijlekom, \emph{Quadratic Forms, Real Zeros and Echoes of the Spectral Action}, Commun.~Math.~Phys.~\textbf{406}, Article~312 (2025), DOI: 10.1007/s00220-025-05493-1.
+
+\bibitem{Geiger2026evendom}
+L.~Geiger, \emph{A conditional proof of the Riemann hypothesis via even dominance of the Weil quadratic form}, Zenodo, 2026, DOI: 10.5281/zenodo.20291994. % added 2026-05-23
 
 \bibitem{BombieriLagarias1999}
 E.~Bombieri und J.~C.~Lagarias, \emph{Complements to Li's criterion for the Riemann hypothesis}, J.~Number Theory~\textbf{77} (1999), 274--287.
-
-\bibitem{Li1997}
-X.-J.~Li, \emph{The positivity of a sequence of numbers and the Riemann hypothesis}, J.~Number Theory~\textbf{65} (1997), 325--333.
-
-\bibitem{Weil1952}
-A.~Weil, \emph{Sur les ``formules explicites'' de la th\'eorie des nombres premiers}, Comm.~S\'em.~Math.~Univ.~Lund (1952), 252--265.
-
-\bibitem{Keiper1992}
-J.~B.~Keiper, \emph{Power series expansions of Riemann's $\xi$ function}, Math.~Comp.~\textbf{58} (1992), 765--773.
-
-\bibitem{Deninger2002}
-C.~Deninger, \emph{On the nature of the ``explicit formulas'' in analytic number theory}, in: Number Theoretic Methods, Developments in Mathematics, vol.~\textbf{8}, Kluwer Academic Publishers (2002), 97--118.
-
-\bibitem{Connes1999}
-A.~Connes, \emph{Trace formula in noncommutative geometry and the zeros of the Riemann zeta function}, Selecta Math.~\textbf{5} (1999), 29--106.
-
-\bibitem{ConreyLi2000}
-J.~B.~Conrey und X.-J.~Li, \emph{A note on some positivity conditions related to zeta and $L$-functions}, Int.~Math.~Res.~Not.~\textbf{2000}, Nr.~18, 929--940.
 
 \end{thebibliography}
 

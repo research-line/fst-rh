@@ -5,6 +5,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
 \usepackage{enumitem}
@@ -38,15 +39,18 @@ Grundlagen, Hindernisse und Neuausrichtung}
 \begin{document}
 \maketitle
 
-\begin{abstract}
+\begin{abstract}\small
 Diese Arbeit, die erste in einer dreiteiligen Serie über die Riemannsche Vermutung, beschreibt die mathematische Landschaft und dokumentiert die systematische Untersuchung --- und letztlich das Scheitern --- eines eich-theoretischen Ansatzes. Im ersten Teil entwickeln wir den analytischen Rahmen: die Riemannsche Vermutung als Stabilitätsproblem, das Li-Kriterium als zentrales Werkzeug und die Bombieri-Lagarias-Zerlegung der Li-Koeffizienten in archimedische und endlich-teilige Beiträge. Ausgehend von einem thermodynamischen Formalismus (Prime Hub Graphen und Ruelle-Transferoperatoren) beweisen wir mehrere unbedingte strukturelle Ergebnisse: die archimedisch-endliche Zerlegung, das Paradoxon der archimedischen Dominanz, die OS-Reflexionspositivität, die arithmetische Unschärferelation und die spektrale Bestandsaufnahme des arithmetischen Kerns. Im zweiten Teil identifizieren wir vier kritische Hindernisse (K1--K4), die einzeln und kollektiv die ursprüngliche Beweisstrategie zum Scheitern bringen: die Gibbs-Normierungslücke, der Vorzeichenwechsel des Zielfunktionals, die falsche Monotonierichtung und das Spurklassen-Hindernis. Wir lokalisieren die Schwierigkeit präzise durch eine neunstufige Logikkette und zeigen, dass sich der \emph{gesamte} Inhalt von RH in einem einzigen Schritt konzentriert (S5: die unbedingte Positivität der Li-Koeffizienten). Wir formulieren fünf konkrete offene Probleme und identifizieren die Neuausrichtung auf das Spektralprogramm von Connes als den Weg nach vorne. Teil~II entwickelt diese neue Richtung über das Shift-Parity-Lemma und computergestützte finite-range Gap-Diagnostik, die nach v2.3 als bedingte endliche Brücke geführt wird; Teil~III zieht die endgültigen Schlussfolgerungen. In v2.0 schließen zwei Nicht-Existenz-Theoreme in Teil~II (NE-A, NE-B) die Routen über absolute totale Positivität und einen universellen kommutierenden Operator formal aus und bekräftigen damit den arithmetisch-statistischen Charakter der Dominanz gerader Eigenfunktionen.
 \end{abstract}
 
+{\small
 \noindent\textbf{MSC 2020:} 11M26, 11M36, 37C30, 47A75, 82B05\\
 \textbf{Schlagworte:} Riemannsche Vermutung, Li-Koeffizienten, Ruelle-Transferoperator, archimedische Dominanz, Eich-Positivität, Hindernisse, Spektralanalyse
+}
 
-\newpage
+\clearpage
 \tableofcontents
+\clearpage
 
 
 % =============================================================================
@@ -593,7 +597,7 @@ A.~Connes, \emph{Trace formula in noncommutative geometry and the zeros of the R
 A.~Connes, \emph{The Riemann Hypothesis: Past, Present and a Letter Through Time}, arXiv:2602.04022v1, 2026.
 
 \bibitem{ConnesvS2025}
-A.~Connes and W.~D. van Suijlekom, \emph{Quadratic Forms, Real Zeros and Echoes of the Spectral Action}, arXiv:2511.23257, 2025.
+A.~Connes und W.~D. van Suijlekom, \emph{Quadratic Forms, Real Zeros and Echoes of the Spectral Action}, Commun.~Math.~Phys.~\textbf{406}, Article~312 (2025), DOI: 10.1007/s00220-025-05493-1.
 
 \bibitem{Deninger2002}
 C.~Deninger, \emph{On the nature of the ``explicit formulas'' in analytic number theory}, in: Number Theoretic Methods, Developments in Mathematics, vol.~\textbf{8}, Kluwer Academic Publishers (2002), 97--118.

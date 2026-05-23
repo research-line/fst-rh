@@ -45,7 +45,7 @@
 
 \title{Eine bedingte Reduktion der Riemannschen Vermutung auf gerade Dominanz der Weilschen quadratischen Form}
 \author{Lukas Geiger\\Unabhängiger Forscher, Bernau\\ORCID: 0009-0005-7296-1534}
-\date{Entwurf v1.6 -- 19. Mai 2026}
+\date{Entwurf v1.7 -- 23. Mai 2026}
 
 \hypersetup{
   unicode=true,
@@ -751,7 +751,7 @@ Die Schur-Komplement-Schranke ist Standard~\cite{Kato1966}. \Cref{lem:higher-mod
   \item \emph{Externe Preprint-Eingabe aus Connes 2026 §6.5 (Fact 6.4):} Die Fourier-Transformierte der Educated-Guess-Eigenfunktion $k_\Lambda$ konvergiert gegen $\Xi$ gleichmäßig auf Substreifen $|\Im z|<\delta<1/2$ mit Rate $O(\Lambda^{-1/2-\delta})$. Dies wird in \cite{Connes2026} als Folge der klassischen Slepian--Pollak-Theorie prolater sphäroidaler Wellenfunktionen ([Theorem~1 of reference~47]{Connes2026}) formuliert, nicht als Conjecture.
   \item \emph{Externe Preprint-Eingabe aus Connes--van Suijlekom 2025 \cite{ConnesvS2025}:} Das fixed-$\Lambda$-Quadratform-Reell-Nullstellen-Kriterium, bewiesen innerhalb dieses Preprints.
   \item \emph{Interne offene Frage:} Einfachheit und Parität des minimalen Eigenwerts von $QW_\Lambda$ (Connes 2026 §6.6 ``remaining steps'' item~(i)) --- das ist Even Dominance wie in Definition~\ref{def:even-dominance} definiert, adressiert im vorliegenden Paper.
-  \item \emph{Interne offene Frage:} Approximationsqualitaet $k_\Lambda\approx\xi_\Lambda$ (Connes 2026 §6.6 ``remaining steps'' item~(ii)) --- das ist die Massen-Konzentrations-Frage MS2, adressiert im Begleit-Paper Zookeeper \cite{GeigerZookeeper2026}.
+  \item \emph{Interne offene Frage:} Approximationsqualität $k_\Lambda\approx\xi_\Lambda$ (Connes 2026 §6.6 ``remaining steps'' item~(ii)) --- das ist die Massen-Konzentrations-Frage MS2, adressiert im Begleit-Paper Zookeeper \cite{GeigerZookeeper2026}.
 \end{itemize}
 
 \subsection{Zertifizierter Bereich: Endliche gerade Dominanz}
@@ -920,6 +920,61 @@ Eine spätere Vergleichanalyse der Operatordefinition gegen Connes--van Suijleko
 Die verbleibende Aufgabe ist eine \emph{rigorose} CAP-Schließung von $\lambda_1^{\cos}(\lambda) < \lambda_1^{\sin}(\lambda)$ in dieser Form. Eine systematische Analyse der verfügbaren rigorosen Lower-Bound-Techniken ist in \path{_proof-notes/K0_LEHMANN_ANALYSIS.md} dokumentiert: Temple's Ungleichung, Lehmann--Mähly, Bauer-Fike, Operator-Norm-Bound, Schur-Komplement und Gerschgorin scheitern alle aus einem gemeinsamen strukturellen Grund: Es ist keine a-priori Lower-Bound auf $\lambda_2$ verfügbar, die das Galerkin-Variationsprinzip allein nicht liefert. Drei mittelfristige Forschungsrichtungen sind dort skizziert: Mollifikation, Toeplitz-Approximation, Reverse-Engineering aus Connes--vS 2025.
 
 \paragraph{Aktuelle ehrliche Position.}  Die Connes--van-Suijlekom-Operator-Form ist die korrekte Einstellung und zeigt gerade Dominanz numerisch mit konsistenter Margin über $\lambda$ und $N$. Die asymptotische $S_1$-Asymptotik gibt eine quantitative Cos-Sin-Diagonal-Lücke der Ordnung $\sqrt\lambda/\log\lambda$. Eine rigorose CAP-ähnliche Schließung im Sinne einer zertifizierten unteren Schranke auf $\lambda_1^{\sin}$, die strikt eine zertifizierte obere Schranke auf $\lambda_1^{\cos}$ übertrifft, bleibt offen und erfordert einen nicht-trivialen technischen Fortschritt jenseits einfachem Galerkin + Temple/Lehmann.
+
+% added 2026-05-23: Route B parallel development reference
+\subsection{Update (Mai 2026): Parallele Route via Connes-vS Err-Kollaps und I-1 Normalfamilien-Reframe}
+\label{sec:route-b-parallel}
+
+In den Begleitnotizen (\path{_proof-notes/K0_NORMAL_FAMILY_REFRAME_2026-05-22.md})
+wurde eine parallele bedingte Schließung der Riemannschen Vermutung
+über einen anderen Umgang mit Wand~(ii) entwickelt.
+Wand~(ii) bezeichnet die Approximationsqualitätsbedingung
+$k_\Lambda \approx \xi_\Lambda$ (MS2-Schranke), die im vorliegenden
+Beweis an das Begleitpapier (Zookeeper) delegiert ist.
+Die Parallelroute --- bezeichnet als Route~B --- zeigt, dass dieselbe
+spektrale Struktur eine zweite bedingte Schließung über ein
+Normalfamilien-Argument (Montel--Vitali) liefert: Wand~(ii) zerfällt
+rigoros in eine A-priori-Streifenschranke~(ii-a) für die Familie
+$\{\hat\xi_\lambda\}$ (kanonische ganze Funktionen vom Paley--Wiener-Typ
+$\hat\xi(z) = (2/\sqrt L)\sin(zL/2)\cdot F(z)$, zentriert, gerade,
+reell-auf-reell) und eine Limesidentifikationsbedingung~(ii-c); und
+(ii-c) wird rigoros in~(ii-a) absorbiert via Parität und Hadamard-Ordnung
+(modulo Nullstellen-Koinzidenz-Annahme~(Z), §E.14 der Notizen).
+Der verbleibende offene Blocker für Route~B ist daher die einzige
+uniforme A-priori-Streifenschranke~(ii-a) aus $QW_N$-Koerzitivität.
+
+Konvergierte empirische Messungen an den kanonischen Objekten (Mac Studio,
+$\mathrm{dps} \approx 30\text{--}50\cdot\lambda$, $\lambda \in
+\{3,5,7,9,11,13,15\}$, §E.18 der Notizen; Werte bei $\lambda=11,13$
+bit-identisch über zwei unabhängige dps-Läufe, und $\lambda=15$
+bit-identisch bei $\mathrm{dps}=640$ und $\mathrm{dps}=800$) ergeben
+$A_\lambda(0{,}4) \approx 1{,}003\text{--}1{,}004$ \emph{flach} über die
+sieben konvergierten $\lambda$-Werte (der SUP-Observable
+$A_\lambda(\delta) := \sup_{x\in\mathbb{R}} |\hat\xi_\lambda(x)|^2 /
+(1+|x|^{2\delta})$, normiert) und $B_\lambda(0{,}4)/\lambda^{0{,}4}
+\approx 0{,}68$ Plateau ($L^2$-Observable, sub-generisches Wachstum):
+
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{c|c|c|c|c}
+$\lambda$ & $\sup|\hat\xi|_{\mathbb{R}}$ & $A_\lambda(0{,}4)$ & $B_\lambda(0{,}4)$ & $B_\lambda/\lambda^{0{,}4}$ \\\hline
+ 3 & 0{,}858 & 1{,}0033 & 1{,}151 & 0{,}74 \\
+ 5 & 0{,}879 & 1{,}0037 & 1{,}340 & 0{,}70 \\
+ 7 & 0{,}886 & 1{,}0038 & 1{,}505 & 0{,}69 \\
+ 9 & 0{,}890 & 1{,}0039 & 1{,}649 & 0{,}68 \\
+11 & 0{,}890 & 1{,}0039 & 1{,}778 & 0{,}68 \\
+13 & 0{,}891 & 1{,}0039 & 1{,}895 & 0{,}68 \\
+15 & 0{,}892 & 1{,}00394 & 2{,}003 & 0{,}68
+\end{tabular}
+\end{center}
+
+Die Flachheit von $A_\lambda$ zeigt, dass das spektrale Framework gut
+konditioniert ist und mit einer uniformen Streifenschranke konsistent ist;
+sie stellt keinen Beweis von~(ii-a) dar. Frühere Messungen in
+§E.16--E.17 der Notizen wurden wegen unzureichender Präzision
+($\mathrm{dps}=30$) bei Cluster-Beinahe-Entartung des minimalen geraden
+Eigenwerts retrahiert; nur die konvergierten §E.18-Werte sind verlässlich.
 
 \section{Was nicht verwendet wird}
 
