@@ -77,6 +77,17 @@ DOI is updated from the v1.5 record to the v1.6 record
 (\texttt{10.5281/zenodo.20291994}).
 
 \medskip\noindent
+\textbf{v2.5 (23 May 2026): Excluded spectral-programme paths catalogued.}
+Part~III now records five post-v2.0 spectral-programme routes that were
+explicitly excluded in the public audit trail: uniform-gap eigenvalue
+ordering, naive strip localisation, edge-profile factorisation, literal MS1
+cluster splitting, and the retracted low-precision strip-amplification
+readings.  The common obstruction pattern is the near-degenerate
+minimum-eigenvector cluster of $QW_N$, which explains why productive routes
+have to work with cluster / quotient reformulations and growth-adapted
+normalisations rather than with uniform-gap or thin-localisation heuristics.
+
+\medskip\noindent
 \textbf{v2.3 (15 May 2026): Conditioning clarified.}  A close reading of Connes
 2026 §6.5 \cite{Connes2026} shows that the Hurwitz-bridge (step A2) is
 presented there as \emph{Fact 6.4}, an analytical consequence of the
@@ -209,6 +220,28 @@ Additionally, the following paths have been explored and found insufficient:
   \item \textbf{Absolute total positivity ($\mathrm{PF}_\infty$) for $A_\lambda$ (v1.4):} The Fourier multiplier of the prime shift operator is $M(\xi) = -2\,\Re[\zeta'/\zeta(\tfrac{1}{2}+i\xi)]$, an identity from the Weil explicit formula valid without assuming RH. Since $M$ is negative on approximately $49\%$ of its domain (the non-trivial zeros of $\zeta$ each generate an oscillation), the prime shift operator is not positive-semidefinite, and $A_\lambda$ is not $\mathrm{PF}_\infty$. Weak variation diminution in the prime-weighted mean holds and coincides with the frontier-dominance argument (N4 + N6), but there is no absolute ``primes smooth everything'' principle.
   \item \textbf{Universal commuting operator (v1.4):} An SVD search for symmetric $T$ satisfying $[T, D_N(r)] = 0$ simultaneously on a dense $r$-grid in $(0,2)$ shows, for $N \in \{3,5,7,10,15\}$, that the kernel is one-dimensional and consists solely of multiples of the identity. The second smallest singular value stays bounded below by $\sim\!0.70$ at $N = 15$ and does not decrease with $N$. The prime shifts at different scales therefore carry no common hidden symmetry. This rules out any Sturm--Liouville-type simplicity argument and confirms that the proof mechanism is arithmetic-statistical (prime-weighted summation of pointwise Shift Parity), not algebraic.
 \end{itemize}
+
+% added 2026-05-23: spectral-programme excluded paths (v2.5 catalog extension)
+\subsection*{Excluded paths in the spectral programme (v2.5 catalog)}
+\label{sec:excluded-spectral}
+
+The post-v2.0 spectral programme (Connes--van Suijlekom reformulation, I-1 normal-family reframe, err-collapse diagnostic) closed several routes as well. These are documented here for the audit trail; they do not affect the main conditional reduction (which rests on A7).
+
+\begin{itemize}
+  \item \textbf{Eigenvalue-ordering via a uniform spectral gap.} The plan to lift $\lambda_{\min}(W^+-W^-)<0$ to the eigenvalue inequality $\lambda_1^+<\lambda_1^-$ via Kato--Temple, Davis--Kahan, or Lehmann gap estimates fails because the relevant minimum eigenvector of $QW_N$ sits in a near-degenerate cluster (even/odd split $\sim\!10^{-65}$ at $\lambda=5$, $\sim\!10^{-84}$ at $\lambda=7$, super-exponentially collapsing with $\lambda$). No uniform spectral gap is available; gap-dependent methods cannot deliver the bound. Companion: EvenDom \texttt{K0\_CCM\_CLUSTER\_LADDER}.
+
+  \item \textbf{Localization hypothesis for the strip bound (ii-a).} In Route~B (Connes--vS err-collapse / I-1 reframe) a natural plan was to bound $|\hat\xi_\lambda(x+i\delta)|$ via the localization $|\hat\xi_\lambda(z)|\leq\int|\xi_\lambda(t)|e^{|y||t|}\,dt$ assuming $\xi_\lambda$ is concentrated in a $\lambda$-uniform core near $t=0$. This is falsified: $\xi_\lambda$ is genuinely \emph{edge-concentrated} ($r_{99}\approx L/2$, $|\xi_\lambda(0)|\approx 0$ --- the $\delta_N$-invisibility seen geometrically). The naive (ii-a) is therefore not just hard but false in $L^2$-normalisation; a growth-adapted normalisation $\Phi$ is required. Companion: EvenDom \texttt{K0\_NORMAL\_FAMILY\_REFRAME} \S E.8 (\texttt{eigenfunction\_decay\_audit.py}).
+
+  \item \textbf{Edge-profile factorisation for (ii-a).} The exact identity $F_\lambda(z) = 2\cos(zL/2)\,C_\lambda(z) + 2\sin(zL/2)\,S_\lambda(z)$ isolates the explicit $\lambda^\delta$-growth modulation in $\cos/\sin(zL/2)$ and would reduce (ii-a) to a uniform type bound on $\{C_\lambda,S_\lambda\}$ --- provided the edge profile $\eta_\lambda(s)=\xi_\lambda(L/2-s)$ is concentrated in a thin $\lambda$-uniform layer. Empirically the eigenfunction mass is spread ($r_{50}\approx 1$ uniformly, but $r_{99}\approx L/2$); the edge route yields no type gain. Companion: EvenDom \texttt{K0\_NORMAL\_FAMILY\_REFRAME} \S E.9.
+
+  \item \textbf{Literal MS1 (cluster ladder).} The conservative form of MS1 --- a uniformly simple splitting of the minimum eigenvalue of $QW_N$ at every $(\lambda,N)$ --- fails: the splitting collapses super-exponentially with $\lambda$. A literal MS1 is not available; only a cluster/quotient reformulation has structural traction. Companion: EvenDom \texttt{K0\_CCM\_MS1\_ROUTE\_S\_AUDIT}, \texttt{K0\_CCM\_CLUSTER\_MS1\_REFINEMENT}.
+
+  \item \textbf{Strip-amplification at $\mathrm{dps}=30$ (retracted).} Early measurements of the strip amplification $A_\lambda(\delta)=\sup_K|\hat\xi_\lambda(x+i\delta)|/\sup_K|\hat\xi_\lambda(x)|$ at $\mathrm{dps}=30$ suggested sub-generic growth and non-monotone $N/R$-instability (\S\S E.16--E.17). At converged precision ($\mathrm{dps}\approx 30\text{--}50\cdot\lambda$, required because of the cluster near-degeneracy of the minimum even eigenvector), the picture is qualitatively different: $A_\lambda(0.4)\approx 1.004$ is flat across $\lambda=3,5,7,9,11,13,15$ and $\sup|\hat\xi_\lambda|_{\mathbb R}\approx 0.88$ is constant. The earlier dps-30 readings are retracted; the methodological lesson (dps requirement scales linearly with $\lambda$ for cluster-near-degenerate eigenvectors) is itself a substantive finding. Companion: EvenDom \texttt{K0\_NORMAL\_FAMILY\_REFRAME} \S E.18.
+\end{itemize}
+
+\begin{remark}[Common pattern]
+These five exclusions share a structural pattern: the minimum-eigenvector cluster of $QW_N$ is the source of the technical difficulty in every spectral attempt. Methods that assume or require a uniform gap (Kato--Temple, literal MS1), or a thin-localised eigenfunction (naive localisation, edge factorisation), or a generic function-class behaviour (dps-30 strip readings without convergence verification) all fail in the same way. Productive routes therefore have to work \emph{with} the cluster (waterline / cluster-quotient reformulations, growth-adapted normalisations) rather than against it.
+\end{remark}
 
 
 % =============================================================================

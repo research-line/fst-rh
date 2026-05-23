@@ -10,6 +10,11 @@
 *.fls
 
 # Internal / private (not for publication)
+CLAUDE.md
+AGENTS.md
+START.md
+STATE.md
+SESSION_HANDOFF.md
 BEWEISNOTIZ.md
 BEWEISNOTIZ*.md
 BEWEISNOTIZ_LANG_ALT.md

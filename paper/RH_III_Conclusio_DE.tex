@@ -43,6 +43,17 @@ Diese abschließende Arbeit in einer dreiteiligen Serie führt die Ergebnisse de
 
 \medskip\noindent
 \textbf{v2.4 (23. Mai 2026): Parallelprogramm ergänzt.}  Ein neuer Unterabschnitt ``Parallelprogramm: Connes--vS-Fehlerkollaps und I-1-Normalfamilien-Reframe'' (\S\ref{sec:parallel-route-b}) präsentiert eine zweite Reduktion der Riemannschen Vermutung, unabhängig von der Asymptotischen Variationsgap-Vermutung~(A7), über die Connes--van-Suijlekom-err-Kollaps-Route (Route~B) und den I-1-Normalfamilien-Reframe der Begleitarbeit \cite{Geiger2026evendom}, \S E.1--E.18.  Beide Routen sind bedingt auf dieselbe offene Wand, Connes' \S6.6(b)/MS2-Streifenschranke~(ii), die der I-1-Reframe als (ii-a) + (ii-c) zerlegt und (modulo Einfachheit~(Z)) auf die einzige offene Schranke~(ii-a) absorbiert.  Konvergierte Empirie an sieben $\lambda \in \{3,5,7,9,11,13,15\}$ ist tabelliert, einschließlich der bit-identischen Zwei-dps-Validierung bei $\lambda = 11, 13, 15$.  Die DOI der Even-Dominance-Begleitarbeit wird vom v1.5-Record auf den v1.6-Record aktualisiert (\texttt{10.5281/zenodo.20291994}).
+\medskip\noindent
+\textbf{v2.5 (23. Mai 2026): Ausgeschlossene Wege des Spektralprogramms katalogisiert.}
+Teil~III dokumentiert nun fünf nach v2.0 explizit ausgeschlossene Wege im
+öffentlichen Audit-Trail: Eigenwertordnung über uniforme Spektrallücke, naive
+Streifen-Lokalisierung, Rand-Profil-Faktorisierung, literales MS1 mit
+Cluster-Aufspaltung sowie die zurückgezogenen Niedrigpräzisions-Messungen der
+Streifen-Amplifikation. Die gemeinsame Obstruktionsstruktur ist der
+nahentartete Minimal-Eigenvektor-Cluster von $QW_N$, weshalb tragfähige
+Routen mit Cluster-/Quotienten-Reformulierungen und
+wachstumsangepassten Normierungen arbeiten müssen statt mit
+uniformen Gap- oder Dünn-Lokalisierungs-Heuristiken.
 \end{abstract}
 
 {\small
@@ -151,6 +162,28 @@ Zusätzlich wurden die folgenden Wege erkundet und als unzureichend befunden:
   \item \textbf{Absolute totale Positivität ($\mathrm{PF}_\infty$) für $A_\lambda$ (v1.4):} Der Fourier-Multiplikator des Primzahl-Shift-Operators ist $M(\xi) = -2\,\Re[\zeta'/\zeta(\tfrac{1}{2}+i\xi)]$, eine Identität aus der expliziten Weil-Formel, gültig ohne RH-Annahme. Da $M$ auf ungefähr $49\%$ seiner Domäne negativ ist (die nicht-trivialen Nullstellen von $\zeta$ erzeugen jeweils eine Oszillation), ist der Primzahl-Shift-Operator nicht positiv-semidefinit, und $A_\lambda$ ist kein $\mathrm{PF}_\infty$. Schwache Variationsverminderung im primzahlgewichteten Mittel gilt und fällt mit dem Frontier-Dominanz-Argument (N4 + N6) zusammen, aber es gibt kein absolutes ,,Primzahlen glätten alles''-Prinzip.
   \item \textbf{Universeller kommutierender Operator (v1.4):} Eine SVD-Suche nach symmetrischem $T$ mit $[T, D_N(r)] = 0$ simultan auf einem dichten $r$-Gitter in $(0,2)$ zeigt für $N \in \{3,5,7,10,15\}$, dass der Kern eindimensional ist und ausschließlich aus Vielfachen der Identität besteht. Der zweitkleinste Singulärwert bleibt bei $N = 15$ unterhalb von $\sim\!0{,}70$ nach unten beschränkt und nimmt mit $N$ nicht ab. Die Primzahl-Shifts auf verschiedenen Skalen tragen daher keine gemeinsame verborgene Symmetrie. Dies schließt jedes Sturm-Liouville-artige Einfachheits-Argument aus und bestätigt, dass der Beweismechanismus arithmetisch-statistisch ist (primzahlgewichtete Summation der punktweisen Shift-Parity), nicht algebraisch.
 \end{itemize}
+
+% added 2026-05-23: spectral-programme excluded paths (v2.5 catalog extension)
+\subsection*{Ausgeschlossene Wege im Spektralprogramm (v2.5-Katalog)}
+\label{sec:excluded-spectral}
+
+Das Post-v2.0-Spektralprogramm (Connes--van Suijlekom-Reformulierung, I-1 Normalfamilien-Reframe, err-Kollaps-Diagnostik) hat ebenfalls mehrere Wege geschlossen. Diese werden hier für den Audit-Trail dokumentiert; sie betreffen nicht die conditional reduction (die auf A7 ruht).
+
+\begin{itemize}
+  \item \textbf{Eigenwertordnung über uniforme Spektrallücke.} Der Plan, $\lambda_{\min}(W^+-W^-)<0$ über Kato--Temple-, Davis--Kahan- oder Lehmann-Gap-Abschätzungen auf die Eigenwertungleichung $\lambda_1^+<\lambda_1^-$ zu heben, scheitert daran, dass der relevante Minimal-Eigenvektor von $QW_N$ in einem nahezu entarteten Cluster sitzt (even/odd-Splitt $\sim\!10^{-65}$ bei $\lambda=5$, $\sim\!10^{-84}$ bei $\lambda=7$, super-exponentiell mit $\lambda$ kollabierend). Keine uniforme Spektrallücke verfügbar; gap-abhängige Methoden können die Schranke nicht liefern. Begleitend: EvenDom \texttt{K0\_CCM\_CLUSTER\_LADDER}.
+
+  \item \textbf{Lokalisierungs-Hypothese für die Streifenschranke (ii-a).} In Route~B (Connes--vS err-Kollaps / I-1 Reframe) war der natürliche Plan, $|\hat\xi_\lambda(x+i\delta)|$ über die Lokalisierung $|\hat\xi_\lambda(z)|\leq\int|\xi_\lambda(t)|e^{|y||t|}\,dt$ zu schranken, unter der Annahme, dass $\xi_\lambda$ in einem $\lambda$-uniformen Kern nahe $t=0$ konzentriert ist. Falsifiziert: $\xi_\lambda$ ist genuin \emph{randkonzentriert} ($r_{99}\approx L/2$, $|\xi_\lambda(0)|\approx 0$ --- die $\delta_N$-Unsichtbarkeit geometrisch gesehen). Die naive (ii-a) ist daher nicht nur schwer, sondern in $L^2$-Normierung falsch; eine wachstumsangepasste Normierung $\Phi$ ist nötig. Begleitend: EvenDom \texttt{K0\_NORMAL\_FAMILY\_REFRAME} \S E.8 (\texttt{eigenfunction\_decay\_audit.py}).
+
+  \item \textbf{Rand-Profil-Faktorisierung für (ii-a).} Die exakte Identität $F_\lambda(z) = 2\cos(zL/2)\,C_\lambda(z) + 2\sin(zL/2)\,S_\lambda(z)$ isoliert die explizite $\lambda^\delta$-Wachstumsmodulation in $\cos/\sin(zL/2)$ und würde (ii-a) auf eine uniforme Typ-Schranke an $\{C_\lambda,S_\lambda\}$ reduzieren --- vorausgesetzt, das Randprofil $\eta_\lambda(s)=\xi_\lambda(L/2-s)$ ist in einer dünnen $\lambda$-uniformen Schicht konzentriert. Empirisch ist die Eigenfunktionsmasse ausgebreitet ($r_{50}\approx 1$ uniform, aber $r_{99}\approx L/2$); die Edge-Route liefert keinen Typ-Gewinn. Begleitend: EvenDom \texttt{K0\_NORMAL\_FAMILY\_REFRAME} \S E.9.
+
+  \item \textbf{Literales MS1 (Cluster-Leiter).} Die konservative Form von MS1 --- eine uniform einfache Aufspaltung des minimalen Eigenwerts von $QW_N$ an jedem $(\lambda,N)$ --- scheitert: Der Splitt kollabiert super-exponentiell mit $\lambda$. Ein literales MS1 ist nicht verfügbar; nur eine Cluster-/Quotienten-Reformulierung hat strukturelle Traktion. Begleitend: EvenDom \texttt{K0\_CCM\_MS1\_ROUTE\_S\_AUDIT}, \texttt{K0\_CCM\_CLUSTER\_MS1\_REFINEMENT}.
+
+  \item \textbf{Streifen-Amplifikation bei $\mathrm{dps}=30$ (retrahiert).} Frühe Messungen der Streifen-Amplifikation $A_\lambda(\delta)=\sup_K|\hat\xi_\lambda(x+i\delta)|/\sup_K|\hat\xi_\lambda(x)|$ bei $\mathrm{dps}=30$ suggerierten sub-generisches Wachstum und nicht-monotone $N/R$-Instabilität (\S\S E.16--E.17). Bei konvergierter Präzision ($\mathrm{dps}\approx 30\text{--}50\cdot\lambda$, nötig wegen der Cluster-Nahentartung des Minimal-Even-Eigenvektors) ist das Bild qualitativ anders: $A_\lambda(0{,}4)\approx 1{,}004$ ist flach über $\lambda=3,5,7,9,11,13,15$ und $\sup|\hat\xi_\lambda|_{\mathbb R}\approx 0{,}88$ konstant. Die früheren dps=30-Messungen sind retrahiert; die methodische Lehre (dps-Bedarf skaliert linear mit $\lambda$ bei Cluster-nahentarteten Eigenvektoren) ist selbst ein substanzielles Ergebnis. Begleitend: EvenDom \texttt{K0\_NORMAL\_FAMILY\_REFRAME} \S E.18.
+\end{itemize}
+
+\begin{remark}[Gemeinsames Muster]
+Diese fünf Ausschlüsse teilen ein strukturelles Muster: Der Minimal-Eigenvektor-Cluster von $QW_N$ ist die Quelle der technischen Schwierigkeit in jedem spektralen Versuch. Methoden, die eine uniforme Lücke voraussetzen (Kato--Temple, literales MS1), oder eine dünn-lokalisierte Eigenfunktion (naive Lokalisierung, Rand-Faktorisierung), oder ein generisches Funktionsklassen-Verhalten (dps-30 Streifenmessungen ohne Konvergenzverifikation) scheitern alle auf dieselbe Weise. Produktive Routen müssen daher \emph{mit} dem Cluster arbeiten (Waterline-/Cluster-Quotienten-Reformulierungen, wachstumsangepasste Normierungen), nicht dagegen.
+\end{remark}
 
 
 % =============================================================================

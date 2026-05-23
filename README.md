@@ -18,27 +18,35 @@ private until a full project closeout permits release.
 
 **Submitted to:** Communications in Mathematics (cm:17829, 2026-03-27)
 
-## Current Status (v2.2, 2026-05-14)
+## Current Status (v2.5, 2026-05-24 sync)
 
-The public paper package now reflects the v2.3 status correction. The finite
-range `100 <= lambda <= 1,300,000` remains strong numerical evidence and a
-conditional finite bridge; theorem-level finite even dominance still depends
-on validating the odd-sector tail lower bound for `lambda_1^-`. The asymptotic
-step is reduced to the `Asymptotic Variational Gap Conjecture`. The Direct
-Frontier-Dominance argument remains part of the package as the asymptotic
-variational route, but it no longer by itself closes the eigenvalue inequality
-`lambda_1^+ < lambda_1^-`.
+The public paper package now reflects the v2.3 status correction, the v2.4
+parallel-programme update, and the v2.5 Part-III excluded-paths catalog
+extension. The finite range `100 <= lambda <= 1,300,000` remains strong
+numerical evidence and a conditional finite bridge; theorem-level finite even
+dominance still depends on validating the odd-sector tail lower bound for
+`lambda_1^-`. The asymptotic step is reduced to the
+`Asymptotic Variational Gap Conjecture`.
+
+Part III now records five post-v2.0 spectral-programme routes that were
+explicitly excluded in the public audit trail: uniform-gap eigenvalue ordering,
+naive strip localisation, edge-profile factorisation, literal MS1 cluster
+splitting, and the retracted low-precision strip-amplification readings. The
+common obstruction pattern is the near-degenerate minimum-eigenvector cluster
+of `QW_N`, which explains why productive routes have to work with cluster /
+quotient reformulations and growth-adapted normalisations rather than with
+uniform-gap or thin-localisation heuristics.
 
 ## Paper Series (3 Parts, EN + DE)
 
-| Paper | File | Pages | Content |
-|-------|------|-------|---------|
-| **Part I** | `RH_I_Foundations` | 15 | Foundations and Obstructions: thermodynamic landscape (R1-R9), dead ends (K1-K4), reorientation to Connes |
-| **Part II** | `RH_II_Even_Dominance` | 52 | **Main paper.** Shift Parity Lemma, 33 finite-range diagnostics, the M1'' variational framework, Leading-Mode Cancellation (c=2+sqrt(2)), Higher-Mode Decay (Lemma B), Resolvent Truncation (Lemma C), PNT Transfer, Euler-Maclaurin Proposition, Direct Frontier-Dominance, and the v2.3 status revision |
-| **Part III** | `RH_III_Conclusio` | 19 | Synthesis of the proof architecture, revised v2.2 status table, explored alternatives (BI-1..11), independent results, and the remaining asymptotic gap problem |
+| Paper | File | Pages (EN/DE) | Content |
+|-------|------|---------------|---------|
+| **Part I** | `RH_I_Foundations` | 14 / 14 | Foundations and Obstructions: thermodynamic landscape (R1-R9), dead ends (K1-K4), reorientation to Connes |
+| **Part II** | `RH_II_Even_Dominance` | 51 / 53 | **Main paper.** Shift Parity Lemma, 33 finite-range diagnostics, the M1'' variational framework, Leading-Mode Cancellation (c=2+sqrt(2)), Higher-Mode Decay (Lemma B), Resolvent Truncation (Lemma C), PNT Transfer, Euler-Maclaurin Proposition, Direct Frontier-Dominance, and the v2.3 status revision |
+| **Part III** | `RH_III_Conclusio` | 22 / 21 | Synthesis of the proof architecture, revised v2.2 status table, explored alternatives (BI-1..11), the v2.4 parallel programme, the v2.5 excluded-paths catalog, independent results, and the remaining asymptotic gap problem |
 
 All papers are available in English and German (DE suffix).
-Combined English version: `paper/RH_Complete_Series_EN.pdf` (86 pages).
+Combined English version: `paper/RH_Complete_Series_EN.pdf` (87 pages).
 
 ## Proof Architecture
 
@@ -155,7 +163,9 @@ even block and float64 with Cauchy tail bounds for the odd block.
 
 ## Version History
 
-- **2.2** (2026-05-14): Status correction from unconditional closure to conditional reduction; public EN paper package synced to the variational-gap revision
+- **2.5** (2026-05-24): Public repo synced to the Part-III excluded-paths catalog extension; Part III EN/DE and combined PDFs rebuilt; local agent-control files kept private via `.gitignore`
+- **2.4** (2026-05-23): Parallel programme added to Part III; companion Even-Dominance DOI updated to `10.5281/zenodo.20291994`
+- **2.3** (2026-05-15): Conditioning clarified from unconditional closure to conditional reduction; public paper package synced to the variational-gap revision
 - **2.1** (2026-04-30): Robust Direct Frontier-Dominance route, Gemini N=200 server-script archival, repo hygiene audit
 - **1.4** (2026-03-27): Reviewer-driven clarifications (Prop A6 interpolation, M1'' explicit threshold, Lemma B Step 3/4 separation, Lemma L3 superseded, Galerkin safety margins, Connes2026 reference key)
 - **1.3** (2026-03-17): Bibliographic corrections (Connes title, Deninger journal, Keiper type)
