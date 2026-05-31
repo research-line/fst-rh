@@ -8,6 +8,7 @@
 \renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
+\emergencystretch=3em
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage[capitalise,noabbrev]{cleveref}
@@ -40,7 +41,10 @@ Grundlagen, Hindernisse und Neuausrichtung}
 \maketitle
 
 \begin{abstract}\small
-Diese Arbeit, die erste in einer dreiteiligen Serie über die Riemannsche Vermutung, beschreibt die mathematische Landschaft und dokumentiert die systematische Untersuchung --- und letztlich das Scheitern --- eines eich-theoretischen Ansatzes. Im ersten Teil entwickeln wir den analytischen Rahmen: die Riemannsche Vermutung als Stabilitätsproblem, das Li-Kriterium als zentrales Werkzeug und die Bombieri-Lagarias-Zerlegung der Li-Koeffizienten in archimedische und endlich-teilige Beiträge. Ausgehend von einem thermodynamischen Formalismus (Prime Hub Graphen und Ruelle-Transferoperatoren) beweisen wir mehrere unbedingte strukturelle Ergebnisse: die archimedisch-endliche Zerlegung, das Paradoxon der archimedischen Dominanz, die OS-Reflexionspositivität, die arithmetische Unschärferelation und die spektrale Bestandsaufnahme des arithmetischen Kerns. Im zweiten Teil identifizieren wir vier kritische Hindernisse (K1--K4), die einzeln und kollektiv die ursprüngliche Beweisstrategie zum Scheitern bringen: die Gibbs-Normierungslücke, der Vorzeichenwechsel des Zielfunktionals, die falsche Monotonierichtung und das Spurklassen-Hindernis. Wir lokalisieren die Schwierigkeit präzise durch eine neunstufige Logikkette und zeigen, dass sich der \emph{gesamte} Inhalt von RH in einem einzigen Schritt konzentriert (S5: die unbedingte Positivität der Li-Koeffizienten). Wir formulieren fünf konkrete offene Probleme und identifizieren die Neuausrichtung auf das Spektralprogramm von Connes als den Weg nach vorne. Teil~II entwickelt diese neue Richtung über das Shift-Parity-Lemma und computergestützte finite-range Gap-Diagnostik, die nach v2.3 als bedingte endliche Brücke geführt wird; Teil~III zieht die endgültigen Schlussfolgerungen. In v2.0 schließen zwei Nicht-Existenz-Theoreme in Teil~II (NE-A, NE-B) die Routen über absolute totale Positivität und einen universellen kommutierenden Operator formal aus und bekräftigen damit den arithmetisch-statistischen Charakter der Dominanz gerader Eigenfunktionen.
+Diese Arbeit, die erste in einer fünfteiligen Serie über die Riemannsche Vermutung, beschreibt die mathematische Landschaft und dokumentiert die systematische Untersuchung --- und letztlich das Scheitern --- eines eich-theoretischen Ansatzes. Im ersten Teil entwickeln wir den analytischen Rahmen: die Riemannsche Vermutung als Stabilitätsproblem, das Li-Kriterium als zentrales Werkzeug und die Bombieri-Lagarias-Zerlegung der Li-Koeffizienten in archimedische und endlich-teilige Beiträge. Ausgehend von einem thermodynamischen Formalismus (Prime Hub Graphen und Ruelle-Transferoperatoren) beweisen wir mehrere unbedingte strukturelle Ergebnisse: die archimedisch-endliche Zerlegung, das Paradoxon der archimedischen Dominanz, die OS-Reflexionspositivität, die arithmetische Unschärferelation und die spektrale Bestandsaufnahme des arithmetischen Kerns. Im zweiten Teil identifizieren wir vier kritische Hindernisse (K1--K4), die einzeln und kollektiv die ursprüngliche Beweisstrategie zum Scheitern bringen: die Gibbs-Normierungslücke, der Vorzeichenwechsel des Zielfunktionals, die falsche Monotonierichtung und das Spurklassen-Hindernis. Wir lokalisieren die Schwierigkeit präzise durch eine neunstufige Logikkette und zeigen, dass sich der \emph{gesamte} Inhalt von RH in einem einzigen Schritt konzentriert (S5: die unbedingte Positivität der Li-Koeffizienten). Wir formulieren fünf konkrete offene Probleme und identifizieren die Neuausrichtung auf das Spektralprogramm von Connes als den Weg nach vorne. Teil~II entwickelt diese neue Richtung über das Shift-Parity-Lemma, finite-range Diagnostik und eine bedingte Gerade-Dominanz-Reduktion; Teil~III behandelt die spektralen Routen; Teil~IV sammelt Cross-Route-Synthese und verbleibende Pfade; Teil~V zieht die endgültigen Schlussfolgerungen. In v2.0 schließen zwei Nicht-Existenz-Theoreme in Teil~II (NE-A, NE-B) die Routen über absolute totale Positivität und einen universellen kommutierenden Operator formal aus und bekräftigen damit den arithmetisch-statistischen Charakter der Dominanz gerader Eigenfunktionen.
+
+\medskip\noindent
+\textbf{Strukturelles Update (v3.0, 2026-05-26).} Die Serie wird von einer Trilogie auf eine fünfteilige Serie umstrukturiert; der bedingte Reduktionsstatus von v2.2 bleibt unverändert.
 \end{abstract}
 
 {\small
@@ -75,14 +79,16 @@ Die Riemannsche Vermutung (RH) besagt, dass alle nicht-trivialen Nullstellen der
 \end{equation}
 wobei $\lambda_n = \sum_\rho [1 - (1-1/\rho)^n]$ und die Summe über die nicht-trivialen Nullstellen von $\zeta$ läuft.
 
-Diese Arbeit ist die erste in einer dreiteiligen Serie:
+Diese Arbeit ist die erste in einer fünfteiligen Serie:
 \begin{itemize}
   \item \textbf{Teil~I} (diese Arbeit): Grundlagen, Hindernisse und Neuausrichtung --- mathematische Grundlagen, analytische Werkzeuge, strukturelle Ergebnisse, Dokumentation von vier Sackgassen, Lokalisierung der Schwierigkeit und Neuausrichtung auf das Spektralprogramm von Connes.
-  \item \textbf{Teil~II} \cite{Geiger2026partII}: Gerade Dominanz --- das Shift-Parity-Lemma, computergestützte Beweise und die neue Beweisarchitektur.
-  \item \textbf{Teil~III} \cite{Geiger2026partIII}: Conclusio --- was bewiesen ist, was ausgeschlossen ist und was offen bleibt.
+  \item \textbf{Teil~II} \cite{Geiger2026partII}: Gerade Dominanz --- das Shift-Parity-Lemma, computergestützte finite-range Diagnostik und die bedingte Beweisarchitektur.
+  \item \textbf{Teil~III} \cite{Geiger2026partIII}: Spektrale Wege und Sackgassen --- Branch~B (I-1 Normal-Family / err-Kollaps) und Branch~Z (CCM-Mikrocluster-Programm), einschließlich spektraler Sackgassen.
+  \item \textbf{Teil~IV} \cite{Geiger2026partIV}: Cross-Route-Synthese, ruhende Routen, externe Linien --- Inter-Branch-Diagnostik, ruhende und externe Routen und methodische Sackgassen.
+  \item \textbf{Teil~V} \cite{Geiger2026partV}: Conclusio --- was bewiesen ist, was ausgeschlossen ist und was offen bleibt.
 \end{itemize}
 
-Die Serie dokumentiert eine ehrliche Forschungsreise: von einem vielversprechenden eich-theoretischen Ansatz (Abschnitte~\ref{sec:thermodynamic}--\ref{sec:gauge}), über dessen Scheitern an mehreren Punkten (Abschnitte~\ref{sec:K1}--\ref{sec:K4}), hin zu einem neuen strukturellen Verständnis des Problems über die quadratische Weil-Form (Abschnitt~\ref{sec:reorientation}) und eine abschließende Bilanz dessen, was erreicht wurde (Teil~III).
+Die Serie dokumentiert eine ehrliche Forschungsreise: von einem vielversprechenden eich-theoretischen Ansatz (Abschnitte~\ref{sec:thermodynamic}--\ref{sec:gauge}), über dessen Scheitern an mehreren Punkten (Abschnitte~\ref{sec:K1}--\ref{sec:K4}), hin zu einem neuen strukturellen Verständnis des Problems über die quadratische Weil-Form (Abschnitt~\ref{sec:reorientation}) und eine abschließende Bilanz dessen, was erreicht wurde (Teil~V).
 
 \subsection{Die Hoffnung}
 
@@ -239,14 +245,19 @@ $A(\sigma)$, $C(\sigma)$ und $D(\sigma)$ konvergieren absolut bei $\sigma = 1$ u
 \end{lemma}
 
 \begin{remark}[Gibbs-Normierungslücke]
-Das Gibbs-normierte Erwartungswert-Funktional $-A(\sigma)/P(\sigma)$ verliert die Information des endlichen Teils für $\sigma \to 1^+$: Die $1/P(\sigma)$-Normierung annihiliert $\lambda_n^{(\mathrm{fin})}$. Dies ist der erste Hinweis darauf, dass der thermodynamische Ansatz strukturelle Einschränkungen hat (siehe Abschnitt~\ref{sec:K1}).
+Das Gibbs-normierte Erwartungswert-Funktional $-A(\sigma)/P(\sigma)$ verliert für $\sigma \to 1^+$ den endlichen Teil: Die $1/P(\sigma)$-Normierung annihiliert $\lambda_n^{(\mathrm{fin})}$. Dies ist der erste Hinweis auf strukturelle Grenzen des thermodynamischen Ansatzes (siehe Abschnitt~\ref{sec:K1}).
 \end{remark}
 
 \subsection{Nicht-Identifikations-Theorem}
 
 \begin{proposition}[Nicht-Identifikation]
 \label{prop:non-ident}
-Die Überschuss-Freie-Energie $I_n := \lim_{\sigma \to 1^+}\Phi_n(\sigma)$ und der Li-Koeffizient $\lambda_n$ sind im Allgemeinen \emph{nicht} identisch: $I_n \neq \lambda_n$. Erstere ist eine KL-Divergenz (Tilt-Kosten), letzterer eine spektrale Spur von $\log\xi$.
+Die Überschuss-Freie-Energie
+\[
+  I_n := \lim_{\sigma \to 1^+}\Phi_n(\sigma)
+\]
+und der Li-Koeffizient $\lambda_n$ sind im Allgemeinen \emph{nicht} identisch:
+$I_n \neq \lambda_n$. Erstere ist eine KL-Divergenz, letzterer eine spektrale Spur von $\log\xi$.
 \end{proposition}
 
 \subsection{Varianz-Untergrenze}
@@ -534,7 +545,7 @@ OP5 ist im Wesentlichen das Hilbert-Pólya-Programm und verbindet sich mit Denin
 
 
 % =============================================================================
-\section{Neuausrichtung: Das Spektralprogramm von Connes}
+\section{Neuausrichtung auf Connes' Spektralprogramm}
 \label{sec:reorientation}
 % =============================================================================
 
@@ -552,6 +563,20 @@ Hier zahlt sich die thermodynamische Erkenntnis auf unerwartete Weise aus: Die Z
 Der eich-theoretische Ansatz scheiterte, weil er versuchte, eine \emph{globale} Aussage ($\lambda_n \geq 0$ für alle $n$) über ein \emph{lokales} Werkzeug (das Gibbs-Maß nahe $\sigma = 1$) zu beweisen. Der Ansatz von Connes ist dort erfolgreich, wo der Eichansatz scheitert, weil er direkt im Spektralbereich von $A_\lambda$ arbeitet, wo die Gerade-Ungerade-Zerlegung eine natürliche Struktur bietet. Das Shift-Parity-Lemma (Teil~II) zeigt, dass diese Struktur fundamental algebraisch und nicht analytisch ist.
 \end{remark}
 
+% added 2026-05-24: Drei-Branch-Architektur
+\subsection*{Drei unabhängige Branches greifen RH aus derselben Neuausrichtung an}
+\label{sec:three-branches}
+
+Die spektrale Neuausrichtung des Connes-Programms öffnet \emph{drei} strukturell unabhängige Angriffe auf RH, die in dieser Serie alle vorkommen. Sie teilen sich dieselben externen Preprint-Eingaben (Connes 2026 \cite{Connes2026}, Connes--vS 2025 \cite{ConnesvS2025} und die Zeta-Spectral-Triples-Konstruktion von Connes--Consani--Moscovici 2025) und treffen auf dieselbe analytische Wand --- Connes' \S6.6(b)/MS2-Bedingung an das Grenzverhalten von $\{\hat\xi_\lambda\}$ --- aber sie erreichen die Wand über unterschiedliche Mechanismen.
+
+\begin{itemize}
+  \item \textbf{Branch~A --- Gerade Dominanz.} Reduziert RH auf die Eigenwertungleichung $\lambda_1^+(\lambda) < \lambda_1^-(\lambda)$ entlang einer Folge $\lambda_n \to \infty$. Entwickelt in Teil~II dieser Serie; eigenständige Extraktion im Begleitpaper~\cite{Geiger2026evendom}. Aktuell eine konditionale Reduktion (offen: A3 Odd-Sektor-Untergrenze, A7 Asymptotische Variationsgap-Vermutung).
+  \item \textbf{Branch~B --- I-1 Normal-Family / err-Kollaps.} Reduziert RH auf eine einzige uniforme wachstumsangepasste Streifenschranke (ii-a) an $\{\hat\xi_\lambda\}$ aus $QW_N$-Koerzitivität. Entwickelt in Teil~III dieser Serie, mit Reduktionskette B1--B11, Foundation-Lock $\hat\xi(z) = (2/\sqrt L)\sin(zL/2)F(z)$ und konvergierter Mac-Studio-Empirie ($A_\lambda(0.4)\approx 1{,}004$ flach über $\lambda\in\{3,5,7,9,11,13,15\}$).
+  \item \textbf{Branch~Z --- CCM-Mikrocluster-Programm.} Reduziert RH (über die err-Kollaps-Kopplung und MS2-Schließung) auf drei benannte konditionale Eingaben C2ca.1, C2ca.2, C2ca.5 plus eine Fixed-Waterline-Outer-Gap-Annahme $g_*\ge g_0$. Entwickelt im eigenständigen Begleitpaper~\cite{Geiger2026zookeeper}; zusammengefasst in Teil~III.
+\end{itemize}
+
+Die drei Branches werden parallel verfolgt, weil jeder verbleibende offene Block strukturell an einer anderen Stelle sitzt: A7 ist variationell, (ii-a) ist analytisch (Streifenschranke aus Koerzitivität), C2ca ist operatortheoretisch (Quasimode-zu-Projektor). Ein Erfolg in einem der drei würde genügen. Die Audit-Trail-Philosophie dieses Papers bewahrt alle drei mit explizitem Status, einschließlich eines Katalogs toter Routen, die innerhalb jeder Branche bereits ausgeschlossen wurden (Teile~III--IV).
+
 
 % =============================================================================
 \section{Fazit}
@@ -568,7 +593,7 @@ Dennoch ist das Scheitern produktiv:
   \item Das Verständnis, dass die Dominanz gerader Eigenfunktionen durch Primzahlbeiträge und nicht durch archimedische Effekte getrieben wird, ergab sich direkt aus der Zerlegungsanalyse.
 \end{enumerate}
 
-Teil~II nimmt den neuen Faden auf: das Shift-Parity-Lemma, die computergestützte finite-range Diagnostik und die Identifizierung des kumulativen Eigenwertordnungs-Schritts als verbleibende Herausforderung. Teil~III zieht die endgültige Bilanz darüber, was bewiesen wurde, was ausgeschlossen wurde und was offen bleibt.
+Teil~II nimmt den neuen Faden auf: das Shift-Parity-Lemma, die computergestützte finite-range Diagnostik und die Identifizierung des kumulativen Eigenwertordnungs-Schritts als verbleibende Herausforderung. Teil~V zieht die endgültige Bilanz darüber, was bewiesen wurde, was ausgeschlossen wurde und was offen bleibt.
 
 
 \section*{KI-Offenlegung}
@@ -605,8 +630,20 @@ C.~Deninger, \emph{On the nature of the ``explicit formulas'' in analytic number
 \bibitem{Geiger2026partII}
 L.~Geiger, \emph{Gerade Dominanz der quadratischen Weil-Form: Spektralanalyse, finite-range Diagnostik und das Resolventen-Gap-Theorem}, 2026.
 
+\bibitem{Geiger2026evendom}
+L.~Geiger, \emph{A Conditional Reduction of the Riemann Hypothesis to Even Dominance of the Weil Quadratic Form}, Zenodo (2026), DOI: 10.5281/zenodo.20479145.
+
+\bibitem{Geiger2026zookeeper}
+L.~Geiger, \emph{The Spectral Zookeeper: A Conditional Reduction toward the Riemann Hypothesis via Spectral Microcluster Closure in the Connes--Consani--Moscovici Framework}, Zenodo (2026), DOI: 10.5281/zenodo.20479223.
+
 \bibitem{Geiger2026partIII}
-L.~Geiger, \emph{Die Riemannsche Vermutung: Conclusio}, 2026.
+L.~Geiger, \emph{Die Riemannsche Vermutung: Spektrale Wege (in Vorbereitung)}, 2026.
+
+\bibitem{Geiger2026partIV}
+L.~Geiger, \emph{Die Riemannsche Vermutung: Cross-Route-Synthese (in Vorbereitung)}, 2026.
+
+\bibitem{Geiger2026partV}
+L.~Geiger, \emph{Die Riemannsche Vermutung: Conclusio (in Vorbereitung)}, 2026.
 
 \end{thebibliography}
 

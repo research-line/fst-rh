@@ -8,6 +8,7 @@
 \renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
+\emergencystretch=3em
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage[capitalise,noabbrev]{cleveref}
@@ -38,7 +39,11 @@
 \maketitle
 
 \begin{abstract}\small
-Dies ist die zweite Arbeit in einer dreiteiligen Serie (Teil~I: Grundlagen und Hindernisse \cite{Geiger2026partI}; Teil~III: Conclusio \cite{Geiger2026partIII}). Wir befassen uns mit dem offenen Problem, das in Connes' \"Ubersicht von 2026 \cite{Connes2026} identifiziert wurde: ob der kleinste Eigenwert der quadratischen Weil-Form~$\mathrm{QW}_\lambda$ einfach ist und eine gerade Eigenfunktion besitzt. Wir etablieren drei Hauptergebnisse. Erstens das \emph{Shift-Parity-Lemma}: Die Differenzmatrix zwischen den Operatoren des geraden und ungeraden Sektors hat f\"ur alle $N \geq 3$ Moden und alle normierten Verschiebungen $r \in (0,2)$ einen streng negativen kleinsten Eigenwert, was impliziert, dass jede Primzahl individuell gerade Eigenfunktionen bevorzugt. Zweitens dokumentieren wir eine starke computergestützte finite-range Gap-Diagnostik für $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$; diese wird als bedingte endliche Brücke geführt, bis der Odd-Sektor-Tail-Lower-Bound unabhängig validiert ist. Drittens beweisen wir das \emph{Leading-Mode-Cancellation-Lemma}: Die \"Uberlappungsdifferenzen zwischen dem geraden und ungeraden Sektor heben sich paarweise mit der exakten Konstanten $c = 2 + \sqrt{2}$ auf, was $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$ ergibt. Dieser Resolventen-ged\"ampfte Rahmen reduziert den verbleibenden analytischen Schritt (M1$''$) auf klassische Fourier-Analyse und den Primzahlsatz. In v2.0 f\"ugen wir zwei Nicht-Existenz-Theoreme (Theoreme~\ref{thm:NE-A} und~\ref{thm:NE-B}) hinzu, die die L\"osungswege \"uber absolute Totalpositivit\"at und universelle kommutierende Operatoren formal ausschlie\ss{}en und damit zeigen, dass gerade Dominanz notwendigerweise ein arithmetisch-statistisches und kein rein algebraisches Ph\"anomen ist. In v2.1 f\"ugen wir einen robusten direkten Frontier-Dominanz-Beweis (Abschnitt~\ref{sec:direct-frontier}, Proposition~\ref{prop:direct-frontier}) hinzu, der auf einem gemeinsamen Rayleigh-Testvektor im Frontier-Fenster $r\in[0.7,1]$ beruht. In der v2.3-Lesart beweist diese Fassung das asymptotische Variationsvorzeichen $\lambda_{\min}(W^+-W^-)<0$, nicht jedoch allein die Eigenwertordnung $\lambda_1^+<\lambda_1^-$; die Reduktionskette A1--A8 bleibt daher bedingt auf die Asymptotische Variationsgap-Vermutung bzw. eine validierte untere Schranke für $\lambda_1^-$.
+Dies ist die zweite Arbeit in einer fünfteiligen Serie (Teil~I: Grundlagen und Hindernisse \cite{Geiger2026partI}; Teil~III: Spektrale Wege \cite{Geiger2026partIII}; Teil~IV: Cross-Route-Synthese \cite{Geiger2026partIV}; Teil~V: Conclusio \cite{Geiger2026partV}). Wir befassen uns mit dem offenen Problem, das in Connes' \"Ubersicht von 2026 \cite{Connes2026} identifiziert wurde: ob der kleinste Eigenwert der quadratischen Weil-Form~$\mathrm{QW}_\lambda$ einfach ist und eine gerade Eigenfunktion besitzt. Wir etablieren drei Hauptergebnisse. Erstens das \emph{Shift-Parity-Lemma}: Die Differenzmatrix zwischen den Operatoren des geraden und ungeraden Sektors hat f\"ur alle $N \geq 3$ Moden und alle normierten Verschiebungen $r \in (0,2)$ einen streng negativen kleinsten Eigenwert, was impliziert, dass jede Primzahl individuell gerade Eigenfunktionen bevorzugt. Zweitens dokumentieren wir eine starke computergestützte finite-range Gap-Diagnostik für $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$; diese wird als bedingte endliche Brücke geführt, bis der Odd-Sektor-Tail-Lower-Bound unabhängig validiert ist. Drittens beweisen wir das \emph{Leading-Mode-Cancellation-Lemma}: Die \"Uberlappungsdifferenzen zwischen dem geraden und ungeraden Sektor heben sich paarweise mit der exakten Konstanten $c = 2 + \sqrt{2}$ auf, was $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$ ergibt. Dieser Resolventen-ged\"ampfte Rahmen reduziert den verbleibenden analytischen Schritt (M1$''$) auf klassische Fourier-Analyse und den Primzahlsatz. In v2.0 f\"ugen wir zwei Nicht-Existenz-Theoreme (Theoreme~\ref{thm:NE-A} und~\ref{thm:NE-B}) hinzu, die die L\"osungswege \"uber absolute Totalpositivit\"at und universelle kommutierende Operatoren formal ausschlie\ss{}en und damit zeigen, dass gerade Dominanz notwendigerweise ein arithmetisch-statistisches und kein rein algebraisches Ph\"anomen ist. In v2.1 f\"ugen wir einen robusten direkten Frontier-Dominanz-Beweis (Abschnitt~\ref{sec:direct-frontier}, Proposition~\ref{prop:direct-frontier}) hinzu, der auf einem gemeinsamen Rayleigh-Testvektor im Frontier-Fenster $r\in[0.7,1]$ beruht. In der v2.3-Lesart beweist diese Fassung das asymptotische Variationsvorzeichen $\lambda_{\min}(W^+-W^-)<0$, nicht jedoch allein die Eigenwertordnung $\lambda_1^+<\lambda_1^-$; die Reduktionskette A1--A8 bleibt daher bedingt auf die Asymptotische Variationsgap-Vermutung bzw. eine validierte untere Schranke für $\lambda_1^-$.
+
+\medskip\noindent
+\textbf{Strukturelles Update (v3.0, 2026-05-26).}
+Die Serie wird von einer Trilogie auf eine fünfteilige Serie umstrukturiert; der bedingte Reduktionsstatus von v2.2 bleibt unverändert. Eine neue \Cref{sec:gf1} stellt den GF1-Boundary-Moment-Benchmark $\mathrm{sLI} \sim (64\pi^2/3)\,\lambda/(NL)$ für den konvergierten $\lambda=5,7$-Benchmark vor, behandelt den Niedrig-$\lambda$-Ausreißer $\lambda=3$ separat und lässt $\lambda=11$ als offenen Diskriminator stehen.
 \end{abstract}
 
 {\small
@@ -55,7 +60,7 @@ Dies ist die zweite Arbeit in einer dreiteiligen Serie (Teil~I: Grundlagen und H
 \label{sec:intro}
 % =============================================================================
 
-Diese Arbeit ist die zweite in einer dreiteiligen Serie, die die Riemannsche Vermutung durch Eichtheorie, Spektralanalyse und arithmetische Thermodynamik untersucht. Teil~I \cite{Geiger2026partI} etabliert die thermodynamische Landschaft (strukturelle Ergebnisse R1--R9) und dokumentiert das Scheitern des eichtheoretischen Ansatzes (Hindernisse K1--K4), was zu einer Neuausrichtung auf das Spektralprogramm von Connes f"uhrte. Teil~III \cite{Geiger2026partIII} liefert die Conclusio.
+Diese Arbeit ist die zweite in einer fünfteiligen Serie, die die Riemannsche Vermutung durch Eichtheorie, Spektralanalyse und arithmetische Thermodynamik untersucht. Teil~I \cite{Geiger2026partI} etabliert die thermodynamische Landschaft (strukturelle Ergebnisse R1--R9) und dokumentiert das Scheitern des eichtheoretischen Ansatzes (Hindernisse K1--K4), was zu einer Neuausrichtung auf das Spektralprogramm von Connes führte. Teil~III \cite{Geiger2026partIII} beschreibt die spektralen Wege; Teil~IV \cite{Geiger2026partIV} liefert die Cross-Route-Synthese; Teil~V \cite{Geiger2026partV} die Conclusio.
 
 Hier entwickeln wir den Spektralansatz vollst"andig. Gem"a\ss{} Connes' "Ubersicht von 2026 \cite{Connes2026} untersuchen wir die quadratische Weil-Form $\mathrm{QW}_\lambda$ und ihre Gerade-Ungerade-Zerlegung. Unsere drei Hauptbeitr"age sind:
 \begin{enumerate}
@@ -285,7 +290,10 @@ where $\lambda_1$ denotes the minimum eigenvalue. For $N = 2$, the statement is 
 \end{theorem}
 
 \begin{proof}[Beweis]
-Nach dem Cauchy-Interlacing-Theorem gilt $\lambda_1(D_{N+1}) \leq \lambda_1(D_N)$ für die Hauptuntermatrix-Einbettung. Daher genügt es, den Fall $N = 3$ zu beweisen.
+Nach dem Cauchy-Interlacing-Theorem gilt
+$\lambda_1(D_{N+1}) \leq \lambda_1(D_N)$
+für die Hauptuntermatrix-Einbettung.
+Daher genügt es, den Fall $N = 3$ zu beweisen.
 
 Die Spur der $3 \times 3$ Matrix teleskopiert mittels \Cref{prop:closed-form}:
 \[
@@ -529,7 +537,15 @@ $\lambda$ & $\mu_{\max}(P_\lambda^+)$ & $\mu_{\max}(P_\lambda^-)$ & ratio \\
 \end{tabular}
 \end{center}
 
-Der gerade Sektor koppelt $5$--$8\times$ stärker an die Primzahl-Shifts. Dies wird auf der Fourier-Ebene verifiziert: der Grundzustand des geraden Sektors $\psi_0^+$ erfüllt $|\hat\psi_0^+(m\log p)|^2 / |\hat\psi_0^-(m\log p)|^2 \approx 5$--$34$ für kleine Primzahlen $p = 2,3,5$ (wobei $\psi_0^-$ der ungerade Grundzustand ist).
+Der gerade Sektor koppelt $5$--$8\times$ stärker an die Primzahl-Shifts.
+Dies wird auf der Fourier-Ebene verifiziert: der Grundzustand des geraden
+Sektors~$\psi_0^+$ erfüllt
+\[
+  \frac{|\hat\psi_0^+(m\log p)|^2}{|\hat\psi_0^-(m\log p)|^2}
+  \;\approx\; 5\text{--}34
+\]
+für kleine Primzahlen $p = 2,3,5$ (wobei $\psi_0^-$ der ungerade
+Grundzustand ist).
 
 \begin{remark}[Analogie zu Slepians Theorem]
 Für den Standard-Prolate-Sphärische-Welle-Operator (Fourier-Bandbegrenzung zusammengesetzt mit Zeitbegrenzung) bewies Slepian~(1961), dass die dominante Eigenfunktion \emph{gerade} ist. Unser Primzahl-Shift-Operator hat dieselbe Parität-symmetrische Struktur: er ist eine Summe von Translationsoperatoren $S_s + S_{-s}$ mit positiven Gewichten. Der entscheidende Unterschied ist, dass die Shifts bei diskreten Frequenzen $m\log p$ stattfinden statt einem kontinuierlichen Band. Die Erweiterung von Slepians Knoten-Argument auf diese diskrete-Frequenz-Einstellung würde den Beweis der geraden Dominanz vervollständigen.
@@ -722,7 +738,9 @@ $|\lambda_1(C)|$ & $0.98$ & $1.57\,L^{0.98}$ \\
 $\|B\|_{\mathrm{op}}$ & $2.64$ & $0.04\,L^{2.64}$
 \end{tabular}
 \end{center}
-Der Nenner skaliert als $\lambda_1(C) - \mu \sim 0.02\,L^{3.66}$, was die Schranke $\|c_{\mathrm{high}}\|^2 \leq C\,L^{2 \cdot 2.64 - 2 \cdot 3.66} = C\,L^{-2.03} \to 0$ ergibt. Die Modenkonzentration verbessert sich als $O(1/L^2)$ und ergibt:
+Der Nenner skaliert als $\lambda_1(C)-\mu \sim 0.02\,L^{3.66}$. Damit
+$\|c_{\mathrm{high}}\|^2 \leq C\,L^{-2.03}\to 0$.
+Die Modenkonzentration verbessert sich als $O(1/L^2)$ und ergibt:
 \[
   \|\psi_\lambda'\|_{L^2[-1,1]}^2 = \pi^2 \sum n^2 c_n^2 \leq \pi^2\bigl(K^2 + N^2 \cdot O(1/L^2)\bigr) = O(1).
 \]
@@ -765,14 +783,19 @@ where $\sigma_{\mathrm{arith}} = \sum_p \sum_{m \geq 1} \log p \cdot p^{-m/2} \c
 
 \subsection{Baustein 4: Br\"ucke zu Hurwitz}
 
-Für Connes. Satz~6.1 benötigen wir lokal gleichmäßige Konvergenz der Mellin-Transformationen:
+Für Connes' Satz~6.1 benötigen wir lokal gleichmäßige Konvergenz der Mellin-Transformationen:
 \[
   F_\lambda(z) = \int_{-L}^{L} \phi_\lambda(t)\,e^{-zt}\,dt.
 \]
 
 \begin{conjecture}[Paley-Wiener-Kontrolle]
 \label{conj:pw}
-Es existiert $\alpha > \tfrac{1}{2}$ so dass $\sup_\lambda \int |\phi_\lambda(t)|^2\,e^{2\alpha|t|}\,dt < \infty$. Folglich konvergiert $\{F_\lambda\}$ lokal gleichmäßig auf dem Streifen $\{z : |\operatorname{Re} z| < \alpha\}$.
+Es existiert $\alpha > \tfrac{1}{2}$ so dass
+\[
+  \sup_\lambda \int |\phi_\lambda(t)|^2\,e^{2\alpha|t|}\,dt < \infty.
+\]
+Folglich konvergiert $\{F_\lambda\}$ lokal gleichmäßig auf dem Streifen
+$\{z : |\operatorname{Re} z| < \alpha\}$.
 \end{conjecture}
 
 Wenn polynomiale Gewichte für Präkompaktheit ausreichen (die gleichmäßige Sobolev-Schranke oben), ist die Verbesserung auf exponentielle Abnahme nicht trivial und stellt die tiefste analytische Zutat dar. Die Stützbedinigung $\phi_\lambda|_{[-L,L]^c} = 0$ ergibt
@@ -854,7 +877,7 @@ B4: Hurwitz bridge & Connes Fact~6.4 & $k_\lambda \to \Xi$ at rate $O(\lambda^{-
 \begin{enumerate}[label=\textbf{M\arabic*:},leftmargin=*]
   \item Die $H^1$-Schranke kann fehlschlagen, wenn die Modenkonzentration für sehr große $\lambda$ schwächer wird (z.B. wenn die Eigenfunktion zunehmend feine Oszillationen entwickelt). Numerische Tests bis $\lambda = 500$ zeigen keine solche Tendenz: die dominanten Moden sind stabil $n = 0, 1, 2$.
   \item Mosco-Konvergenz erfordert gleichmäßige Resolventen-Schranken. Der singuläre archimedische Kern $K(s) \sim 1/s$ bei $s = 0$ kann im reskalierten Limes Schwierigkeiten verursachen. Die beobachtete Stabilisierung von $\lambda_1^+/L^2$ liefert indirekte Evidenz.
-  \item Die Paley--Wiener-Verbesserung erfordert exponentielle, nicht polynomiale, Kontrolle---eine grundsätzlich stärkere Bedingung. Die Massenkonzentrations-Daten (Tail $< 1.5\%$ bei $|u| > 0.95$ für $\lambda = 500$) sind ermutigend aber nicht ausreichend.
+  \item Die Paley--Wiener-Verbesserung erfordert exponentielle, nicht polynomiale Kontrolle. Das ist eine grundsätzlich stärkere Bedingung. Die Massenkonzentrations-Daten (Tail $< 1.5\%$ bei $|u| > 0.95$ für $\lambda = 500$) sind ermutigend, aber nicht ausreichend.
 \end{enumerate}
 
 Die alternativen Ansätze (Hellmann--Feynman-Monotonie, Index-Stabilität) bleiben gangbar und können möglicherweise mit dem Kompaktheits-Argument kombiniert werden: z.B. wenn Monotonie für eine dichte Teilfolge bewiesen werden kann, erweitert Kompaktheit dies auf alle großen $\lambda$.
@@ -970,7 +993,7 @@ $\lambda$ & $W_{11}^+$ & $W_{00}^-$ & $W_{11}^+\! -\! W_{00}^-$ & $(W_{11}^+\! -
 \end{table}
 
 \begin{remark}[Exponentiell vs.\ polynomiell]
-Die frühere Anpassung $\Delta \sim -0.004 (\log\lambda)^{4.2}$ (\Cref{eq:gap-fit}) spiegelt den \emph{numerischen Bereich} $\lambda \in [50, 500]$ wider; auf diesem Bereich sind $e^{L/2}$ und $L^{4.2}$ schwer zu unterscheiden. Das analytische Argument über PNT offenbart die wahre Asymptotik: die Gap wächst als $e^{L/2} = \sqrt{\lambda}$, getrieben durch die Primzahl-Zählfunktion. Dies macht das Argument ``dominanter Term schlägt Kopplung'' \emph{trivial} robust: die Kopplungskorrektur ist $O(L^2 e^{-L/2}) \to 0$.
+Die frühere Anpassung $\Delta \sim -0.004(\log\lambda)^{4.2}$ (\Cref{eq:gap-fit}) spiegelt den \emph{numerischen Bereich} $\lambda \in [50,500]$ wider; dort sind $e^{L/2}$ und $L^{4.2}$ schwer zu unterscheiden. Das analytische PNT-Argument zeigt die wahre Asymptotik: Die Lücke wächst wie $e^{L/2}=\sqrt{\lambda}$. Damit wird das Argument ``dominanter Term schlägt Kopplung'' robust, denn die Kopplungskorrektur ist $O(L^2 e^{-L/2}) \to 0$.
 \end{remark}
 
 
@@ -992,6 +1015,128 @@ Unsere Zerlegungsanalyse (\Cref{sec:connes}) offenbart, dass die Primzahlbeiträ
 
 \subsection{de-Branges-R\"aume und Hilbert--P\'olya}
 Die Hilbert--Pólya-Vermutung sucht einen selbstadjungierten Operator deren Eigenwerte die nichttrivialen Nullstellen sind. Falls solch ein Operator existiert, könnten seine Positivitätseigenschaften die in OP5 gesuchte ``manifeste Vorzeichendarstellung'' liefern. Die Spektralzensus aus Teil~I (dim~$V^- = 2$) könnte mit dem Index des Dirac-ähnlichen Operators in diesem Kontext zusammenhängen.
+
+
+% =============================================================================
+\section{GF1-Boundary-Moment-Benchmark (v3.0)}
+\label{sec:gf1}
+% =============================================================================
+
+Die endlich-dimensionale Galerkin-Approximation der Weil-Quadratform~$\mathrm{QW}_\lambda$ erzeugt ein Ungleichgewicht zwischen dem geraden und dem ungeraden Sektor, das sowohl vom Cutoff-Parameter~$\lambda$ als auch von der Galerkin-Dimension~$N$ abhängt. Wir definieren das \emph{skalierte Leiter-Ungleichgewicht}
+\begin{equation}
+\label{eq:sLI}
+\mathrm{sLI}(\lambda, N) \;=\; \frac{I_2^{\mathrm{ladder}}(\lambda,N)}{I_1^{\mathrm{ladder}}(\lambda,N)}\,\cdot\,\Gamma(\lambda)^{-1/4},
+\end{equation}
+wobei $I_1^{\mathrm{ladder}}$ und $I_2^{\mathrm{ladder}}$ die $L^1$-gewichteten Chebyshev-Moment-Leitersummen auf dem geraden bzw.\ ungeraden Far-Tail-Sektor bezeichnen und $\Gamma(\lambda)$ die Galerkin-Viertelpotenznormierung ist.
+
+\subsection{Identifikation der Boundary-Moment-Konstante}
+
+Numerische Berechnung auf dem Mac~Studio (konvergiertes Benchmark-Regime
+$\xi=NL/\lambda \gtrsim 50$, $\mathrm{dps} = 4N$ für
+Präzisionssicherheit) zeigt, dass $\mathrm{sLI}$ für die getesteten
+Benchmark-Werte $\lambda\in\{5,7\}$ durch den Boundary-Moment-Benchmark
+beschrieben wird:
+\begin{equation}
+\label{eq:gf1-scaling}
+\mathrm{sLI}(\lambda, N) \;=\; \frac{C^*\,\lambda}{N\,L} \;+\; o\!\Bigl(\frac{\lambda}{NL}\Bigr), \qquad L = 2\log\lambda,
+\end{equation}
+mit einer einzigen dimensionslosen Benchmark-Konstanten
+\begin{equation}
+\label{eq:Cstar}
+C^* \;=\; \frac{64\pi^2}{3} \;=\; 210.5515\ldots
+\end{equation}
+
+\begin{remark}[Herleitungskandidat]
+\label{rem:cstar-derivation}
+Der Wert $C^*$ besitzt die formale Integraldarstellung
+\[
+C^* = 16 \int_0^\infty \frac{t^2}{\sinh^2(t/2)}\,dt = 16\,\cdot\,\frac{4\pi^2}{3} = \frac{64\pi^2}{3},
+\]
+wobei $\int_0^\infty t^2/\sinh^2(t/2)\,dt = 4\pi^2/3$ ein Standard-Bernoulli-Integral ist. Dies ist ein Identifikationskandidat, keine Vorwärtsherleitung. Der Audit vom 27.~Mai falsifiziert die naive Endpoint-Faktorisierung
+$K(p,\gamma)=\mathrm{const}\cdot t^2/\sinh^2(t/2)$: In der Variable
+$t=\log(\gamma/p)$ lautet der exakte gepaarte Cauchy-Kern
+\[
+  K(t)=\frac{e^t\cosh t}{2\sinh^2 t},
+\]
+mit einer Collar-Singularität bei $t=0$. Ein Beweis von $C^*$ benötigt
+daher die fehlende Eigenmoden-Asymptotik der Gewichte $q_a(k)$, nicht nur
+die skalare Kernidentität.
+\end{remark}
+
+\begin{table}[h]
+\centering
+\caption{Datenprüfung für die Boundary-Moment-Konstante $C^*$. Die effektive Konstante $C_{\lambda,N} = \mathrm{sLI}\cdot NL/\lambda$ wird mit $C^* = 64\pi^2/3 \approx 210{,}55$ verglichen. Die $\lambda=5,7$-Zeilen sind die aktuelle Benchmark-Stütze; die $\lambda=11$-Zeile ist ein einzelner offener Diskriminator, keine Bestätigung eines universellen $\lambda\geq5$-Gesetzes. Alle Läufe verwenden Chebyshev-Grad~$80$, $j = 25$.}
+\label{tab:gf1-data}
+\begin{tabular}{cccccc}
+\toprule
+$\lambda$ & $N$ & $\xi=NL/\lambda$ & $C_{\lambda,N}$ & Abweichung & Status \\
+\midrule
+5 & 110 & 70{,}8 & 211{,}5 & $+0{,}5\,\%$ & Benchmark \\
+5 & 150 & 96{,}6 & 211{,}0 & $+0{,}2\,\%$ & Benchmark \\
+7 & 200 & 111{,}2 & 208{,}8 & $-0{,}8\,\%$ & Benchmark \\
+11 & 200 & 87{,}2 & 167{,}6 & $-20{,}4\,\%$ & offen \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{theorem}[GF1: Bedingte Boundary-Moment-Skalierung]
+\label{thm:GF1}
+Angenommen, der eigenmodengewichtete Galerkin-Kern von
+$\mathrm{QW}_\lambda$ besitzt einen Produktions-sLI-Limes, in dem der
+exakte Collar-Kern oben zum effektiven Boundary-Moment
+$16\int_0^\infty t^2/\sinh^2(t/2)\,dt$ reduziert. Angenommen außerdem,
+die Produktionsobservable ist stabil unter Rotationen des nahezu entarteten
+Clusters, und der $\lambda=5,7$-Benchmark übersteht den aktuellen
+$\lambda=11$-Diskriminator. Dann gilt
+\[
+\mathrm{sLI}(\lambda, N) \;=\; \frac{64\pi^2}{3}\,\cdot\,\frac{\lambda}{NL} + o\!\Bigl(\frac{\lambda}{NL}\Bigr).
+\]
+\end{theorem}
+
+\begin{remark}[Niedrigband-Guardrail]
+\label{rem:gf1-lambda3}
+Dieselbe Normierung ist \emph{kein} Satz gleichmäßig bis hinab zu
+$\lambda=3$. Ein eigener $N$-Sweep bei $\lambda=3$ zeigt ein anderes
+Niedrigband-Plateau: In der älteren $C_m$-Normierung liegt es bei etwa
+$7$, nicht beim $\lambda=5,7$-Benchmark-Plateau nahe $1{,}5$--$2{,}0$.
+Ein separater Lauf $\lambda=11,N=200$ ergibt
+$C_{\lambda,N}^{\mathrm{eff}}\approx167{,}6$, also etwa $20\,\%$ unter
+$64\pi^2/3$; die laufenden $N=280$- und $N=360$-Läufe entscheiden, ob dies
+Vorkonvergenz oder echte $\lambda$-Abhängigkeit ist. GF1 ist damit derzeit
+ein bedingter Benchmark, kein einzelner universeller Satz für
+$\lambda\geq5$.
+\end{remark}
+
+\begin{remark}[Konvergenzregime]
+\label{rem:NL-regime}
+Die relevante Skalierungsvariable ist
+\[
+  \xi=\frac{NL}{\lambda},\qquad L=2\log\lambda,
+\]
+nicht $N/L$. Für $\lambda=5,7$ betreten die Daten das Benchmark-Fenster
+bei etwa $\xi\gtrsim50$--$60$; darunter verzerren endlich-dimensionale
+Randeffekte den Wert $C_{\lambda,N}$. Der $\lambda=11$-Diskriminator zeigt,
+dass die Schwelle selbst $\lambda$-abhängig sein kann.
+\end{remark}
+
+\subsection{Hypothesen-Korrekturkette}
+\label{sec:gf1-corrections}
+
+Im Sinne der Audit-Trail-Philosophie dieser Serie dokumentieren wir die iterativen Korrekturen an der GF1-Hypothese während ihrer Entwicklung:
+\begin{enumerate}
+  \item \textbf{Iter~15 (2026-05-24):} Ausgangshypothese: $C_m \approx 8$ konstant, basierend auf $\lambda = 5$, $N = 55$ Daten.
+  \item \textbf{Iter~18 (2026-05-25):} $C_m \approx 8$ falsifiziert durch $N$-Konvergenzsweep; $\mathrm{scaledLadderI}$ fällt monoton mit~$N$.
+  \item \textbf{Iter~19 (2026-05-25):} Revidierte Hypothese: Plateau bei $C_m \approx 1{,}5$--$2{,}0$.
+  \item \textbf{Iter~20 (2026-05-26):} Multi-$\lambda$-Bestätigung ($\lambda = 5, 7$): Benchmark-Konsistenz in $\xi=NL/\lambda$ innerhalb~$5\,\%$ bestätigt.
+  \item \textbf{Iter~27 (2026-05-26, GPT-Audit):} Universelle Konstante $C^* = 64\pi^2/3$ identifiziert via Integraldarstellung; Boundary-Moment-Kern $16t^2/\sinh^2(t/2)$ als Herleitungskandidat.
+  \item \textbf{Iter~28 (2026-05-26):} Der $\lambda=3$-$N$-Sweep bricht die All-$\lambda$-Lesart. Die damalige sichere Formulierung ist ein $\lambda=5,7$-Boundary-Moment-Benchmark plus ein konservativer Niedrigband-Ast bei $\lambda=3$.
+  \item \textbf{Iter~29 (2026-05-27):} Die Endpoint-Kern-Faktorisierung wird durch den exakten Kern $K(t)=e^t\cosh(t)/(2\sinh^2t)$ falsifiziert, und der Punkt $\lambda=11,N=200$ ergibt $C_{\mathrm{eff}}\approx168$. Die sichere Formulierung ist jetzt ein $\lambda=5,7$-Benchmark mit offenem $\lambda=11$-Diskriminator.
+\end{enumerate}
+Die anfängliche $C_m$-Konstanz-Hypothese war ein Artefakt des transienten
+Galerkin-Regimes. Im konvergierten Benchmark-Regime für $\lambda=5,7$
+folgt $\mathrm{sLI}$ dem $C^*\lambda/(NL)$-Gesetz; der
+$\lambda=3$-Gegensweep und der offene $\lambda=11$-Diskriminator halten
+GF1 auf der Ebene eines bedingten Ziels statt eines universellen Satzes.
 
 
 % =============================================================================
@@ -1608,7 +1753,9 @@ Die spektralen Lücken zeigen eine \emph{paritätsabhängige} Struktur (siehe Be
 \end{lemma}
 
 \begin{proof}[Beweis]
-\emph{Schritt~1 (Überlappungsschranke).} Für $j \geq 2$ gibt die Orthogonalität $S^+(1,j;0,L) = 0$. Nach dem Mittelwertsatz: $|S^+(1,j;\delta,L)| \leq \pi\,\delta/L$.
+\emph{Schritt~1 (Überlappungsschranke).} Für $j \geq 2$ gibt die Orthogonalität
+$S^+(1,j;0,L)=0$. Nach dem Mittelwertsatz gilt
+$|S^+(1,j;\delta,L)| \leq \pi\,\delta/L$.
 
 \emph{Schritt~2 (Primsumme).} Durch Abel-Summation mit $\theta(x) = x + O(x\,e^{-c\sqrt{\log x}})$:
 \[
@@ -1749,11 +1896,18 @@ Gleichung~\eqref{eq:direct-decomp} ist die algebraische Identität $a/x - b/y = 
 
 \begin{remark}[Das Gap als St"orungseffekt zweiter Ordnung]
 \label{rem:gap-source}
-Die Laplace-asymptotische Analyse der Primsummen-Matrixeinträge offenbart die genaue Herkunft der Lücke. Definiere die normalisierte Matrix $M_L \coloneqq W / \sqrt{\lambda}$. Die Laplace-Entwicklung des Stieltjes-Integrals gibt
+Die Laplace-asymptotische Analyse der Primsummen-Matrixeinträge zeigt die genaue Herkunft der Lücke. Definiere $M_L \coloneqq W/\sqrt{\lambda}$. Die Laplace-Entwicklung des Stieltjes-Integrals gibt
 \[
   M_L = M_\infty - \frac{4}{L}\,F' + O(1/L^2),
 \]
-wobei $M_\infty = 2 \cdot \mathrm{diag}(f_{00}(1), f_{11}(1), \ldots)$ mit $f_{nn}(1) = \pm 1/2$, und $F'_{ij} = f'_{ij}(1)$ (die Endpunkt-Ableitung des Überlappungsprofils). Für die $4 \times 4$-Blöcke: $M_\infty^{\cos} = \mathrm{diag}(+1,-1,+1,-1)$ und $M_\infty^{\sin} = \mathrm{diag}(-1,+1,-1,+1)$.
+wobei $M_\infty = 2 \cdot \mathrm{diag}(f_{00}(1), f_{11}(1), \ldots)$
+mit $f_{nn}(1) = \pm 1/2$, und $F'_{ij} = f'_{ij}(1)$
+(die Endpunkt-Ableitung des Überlappungsprofils). Für die
+$4 \times 4$-Blöcke:
+\[
+  M_\infty^{\cos} = \mathrm{diag}(+1,-1,+1,-1), \qquad
+  M_\infty^{\sin} = \mathrm{diag}(-1,+1,-1,+1).
+\]
 
 Beide Sektoren haben $\lambda_1(M_\infty) = -1$ mit \emph{Multiplizität~$2$}. Entartete Störungstheorie erfordert Diagonalisierung von $F'$ innerhalb jeden $\lambda_1$-Eigenraums:
 \begin{itemize}
@@ -1886,15 +2040,20 @@ genau das, was der Beweis tatsächlich benötigt. Numerische Werte: Spielraum be
 
 \begin{proposition}[Kumulativer Schritt A6]
 \label{prop:A6}
-Die vorliegenden Drei-Regime- und Direct-Frontier-Argumente etablieren die asymptotische Variationsaussage
+Die vorliegenden Drei-Regime- und Direct-Frontier-Argumente
+etablieren die asymptotische Variationsaussage
 \[
   \lambda_{\min}(W^+_\lambda-W^-_\lambda)=-\Theta(\sqrt{\lambda})
 \]
-und eine endliche Brücke bedingt auf den Odd-Sektor-Tail-Lower-Bound. Die Eigenwertordnungs-Aussage
-$\lambda_1(\mathrm{QW}_\lambda^{\mathrm{even}})
-<\lambda_1(\mathrm{QW}_\lambda^{\mathrm{odd}})$ bleibt bedingt auf die
-Asymptotische Variationsgap-Vermutung bzw. auf eine validierte untere Schranke
-für $\lambda_1^-(\lambda)$.
+und eine endliche Brücke bedingt auf die Tail-Schranke im ungeraden Sektor.
+Die Eigenwertordnungs-Aussage
+\[
+  \lambda_1\!\bigl(\mathrm{QW}_\lambda^{\mathrm{even}}\bigr)
+  < \lambda_1\!\bigl(\mathrm{QW}_\lambda^{\mathrm{odd}}\bigr)
+\]
+bleibt bedingt auf die Asymptotische Variationsgap-Vermutung
+bzw.\ auf eine validierte untere Schranke für
+$\lambda_1^-(\lambda)$.
 \end{proposition}
 
 \begin{proof}[Statusanalyse des Drei-Regime-Arguments]

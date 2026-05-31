@@ -7,6 +7,7 @@
 \renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
+\emergencystretch=3em
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage[capitalise,noabbrev]{cleveref}
@@ -37,7 +38,7 @@
 \maketitle
 
 \begin{abstract}\footnotesize
-This is the second paper in a three-part series (Part~I: Foundations and Obstructions \cite{Geiger2026partI}; Part~III: Conclusio \cite{Geiger2026partIII}). We address the open problem identified in Connes' 2026 survey \cite{Connes2026}: whether the minimum eigenvalue of the Weil quadratic form~$\mathrm{QW}_\lambda$ is simple with even eigenfunction. We establish three main results. First, the \emph{Shift Parity Lemma}: the difference matrix between even and odd shift operators has strictly negative minimum eigenvalue for all $N \geq 3$ modes and all normalized shifts $r \in (0,2)$, implying that every prime individually favors even eigenfunctions. Second, we report computer-assisted finite-range gap diagnostics using interval arithmetic for $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$; these are a strong conditional bridge until the odd-sector lower bound is independently validated. Third, we prove the \emph{Leading-Mode Cancellation Lemma}: the overlap differences between even and odd sectors cancel pairwise with exact constant $c = 2 + \sqrt{2}$, yielding $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$. In v2.0 we add two non-existence theorems (Theorems~\ref{thm:NE-A} and~\ref{thm:NE-B}) that formally rule out the absolute total-positivity and universal-commuting-operator routes, establishing that even dominance is necessarily an arithmetic-statistical rather than a purely algebraic phenomenon. In v2.1 we add a robust Direct Frontier-Dominance argument (\Cref{sec:direct-frontier}, \Cref{prop:direct-frontier}) based on a common Rayleigh test vector on the frontier window $r \in [0.7,1]$.
+This is the second paper in a five-part series (Part~I: Foundations and Obstructions \cite{Geiger2026partI}; Part~III: Spectral Routes \cite{Geiger2026partIII}; Part~IV: Cross-Route Synthesis \cite{Geiger2026partIV}; Part~V: Conclusio \cite{Geiger2026partV}). We address the open problem identified in Connes' 2026 survey \cite{Connes2026}: whether the minimum eigenvalue of the Weil quadratic form~$\mathrm{QW}_\lambda$ is simple with even eigenfunction. We establish three main results. First, the \emph{Shift Parity Lemma}: the difference matrix between even and odd shift operators has strictly negative minimum eigenvalue for all $N \geq 3$ modes and all normalized shifts $r \in (0,2)$, implying that every prime individually favors even eigenfunctions. Second, we report computer-assisted finite-range gap diagnostics using interval arithmetic for $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$; these are a strong conditional bridge until the odd-sector lower bound is independently validated. Third, we prove the \emph{Leading-Mode Cancellation Lemma}: the overlap differences between even and odd sectors cancel pairwise with exact constant $c = 2 + \sqrt{2}$, yielding $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$. In v2.0 we add two non-existence theorems (Theorems~\ref{thm:NE-A} and~\ref{thm:NE-B}) that formally rule out the absolute total-positivity and universal-commuting-operator routes, establishing that even dominance is necessarily an arithmetic-statistical rather than a purely algebraic phenomenon. In v2.1 we add a robust Direct Frontier-Dominance argument (\Cref{sec:direct-frontier}, \Cref{prop:direct-frontier}) based on a common Rayleigh test vector on the frontier window $r \in [0.7,1]$.
 
 \medskip\noindent
 \textbf{Status correction (v2.2, 2026-05-14).}
@@ -45,6 +46,15 @@ External critical review of the v2.1 manuscript and the companion proof-only ext
 $\lambda_{\min}(W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}})=-\Theta(\sqrt\lambda)$
 via Rayleigh evaluation at a common test vector. This is a \emph{variational} statement: there exists a vector $v$ with $v^T W^+ v < v^T W^- v$. It does \emph{not} establish $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ asymptotically, because $\lambda_1^-(\lambda)\le v^T W^- v$ runs in the same direction; a separate quantitative lower bound for $\lambda_1^-$ is required. The simple $2\times 2$ counter-example $A=\mathrm{diag}(0,10)$, $B=\mathrm{diag}(5,-5)$ illustrates the gap.
 The status of the A1--A8 reduction chain is therefore revised from ``unconditional'' (v2.1) back to \textbf{conditional reduction}: the finite range $100\le\lambda\le 1{,}300{,}000$ provides strong interval-arithmetic diagnostics, but theorem-level even dominance on that range still depends on a validated lower bound for $\lambda_1^-(\lambda)$. Asymptotic even dominance is reduced to the \emph{Asymptotic Variational Gap Conjecture} (a quantitative lower bound for $\lambda_1^-(\lambda)$). A proposed approach via degenerate perturbation theory on the asymmetric three-mode diagonal structure is sketched in the companion paper~\cite{Geiger2026evendom}. The non-existence theorems NE-A and NE-B, the Shift Parity Lemma, the Leading-Mode Cancellation Lemma, and the 33 finite-range diagnostics remain unaffected by this revision.
+
+\medskip\noindent
+\textbf{Structural update (v3.0, 2026-05-26).}
+The series is restructured from a trilogy to a five-part series; the conditional
+reduction status from v2.2 is unchanged. A new \Cref{sec:gf1} presents the
+GF1 boundary-moment benchmark
+$\mathrm{sLI} \sim (64\pi^2/3)\,\lambda/(NL)$ for the converged
+$\lambda=5,7$ benchmark, records the $\lambda=3$ low-bandwidth
+outlier separately, and leaves $\lambda=11$ as an open discriminator.
 \end{abstract}
 
 {\footnotesize
@@ -61,7 +71,7 @@ The status of the A1--A8 reduction chain is therefore revised from ``uncondition
 \label{sec:intro}
 % =============================================================================
 
-This paper is the second in a three-part series investigating the Riemann Hypothesis through gauge theory, spectral analysis, and arithmetic thermodynamics. Part~I \cite{Geiger2026partI} establishes the thermodynamic landscape (structural results R1--R9) and documents the failure of the gauge-theoretic approach (obstructions K1--K4), leading to a reorientation toward Connes' spectral program. Part~III \cite{Geiger2026partIII} provides the conclusio.
+This paper is the second in a five-part series investigating the Riemann Hypothesis through gauge theory, spectral analysis, and arithmetic thermodynamics. Part~I \cite{Geiger2026partI} establishes the thermodynamic landscape (structural results R1--R9) and documents the failure of the gauge-theoretic approach (obstructions K1--K4), leading to a reorientation toward Connes' spectral program. Part~III \cite{Geiger2026partIII} surveys the spectral routes; Part~IV \cite{Geiger2026partIV} collects cross-route synthesis; Part~V \cite{Geiger2026partV} provides the conclusio.
 
 Here we develop the spectral approach in full. Following Connes' 2026 survey \cite{Connes2026}, we study the Weil quadratic form $\mathrm{QW}_\lambda$ and its even-odd decomposition. Our three main contributions are:
 \begin{enumerate}
@@ -663,7 +673,7 @@ The Hellmann--Feynman analysis (\Cref{tab:hf-results}) provides a structural exp
 \label{sec:weighted-compactness}
 % =============================================================================
 
-The preceding sections establish strong finite-range gap diagnostics for finitely many $\lambda$ ($33$ values up to $\lambda = 1{,}300{,}000$; numerically for all $\lambda \geq 55$). To close the conditional proof for \emph{all} large $\lambda$, we outline a functional-analytic strategy based on weighted compactness that could avoid the cumulative algebraic step entirely.
+The preceding sections establish strong finite-range gap diagnostics for finitely many $\lambda$ ($33$ values up to $\lambda = 1{,}300{,}000$; numerically for all $\lambda \geq 55$). To close the conditional reduction for \emph{all} large $\lambda$, we outline a functional-analytic strategy based on weighted compactness that could avoid the cumulative algebraic step entirely.
 
 \subsection{Setup and Rescaling}
 
@@ -778,7 +788,12 @@ For Connes' Theorem~6.1, we need locally uniform convergence of the Mellin trans
 
 \begin{conjecture}[Paley--Wiener control]
 \label{conj:pw}
-There exists $\alpha > \tfrac{1}{2}$ such that $\sup_\lambda \int |\phi_\lambda(t)|^2\,e^{2\alpha|t|}\,dt < \infty$. Consequently, $\{F_\lambda\}$ converges locally uniformly on the strip $\{z : |\operatorname{Re} z| < \alpha\}$.
+There exists $\alpha > \tfrac{1}{2}$ such that
+\[
+  \sup_\lambda \int |\phi_\lambda(t)|^2\,e^{2\alpha|t|}\,dt < \infty.
+\]
+Consequently, $\{F_\lambda\}$ converges locally uniformly on the strip
+$\{z : |\operatorname{Re} z| < \alpha\}$.
 \end{conjecture}
 
 If polynomial weights suffice for precompactness (the uniform Sobolev bound above), the upgrade to exponential decay is non-trivial and constitutes the deepest analytical ingredient. The support constraint $\phi_\lambda|_{[-L,L]^c} = 0$ gives
@@ -1001,6 +1016,127 @@ The Hilbert--P\'olya conjecture seeks a self-adjoint operator whose eigenvalues 
 
 
 % =============================================================================
+\section{Galerkin Imbalance: Boundary-Moment Benchmark (v3.0)}
+\label{sec:gf1}
+% =============================================================================
+
+The finite-dimensional Galerkin approximation to the Weil quadratic form~$\mathrm{QW}_\lambda$ introduces an imbalance between the even and odd sectors that depends on both the cutoff parameter~$\lambda$ and the Galerkin dimension~$N$. We define the \emph{scaled ladder imbalance}
+\begin{equation}
+\label{eq:sLI}
+\mathrm{sLI}(\lambda, N) \;=\; \frac{I_2^{\mathrm{ladder}}(\lambda,N)}{I_1^{\mathrm{ladder}}(\lambda,N)}\,\cdot\,\Gamma(\lambda)^{-1/4},
+\end{equation}
+where $I_1^{\mathrm{ladder}}$ and $I_2^{\mathrm{ladder}}$ denote the $L^1$-weighted Chebyshev moment ladder sums on the even and odd far-tail sectors, respectively, and $\Gamma(\lambda)$ is the Galerkin quarter-power normalization.
+
+\subsection{Identification of the Boundary-Moment Constant}
+
+Numerical computation on the Mac~Studio (converged benchmark regime
+$\xi=NL/\lambda \gtrsim 50$, $\mathrm{dps} = 4N$ for precision
+safety) reveals that, for the tested benchmark values
+$\lambda\in\{5,7\}$, $\mathrm{sLI}$ is well described by the
+boundary-moment benchmark
+\begin{equation}
+\label{eq:gf1-scaling}
+\mathrm{sLI}(\lambda, N) \;=\; \frac{C^*\,\lambda}{N\,L} \;+\; o\!\Bigl(\frac{\lambda}{NL}\Bigr), \qquad L = 2\log\lambda,
+\end{equation}
+with a single dimensionless benchmark constant
+\begin{equation}
+\label{eq:Cstar}
+C^* \;=\; \frac{64\pi^2}{3} \;=\; 210.5515\ldots
+\end{equation}
+
+\begin{remark}[Derivation candidate]
+\label{rem:cstar-derivation}
+The value $C^*$ admits the formal integral representation
+\[
+C^* = 16 \int_0^\infty \frac{t^2}{\sinh^2(t/2)}\,dt = 16\,\cdot\,\frac{4\pi^2}{3} = \frac{64\pi^2}{3},
+\]
+where $\int_0^\infty t^2/\sinh^2(t/2)\,dt = 4\pi^2/3$ is a standard Bernoulli integral. This is an identification candidate, not a forward derivation. The 27~May audit falsified the naive endpoint factorisation
+$K(p,\gamma)=\mathrm{const}\cdot t^2/\sinh^2(t/2)$: in the variable
+$t=\log(\gamma/p)$ the exact paired Cauchy kernel is
+\[
+  K(t)=\frac{e^t\cosh t}{2\sinh^2 t},
+\]
+with a collar singularity at $t=0$. A proof of $C^*$ therefore requires
+the missing eigenmode asymptotics for the weights $q_a(k)$, not only the
+scalar kernel identity.
+\end{remark}
+
+\begin{table}[h]
+\centering
+\caption{Data check for the boundary-moment constant $C^*$. The effective constant $C_{\lambda,N} = \mathrm{sLI}\cdot NL/\lambda$ is compared against $C^* = 64\pi^2/3 \approx 210.55$. The $\lambda=5,7$ rows are the current benchmark support; the $\lambda=11$ row is a single open discriminator, not confirmation of a universal $\lambda\geq5$ law. All runs use Chebyshev degree~$80$, $j = 25$.}
+\label{tab:gf1-data}
+\begin{tabular}{cccccc}
+\toprule
+$\lambda$ & $N$ & $\xi=NL/\lambda$ & $C_{\lambda,N}$ & deviation & status \\
+\midrule
+5 & 110 & 70.8 & 211.5 & $+0.5\%$ & benchmark \\
+5 & 150 & 96.6 & 211.0 & $+0.2\%$ & benchmark \\
+7 & 200 & 111.2 & 208.8 & $-0.8\%$ & benchmark \\
+11 & 200 & 87.2 & 167.6 & $-20.4\%$ & open \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{theorem}[GF1: Conditional boundary-moment scaling]
+\label{thm:GF1}
+Assume that the eigenmode-weighted Galerkin kernel of
+$\mathrm{QW}_\lambda$ has a production-sLI limit in which the exact
+collar kernel above reduces to the effective boundary moment
+$16\int_0^\infty t^2/\sinh^2(t/2)\,dt$. Assume additionally that the
+production observable is stable under near-cluster rotations and that the
+$\lambda=5,7$ benchmark persists beyond the current $\lambda=11$
+discriminator. Then
+\[
+\mathrm{sLI}(\lambda, N) \;=\; \frac{64\pi^2}{3}\,\cdot\,\frac{\lambda}{NL} + o\!\Bigl(\frac{\lambda}{NL}\Bigr).
+\]
+\end{theorem}
+
+\begin{remark}[Low-bandwidth guardrail]
+\label{rem:gf1-lambda3}
+The same normalisation is \emph{not} a theorem uniformly down to
+$\lambda=3$. A dedicated $N$-sweep at $\lambda=3$ indicates a different
+low-bandwidth plateau, with the older $C_m$ normalisation approaching
+approximately~$7$ rather than the $\lambda=5,7$ benchmark plateau near
+$1.5$--$2.0$. A separate $\lambda=11,N=200$ run gives
+$C_{\lambda,N}^{\mathrm{eff}}\approx167.6$, about $20\%$ below
+$64\pi^2/3$; the pending $N=280$ and $N=360$ runs decide whether this is
+pre-convergence or genuine $\lambda$-dependence. Thus GF1 is currently a
+conditional benchmark, not a single $\lambda\geq5$ universal theorem.
+\end{remark}
+
+\begin{remark}[Convergence regime]
+\label{rem:NL-regime}
+The relevant scaling variable is
+\[
+  \xi=\frac{NL}{\lambda},\qquad L=2\log\lambda,
+\]
+not $N/L$. For $\lambda=5,7$, the data enter the benchmark window once
+$\xi\gtrsim50$--$60$; below that window finite-dimensional boundary
+effects distort $C_{\lambda,N}$. The $\lambda=11$ discriminator shows that
+the threshold may itself be $\lambda$-dependent.
+\end{remark}
+
+\subsection{Hypothesis Correction Chain}
+\label{sec:gf1-corrections}
+
+In the spirit of the audit-trail philosophy of this series, we record the iterative corrections to the GF1 hypothesis during its development:
+\begin{enumerate}
+  \item \textbf{Iter~15 (2026-05-24):} Initial hypothesis: $C_m \approx 8$ constant, based on $\lambda = 5$, $N = 55$ data.
+  \item \textbf{Iter~18 (2026-05-25):} $C_m \approx 8$ falsified by $N$-convergence sweep; $\mathrm{scaledLadderI}$ decreases monotonically with~$N$.
+  \item \textbf{Iter~19 (2026-05-25):} Revised hypothesis: plateau at $C_m \approx 1.5$--$2.0$.
+  \item \textbf{Iter~20 (2026-05-26):} Multi-$\lambda$ confirmation ($\lambda = 5, 7$): benchmark consistency in $\xi=NL/\lambda$ confirmed within~$5\%$.
+  \item \textbf{Iter~27 (2026-05-26, GPT audit):} Universal constant $C^* = 64\pi^2/3$ identified via integral representation; boundary-moment kernel $16t^2/\sinh^2(t/2)$ as derivation candidate.
+  \item \textbf{Iter~28 (2026-05-26):} The $\lambda=3$ $N$-sweep breaks the all-$\lambda$ universal reading. The safe formulation at this stage was a $\lambda=5,7$ boundary-moment benchmark plus a conservative low-bandwidth branch at $\lambda=3$.
+  \item \textbf{Iter~29 (2026-05-27):} The endpoint-kernel factorisation is falsified by the exact kernel $K(t)=e^t\cosh(t)/(2\sinh^2t)$, and the $\lambda=11,N=200$ point gives $C_{\mathrm{eff}}\approx168$. The safe formulation is now a $\lambda=5,7$ benchmark with $\lambda=11$ pending.
+\end{enumerate}
+The initial $C_m$-constancy hypothesis was an artifact of the transient
+Galerkin regime. In the converged benchmark regime for $\lambda=5,7$,
+$\mathrm{sLI}$ follows the $C^*\lambda/(NL)$ law; the $\lambda=3$
+counter-sweep and the open $\lambda=11$ discriminator keep GF1 at the
+level of a conditional target rather than a universal theorem.
+
+
+% =============================================================================
 \section{Conclusion}
 % =============================================================================
 
@@ -1210,7 +1346,12 @@ The row sum for row $i < K$:
   \sum_{j \geq K}|B_{ij}|
   \leq \sum_{j \geq K}\sum_{p,m}\frac{2\log p}{p^{m/2}}\,|S_{i,j+K}^+(m\log p, L)| + O(N).
 \]
-Exchanging sums and using $\sum_{j \geq K} |S_{i,j+K}^+(\delta, L)| \leq C_0\sqrt{L}$ (Bessel's inequality: $\sum_j |\langle e_i, T_\delta e_j\rangle|^2 \leq \|T_\delta e_i\|^2 \leq 1$, so $\sum_j |S_{ij}| \leq \sqrt{N}$ by Cauchy--Schwarz):
+Exchanging sums and using Bessel's inequality
+($\sum_j |\langle e_i, T_\delta e_j\rangle|^2
+\leq \|T_\delta e_i\|^2 \leq 1$,
+hence $\sum_j |S_{ij}| \leq \sqrt{N}$ by Cauchy--Schwarz)
+yields $\sum_{j \geq K} |S_{i,j+K}^+(\delta, L)|
+\leq C_0\sqrt{L}$, so
 \[
   R_{\max} \leq \sqrt{N}\sum_{p,m}\frac{2\log p}{p^{m/2}} + O(N) = O(\sqrt{N}\,\sqrt{\lambda}) + O(N).
 \]
@@ -1622,7 +1763,9 @@ Part~(b) follows from the mean value theorem applied to $\Delta_j(u) = \Delta_j(
 
 \begin{lemma}[Higher-mode decay]
 \label{lem:higher-mode-decay}
-For $j \geq 2$, the overlap functions satisfy $|S^{\pm}(m,j;\delta,L)| \leq \pi\,\delta/L$ (by orthogonality at $\delta = 0$ and the mean value theorem). The mode-$j$ coupling is therefore bounded as
+For $j \geq 2$, orthogonality at $\delta = 0$ and the mean value theorem give
+$|S^{\pm}(m,j;\delta,L)| \leq \pi\,\delta/L$.
+Thus the mode-$j$ coupling is bounded as
 \[
   |B_{1j}^{\cos}| \leq \frac{\pi}{L}\sum_{p \leq \lambda}\frac{(\log p)^2}{\sqrt{p}}
   \leq \frac{4\pi\sqrt{\lambda}}{L}\bigl(1 + O(1/\log\lambda)\bigr),

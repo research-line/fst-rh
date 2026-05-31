@@ -1,0 +1,828 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\emergencystretch=3em
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{needspace}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Korollar}
+\newtheorem{conjecture}[theorem]{Vermutung}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Bemerkung}
+
+\title{Die Riemannsche Vermutung: Spektrale Wege und Sackgassen\\[4pt]
+\large Teil~III einer fünfteiligen Serie}
+\author{Lukas Geiger\\
+\small Bernau, Deutschland\\
+\small ORCID: \href{https://orcid.org/0009-0005-7296-1534}{0009-0005-7296-1534}}
+\date{\today}
+
+\begin{document}
+\overfullrule=0pt
+\maketitle
+
+\begin{abstract}\footnotesize
+Dieses Paper, Teil~III einer fünfteiligen Serie
+\cite{Geiger2026partI,Geiger2026partII,Geiger2026partIV,Geiger2026partV},
+dokumentiert den spektralen Sektor der Beweislandschaft für die
+Riemannsche Vermutung. Zwei unabhängige bedingte Reduktionen werden
+vorgestellt:
+
+Branch~B (Hadamard-Streifen / I-1 Normal-Family Reframe) reduziert RH auf
+eine einzige offene Hypothese~(ii-a): eine uniforme, wachstumsadaptierte
+Streifenschranke auf der Familie $\{\hat\xi_\lambda\}$, abgeleitet aus
+$QW_N$-Koerzivität. Die multiplikative kanonische Form
+$A_\lambda(\delta) = A_\Xi(\delta)\bigl(1+\kappa(\lambda)\delta^2\bigr)$
+mit sättigendem $\kappa_\infty \in [1.6, 1.8]\times 10^{-3}$ wird
+empirisch etabliert und liefert Theorem~B-1 (bedingt):
+$A_\lambda(\delta) \leq 1.0063$ unter uniformer Log-Krümmungskontrolle.
+
+Branch~Z (CCM-Mikrocluster-Programm) reduziert RH auf drei C2ca-Eingaben
+(skalare säkulare Auslöschung, projizierte Poisson-Quasimode, koerzives
+Komplement) via das Connes--Consani--Moscovici-Fourier-Modell~\cite{ConnesMoscovici2023}.
+
+Beide Branches teilen Wand~(ii) als gemeinsames analytisches Hindernis.
+Fünfzehn ausgeschlossene spektrale und CCM-Wege werden katalogisiert,
+wodurch die produktiven Wege als die einzig gangbaren Ansätze in der
+aktuellen Landschaft etabliert werden.
+
+\medskip\noindent
+\textbf{Serienstatus (v3.0, 26.05.2026).}
+Die Serie wurde von einer Trilogie zu einer fünfteiligen Serie
+umstrukturiert; der Status der bedingten Reduktion aus v2.2 ist
+unverändert. Neu in diesem Teil: die multiplikative kanonische Form
+(\Cref{sec:canonical-form}), Theorem~B-1 (bedingte uniforme
+Streifenschranke mit $A_\lambda \leq 1.0063$, \Cref{thm:B1}) und die
+RH-neutrale Hadamard-Konstante
+$c_\Xi = -\tfrac{1}{2}\sum_\rho 1/(\rho-\tfrac{1}{2})^2 \approx 0.0231$
+(\Cref{sec:spectral-constants}).
+\end{abstract}
+
+{\footnotesize
+\noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 30D15\\
+\textbf{Schlüsselwörter:} Riemannsche Vermutung, spektrale Wege,\\
+Normal-Family, Hadamard-Streifen, CCM-Mikrocluster, bedingte Reduktion,\\
+ausgeschlossene Wege
+}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+
+% =============================================================================
+\section{Einleitung: Der spektrale Sektor}
+\label{sec:intro}
+% =============================================================================
+
+Dieses Paper behandelt den spektralen Sektor einer laufenden
+Multi-Routen-Untersuchung der Riemannschen Vermutung:
+\begin{description}[font=\bfseries,leftmargin=2em]
+  \item[Teil~I \cite{Geiger2026partI}:] Grundlagen und Obstruktionen ---
+    strukturelle Resultate (R1--R9), vier kritische Obstruktionen (K1--K4),
+    Neuausrichtung auf Connes' spektrales Programm.
+  \item[Teil~II \cite{Geiger2026partII}:] Even Dominance (Branch~A) ---
+    Shift Parity Lemma, computergestützte Finite-Range-Diagnostik,
+    Euler--Maclaurin-Proposition, GF1-Boundary-Moment-Benchmark.
+  \item[Teil~III (dieses Paper):] Spektrale Wege (Branches~B und~Z) ---
+    Hadamard-Streifen / I-1 Normal-Family Reframe, CCM-Mikrocluster-Programm,
+    ausgeschlossene spektrale und CCM-Wege.
+  \item[Teil~IV \cite{Geiger2026partIV}:] Routenübergreifende Synthese ---
+    kombinierte Analyse, ruhende Routen, externe Linien, methodische
+    Sackgassen.
+  \item[Teil~V \cite{Geiger2026partV}:] Conclusio --- kondensierter Atlas,
+    offene Probleme, Bewertung und Ausblick.
+\end{description}
+
+Der spektrale Sektor greift Wand~(ii) an --- die Approximationsqualitäts\-bedingung $k_\Lambda \approx \xi_\Lambda$ aus Connes'
+\S6.6(b)~\cite{Connes2026} --- durch zwei strukturell verschiedene
+Mechanismen. Branch~B zerlegt (ii) via ein I-1 Normal-Family Argument
+in die Streifenschranke~(ii-a) und die Grenzwertidentifikation~(ii-c),
+absorbiert dann (ii-c) in (ii-a) unter einer Annahme einfacher
+Nullstellen. Branch~Z greift (ii) durch eine
+Mikrocluster-Quasimode-zu-Projektor-Abschätzung im CCM-Fourier-Modell
+an. Die beiden Branches sind unabhängig von Branch~A's Asymptotic
+Variational Gap Conjecture~(A7) aus Teil~II~\cite{Geiger2026partII}.
+
+Beide Branches teilen Wand~(ii) mit Branch~A, greifen sie aber mit
+grundlegend verschiedenen analytischen Werkzeugen an. Die
+routenübergreifende Synthese (Muster, die allen drei Branches gemeinsam
+sind) wird auf Teil~IV~\cite{Geiger2026partIV} verschoben.
+
+
+% =============================================================================
+\section{Branch B: Hadamard-Streifen / I-1 Normal-Family}
+\label{sec:branch-b}
+% =============================================================================
+
+Branch~B ist eine parallele Reduktion auf RH, unabhängig von der
+Asymptotic Variational Gap Conjecture~(A7), die Branch~A bedingt. Ihr
+Ausgangspunkt ist derselbe wie bei Branch~A: Das
+Connes--van~Suijlekom-Theorem~5.6~\cite{ConnesvS2025} liefert die
+Finite-$N$-Fehlerschranke
+$\mathrm{err}_\lambda \leq C e^{-c\lambda}$ für jede einzelne
+Riemann-Nullstelle, numerisch verifiziert bei $\lesssim 10^{-25\lambda}$
+für $\geq 15$ Nullstellen. Branch~B reformuliert dann die
+Grenzbedingung via err-collapse, die I-1 Normal-Family Zerlegung und
+die unten zusammengefassten empirischen Daten.
+
+
+\subsection{Die Reduktionskette (B1--B11)}
+\label{sec:branch-b-chain}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|p{7.5cm}|l|l}
+\textbf{Schritt} & \textbf{Aussage} & \textbf{Status} & \textbf{Quelle} \\\hline
+B1 & Connes' Theorem~6.1 / Even Dominance $\Rightarrow$ Nullstellen von $\hat\eta$ reell (= A1) & bewiesen & \cite{ConnesvS2025, Connes2026} \\
+B2 & Bedingung~(i): reelle Nullstellen von $\hat\xi_\lambda$ bei endlichem $N$ (CvS Thm~5.6 / 1-dim gerader Kern) & bewiesen für jedes endliche $N$ & Begleitende Beweisnotizen \\
+B3 & err-collapse-Äquivalenz: $\mathrm{err}\to 0 \Longleftrightarrow \text{(i)} + \text{(ii)}$ & rigorose Reduktion & Begleitende Beweisnotizen \S1 \\
+B4 & err-collapse-Empirie: $\mathrm{err}\sim 10^{-25\lambda}$ für $\geq\!15$ Nullstellen, 4 $\lambda$-Punkte & numerische Evidenz & Begleitende Beweisnotizen \S9 \\
+B5 & I-1 Normal-Family Reframe: (ii) = (ii-a) $\wedge$ (ii-c) via Montel--Vitali-Kompaktheit & rigorose Zerlegung & \S E.2 \\
+B6 & (ii-c) absorbiert in (ii-a) via Parität + Hadamard Ordnung~1 (unter stehender Annahme (Z) über einfache Nullstellen) & rigoros & \S E.14 \\
+B7 & Foundation-Lock: $\hat\xi(z) = (2/\sqrt L)\sin(zL/2)F(z)$ mit $F(z) = \sum_{n\le N}\Lambda(n)/\sqrt n\cdot\cos(z\log n /2)$; zentriert, gerade, reell-auf-reell, ganz & rigoros (algebraische Identität + Polkompensation) & \S E.11, \S E.15 \\
+B8 & Streifen-Amplifikation flach bei konvergierter Präzision: $A_\lambda(0.4)\approx 1.004$ über $\lambda\in\{3,5,7,9,11,13,15\}$ & numerische Evidenz, $\mathrm{dps}\approx 30\text{--}50\cdot\lambda$ & \S E.18, siehe \Cref{tab:route-b-empirics} \\
+B9 & (ii-a): uniforme wachstumsadaptierte Streifenschranke auf $\{\hat\xi_\lambda\}$ aus $QW_N$-Koerzivität & \textbf{OFFEN} (die Wand für Branch~B) & \S E.7, dieses Paper \\
+B10 & MS2-Abschluss (Mikrocluster --- drei C2ca-Eingaben) & bedingte Reduktion (delegiert an Branch~Z) & \cite{Geiger2026zookeeper} \\
+B11 & RH bedingt durch B9 $\wedge$ (delegiertes B10 via die err-collapse-Kopplung) & bedingte Reduktion & dieses Paper + \cite{Geiger2026evendom, Geiger2026zookeeper} \\
+\end{tabular}}
+\end{center}
+
+
+\subsection{Der I-1 Normal-Family Reframe und der Foundation-Lock}
+\label{sec:i1-reframe}
+
+Die Zerlegung von~(ii) in die Streifenschranke~(ii-a) und die
+Grenzwertidentifikation~(ii-c) ist das strukturelle Herzstück von
+Branch~B. Montel--Vitali-Kompaktheit auf der Normal-Family
+$\{\hat\xi_\lambda\}$ reduziert lokal-gleichmäßige Konvergenz auf zwei
+Teilbedingungen; die Parität von $\mathrm{QW}_N$ (reell-symmetrisch,
+Projektion mit gerader Parität $\Rightarrow$ $\hat\xi_\lambda$ ist
+gerade und reell-auf-reell) zusammen mit einem
+Hadamard-Ordnung-eins-Argument erzwingt, dass der
+Bohr--Carath\'eodory-Phasenfaktor unter der stehenden Annahme~(Z)
+(einfache Nullstellen) identisch~$1$ ist. Das kanonische
+Kriteriumsobjekt ist dann definitiv als der obige Foundation-Lock
+fixiert (Abweichung von den numerischen Daten
+$\leq 1.9\times 10^{-52}$ bei $\lambda=5,7,\mathrm{dps}=50$).
+
+Branch~B reduziert sich daher \emph{vollständig auf die einzige offene
+Bedingung~(ii-a)}: eine rigorose uniforme wachstumsadaptierte
+Streifenschranke, abgeleitet aus $\mathrm{QW}_N$-Koerzivität. Dies
+sind weniger offene Bausteine als Branch~A's zwei (A3 + A7), und die
+empirische Evidenz für~(ii-a) bei konvergierter Präzision ist
+ungewöhnlich stark (nächster Abschnitt).
+
+
+\subsection{Empirische Konvergenz (Mac~Studio, konvergierte dps)}
+\label{sec:branch-b-empirics}
+
+Konvergierte Daten für die Sup-Observable
+$A_\lambda(\delta):=\sup_{x\in\mathbb R}|\hat\xi_\lambda(x+i\delta)|
+/|\hat\xi_\lambda(x)|$ und die $L^2$-Observable $B_\lambda(\delta)$ bei
+$\delta = 0.4$, erhalten auf einem dedizierten Rechenknoten (Mac~Studio,
+$\mathrm{dps}_{\min}\approx 30\lambda$--$50\lambda$ zur Kontrolle der
+Cluster-Nahdegenerierung; zwei verschiedene dps-Werte bit-identisch bei
+$\lambda=11,13,15$):
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{r r r r r}
+\toprule
+$\lambda$ & $\sup|\hat\xi_\lambda|_{\mathbb R}$ & $A_\lambda(0.4)$ & $B_\lambda(0.4)$ & $B_\lambda(0.4)/\lambda^{0.4}$ \\
+\midrule
+ 3 & 0.858 & 1.0033  & 1.151 & 0.74 \\
+ 5 & 0.879 & 1.0037  & 1.340 & 0.70 \\
+ 7 & 0.886 & 1.0038  & 1.505 & 0.69 \\
+ 9 & 0.890 & 1.0039  & 1.649 & 0.68 \\
+11 & 0.890 & 1.0039  & 1.778 & 0.68 \\
+13 & 0.891 & 1.0039  & 1.895 & 0.68 \\
+15 & 0.892 & 1.00394 & 2.003 & 0.68 \\
+\bottomrule
+\end{tabular}
+\caption{Konvergierte Empirie für Branch~B-Observablen bei $\delta = 0.4$
+(begleitende Beweisnotizen, \S E.18). Die Sup-Observable $A_\lambda(0.4)$
+ist im Wesentlichen flach bei $\approx 1.004$, in auffallendem Kontrast
+zur generischen Phragm\'en--Lindel\"of-Vorhersage $\sim \lambda^\delta$.
+Das $B_\lambda$-Verhältnis sinkt von $0.74$ bei $\lambda=3$ auf ein
+stabiles Plateau bei $0.68$ für $\lambda\ge 9$.}
+\label{tab:route-b-empirics}
+\end{table}
+
+Die Nahflachheit von $A_\lambda(0.4)$ zeigt, dass die Familie
+$\{\hat\xi_\lambda\}$ stark sub-generisch ist, was~(ii-a) empirisch
+plausibel macht. Die $L^2$-Observable wächst als
+$B_\lambda(0.4)\approx 0.68\lambda^{0.4}$ auf dem Plateau, konsistent
+mit polynomialem sub-generischem Verhalten. Frühere Läufe bei
+$\mathrm{dps}=30$ (\S E.16--E.17) wurden aufgrund unterkonvergierter
+Eigenvektoren zurückgezogen; die korrigierten Daten sind in \S E.18 der
+begleitenden Notizen~\cite{Geiger2026evendom} dokumentiert.
+
+
+\subsection{Multiplikative kanonische Form}
+\label{sec:canonical-form}
+
+Die Streifen-Amplifikationsdaten (\Cref{tab:route-b-empirics})
+erlauben eine faktorisierte Darstellung in Bezug auf die vollständige
+Riemannsche $\xi$-Funktion. Definiere die \emph{Hadamard-Basislinie}
+\begin{equation}\label{eq:A-Xi}
+  A_\Xi(\delta) := \frac{\sup_{x\in\mathbb R}|\Xi(x+i\delta)|}
+                        {\sup_{x\in\mathbb R}|\Xi(x)|},
+\end{equation}
+wobei $\Xi(z) = \xi(\tfrac{1}{2}+iz)$ die Standard-vollständige
+Zeta-Funktion auf der kritischen Geraden ist. Durch das
+Hadamard-Produkt gilt
+$\log A_\Xi(\delta) \sim c_\Xi\,\delta^2$ für kleines $\delta$, wobei
+die Hadamard-Krümmungskonstante (siehe \Cref{sec:spectral-constants})
+\begin{equation}\label{eq:c-Xi}
+  c_\Xi = -\frac{1}{2}\sum_\rho \frac{1}{(\rho-\tfrac{1}{2})^2}
+        \approx 0.0231
+\end{equation}
+ist und über alle nicht-trivialen Nullstellen $\rho$ von $\zeta(s)$
+summiert wird. Diese Darstellung ist \emph{RH-neutral}: sie setzt die
+Riemannsche Vermutung nicht voraus. Unter RH spezialisiert sich die
+Summe zu $\sum_{k\geq 1} 1/\gamma_k^2$ mit
+$\gamma_k = \Im(\rho_k)$.
+
+Die empirischen Daten werden gut beschrieben durch die
+\emph{multiplikative kanonische Form}
+\begin{equation}\label{eq:canonical-form}
+  A_\lambda(\delta)
+  = A_\Xi(\delta)\,\bigl(1 + \kappa(\lambda)\,\delta^2\bigr),
+\end{equation}
+wobei $\kappa(\lambda)$ ein residualer Krümmungskoeffizient ist, der
+empirisch sättigt:
+\begin{equation}\label{eq:kappa-inf}
+  \kappa_\infty := \lim_{\lambda\to\infty}\kappa(\lambda)
+  \in [1.6, 1.8]\times 10^{-3}
+\end{equation}
+(sechs $\lambda$-Punkte einschließlich $\lambda=20$, mit
+$\kappa(20)=1{,}527\times 10^{-3}$ und stabiler Abweichung von der
+faktorisierten Form). Die Sättigung ist konsistent mit der
+Foundation-Lock-Struktur: für $\lambda\to\infty$ konvergiert
+$\hat\xi_\lambda \to \Xi$ in der relevanten Topologie, und
+$\kappa(\lambda)$ misst den residualen Finite-$\lambda$-Streifen-Krümmungsüberschuss.
+
+\begin{remark}[Punktweise Identität, keine uniforme Schranke]
+\Cref{eq:canonical-form} ist eine punktweise algebraische Zerlegung bei
+jedem $\delta$, keine uniforme Streifenschranke. Das Supremum über $x$
+wird auf jeder Seite separat genommen. Die Umwandlung in eine
+\emph{uniforme} Schranke $A_\lambda(\delta) \leq C$ für alle $\lambda$
+und $\delta \in [0,\tfrac{1}{2})$ erfordert die separate
+Log-Krümmungskontrolle von Theorem~B-1 unten.
+\end{remark}
+
+
+\subsection{Theorem B-1: Bedingte uniforme Streifenschranke}
+\label{sec:theorem-b1}
+
+Das folgende bedingte Theorem wandelt die empirische kanonische Form
+in eine quantitative Streifenschranke für Branch~B um.
+
+\begin{definition}\label{def:H-lambda}
+Für $\lambda \geq \lambda_0$ und $\delta \in [0, \tfrac{1}{2})$
+definiere den Log-Krümmungsüberschuss
+\[
+  H_\lambda(\delta) := \log\frac{A_\lambda(\delta)}{A_\Xi(\delta)}.
+\]
+\end{definition}
+
+\begin{theorem}[Bedingte uniforme Streifenschranke]
+\label{thm:B1}
+Angenommen, es existieren Konstanten $\lambda_0$ und
+$K \leq 1.8\times 10^{-3}$, so dass
+$H_\lambda(\delta) \leq K\delta^2$ für alle
+$\lambda \geq \lambda_0$ und $\delta \in [0, \tfrac{1}{2})$. Dann gilt
+\begin{equation}\label{eq:B1-bound}
+  A_\lambda(\delta)
+  \leq B_\Xi \cdot \exp\!\bigl(K/4\bigr)
+  \leq 1.0063,
+\end{equation}
+wobei $B_\Xi := \xi(0)/\xi(\tfrac{1}{2})
+= 1.005791795350375\ldots$ die analytische obere Schranke für
+$A_\Xi$ auf $[0,\tfrac{1}{2})$ ist.
+\end{theorem}
+
+\begin{proof}[Beweisskizze]
+Nach Voraussetzung gilt $A_\lambda(\delta) \leq A_\Xi(\delta)\,e^{K\delta^2}$.
+Das Hadamard-Produkt für $\Xi$ liefert
+$A_\Xi(\delta) \leq B_\Xi$ für $\delta \in [0,\tfrac{1}{2})$, wobei
+$B_\Xi = \Xi(0)/\Xi(i/2) = \xi(0)/\xi(\tfrac{1}{2})$ bei
+$\delta = \tfrac{1}{2}$ angenommen wird (Grenzwert). Der
+Exponentialfaktor wird bei $\delta = \tfrac{1}{2}$ maximiert:
+$e^{K/4} \leq e^{1.8\times 10^{-3}/4} \leq 1.00045$.
+Somit $A_\lambda(\delta) \leq 1.005792 \times 1.00045 \leq 1.0063$.
+\end{proof}
+
+\begin{remark}[Offener Beweisslot]
+Die Hypothese $H_\lambda(\delta) \leq K\delta^2$ ist die
+\emph{uniforme Log-Krümmungskontrolle}. Ihre rigorose Herleitung aus
+der Foundation-Lock-Struktur
+\[
+  \hat\xi(z) = \frac{2}{\sqrt{L}}\sin\!\bigl(\tfrac{zL}{2}\bigr)\,F(z)
+\]
+ist ein isolierter offener Beweisslot für Branch~B. Die empirischen Daten
+(\Cref{tab:route-b-empirics}) erfüllen diese Bedingung mit
+$K$ im Sättigungsbereich $1{,}6$--$1{,}8\times 10^{-3}$, passend zur
+konservativen Theoremschranke.
+\end{remark}
+
+
+% =============================================================================
+\section{Branch Z: CCM-Mikrocluster-Programm}
+\label{sec:branch-z}
+% =============================================================================
+
+Branch~Z ist der dritte unabhängige Angriff auf Wand~(ii), der über
+das Connes--Consani--Moscovici-Fourier-Modell der Weil-Quadratform
+verläuft. Er begleitet das eigenständige
+Zookeeper-Paper~\cite{Geiger2026zookeeper}, das den vollständigen
+Audit-Trail der Mikrocluster-Analyse und der C2-Lemma-Kette enthält.
+Dieser Abschnitt dokumentiert die Zusammenfassung der Reduktionskette;
+die bedingte Reduktion beruht auf drei C2ca-Eingaben (skalare säkulare
+Auslöschung, projizierte Poisson-Quasimode, koerzives Komplement) plus
+einer Fixed-Waterline-Outer-Gap-Annahme $g_*\ge g_0$ von der Ordnung
+eins.
+
+
+\subsection{Die Reduktionskette (B1--B11, CCM-Branch)}
+\label{sec:branch-z-chain}
+
+Die Kette überlappt teilweise mit Branch~B (gemeinsame externe
+Preprint-Eingaben und die err-collapse-Kopplung), divergiert aber im
+Abschlussmechanismus (Mikrocluster-Quasimode statt I-1-Streifenschranke).
+Labels B1--B11 werden mit der CCM-Branch-Lesart wiederverwendet.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|p{7.5cm}|l|l}
+\textbf{Schritt} & \textbf{Aussage (CCM-Branch-Lesart)} & \textbf{Status} & \textbf{Quelle} \\\hline
+B1 & W02$_{\mathrm{even}}$ ist Rang-eins (Pol bei $s=1$): $\tilde C = +4.864$, Nullraumdimension~$30$ bei $(\lambda,N) = (3,30)$ & bewiesen & \texttt{cluster\_mechanism\_analysis.py} \\
+B2 & PHP-Eigenwerte = Cluster-Eigenwerte (Übereinstimmung $10^{-14}$) & bewiesen & \texttt{cluster\_mechanism.log} \\
+B3 & Cluster-Eigenvektoren $q_k$ erfüllen $F(\gamma)\approx 0$ an Riemann-Nullstellen & bewiesen ($10^{-14}$ bis $10^{-17}$) & \texttt{multi\_eigenvec\_riemann.log} \\
+B4 & 15-stellige Auslöschung: Polterm + Nullterm $\approx 0$ & bewiesen & \texttt{weil\_positivity\_analysis.log} \\
+B5 & $P_e(\gamma)$ orthogonal zum Cluster im Nullraum (Überlappungen $10^{-21}$ bis $10^{-10}$) & bewiesen & \texttt{weil\_positivity\_analysis.log} \\
+B6 & Kontrafaktisch: $F(z)\ne 0$ an Nicht-Nullstellen (Faktor $10^{13}$ Separation) & bewiesen & \texttt{weil\_positivity\_analysis.log} \\
+B7 & Relative Positivität $w_{\min}/\tilde C \to 0$ für $\lambda \to \infty$ & bewiesen (numerisch) & \texttt{lambda\_positivity\_convergence.log} \\
+B8 & $w_{\min}$ konvergiert bei festem $N$; beschränkte Asymptote $\approx -2.36$ & bewiesen & \texttt{lambda\_positivity\_convergence.log} \\
+B9 & N-skalierte Konvergenz: $w_{\min}$ unabhängig von $N$, $w_{\min}/\tilde C\to 0$ & bewiesen (partiell), Serverlauf fortgesetzt & \texttt{n\_scaled\_convergence.log} \\
+B10 & Resolventenidentität: $F(\gamma) = \beta[\alpha(\gamma) - R(\gamma,w)]$ algebraisch + numerisch verifiziert ($10^{-13}$) & bewiesen & \texttt{b10\_analytical\_derivation.py} \\
+B11 & MS2-Abschluss: $k_\lambda \approx \xi_\lambda$ via drei C2ca-Eingaben + Fixed-Waterline Outer Gap $g_*\ge g_0$ & \textbf{bedingte Reduktion} auf C2ca.1 + C2ca.2 + C2ca.5 + $g_*$-Annahme & \cite{Geiger2026zookeeper}, C2ca-Kette \\
+\end{tabular}}
+\end{center}
+
+
+\subsection{Die drei C2ca-Eingaben}
+\label{sec:c2ca-inputs}
+
+Das Zookeeper-Paper~\cite{Geiger2026zookeeper} reduziert
+MS2 (Connes' \S6.6(b) / err-collapse-Bedingung~(ii)) auf drei benannte
+bedingte Lemmata (Theorem-Niveau, abhängig von einer separaten
+H-Spektrallücken-Annahme):
+
+\begin{itemize}
+  \item \textbf{C2ca.1 Skalare säkulare Auslöschung:} algebraische
+    säkulare Identität bewiesen; uniforme Abnahme $s_\lambda \to 0$ nur
+    unter einer separaten Galerkin-Trunkierungskontrolle bewiesen.
+    Numerische Evidenz:
+    $|\mu/\alpha|\approx 4\text{--}5\times 10^{-7}$ stabil über
+    $\lambda = 3, 5, 7$.
+  \item \textbf{C2ca.2 Projizierte Poisson-Quasimode:} Transferformel
+    $h = (1/n)P_0\Pi(E+B)$ bewiesen; uniforme analytische Kontrolle
+    des $P_0$-Lecks und der Randdämpfung offen. Numerische Evidenz:
+    $p_\lambda \approx 2\text{--}3\times 10^{-6}$.
+  \item \textbf{C2ca.5 Koerzives Komplement:} endliche Min--Max-Identität
+    für ein vorgegebenes Spektralfenster bewiesen; die uniforme
+    Ordnung-eins-Lücke $g_*$ wird nicht allein aus Cauchy-Verschachtelung
+    abgeleitet --- sie erfordert eine separate H-Spektrallücke oder
+    Fixed-Waterline-/Slush-Collar-Kontrolle (ersetzt durch C2cf.1
+    \emph{Fixed-Waterline Quasimode Projection}: im endlichen
+    selbstadjungierten Galerkin-Modell gilt für jedes vorgewählte $g_0>0$:
+    $\|(I-P_{\lambda,g_0})k\|\leq R_0/g_0$).
+\end{itemize}
+
+Diese drei Eingaben plus die Fixed-Waterline-Annahme ersetzen die
+frühere massadaptive Lückenrhetorik (die als zirkulär gegenüber MS2
+diagnostiziert wurde, siehe \Cref{sec:excluded-ccm}).
+
+
+\subsection{Empirische Konvergenz und der effektive Mikrocluster}
+\label{sec:branch-z-empirics}
+
+Die massebasierte effektive Clusterlücke
+$g_{\text{eff}}(\varepsilon) := u_{J+1}-u_0$ mit
+$J_\varepsilon := \min\{J: M(J)\ge 1-\varepsilon\}$ stabilisiert sich
+bei $g_{\text{eff}}(10^{-12}) \approx 5\text{--}6$ (Ordnung eins,
+$\lambda$-unabhängig), was
+$R_0/g_{\text{eff}}\approx 5\times 10^{-7}$ ergibt. Die frühere
+Festtoleranzlücke war instabil (Schnitt innerhalb des echten Clusters);
+der massebasierte Ersatz ist stabil und makroskopisch. Siehe Zookeeper
+C2by/C2bz für die vollständige Analyse~\cite{Geiger2026zookeeper}.
+
+
+% =============================================================================
+\section{Spektrale Konvergenzkonstanten}
+\label{sec:spectral-constants}
+% =============================================================================
+
+Beide spektralen Branches produzieren charakteristische Konstanten,
+deren Identifikation und Sättigung Evidenz für die bedingten Reduktionen
+liefern. Wir sammeln sie hier zum Vergleich; die routenübergreifende
+Synthese mit Branch~A's Konstante $C^* = 64\pi^2/3$
+(Teil~II~\cite{Geiger2026partII}, \S\,GF1) wird auf
+Teil~IV~\cite{Geiger2026partIV} verschoben.
+
+\subsection{\texorpdfstring{Hadamard-Krümmungskonstante $c_\Xi$ (RH-neutral)}{Hadamard-Kruemmungskonstante cXi (RH-neutral)}}
+
+Das Hadamard-Produkt für die vollständige Riemannsche
+$\xi$-Funktion ergibt
+\[
+  \log\frac{|\Xi(it)|}{|\Xi(0)|}
+  = \sum_\rho \log\Bigl|1 - \frac{-t^2}{(\rho-\tfrac{1}{2})^2}\Bigr|
+  \sim -\frac{t^2}{2}\sum_\rho
+       \frac{1}{(\rho-\tfrac{1}{2})^2}
+  + O(t^4),
+\]
+woraus
+\begin{equation}\label{eq:c-Xi-def}
+  c_\Xi = -\frac{1}{2}\sum_\rho
+          \frac{1}{(\rho-\tfrac{1}{2})^2}
+        \approx 0.0231
+\end{equation}
+folgt. Dies ist die führende quadratische Krümmung von
+$\log A_\Xi(\delta)$ nahe $\delta = 0$. Die
+Darstellung~\eqref{eq:c-Xi-def} summiert über \emph{alle}
+nicht-trivialen Nullstellen und ist \emph{RH-neutral}. Unter RH gilt
+$\rho = \tfrac{1}{2}+i\gamma_k$ und die Summe spezialisiert sich zu
+$\sum_{k\geq 1} 1/\gamma_k^2$.
+
+\subsection{\texorpdfstring{Residuale Krümmung $\kappa_\infty$ (Branch~B)}{Residuale Kruemmung kappa-infinity (Branch B)}}
+
+Die multiplikative kanonische Form~\eqref{eq:canonical-form} zerlegt
+$A_\lambda$ in die Hadamard-Basislinie $A_\Xi$ und einen Restfaktor
+$1+\kappa(\lambda)\delta^2$. Empirisch sättigt
+$\kappa(\lambda)$ zu
+$\kappa_\infty \in [1.6, 1.8]\times 10^{-3}$ über
+$\lambda = 3,5,7,9,11,13,15,20$, mit
+$\kappa(20)=1{,}527\times 10^{-3}$. Diese Sättigung ist konsistent mit der
+Foundation-Lock-Konvergenz: für $\lambda\to\infty$ konvergiert
+$\hat\xi_\lambda \to \Xi$ in der relevanten Topologie, und die residuale
+Krümmung misst die Finite-$\lambda$-Korrektur.
+
+\subsection{\texorpdfstring{Hecke-normierte Lücke $g_0(m)$ (Branch~Z)}{Hecke-normierte Luecke g0(m) (Branch Z)}}
+
+Für die $m$-te Riemann-Nullstelle $\gamma_m$ legt die klassische
+Paarkorrelationsheuristik von Montgomery--Odlyzko~\cite{Montgomery1973}
+einen lokalen mittleren Nullstellenabstand von
+$2\pi/\log\gamma_m$ nahe. Die effektive Mikroclusterlücke
+$g_{\text{eff}}$ von Branch~Z (\Cref{sec:branch-z-empirics}) ist
+mit dieser Skalierung konsistent:
+\[
+  g_0(m) \;\approx\; \frac{2\pi}{\log\gamma_m}.
+\]
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llll}
+\toprule
+\textbf{Branch} & \textbf{Konstante} & \textbf{Wert} & \textbf{Status} \\
+\midrule
+B & $c_\Xi$ (Hadamard-Krümmung) & $\approx 0.0231$ & analytisch (RH-neutral) \\
+B & $\kappa_\infty$ (residuale Krümmung) & $\in [1.6,1.8]\times 10^{-3}$ & empirisch (gesättigt) \\
+B & $B_\Xi = \xi(0)/\xi(1/2)$ & $1.00579\ldots$ & analytisch \\
+Z & $g_0(m) \approx 2\pi/\log\gamma_m$ & variiert & klassisch (Montgomery--Odlyzko) \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+
+% =============================================================================
+\section{Gemeinsame Wand und Ausblick des spektralen Sektors}
+\label{sec:common-wall}
+% =============================================================================
+
+Die drei Branches teilen Wand~(ii) als gemeinsames analytisches
+Hindernis, greifen sie aber durch strukturell verschiedene Mechanismen
+an. Die folgende Vergleichstabelle fasst die bedingten Reduktionen
+zusammen.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|l|l}
+\textbf{Branch} & \textbf{Reduktionskette} & \textbf{Offene Hypothese (die Wand hier)} & \textbf{Status} \\\hline
+A --- Even Dominance & A1 + A2 + A7 $\Rightarrow$ RH & A7 (Asymp.~Variational Gap Conj.) + A3 (Odd-Sektor untere Schranke) & bedingte Reduktion \\
+B --- I-1 Normal-Family & B1 + B5 + B9 $\Rightarrow$ RH & (ii-a) (uniforme Streifenschranke aus $QW_N$-Koerzivität) & bedingte Reduktion \\
+Z --- CCM-Mikrocluster & B1 + C2ca + Fixed-Waterline $\Rightarrow$ RH & C2ca.1 + C2ca.2 + C2ca.5 + $g_*\ge g_0$ & bedingte Reduktion \\
+\end{tabular}}
+\end{center}
+
+\noindent\textbf{Gemeinsame Eingaben.} A1 = B1 (beide beruhen auf dem
+Connes--vS-Thm~5.6~\cite{ConnesvS2025}). Der Foundation-Lock
+$\hat\xi(z) = (2/\sqrt L)\sin(zL/2)F(z)$ aus Branch~B ist das
+kanonische Kriteriumsobjekt, das auch in Branch~Z verwendet wird.
+
+\noindent\textbf{Unterschiedliche Mechanismen.} Branch~A greift
+Wand~(ii) via Eigenwertordnung $\lambda_1^+ < \lambda_1^-$ an
+(Teil~II~\cite{Geiger2026partII}). Branch~B greift via ein
+streifenuniformes Hurwitz-artiges Normal-Family-Argument an (dieses
+Paper). Branch~Z greift via eine
+Mikrocluster-Quasimode-zu-Projektor-Abschätzung an (dieses Paper +
+Zookeeper~\cite{Geiger2026zookeeper}).
+
+\noindent\textbf{Am nächsten am bedingten Beweis.} Branch~B hat derzeit
+die kleinste offene Fläche (eine einzige benannte Hypothese~(ii-a))
+zusammen mit stark sub-generischer empirischer Evidenz
+($A_\lambda(0.4)\approx 1.004$ flach über sieben konvergierte
+$\lambda$-Punkte, Theorem~B-1 gibt $A_\lambda \leq 1.0063$ unter der
+Log-Krümmungshypothese). Branches~A und~Z bleiben bedingte Reduktionen
+im Multi-Lücken-Sinn (zwei bzw. drei offene Eingaben). Der Titel der
+vorliegenden Serie folgt der konservativen Konvention: ,,Atlas`` gilt,
+solange kein einzelner Branch das Niveau eines bedingten Beweises unter
+dem Auditprotokoll des Projekts \texttt{DECISION.md} erreicht hat.
+
+\noindent\textbf{Promotionsprotokoll und Zukunftsszenarien} werden in
+Teil~V diskutiert (\Cref{sec:summary} gibt einen kurzen Vorverweis).
+
+
+% =============================================================================
+\section{Ausgeschlossene spektrale Wege}
+\label{sec:excluded-spectral}
+% =============================================================================
+
+Das Post-v2.0-Spektralprogramm (Connes--van~Suijlekom-Reformulierung,
+I-1 Normal-Family Reframe, err-collapse-Diagnostik) schloss mehrere
+Routen. Diese werden hier für den Audit-Trail dokumentiert; sie
+beeinflussen die bedingte Hauptreduktion nicht.
+
+\begin{itemize}
+  \item \textbf{Eigenwert-Ordnung über eine uniforme Spektrallücke.} Der
+    Plan, $\lambda_{\min}(W^+-W^-)<0$ zur Eigenwertungleichung
+    $\lambda_1^+<\lambda_1^-$ via Kato--Temple, Davis--Kahan oder
+    Lehmann-Lückenabschätzungen zu heben, scheitert, weil der relevante
+    minimale Eigenvektor von $QW_N$ in einem nahdegeneriertem Cluster
+    sitzt (gerade/ungerade-Aufspaltung $\sim\!10^{-65}$ bei $\lambda=5$,
+    $\sim\!10^{-84}$ bei $\lambda=7$, superexponentiell kollabierend mit
+    $\lambda$). Keine uniforme Spektrallücke ist verfügbar.
+
+  \item \textbf{Lokalisierungshypothese für die Streifenschranke~(ii-a).}
+    Ein naheliegender Plan war,
+    $|\hat\xi_\lambda(x+i\delta)|$ via Lokalisierung zu beschränken,
+    unter der Annahme, dass $\xi_\lambda$ nahe $t=0$ konzentriert ist.
+    Dies wird falsifiziert: $\xi_\lambda$ ist tatsächlich
+    randkonzentriert ($r_{99}\approx L/2$,
+    $|\xi_\lambda(0)|\approx 0$). Eine wachstumsadaptierte
+    Normalisierung $\Phi$ ist erforderlich.
+
+  \item \textbf{Randprofil-Faktorisierung für~(ii-a).} Die exakte
+    Identität
+    \[
+      F_\lambda(z) = 2\cos(zL/2)\,C_\lambda(z)
+                    + 2\sin(zL/2)\,S_\lambda(z)
+    \]
+    isoliert die explizite $\lambda^\delta$-Wachstumsmodulation. Der
+    Randweg liefert keinen Typgewinn, weil die Eigenfunktionsmasse
+    verteilt ist ($r_{50}\approx 1$ uniform, aber $r_{99}\approx L/2$).
+
+  \item \textbf{Wörtliches MS1 (Cluster-Leiter).} Die konservative Form
+    von MS1 --- uniform einfache Aufspaltung des Minimaleigenwerts von
+    $QW_N$ bei jedem $(\lambda,N)$ --- scheitert: die Aufspaltung
+    kollabiert superexponentiell mit $\lambda$. Nur eine
+    Cluster/Quotienten-Reformulierung hat strukturelle Traktion.
+
+  \item \textbf{Streifen-Amplifikation bei $\mathrm{dps}=30$
+    (zurückgezogen).} Frühe Messungen bei $\mathrm{dps}=30$ deuteten
+    auf sub-generisches Wachstum und nicht-monotone Instabilität hin.
+    Bei konvergierter Präzision
+    ($\mathrm{dps}\approx 30\text{--}50\cdot\lambda$) ist das Bild
+    qualitativ anders: $A_\lambda(0.4)\approx 1.004$ ist flach. Die
+    methodische Lektion (dps-Bedarf skaliert linear mit $\lambda$ für
+    cluster-nahdegenerierte Eigenvektoren) ist selbst substantiell.
+
+  \item \textbf{Roher-$L^2$-Hurwitz-Übergang (falsifiziert 2026-05-15).}
+    Der Plan, die Hurwitz-streifenuniforme Konvergenz direkt aus einer
+    rohen-$L^2$-Tailabschätzung abzuleiten, scheitert auf zwei Fronten:
+    (a) der archimedische Tail hat Norm $O(\lambda^{-1/2})$ --- exakt
+    Randexponent $\alpha=0$, keine Marge; (b) der Prim-Dirac-Tail
+    divergiert im $m=1$-Branch. Negativ-Sobolev rettet dies nicht. Die
+    Diagnostik identifiziert Operatornorm-Topologie (d.\,h.\ Branch~B)
+    als einzigen gangbaren Ersatz. Das Connes--Hurwitz-Passage-Projekt
+    wurde am 2026-05-17 auf eine rein darstellende Rolle umgewidmet
+    (\texttt{Geiger2026hurwitz}, in Vorbereitung).
+\end{itemize}
+
+\begin{remark}[Gemeinsames Muster]
+\label{rem:spectral-pattern}
+Diese sechs Ausschlüsse teilen ein strukturelles Muster: der
+Minimaleigenvektor-Cluster von $QW_N$ ist die Quelle der technischen
+Schwierigkeit. Methoden, die eine uniforme Lücke, eine
+dünn-lokalisierte Eigenfunktion oder ein generisches
+Funktionsklassenverhalten voraussetzen oder erfordern, scheitern alle.
+Produktive Wege arbeiten \emph{mit} dem Cluster (Waterline-/Cluster-Quotienten-Reformulierungen, wachstumsadaptierte Normalisierungen) statt gegen ihn.
+\end{remark}
+
+
+% =============================================================================
+\section{Ausgeschlossene CCM-Wege (Branch~Z-Erbe)}
+\label{sec:excluded-ccm}
+% =============================================================================
+
+Das CCM-Mikrocluster-Programm hat seinen eigenen Katalog toter Routen
+angesammelt. Sie beeinflussen die bedingte Reduktion von Branch~Z nicht.
+
+\begin{itemize}
+  \item \textbf{Massebasierte Mikrocluster-Definition.} Die Definition
+    des Mikroclusters über ein Massekriterium ist zirkulär gegenüber MS2.
+    Ersetzt in Zookeeper v1.2+ durch einen \emph{spektralen} Mikrocluster
+    (Niedrigenergie-Eigenraum, begrenzt durch eine Outer Gap $g_*$ der
+    Ordnung eins).
+
+  \item \textbf{Naiver Hurwitz-Übergang.} Eine direkte Hurwitz-Anwendung
+    ohne Approximationsqualitätskontrolle liefert Aussagen, die für den
+    err-collapse-Abschluss zu schwach sind. Ersetzt durch einen
+    Slepian--Pollak-/PSWF-basierten Übergang.
+
+  \item \textbf{Anker-Störung / Banach-Kontraktion (C2br$'$,
+    falsifiziert).} Eine Banach-Norm-Kontraktion $C_{\max}<M$ scheitert
+    um den Faktor 55--7000 auf allen zwölf getesteten Konfigurationen.
+
+  \item \textbf{Projizierte Frontier-Auslöschung $S_{bulk}\approx
+    -S_{bd}$ (C2bs, falsifiziert).} Beide Beiträge haben das gleiche
+    Vorzeichen und sind beide von der Größenordnung $\sim 10^{-7}$. Der
+    wahre Auslöschungsmechanismus liegt in der Eigenwertgleichung
+    $(A-w_0)k\approx 0$.
+
+  \item \textbf{Uniformes Massekriterium C2ak.} Die gesamte
+    Off-Cluster-Masseschranke divergiert mit $\lambda$
+    ($6.68\to 15.3\to 1865$ über $\lambda=3,5,7$), weil sie interne
+    Auslöschung verwirft.
+
+  \item \textbf{Kanonische lokale Geometrie C2al (Richtungsdefekt).}
+    Die geometrische Ungleichung hat die falsche Richtung --- die
+    korrekte Form ist $g_R/d_m\le T_m^\beta/\beta_0$ (untere Schranke
+    für $d/g$, nicht obere).
+
+  \item \textbf{Clusterselektion via $\Delta$-Projektion.} Einfache
+    $\delta_N$-Projektion ist kein robuster Clusterselektor: bei
+    $\lambda=5,N=55$ wählt \texttt{best\_zero=k=16}, während die
+    anderen beiden $k=17$ selektieren.
+
+  \item \textbf{Log-Konkavität / detailliertes Gleichgewicht (C2cc
+    H1/H2/H4).} Die Hypothesen, dass $\beta_n$ oder $|b_n|$
+    log-konkav sind (H1), dass die spektrale Residuenkette eine
+    Detailed-Balance-Struktur hat (H2), oder dass ein Mertens-Anker
+    gilt (H4), wurden bei
+    $\lambda=3,N=30,\mathrm{dps}=50$ getestet und falsifiziert.
+    Strukturelle Ursache: arithmetische (primzahlgetriebene)
+    Oszillation.
+
+  \item \textbf{Direkte Frontier-Dominance v2.1 (Killer~0, 2026-05-14).}
+    Das v2.1-Argument verwendete einen gemeinsamen Rayleigh-Testvektor,
+    um $\lambda_{\min}(D_{tot})<0$ zu beweisen, und identifizierte dann
+    $\Delta_{low}=\lambda_{\min}(D_{tot})$ mit
+    $\Delta=\lambda_1^+-\lambda_1^-$. Das Reviewer-Gegenbeispiel
+    $A=\mathrm{diag}(0,10), B=\mathrm{diag}(5,-5)$ zeigt, dass dies
+    \emph{nicht} folgt. Even Dominance für asymptotisches $\lambda$
+    bleibt bedingt durch eine separate Odd-Sektor untere Schranke.
+    (Dieser Punkt ist Even-Sektor-spezifisch und in
+    Teil~II~\cite{Geiger2026partII} detailliert dokumentiert; er wird
+    hier aufgeführt, weil die Falsifikation auch die vergleichende
+    Analyse der Branches~B und~Z umstrukturierte.)
+\end{itemize}
+
+\begin{remark}[CCM-Muster: Auslöschung, nicht Betrag]
+\label{rem:ccm-pattern}
+Die toten CCM-Routen teilen ein anderes Muster als die spektrale Seite:
+jede versucht, eine Größe durch ihren Einzelterm-Betrag zu beschränken,
+und jede wird durch große interne Auslöschung besiegt. Die lebenden
+Routen faktorisieren die Auslöschung explizit durch
+Projektoridentitäten oder skalare säkulare Gleichungen, niemals durch
+einfache Normdominanz.
+\end{remark}
+
+
+% =============================================================================
+\section{Methodische Sackgassen}
+\label{sec:methodical}
+% =============================================================================
+
+Eine kleine Anzahl methodischer Routen wurde auf der spektralen Seite
+getestet und aus strukturellen Gründen ausgeschlossen.
+
+\begin{itemize}
+  \item \textbf{Dobrushin--Zegarlinski-Eindeutigkeit $\to$ RH-CAP.}
+    Dobrushin--Zegarlinski-Eindeutigkeit funktioniert nur auf Gittern
+    mit lokalisierten Gibbs-Maßen. RH hat weder das eine noch das
+    andere; das Fehlen multiplikativer Unabhängigkeit erzwingt eine
+    nichtlokale Primzahlkopplungsstruktur, die die
+    Dobrushin-Kontraktionssituation zerstört.
+
+  \item \textbf{Sturm-Knotenzählung (naiv).} Klassische
+    Sturm--Liouville-Knotenzählung für die Eigenfunktionen von $QW_N$
+    scheitert, weil der Operator endlichdimensional ist und die
+    gerade/ungerade Spektrallücke subexponentiell klein ist. Die
+    Knotenzählung liefert keine Information auf der relevanten
+    Präzisionsskala.
+
+  \item \textbf{Naive Abel-Summation für den fernen Tail.} Die
+    Anwendung der Abel-Summation auf die fernen Primzahlsummen
+    $\sum_{p>\lambda} (\log p)^k / p^s$ ohne Kontrolle der
+    arithmetischen Oszillation von $\theta(x)-x$ führt zu divergenten
+    Fehlertermen. Das PNT-Transferlemma (Teil~II) zeigt, wie dies
+    korrekt durchgeführt wird.
+
+  \item \textbf{Naive Superdeterminantenform für Möbius-$\mathbb{Z}_2$.}
+    Die formale Identität
+    $\mathrm{sdet}(I - L_s) = \det(I-L_s^+)/\det(I-L_s^-) = 1/\zeta(s)$
+    ist algebraisch korrekt für endliche Primzahlmengen, konvergiert aber
+    nicht für die volle Primzahlmenge bei $\Re(s) = \tfrac{1}{2}$
+    (Spurklassen-Obstruktion K4 aus Teil~I).
+
+  \item \textbf{Friedrichs + Petersson als Hilbert--P\'olya-Hebel.}
+    Der Plan, die Friedrichs-Erweiterung des Petersson-Innenprodukts zu
+    nutzen, um eine selbstadjungierte Realisierung zu konstruieren,
+    deren Spektrum die Riemann-Nullstellen kodiert, scheitert: die
+    relevante Bilinearform ist nicht halbbeschränkt auf dem Definitionsbereich, der nötig ist, um die Nullstellen auf der
+    kritischen Geraden zu erfassen.
+\end{itemize}
+
+
+% =============================================================================
+\section{Zusammenfassung}
+\label{sec:summary}
+% =============================================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|c|l}
+\textbf{Beitrag} & \textbf{Status} & \textbf{Ort} \\\hline
+I-1 Normal-Family Reframe: (ii) $\to$ (ii-a) + (ii-c) & rigoros & \Cref{sec:i1-reframe} \\
+(ii-c) absorbiert in (ii-a) unter (Z) & rigoros & \Cref{sec:i1-reframe} \\
+Foundation-Lock: kanonisches Kriteriumsobjekt & rigoros & \Cref{sec:i1-reframe} \\
+Konvergierte Empirie: $A_\lambda(0.4) \approx 1.004$ (7 Punkte) & numerische Evidenz & \Cref{tab:route-b-empirics} \\
+Multiplikative kanonische Form & empirisch (0.012\% Anpassung) & \Cref{sec:canonical-form} \\
+Theorem~B-1: $A_\lambda \leq 1.0063$ (bedingt) & bedingt & \Cref{thm:B1} \\
+$c_\Xi$ Hadamard-Krümmung (RH-neutral) & analytisch & \Cref{sec:spectral-constants} \\
+CCM: drei C2ca-Eingaben identifiziert & bedingte Reduktion & \Cref{sec:c2ca-inputs} \\
+CCM: effektive Mikroclusterlücke $g_{\text{eff}} \approx 5\text{--}6$ & numerische Evidenz & \Cref{sec:branch-z-empirics} \\
+6 ausgeschlossene spektrale Wege + 9 ausgeschlossene CCM-Wege & dokumentiert & \Cref{sec:excluded-spectral,sec:excluded-ccm} \\
+5 methodische Sackgassen & dokumentiert & \Cref{sec:methodical} \\
+\end{tabular}%
+}
+\end{center}
+
+\noindent Der spektrale Sektor liefert zwei unabhängige bedingte
+Reduktionen der RH, jede mit einer gut charakterisierten offenen
+Fläche. Branch~B hat die kleinste offene Fläche (eine einzige
+Hypothese~(ii-a)) und die stärkste empirische Unterstützung
+($A_\lambda \leq 1.0063$ bedingt durch uniforme
+Log-Krümmungskontrolle). Die routenübergreifende Synthese aller drei
+Branches wird in Teil~IV~\cite{Geiger2026partIV} entwickelt; der
+kondensierte Atlas und Ausblick in Teil~V~\cite{Geiger2026partV}.
+
+
+\bigskip
+\noindent\textbf{Danksagungen.} Berechnungen wurden auf einem
+Mac~Studio (Apple M1~Max, 32~GB) durchgeführt. Die
+Intervallarithmetik-Bibliothek mpmath wurde von Fredrik Johansson
+entwickelt.
+
+
+\section*{KI-Offenlegung}
+
+Dieses Manuskript wurde in umfassender Zusammenarbeit mit
+KI-Sprachmodellen (Claude, Anthropic; Copilot, Microsoft/GitHub; Gemini,
+Google DeepMind) entwickelt. Die KI trug zur konzeptionellen Erkundung,
+analytischen Arbeit, Literaturrecherche, zum Schreiben und zur
+kritischen Überprüfung bei. Der Autor, Lukas Geiger, konzipierte die
+Forschungsrichtung, brachte Domänenwissen ein und übte die endgültige
+redaktionelle Verantwortung aus. Der Autor übernimmt die volle und
+alleinige wissenschaftliche Verantwortung für alle Inhalte,
+einschließlich etwaiger Fehler.
+
+
+\bibliographystyle{plain}
+\bibliography{fst-rh-references}
+
+\end{document}

@@ -7,6 +7,7 @@
 \renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
+\emergencystretch=1.5em
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage[capitalise,noabbrev]{cleveref}
@@ -40,12 +41,12 @@ Foundations, Obstructions, and Reorientation}
 \maketitle
 
 \begin{abstract}\footnotesize
-This paper, the first in a three-part series on the Riemann Hypothesis, establishes the mathematical landscape and documents the systematic exploration---and ultimately the failure---of a gauge-theoretic approach. In the first part, we develop the analytical framework: the Riemann Hypothesis as a stability problem, the Li criterion as the central tool, and the Bombieri--Lagarias decomposition of the Li coefficients into archimedean and finite-part contributions. Starting from a thermodynamic formalism (Prime Hub Graphs and Ruelle transfer operators), we prove several unconditional structural results: the archimedean--finite decomposition, the archimedean dominance paradox, OS reflection positivity, the arithmetic uncertainty relation, and the spectral census of the arithmetic kernel.
+This paper, the first in a five-part series on the Riemann Hypothesis, establishes the mathematical landscape and documents the systematic exploration---and ultimately the failure---of a gauge-theoretic approach. In the first part, we develop the analytical framework: the Riemann Hypothesis as a stability problem, the Li criterion as the central tool, and the Bombieri--Lagarias decomposition of the Li coefficients into archimedean and finite-part contributions. Starting from a thermodynamic formalism (Prime Hub Graphs and Ruelle transfer operators), we prove several unconditional structural results: the archimedean--finite decomposition, the archimedean dominance paradox, OS reflection positivity, the arithmetic uncertainty relation, and the spectral census of the arithmetic kernel.
 
-In the second part, we identify four critical obstructions (K1--K4) that individually and collectively doom the original proof strategy: the Gibbs normalization gap, the sign change of the target functional, the wrong monotonicity direction, and the trace-class obstruction. We localize the difficulty precisely through a nine-step logical chain, showing that the \emph{entire} content of RH concentrates in a single step (S5: the unconditional positivity of the Li coefficients). We formulate five concrete open problems and identify the reorientation toward Connes' spectral program as the path forward. Part~II develops this new direction via the Shift Parity Lemma, finite-range diagnostics, and a conditional even-dominance reduction; Part~III draws the final conclusions. In v2.0, two non-existence theorems in Part~II (NE-A, NE-B) formally rule out the absolute total-positivity and universal-commuting-operator routes, reinforcing the arithmetic-statistical nature of even dominance.
+In the second part, we identify four critical obstructions (K1--K4) that individually and collectively doom the original proof strategy: the Gibbs normalization gap, the sign change of the target functional, the wrong monotonicity direction, and the trace-class obstruction. We localize the difficulty precisely through a nine-step logical chain, showing that the \emph{entire} content of RH concentrates in a single step (S5: the unconditional positivity of the Li coefficients). We formulate five concrete open problems and identify the reorientation toward Connes' spectral program as the path forward. Part~II develops this new direction via the Shift Parity Lemma, finite-range diagnostics, and a conditional even-dominance reduction; Part~III surveys the spectral routes; Part~IV collects cross-route synthesis and remaining paths; Part~V draws the final conclusions. In v2.0, two non-existence theorems in Part~II (NE-A, NE-B) formally rule out the absolute total-positivity and universal-commuting-operator routes, reinforcing the arithmetic-statistical nature of even dominance.
 
 \medskip\noindent
-\textbf{Series status (v2.2, 2026-05-14).}
+\textbf{Series status (v3.0, 2026-05-26).}
 Following external critical review, the series status is revised from
 ``unconditional A1--A8'' (v2.1) to \emph{conditional reduction}: even
 dominance is rigorously certified on the finite range
@@ -58,8 +59,9 @@ Gap Conjecture} for $\lambda_1^-$ (Part~II, ``Status of the proof''
 remark, v2.2 revision; companion paper~\cite{Geiger2026evendom}).  The Shift Parity Lemma,
 Leading-Mode Cancellation, the 33 finite-range diagnostics, and the
 non-existence theorems NE-A and NE-B are unaffected by this revision.
-The series is a continuously evolving draft/preprint; v2.2 is the
-current honest position.
+The series is a continuously evolving draft/preprint; v3.0 restructures
+the trilogy into a five-part series (structural reorganization only;
+the conditional reduction status from v2.2 is unchanged).
 \end{abstract}
 
 {\footnotesize
@@ -94,14 +96,16 @@ The Riemann Hypothesis (RH) asserts that all non-trivial zeros of the Riemann ze
 \end{equation}
 where $\lambda_n = \sum_\rho [1 - (1-1/\rho)^n]$ and the sum runs over the non-trivial zeros of $\zeta$.
 
-This paper is the first in a three-part series:
+This paper is the first in a five-part series:
 \begin{itemize}
   \item \textbf{Part~I} (this paper): Foundations, obstructions, and reorientation --- mathematical foundations, analytical tools, structural results, the documentation of four dead ends, the localization of difficulty, and the reorientation toward Connes' spectral program.
-  \item \textbf{Part~II} \cite{Geiger2026partII}: Even dominance --- the Shift Parity Lemma, computer-assisted finite-range diagnostics, and the conditional proof architecture.
-  \item \textbf{Part~III} \cite{Geiger2026partIII}: Conclusio --- what is proven, what is excluded, and what remains.
+  \item \textbf{Part~II} \cite{Geiger2026partII}: Even dominance --- the Shift Parity Lemma, computer-assisted finite-range diagnostics, and the conditional reduction architecture.
+  \item \textbf{Part~III} \cite{Geiger2026partIII}: Spectral routes --- Branch~B (I-1 normal-family / err-collapse) and Branch~Z (CCM microcluster programme), including spectral dead ends.
+  \item \textbf{Part~IV} \cite{Geiger2026partIV}: Cross-route synthesis and remaining paths --- inter-branch diagnostics, dormant and external routes, and methodological dead ends.
+  \item \textbf{Part~V} \cite{Geiger2026partV}: Conclusio --- what is proven, what is excluded, and what remains.
 \end{itemize}
 
-The series documents an honest research journey: from a promising gauge-theoretic approach (Sections~\ref{sec:thermodynamic}--\ref{sec:gauge}), through its failure at multiple points (Sections~\ref{sec:K1}--\ref{sec:K4}), to a new structural understanding of the problem via the Weil quadratic form (Section~\ref{sec:reorientation}), and a final accounting of what has been achieved (Part~III).
+The series documents an honest research journey: from a promising gauge-theoretic approach (Sections~\ref{sec:thermodynamic}--\ref{sec:gauge}), through its failure at multiple points (Sections~\ref{sec:K1}--\ref{sec:K4}), to a new structural understanding of the problem via the Weil quadratic form (Section~\ref{sec:reorientation}), and a final accounting of what has been achieved (Part~V).
 
 \subsection{The Hope}
 
@@ -576,6 +580,20 @@ This is where the thermodynamic insight pays off in an unexpected way: the decom
 The gauge-theoretic approach failed because it tried to prove a \emph{global} statement ($\lambda_n \geq 0$ for all $n$) via a \emph{local} tool (the Gibbs measure near $\sigma = 1$). The Connes approach succeeds where the gauge approach fails because it works directly in the spectral domain of $A_\lambda$, where the even-odd decomposition provides a natural structure. The Shift Parity Lemma (Part~II) shows that this structure is fundamentally algebraic, not analytic.
 \end{remark}
 
+% added 2026-05-24: three-branch attack
+\subsection*{Three Independent Branches Attack RH from the Same Reorientation}
+\label{sec:three-branches}
+
+The spectral reorientation of Connes' programme opens \emph{three} structurally independent attacks on RH, all of which appear in the present series. They share the same external preprint inputs (Connes 2026 \cite{Connes2026}, Connes--vS 2025 \cite{ConnesvS2025}, and the Connes--Consani--Moscovici 2025 zeta-spectral-triples construction) and meet at the same analytical wall --- Connes' \S6.6(b)/MS2 condition on the limit behaviour of $\{\hat\xi_\lambda\}$ --- but they reach the wall through different mechanisms.
+
+\begin{itemize}
+  \item \textbf{Branch A --- Even Dominance.} Reduces RH to the eigenvalue inequality $\lambda_1^+(\lambda) < \lambda_1^-(\lambda)$ along a sequence $\lambda_n \to \infty$. Developed in Part~II of this series; standalone extraction in the companion paper~\cite{Geiger2026evendom}. Currently a conditional reduction (open: A3 odd-sector lower bound, A7 Asymptotic Variational Gap Conjecture).
+  \item \textbf{Branch B --- I-1 Normal-Family / err-Collapse.} Reduces RH to a single uniform growth-adapted strip bound (ii-a) on $\{\hat\xi_\lambda\}$ from $QW_N$-coercivity. Developed in Part~III of this series, with reduction chain B1--B11, Foundation-Lock $\hat\xi(z) = (2/\sqrt L)\sin(zL/2)F(z)$, and converged Mac~Studio empirics ($A_\lambda(0.4)\approx 1.004$ flat across $\lambda\in\{3,5,7,9,11,13,15\}$).
+  \item \textbf{Branch Z --- CCM Microcluster Programme.} Reduces RH (via the err-collapse coupling and MS2-closure) to three named conditional inputs C2ca.1, C2ca.2, C2ca.5 plus a fixed-waterline outer-gap assumption $g_*\ge g_0$. Developed in the standalone companion paper~\cite{Geiger2026zookeeper}; summarised in Part~III.
+\end{itemize}
+
+The three branches are pursued in parallel because each remaining open block sits at a structurally different place: A7 is variational, (ii-a) is analytical (strip bound from coercivity), C2ca is operator-theoretic (quasimode-to-projector). A success on any one of the three would suffice. The audit-trail philosophy of this paper preserves all three with explicit status, including a catalogue of dead routes already eliminated within each branch (Parts~III--IV).
+
 
 % =============================================================================
 \section{Conclusion}
@@ -592,7 +610,7 @@ However, the failure is productive:
   \item The understanding that even dominance is driven by prime contributions, not archimedean effects, emerged directly from the decomposition analysis.
 \end{enumerate}
 
-Part~II takes up the new thread: the Shift Parity Lemma, the computer-assisted finite-range diagnostics, and the identification of the cumulative eigenvalue-ordering step as the remaining challenge. Part~III draws the final conclusions on what has been proven, what has been excluded, and what remains open.
+Part~II takes up the new thread: the Shift Parity Lemma, the computer-assisted finite-range diagnostics, and the identification of the cumulative eigenvalue-ordering step as the remaining challenge. Parts~III--IV document the spectral routes, cross-route synthesis, and remaining paths; Part~V draws the final conclusions on what has been proven, what has been excluded, and what remains open.
 
 
 \section*{AI Disclosure}
@@ -631,11 +649,22 @@ L.~Geiger, \emph{The Riemann Hypothesis: Even Dominance of the Weil Quadratic Fo
 
 \bibitem{Geiger2026evendom}
 L.~Geiger,
-\emph{A conditional proof of the Riemann hypothesis via even dominance of the Weil quadratic form},
-Zenodo (2026), DOI: 10.5281/zenodo.20011910.
+\emph{A Conditional Reduction of the Riemann Hypothesis to Even Dominance of the Weil Quadratic Form},
+Zenodo (2026), DOI: 10.5281/zenodo.20479145.
+
+\bibitem{Geiger2026zookeeper}
+L.~Geiger,
+\emph{The Spectral Zookeeper: A Conditional Reduction toward the Riemann Hypothesis via Spectral Microcluster Closure in the Connes--Consani--Moscovici Framework},
+Zenodo (2026), DOI: 10.5281/zenodo.20479223.
 
 \bibitem{Geiger2026partIII}
-L.~Geiger, \emph{The Riemann Hypothesis: Conclusio}, 2026.
+L.~Geiger, \emph{The Riemann Hypothesis: Spectral Routes}, 2026 (in preparation).
+
+\bibitem{Geiger2026partIV}
+L.~Geiger, \emph{The Riemann Hypothesis: Cross-Route Synthesis}, 2026 (in preparation).
+
+\bibitem{Geiger2026partV}
+L.~Geiger, \emph{The Riemann Hypothesis: Conclusio}, 2026 (in preparation).
 
 \end{thebibliography}
 

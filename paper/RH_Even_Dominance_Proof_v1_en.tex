@@ -7,8 +7,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{aliascnt}
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage{enumitem}
+\usepackage{etoolbox}
 \usepackage{geometry}
 \usepackage{makecell}
 \usepackage{xurl}
@@ -19,14 +22,26 @@
 \setlength{\emergencystretch}{2em}
 
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{definition}[theorem]{Definition}
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
 \theoremstyle{plain}
-\newtheorem{conjecture}[theorem]{Conjecture}
+\newaliascnt{conjecture}{theorem}
+\newtheorem{conjecture}[conjecture]{Conjecture}
+\aliascntresetthe{conjecture}
 \crefname{theorem}{Theorem}{Theorems}
 \crefname{lemma}{Lemma}{Lemmas}
 \crefname{proposition}{Proposition}{Propositions}
@@ -34,17 +49,24 @@
 \crefname{definition}{Definition}{Definitions}
 \crefname{remark}{Remark}{Remarks}
 \crefname{conjecture}{Conjecture}{Conjectures}
+\AtBeginEnvironment{thebibliography}{%
+  \small
+  \setlength{\itemsep}{0.2em}%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parsep}{0pt}%
+}
 
 \newcommand{\QW}{\mathrm{QW}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\projectrepo}{\href{https://github.com/research-line/rh-even-dominance}{\path{github.com/research-line/rh-even-dominance}}}
+\newcommand{\projectrepo}{\href{https://github.com/research-line/rh-even-dominance}{\path{research-line/rh-even-dominance}}}
 \DeclareMathOperator{\Tr}{Tr}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \title{A Conditional Reduction of the Riemann Hypothesis to Even Dominance of the Weil Quadratic Form}
 \author{Lukas Geiger\\Independent Researcher, Bernau\\ORCID: 0009-0005-7296-1534}
-\date{Draft v1.7 -- 23 May 2026}
+\date{Draft v1.9 -- 29 May 2026}
 
 \hypersetup{
   unicode=true,
@@ -80,7 +102,7 @@ $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ for asymptotic $\lambda$ requires a
 separate quantitative lower bound for $\lambda_1^-$; we formulate this as the
 \emph{Asymptotic Variational Gap Conjecture} and outline a degenerate
 perturbation-theory route in Section~\ref{sec:asymptotic-lower-bound}.
-The proof of RH presented here is therefore conditional on (i) the
+The route toward RH analysed here is therefore conditional on (i) the
 Connes program (Connes--van Suijlekom real-zero criterion
 \cite{ConnesvS2025}, which is fully proven at fixed $L$, together with
 the Hurwitz limit-passage of \cite[Sec.~6.4--6.6]{Connes2026}, whose
@@ -1745,6 +1767,349 @@ precision ($\mathrm{dps}=30$) near cluster near-degeneracy of the
 minimal even eigenvalue; only the converged \S{}E.18 values are
 reliable.
 
+\paragraph{26 May 2026 guardrail.}
+Two subsequent audits sharpen the status without strengthening the
+theorem claims. First, the $\lambda=20$ strip run gives
+$\kappa(20)=1.527\times10^{-3}$; a six-point refit now places the
+residual-curvature saturation in the conservative range
+$\kappa_\infty\in[1.6,1.8]\times10^{-3}$. Thus the conditional
+Theorem~B-1 should be read with the bound $A_\lambda(\delta)\leq
+1.0063$ only under uniform log-curvature control, not as an established
+strip theorem. Second, the GF1 Chebyshev-ladder audit is two-regime:
+for $\lambda=5,7$ the converged data support the boundary-moment
+benchmark $\mathrm{sLI}\sim(64\pi^2/3)\lambda/(NL)$, whereas
+$\lambda=3$ is a low-bandwidth outlier whose older $C_m$ normalisation
+approaches approximately~$7$ rather than the $\lambda=5,7$ plateau
+near $1.5$--$2.0$. The 27~May audit adds a second guardrail: the
+single $\lambda=11,N=200$ point gives
+$C_{\mathrm{eff}}\approx168$, about $20\%$ below $64\pi^2/3$, so
+$\lambda=11$ remains a discriminator until the larger-$N$ runs finish.
+Consequently GF1 is a conservative diagnostic target, not a uniform
+all-$\lambda$ theorem and not a DZT2/MS2/RH closure. Both diagnostics
+are sensitive to Galerkin order: at $\xi = NL/\lambda \lesssim 50$,
+measured $\mathrm{sLI}$ overshoots the asymptotic $C^*/\xi$ law in the
+$\lambda=5,7$ sweeps, while the $\lambda=11$ point shows that the
+threshold may be $\lambda$-dependent. The simple endpoint-kernel
+factorisation has also been falsified; the exact collar kernel is
+$K(t)=e^t\cosh(t)/(2\sinh^2t)$ and the missing input is the
+eigenmode asymptotics. The b1 curvature coefficients $\kappa(\lambda)$
+use different $N$ per~$\lambda$ without separate $N$-convergence
+verification. Converged GF1 diagnostics require at minimum a validated
+$\xi$-window, currently supported for $\lambda \in \{5,7\}$; the
+$\lambda = 11$ sweep is pending.
+
+\paragraph{29 May 2026 GF1 kernel update.}
+The GF1 audit has since separated a closed analytic identity from the
+remaining eigenmode problem.  The following proposition is used only as a
+structural normalisation of the Chebyshev-ladder observable; it is not a
+proof of DZT2, MS2, even dominance, or RH.
+
+\begin{proposition}[GF1 Cauchy ladder kernel and the \(C^*\) moment]
+\label{prop:gf1-collar-kernel-cstar}
+Let
+\[
+  K_\gamma(p):=\frac{2(\gamma^2+p^2)}{(\gamma^2-p^2)^2}
+\]
+be the paired Cauchy weight appearing in the GF1 far-ladder
+diagnostics.  For the reflected moment variable
+\[
+  s=\min\{(p/\gamma)^2,(\gamma/p)^2\}\in[0,1)
+\]
+one has the exact identity
+\[
+  \frac{\gamma^2}{2}K_\gamma(p)
+  =G(s):=\frac{1+s}{(1-s)^2}
+  =\sum_{r\ge0}(2r+1)s^r.
+\]
+Writing \(s=e^{-2t}\), this is the exact collar kernel
+\[
+  K_{\rm collar}(t)
+  =\frac{e^t\cosh t}{2\sinh^2t}
+  =\frac12\coth^2t+\frac12\coth t
+  =\Bigl(\frac12+\frac12\operatorname{csch}^2t\Bigr)
+    +\frac12\coth t .
+\]
+In particular the even singular part is
+\(\frac12\operatorname{csch}^2t\), the odd singular part is
+\(\frac12\coth t\), and
+\[
+  K_{\rm collar}(t)
+  =\frac{1}{2t^2}+\frac{1}{2t}+\frac13+\frac{t}{6}
+    +\frac{t^2}{30}+O(t^3).
+\]
+With \(u=2t\), the phenomenological GF1 benchmark kernel is precisely
+the \(2u^2\)-weighted pullback of the even singular component:
+\[
+  \varphi(u):=\frac{u^2}{\sinh^2(u/2)}
+  =2u^2\Bigl(\frac12\operatorname{csch}^2(u/2)\Bigr).
+\]
+Consequently
+\[
+  C^*:=16\int_0^\infty \varphi(u)\,du
+  =\frac{64\pi^2}{3}.
+\]
+\end{proposition}
+
+\begin{proof}
+The first identity is algebraic:
+\[
+  \frac{\gamma^2}{2}K_\gamma(p)
+  =\frac{1+(p/\gamma)^2}{(1-(p/\gamma)^2)^2}
+\]
+on the inner side, and the same expression with \(p/\gamma\) replaced
+by \(\gamma/p\) after the outer reflection.  The Taylor series follows
+from \((1+s)/(1-s)^2=\sum_{r\ge0}(2r+1)s^r\).  Substituting
+\(s=e^{-2t}\) gives
+\[
+  G(e^{-2t})=\frac{e^t\cosh t}{2\sinh^2t}.
+\]
+The displayed decomposition follows from
+\(e^t=\cosh t+\sinh t\) and \(\coth^2t=1+\operatorname{csch}^2t\);
+the Laurent expansion is the standard expansion of \(\coth\) and
+\(\operatorname{csch}^2\) at the origin.  Finally,
+\[
+  \frac{1}{\sinh^2(u/2)}
+  =4\sum_{n\ge1}n e^{-nu}
+\]
+for \(u>0\), hence
+\[
+  \int_0^\infty \frac{u^2}{\sinh^2(u/2)}\,du
+  =4\sum_{n\ge1}n\int_0^\infty u^2e^{-nu}\,du
+  =8\sum_{n\ge1}\frac1{n^2}
+  =\frac{4\pi^2}{3}.
+\]
+Multiplication by the GF1 normalisation factor \(16\) gives
+\(C^*=64\pi^2/3\).
+\end{proof}
+
+\begin{lemma}[GF1 collar-channel annihilation under \(q\)-orthogonality]
+\label{lem:gf1-q-orthogonality-annihilation}
+Let \(I\) be a finite index set, let
+\(t_i\in\mathbb{R}\setminus\{0\}\) (with the limiting value
+\(t_i=+\infty\) allowed), and let \(c_i\in\mathbb{R}\).  Put
+\[
+  E_{\rm sing}(t):=\frac12\operatorname{csch}^2t,
+  \qquad
+  E_{\rm const}:=\frac12,
+  \qquad
+  O(t):=\frac12\coth t .
+\]
+Then \(K_{\rm collar}=E_{\rm const}+E_{\rm sing}+O\).  If the
+coefficient vector is orthogonal to the constant and odd collar
+channels,
+\[
+  \sum_{i\in I}c_i=0,
+  \qquad
+  \sum_{i\in I}c_i\,\coth t_i=0,
+\]
+then the signed collar sum contains only the even singular channel:
+\[
+  \sum_{i\in I}c_i K_{\rm collar}(t_i)
+  =\frac12\sum_{i\in I}c_i\,\operatorname{csch}^2t_i .
+\]
+Moreover, for \(u_i=2t_i\),
+\[
+  \varphi(u_i)
+  =\frac{u_i^2}{\sinh^2(u_i/2)}
+  =2u_i^2 E_{\rm sing}(t_i),
+\]
+so the \(\varphi\)-observable is precisely the \(u^2\)-regularised
+version of the surviving even singular channel.
+\end{lemma}
+
+\begin{proof}
+The decomposition of \(K_{\rm collar}\) is
+\[
+  K_{\rm collar}(t)
+  =\frac12+\frac12\operatorname{csch}^2t+\frac12\coth t
+\]
+by \Cref{prop:gf1-collar-kernel-cstar}.  Therefore
+\[
+  \sum_{i\in I}c_iK_{\rm collar}(t_i)
+  =
+  \frac12\sum_{i\in I}c_i
+  +\frac12\sum_{i\in I}c_i\,\operatorname{csch}^2t_i
+  +\frac12\sum_{i\in I}c_i\,\coth t_i .
+\]
+The first and third terms vanish by the two stated orthogonality
+relations.  Finally, \(u_i=2t_i\) gives
+\(\sinh^2(u_i/2)=\sinh^2t_i\), hence
+\(\varphi(u_i)=u_i^2\operatorname{csch}^2t_i
+=2u_i^2E_{\rm sing}(t_i)\).
+\end{proof}
+
+\begin{proposition}[Production splitting modes and the \(q_a\)-orthogonality test]
+\label{prop:gf1-production-q-orthogonality-status}
+In the GF1-ECL audit scripts
+\path{_proof-notes/gf1_ecl_oddconst_annihilation_audit.py} and
+\path{_proof-notes/gf1_ecl_phi_norm_audit.py}, the coefficients
+\(q_a(k)\) are not abstract test coefficients.  For fixed
+\((\lambda,N)\), the scripts construct
+\[
+  M_{\rm even},U_{\rm even}
+  =\texttt{project\_to\_parity}(
+      \texttt{build\_QW\_mp}(N,\lambda,\ldots),N,\texttt{even}),
+\]
+diagonalise \(M_{\rm even}\), and set, for \(a=1,2\),
+\[
+  q_a(k)
+  =
+  \texttt{half\_vector}(
+    \texttt{embed}(Q,U_{\rm even},a,2N+1,N+1),N)[k],
+  \qquad 0\leq k\leq N,
+\]
+with the sign convention implemented in \(\texttt{half\_vector}\).
+For a zero \(\gamma_j\), put \(p_k=2\pi k/L\) and let
+\[
+  \mathcal{F}_j
+  :=\{0\}\cup\{1\leq k\leq N:\ |p_k/\gamma_j-1|>\eta\},
+  \qquad \eta=0.12,
+\]
+the far index set used by the audits.  For \(k\geq1\) write
+\(t_k=\log(\gamma_j/p_k)\); for \(k=0\) use the limiting convention
+\(\coth t_0=1\), \(\operatorname{csch}^2t_0=0\), \(K_{\rm collar}(t_0)=1\).
+
+Applying \Cref{lem:gf1-q-orthogonality-annihilation} to the production
+mode with \(c_k=-q_a(k)\) is therefore equivalent to the two concrete
+finite identities
+\[
+  \mathcal{E}^{(0)}_{a,j}
+  :=\sum_{k\in\mathcal{F}_j}q_a(k)=0,
+  \qquad
+  \mathcal{E}^{(1)}_{a,j}
+  :=\sum_{k\in\mathcal{F}_j}q_a(k)\coth t_k=0 .
+\]
+The script computes these defects exactly as the two smooth collar
+channels:
+\[
+  S_{\rm const}=-\frac12\mathcal{E}^{(0)}_{a,j},
+  \qquad
+  S_{\rm odd}=-\frac12\mathcal{E}^{(1)}_{a,j}.
+\]
+Thus the lemma gives a clean production-level annihilation of the
+constant and odd channels if and only if these two displayed defects
+vanish, or vanish in the normalised limit in which the audit observable
+is used.
+
+The current smoke data do not prove those two relations for the raw
+production modes.  On the contrary, the \(\lambda=3,N=40\) and
+\(\lambda=5,N=55\) runs recorded in
+\path{_proof-notes/K0_DZT2_QA_GF1_ECL_FAR_ANNIHILATION_FINDING_2026-05-29.md}
+show the smooth channels \(S_{\rm const}\) and \(S_{\rm odd}\) surviving
+while the raw \(S_{\rm csch}\) channel is driven toward zero for higher
+zeros and the \(u^2\)-weighted \(S_\varphi\) channel survives.  The
+strongest present statement for the raw \(q_a\) is therefore an exact
+obstruction and test criterion: the two quantities
+\(\mathcal{E}^{(0)}_{a,j}\) and \(\mathcal{E}^{(1)}_{a,j}\) are precisely
+what must be shown small before \Cref{lem:gf1-q-orthogonality-annihilation}
+can be used as a production proof.
+\end{proposition}
+
+\begin{proof}
+The displayed definition of \(q_a(k)\) is the literal construction in the
+audit scripts: \(\texttt{embed}\) maps the \(a\)-th eigenvector of the
+even-parity Galerkin matrix back to the full \((-N,\ldots,N)\) coordinate
+vector, and \(\texttt{half\_vector}\) keeps the non-negative frequencies
+with a fixed sign convention.  The decomposition routine then sets
+\(c_k=-q_a(k)\) and accumulates
+\[
+\begin{aligned}
+  S_{\rm total}
+    &= \sum_{k\in\mathcal{F}_j} c_k K_{\rm collar}(t_k),\\
+  S_{\rm csch}
+    &= \frac12\sum_{k\in\mathcal{F}_j} c_k \operatorname{csch}^2 t_k,\\
+  S_{\rm const}
+    &= \frac12\sum_{k\in\mathcal{F}_j} c_k,\\
+  S_{\rm odd}
+    &= \frac12\sum_{k\in\mathcal{F}_j} c_k \coth t_k.
+\end{aligned}
+\]
+Substituting \(c_k=-q_a(k)\) gives the two defect identities above.
+The conditional implication is exactly
+\Cref{lem:gf1-q-orthogonality-annihilation}; the final assertion is the
+documented outcome of the cited smoke tests and is not a theorem-level
+limit statement.
+\end{proof}
+
+\begin{remark}[What remains open after the kernel identity]
+\label{rem:gf1-phi-cheb-ladder-open}
+The identity in \Cref{prop:gf1-collar-kernel-cstar} fixes the exact
+kernel and the normalising benchmark.  \Cref{lem:gf1-q-orthogonality-annihilation}
+records the abstract algebraic cancellation, while
+\Cref{prop:gf1-production-q-orthogonality-status} identifies the concrete
+production \(q_a\) and the exact finite defects that obstruct its direct
+use.  The 29 May 2026 phi-norm smoke test shows
+that the raw quotient built from
+\[
+  S_\varphi=\sum_k(-q_a(k))\,
+      \frac{u_k^2}{\sinh^2(u_k/2)}
+\]
+does \emph{not} reproduce \(C^*\) after the naive
+mode-2/mode-1 normalisation: at \(\lambda=3,N=40\) it gives
+\(C_{\rm eff}^{\varphi}\approx1.022\), far below
+\(64\pi^2/3\).  Thus \(S_\varphi\) remains the structurally correct
+\(u^2\)-weighted carrier of the even singular channel, but the open
+slot is the production-matched
+\[
+  \texttt{GF1\_PHI\_CHEBYSHEV\_LADDER\_MATCH}.
+\]
+It must use the genuine Chebyshev ladder coefficients
+\[
+  P_a(d)=\sum_{n\le d}\bigl(b_n^{\rm in}M_{a,n}^{\rm in}
+        +b_n^{\rm out}M_{a,n}^{\rm out}\bigr)
+\]
+and the same ladder imbalance normalisation as the production audit,
+rather than the naked \(S_\varphi\)-over-\(L^1\) quotient.  Until that
+match is proved or falsified, \(C^*\) is a sharp structural benchmark
+for GF1, not a forward derivation of DZT2, MS2, even dominance, or RH.
+\end{remark}
+
+\subsection{Update (31 May 2026): Cross-Route Diagnostic Phase --- Unconditional Structural Results, the \texorpdfstring{$\Lambda=0$}{Lambda=0} Lens, and Why the Route Lives}
+
+A 2026 cross-route diagnostic phase (consolidated in the Landscape mother, Part~IV)
+produced three things bearing on the even-dominance route. None closes the route,
+and none changes its conditional-reduction status.
+
+\medskip\noindent\textbf{Two unconditional structural results (route-strengthening).}
+\begin{itemize}[leftmargin=*]
+  \item \emph{Concentration lemma.} For a fixed mode window, no fixed finite set of
+    $K$ prime atoms controls a positive share of the absolute prime mass
+    ($\mathrm{Top}\text{-}K/A_\lambda(W)\to 0$). Rigorously: the even-dominance
+    route has \emph{no} few-prime / local key --- the mechanism is genuinely the
+    full prime ensemble. Unconditional; no RH.
+  \item \emph{Finite Sylvester inertia $\nu_-=0$.} Interval-arithmetic
+    $\mathrm{LDL}^\top$ inertia ($\lambda=100$, $N\le 40$) certifies the finite
+    even-dominance positivity directly --- stronger than the lemma required, with
+    no symbol, no $\lVert E\rVert$, no Temple bound. This lifts the finite stage of
+    A3 from heuristic tail-extrapolation to rigorous finite-section positivity.
+\end{itemize}
+
+\medskip\noindent\textbf{One genuinely closed sub-method, one re-typed.}
+The \emph{Toeplitz-symbol} lower-bound sub-method is closed: $A_{\sin}$ is not
+Toeplitz ($m$-dependent oscillating diagonals, hence no well-defined symbol
+$f(\theta)$); the successor is the finite Sylvester-inertia bound above plus
+GLT/outlier control. The \emph{monotone-continuation} bridge (finite $\to$
+asymptotic) is not a structural defect but is A7-equivalent (it re-encodes the
+open problem) --- re-typed, not closed.
+
+\begin{remark}[The $\Lambda=0$ lens is heuristic, not an impossibility theorem --- the route lives]
+Since $\mathrm{RH}\Leftrightarrow\Lambda=0$ (de~Bruijn--Newman; Rodgers--Tao
+$\Lambda\ge 0$), RH --- if true --- sits exactly at criticality with no margin.
+This \emph{suggests} that a margin-seeking closure (the asymptotic variational gap
+$\lambda_1^+<\lambda_1^-$ of the preceding section) is the less promising
+\emph{type} of mechanism, and that exact-structural routes
+(Bost--Connes\,$\leftrightarrow$\,Meyer; the global adelic trace route) deserve
+additional strategic weight. \textbf{This is a strategic lens, not a theorem:} the
+even-dominance margin is \emph{not} shown to equal a de~Bruijn--Newman statement
+(``a margin would force $\Lambda<0$'' is an analogy). Consequently the route is
+\emph{not} refuted --- the asymptotic variational gap remains a well-posed open
+problem, the exact kernel (shift parity, the closed Weil/Hankel form) remains a
+valuable asset, and the route \emph{lives}. It is strategically deprioritised
+relative to the exact-structural routes, \emph{not} closed. We have \emph{not}
+shown that even dominance cannot lead to a proof.
+\end{remark}
+
+
 \section{What Is Not Used}
 
 The proof does not use the following Landscape material:
@@ -1771,11 +2136,12 @@ computer-assisted certificates; ``PNT/Mertens'' are explicit asymptotic remainde
 \begin{center}
 \footnotesize
 \renewcommand{\arraystretch}{1.25}
-\begin{tabular}{p{2.6cm}|p{2.0cm}|p{6.2cm}|p{2.6cm}}
+\begin{tabular}{L{2.6cm}|L{2.0cm}|L{6.2cm}|L{2.6cm}}
 \textbf{Constant} & \textbf{Value} & \textbf{Role / Source} & \textbf{Verification} \\\hline
 $C_f$ & $0.4685$ & Common frontier Rayleigh quotient $-d_{11}(r)\geq C_f$ on $r\in[0.7,1]$ (\Cref{lem:common-vector}) & IA on $[0.7,1]$ (1D)\\
 $C_n$ & $2.2847$ & Operator-norm bound $\sup_{r\in(0,2)}\norm{D_3(r)}_{\mathrm{op}}\leq C_n$ (\Cref{lem:nonfrontier}) & IA on $(0,2)$ (3D)\\
 $c_{\mathrm{gap}}$ & $\geq 4\pi^2/L\geq 2.8$ & Spectral-gap constant for $L\leq 14$ (\Cref{lem:higher-mode}(ii)) & Laplace asymptotics\\
+$C^*$ & $64\pi^2/3$ & GF1 Cauchy-ladder moment benchmark from the \(u^2\)-weighted even singular collar component (\Cref{prop:gf1-collar-kernel-cstar}); diagnostic normalisation only & Closed-form identity\\
 $N_{\cos}$ & $4$ & Even-block Galerkin truncation (\Cref{rem:galerkin-asymmetry}) & Stability check $k=3,4,5$\\
 $N_{\sin}$ & $40$--$90$ & Odd-block Galerkin truncation (\Cref{rem:galerkin-asymmetry}) & Cauchy tail bound\\
 $\Lambda_*$ & $\leq 175{,}000$ & Asymptotic threshold; prime-sum computation (\Cref{rem:lambda-star-improved}); conservative bound $\leq 1{,}300{,}000$ (\Cref{prop:frontier-dominance}) & Exact prime enum.\\

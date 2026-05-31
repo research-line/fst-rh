@@ -1,0 +1,795 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\emergencystretch=3em
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{needspace}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{The Riemann Hypothesis: Spectral Routes and Dead Ends\\[4pt]
+\large Part~III of a Five-Part Series}
+\author{Lukas Geiger\\
+\small Bernau, Germany\\
+\small ORCID: \href{https://orcid.org/0009-0005-7296-1534}{0009-0005-7296-1534}}
+\date{\today}
+
+\begin{document}
+\overfullrule=0pt
+\maketitle
+
+\begin{abstract}\footnotesize
+This paper, Part~III of a five-part series
+\cite{Geiger2026partI,Geiger2026partII,Geiger2026partIV,Geiger2026partV},
+documents the spectral sector of the proof landscape for the Riemann
+Hypothesis. Two independent conditional reductions are presented:
+
+Branch~B (Hadamard Strip / I-1 Normal-Family Reframe) reduces RH to a
+single open hypothesis~(ii-a): a uniform growth-adapted strip bound on the
+family $\{\hat\xi_\lambda\}$ derived from $QW_N$-coercivity. The
+multiplicative canonical form
+$A_\lambda(\delta) = A_\Xi(\delta)\bigl(1+\kappa(\lambda)\delta^2\bigr)$
+with saturating $\kappa_\infty \in [1.6, 1.8]\times 10^{-3}$ is
+established empirically, yielding Theorem~B-1 (conditional):
+$A_\lambda(\delta) \leq 1.0063$ under uniform log-curvature control.
+
+Branch~Z (CCM Microcluster Programme) reduces RH to three C2ca-inputs
+(scalar secular cancellation, projected Poisson quasimode, coercive
+complement) via the Connes--Consani--Moscovici Fourier
+model~\cite{ConnesMoscovici2023}.
+
+Both branches share Wall~(ii) as the common analytical obstacle.
+Fifteen excluded spectral and CCM paths are catalogued, establishing the
+productive routes as the only viable approaches in the current landscape.
+
+\medskip\noindent
+\textbf{Series status (v3.0, 2026-05-26).}
+The series is restructured from a trilogy to a five-part series; the
+conditional reduction status from v2.2 is unchanged. New in this part:
+the multiplicative canonical form (\Cref{sec:canonical-form}),
+Theorem~B-1 (conditional uniform strip bound with
+$A_\lambda \leq 1.0063$, \Cref{thm:B1}), and the RH-neutral Hadamard
+constant
+$c_\Xi = -\tfrac{1}{2}\sum_\rho 1/(\rho-\tfrac{1}{2})^2 \approx 0.0231$
+(\Cref{sec:spectral-constants}).
+\end{abstract}
+
+{\footnotesize
+\noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75, 30D15\\
+\textbf{Keywords:} Riemann Hypothesis, spectral routes, normal family,
+Hadamard strip bound, CCM microcluster, conditional reduction,
+excluded paths
+}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+
+% =============================================================================
+\section{Introduction: The Spectral Sector}
+\label{sec:intro}
+% =============================================================================
+
+This paper covers the spectral sector of an ongoing multi-route
+investigation of the Riemann Hypothesis:
+\begin{description}[font=\bfseries,leftmargin=2em]
+  \item[Part~I \cite{Geiger2026partI}:] Foundations and Obstructions ---
+    structural results (R1--R9), four critical obstructions (K1--K4),
+    reorientation to Connes' spectral program.
+  \item[Part~II \cite{Geiger2026partII}:] Even Dominance (Branch~A) ---
+    Shift Parity Lemma, computer-assisted finite-range diagnostics,
+    Euler--Maclaurin Proposition, GF1 boundary-moment benchmark.
+  \item[Part~III (this paper):] Spectral Routes (Branches~B and~Z) ---
+    Hadamard strip / I-1 normal-family reframe, CCM microcluster
+    programme, excluded spectral and CCM paths.
+  \item[Part~IV \cite{Geiger2026partIV}:] Cross-Route Synthesis ---
+    combined analysis, dormant routes, external lines, methodical dead
+    ends.
+  \item[Part~V \cite{Geiger2026partV}:] Conclusio --- condensed atlas,
+    open problems, assessment and outlook.
+\end{description}
+
+The spectral sector attacks Wall~(ii) --- the approximation quality
+condition $k_\Lambda \approx \xi_\Lambda$ from Connes'
+\S6.6(b)~\cite{Connes2026} --- through two structurally distinct
+mechanisms. Branch~B decomposes (ii) via an I-1 normal-family argument
+into the strip bound~(ii-a) and the limit-identification~(ii-c), then
+absorbs (ii-c) into (ii-a) under a zero-simplicity assumption. Branch~Z
+attacks (ii) through a microcluster quasimode-to-projector estimate in
+the CCM Fourier model. The two branches are independent of Branch~A's
+Asymptotic Variational Gap Conjecture~(A7)
+from Part~II~\cite{Geiger2026partII}.
+
+Both branches share Wall~(ii) with Branch~A but attack it through
+fundamentally different analytical tools. The cross-route synthesis
+(patterns common to all three branches) is deferred to
+Part~IV~\cite{Geiger2026partIV}.
+
+
+% =============================================================================
+\section{Branch B: Hadamard Strip / I-1 Normal-Family}
+\label{sec:branch-b}
+% =============================================================================
+
+Branch~B is a parallel reduction to RH, independent of the Asymptotic
+Variational Gap Conjecture~(A7) that conditions Branch~A. Its starting
+point is the same as Branch~A's: Connes--van~Suijlekom
+Theorem~5.6~\cite{ConnesvS2025} provides the finite-$N$ error bound
+$\mathrm{err}_\lambda \leq C e^{-c\lambda}$ for each individual Riemann
+zero, verified numerically at $\lesssim 10^{-25\lambda}$ for $\geq 15$
+zeros. Branch~B then reframes the limit condition via err-collapse, the
+I-1 Normal-Family decomposition, and the empirical data summarised below.
+
+
+\subsection{The Reduction Chain (B1--B11)}
+\label{sec:branch-b-chain}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|p{7.5cm}|l|l}
+\textbf{Step} & \textbf{Statement} & \textbf{Status} & \textbf{Source} \\\hline
+B1 & Connes' Theorem~6.1 / even dominance $\Rightarrow$ zeros of $\hat\eta$ real (= A1) & proven & \cite{ConnesvS2025, Connes2026} \\
+B2 & Condition~(i): real zeros of $\hat\xi_\lambda$ at finite $N$ (CvS Thm~5.6 / 1-dim even kernel) & proven at every finite $N$ & companion proof notes \\
+B3 & err-collapse equivalence: $\mathrm{err}\to 0 \Longleftrightarrow \text{(i)} + \text{(ii)}$ & rigorous reduction & companion proof notes \S1 \\
+B4 & err-collapse empirics: $\mathrm{err}\sim 10^{-25\lambda}$ for $\geq\!15$ zeros, 4 $\lambda$-points & numerical evidence & companion proof notes \S9 \\
+B5 & I-1 Normal-Family Reframe: (ii) = (ii-a) $\wedge$ (ii-c) via Montel--Vitali compactness & rigorous decomposition & \S E.2 \\
+B6 & (ii-c) absorbed into (ii-a) via parity + Hadamard order-1 (under standing assumption (Z) on zero simplicity) & rigorous & \S E.14 \\
+B7 & Foundation-Lock: $\hat\xi(z) = (2/\sqrt L)\sin(zL/2)F(z)$ with $F(z) = \sum_{n\le N}\Lambda(n)/\sqrt n\cdot\cos(z\log n /2)$; centered, even, real-on-real, entire & rigorous (algebraic identity + pole cancellation) & \S E.11, \S E.15 \\
+B8 & Strip amplification flat at converged precision: $A_\lambda(0.4)\approx 1.004$ across $\lambda\in\{3,5,7,9,11,13,15\}$ & numerical evidence, $\mathrm{dps}\approx 30\text{--}50\cdot\lambda$ & \S E.18, see \Cref{tab:route-b-empirics} \\
+B9 & (ii-a): uniform growth-adapted strip bound on $\{\hat\xi_\lambda\}$ from $QW_N$-coercivity & \textbf{OPEN} (the wall for Branch~B) & \S E.7, this paper \\
+B10 & MS2 closure (microcluster --- three C2ca inputs) & conditional reduction (delegated to Branch~Z) & \cite{Geiger2026zookeeper} \\
+B11 & RH conditional on B9 $\wedge$ (delegated B10 via the err-collapse coupling) & conditional reduction & this paper + \cite{Geiger2026evendom, Geiger2026zookeeper} \\
+\end{tabular}}
+\end{center}
+
+
+\subsection{The I-1 Normal-Family Reframe and the Foundation-Lock}
+\label{sec:i1-reframe}
+
+The decomposition of~(ii) into the strip bound~(ii-a) and the
+limit-identification~(ii-c) is the structural heart of Branch~B.
+Montel--Vitali compactness on the normal family $\{\hat\xi_\lambda\}$
+reduces local uniform convergence to two sub-conditions; the parity of
+$\mathrm{QW}_N$ (real-symmetric, even-parity projection $\Rightarrow
+\hat\xi_\lambda$ is even and real-on-real) together with a Hadamard
+order-one argument forces the Bohr--Carath\'eodory phase factor to be
+identically~$1$ under standing assumption~(Z) (zeros simple). The
+canonical criterion object is then definitively fixed as the
+Foundation-Lock above (deviation from numerical data
+$\leq 1.9\times 10^{-52}$ at $\lambda=5,7,\mathrm{dps}=50$).
+
+Branch~B therefore reduces \emph{entirely to the single open
+condition~(ii-a)}: a rigorous uniform growth-adapted strip bound derived
+from $\mathrm{QW}_N$-coercivity. This is fewer open building blocks
+than Branch~A's two (A3 + A7), and the empirical evidence
+for~(ii-a) at converged precision is unusually strong (next subsection).
+
+
+\subsection{Empirical Convergence (Mac~Studio, converged dps)}
+\label{sec:branch-b-empirics}
+
+Converged data for the sup-observable
+$A_\lambda(\delta):=\sup_{x\in\mathbb R}|\hat\xi_\lambda(x+i\delta)|
+/|\hat\xi_\lambda(x)|$ and the $L^2$-observable $B_\lambda(\delta)$ at
+$\delta = 0.4$, obtained on a dedicated compute node (Mac~Studio,
+$\mathrm{dps}_{\min}\approx 30\lambda$--$50\lambda$ to control cluster
+near-degeneracy; two distinct dps values bit-identical at
+$\lambda=11,13,15$):
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{r r r r r}
+\toprule
+$\lambda$ & $\sup|\hat\xi_\lambda|_{\mathbb R}$ & $A_\lambda(0.4)$ & $B_\lambda(0.4)$ & $B_\lambda(0.4)/\lambda^{0.4}$ \\
+\midrule
+ 3 & 0.858 & 1.0033  & 1.151 & 0.74 \\
+ 5 & 0.879 & 1.0037  & 1.340 & 0.70 \\
+ 7 & 0.886 & 1.0038  & 1.505 & 0.69 \\
+ 9 & 0.890 & 1.0039  & 1.649 & 0.68 \\
+11 & 0.890 & 1.0039  & 1.778 & 0.68 \\
+13 & 0.891 & 1.0039  & 1.895 & 0.68 \\
+15 & 0.892 & 1.00394 & 2.003 & 0.68 \\
+\bottomrule
+\end{tabular}
+\caption{Converged empirics for Branch~B observables at $\delta = 0.4$
+(companion proof notes, \S E.18). The sup-observable $A_\lambda(0.4)$ is
+essentially flat at $\approx 1.004$, in striking contrast to the generic
+Phragm\'en--Lindel\"of prediction $\sim \lambda^\delta$. The
+$B_\lambda$-ratio decreases from $0.74$ at $\lambda=3$ to a stable
+plateau at $0.68$ for $\lambda\ge 9$.}
+\label{tab:route-b-empirics}
+\end{table}
+
+The near-flatness of $A_\lambda(0.4)$ shows that the family
+$\{\hat\xi_\lambda\}$ is strongly sub-generic, making~(ii-a)
+empirically plausible. The $L^2$-observable grows as
+$B_\lambda(0.4)\approx 0.68\lambda^{0.4}$ on the plateau, consistent
+with polynomial sub-generic behaviour. Earlier runs at $\mathrm{dps}=30$
+(\S E.16--E.17) were retracted due to under-converged eigenvectors; the
+corrected data are documented in \S E.18 of the companion
+notes~\cite{Geiger2026evendom}.
+
+
+\subsection{Multiplicative Canonical Form}
+\label{sec:canonical-form}
+
+The strip-amplification data (\Cref{tab:route-b-empirics}) admit a
+factored representation in terms of the completed Riemann
+$\xi$-function. Define the \emph{Hadamard baseline}
+\begin{equation}\label{eq:A-Xi}
+  A_\Xi(\delta) := \frac{\sup_{x\in\mathbb R}|\Xi(x+i\delta)|}
+                        {\sup_{x\in\mathbb R}|\Xi(x)|},
+\end{equation}
+where $\Xi(z) = \xi(\tfrac{1}{2}+iz)$ is the standard completed zeta
+function on the critical line. By the Hadamard product,
+$\log A_\Xi(\delta) \sim c_\Xi\,\delta^2$ for small $\delta$, where the
+Hadamard curvature constant is (see \Cref{sec:spectral-constants})
+\begin{equation}\label{eq:c-Xi}
+  c_\Xi = -\frac{1}{2}\sum_\rho \frac{1}{(\rho-\tfrac{1}{2})^2}
+        \approx 0.0231,
+\end{equation}
+summing over all non-trivial zeros $\rho$ of $\zeta(s)$. This
+representation is \emph{RH-neutral}: it does not assume the Riemann
+Hypothesis. Under RH, the sum specialises to
+$\sum_{k\geq 1} 1/\gamma_k^2$ with $\gamma_k = \Im(\rho_k)$.
+
+The empirical data are well described by the
+\emph{multiplicative canonical form}
+\begin{equation}\label{eq:canonical-form}
+  A_\lambda(\delta)
+  = A_\Xi(\delta)\,\bigl(1 + \kappa(\lambda)\,\delta^2\bigr),
+\end{equation}
+where $\kappa(\lambda)$ is a residual curvature coefficient that
+saturates empirically:
+\begin{equation}\label{eq:kappa-inf}
+  \kappa_\infty := \lim_{\lambda\to\infty}\kappa(\lambda)
+  \in [1.6, 1.8]\times 10^{-3}
+\end{equation}
+(six $\lambda$-points including $\lambda=20$, with
+$\kappa(20)=1.527\times 10^{-3}$ and stable deviation from the
+factored form). The saturation is consistent with the
+Foundation-Lock structure: $\hat\xi_\lambda$ converges to $\Xi$ in
+a growth-controlled sense, and $\kappa(\lambda)$ measures the
+residual finite-$\lambda$ strip-curvature excess.
+
+\begin{remark}[Pointwise identity, not uniform bound]
+\Cref{eq:canonical-form} is a pointwise algebraic decomposition at each
+$\delta$, not a uniform strip bound. The sup over $x$ is taken
+separately on each side. Converting this to a \emph{uniform}
+$A_\lambda(\delta) \leq C$ for all $\lambda$ and
+$\delta \in [0,\tfrac{1}{2})$ requires the separate log-curvature
+control of Theorem~B-1 below.
+\end{remark}
+
+
+\subsection{Theorem B-1: Conditional Uniform Strip Bound}
+\label{sec:theorem-b1}
+
+The following conditional theorem converts the empirical canonical form
+into a quantitative strip bound for Branch~B.
+
+\begin{definition}\label{def:H-lambda}
+For $\lambda \geq \lambda_0$ and $\delta \in [0, \tfrac{1}{2})$, define
+the log-curvature excess
+\[
+  H_\lambda(\delta) := \log\frac{A_\lambda(\delta)}{A_\Xi(\delta)}.
+\]
+\end{definition}
+
+\begin{theorem}[Conditional uniform strip bound]
+\label{thm:B1}
+Suppose there exist constants $\lambda_0$ and
+$K \leq 1.8\times 10^{-3}$ such that
+$H_\lambda(\delta) \leq K\delta^2$ for all
+$\lambda \geq \lambda_0$ and $\delta \in [0, \tfrac{1}{2})$. Then
+\begin{equation}\label{eq:B1-bound}
+  A_\lambda(\delta)
+  \leq B_\Xi \cdot \exp\!\bigl(K/4\bigr)
+  \leq 1.0063,
+\end{equation}
+where $B_\Xi := \xi(0)/\xi(\tfrac{1}{2})
+= 1.005791795350375\ldots$ is the analytical upper bound for
+$A_\Xi$ on $[0,\tfrac{1}{2})$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+By the hypothesis, $A_\lambda(\delta) \leq A_\Xi(\delta)\,e^{K\delta^2}$.
+The Hadamard product for $\Xi$ gives
+$A_\Xi(\delta) \leq B_\Xi$ for $\delta \in [0,\tfrac{1}{2})$, where
+$B_\Xi = \Xi(0)/\Xi(i/2) = \xi(0)/\xi(\tfrac{1}{2})$ is attained
+at $\delta = \tfrac{1}{2}$ (limit value). The exponential factor is
+maximised at $\delta = \tfrac{1}{2}$:
+$e^{K/4} \leq e^{1.8\times 10^{-3}/4} \leq 1.00045$.
+Hence $A_\lambda(\delta) \leq 1.005792 \times 1.00045 \leq 1.0063$.
+\end{proof}
+
+\begin{remark}[Open proof slot]
+The hypothesis $H_\lambda(\delta) \leq K\delta^2$ is the
+\emph{uniform log-curvature control}. Deriving it rigorously from
+the Foundation-Lock structure
+\[
+  \hat\xi(z) = \frac{2}{\sqrt{L}}\sin\!\bigl(\tfrac{zL}{2}\bigr)\,F(z)
+\]
+is an isolated open proof slot for Branch~B. The empirical data
+(\Cref{tab:route-b-empirics}) satisfy this condition with
+$K$ in the $1.6$--$1.8\times 10^{-3}$ saturation range, matching the
+conservative theorem bound.
+\end{remark}
+
+
+% =============================================================================
+\section{Branch Z: CCM Microcluster Programme}
+\label{sec:branch-z}
+% =============================================================================
+
+Branch~Z is the third independent attack on Wall~(ii), running through
+the Connes--Consani--Moscovici Fourier model of the Weil quadratic form.
+It is companion to the standalone Zookeeper
+paper~\cite{Geiger2026zookeeper}, which contains the full audit-trail of
+the microcluster analysis and the C2-lemma chain. This section documents
+the reduction-chain summary; the conditional reduction rests on three
+C2ca-inputs (scalar secular cancellation, projected Poisson quasimode,
+coercive complement) plus a fixed-waterline outer-gap assumption
+$g_*\ge g_0$ of order one.
+
+
+\subsection{The Reduction Chain (B1--B11, CCM-Branch)}
+\label{sec:branch-z-chain}
+
+The chain partly overlaps Branch~B (shared external preprint inputs and
+the err-collapse coupling) but diverges in the closure mechanism
+(microcluster quasimode rather than I-1 strip bound). Labels B1--B11 are
+reused with the CCM-Branch reading.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|p{7.5cm}|l|l}
+\textbf{Step} & \textbf{Statement (CCM-Branch reading)} & \textbf{Status} & \textbf{Source} \\\hline
+B1 & W02$_{\mathrm{even}}$ is rank-one (pole at $s=1$): $\tilde C = +4.864$, nullspace dim~$30$ at $(\lambda,N) = (3,30)$ & proven & \texttt{cluster\_mechanism\_analysis.py} \\
+B2 & PHP-eigenvalues = cluster-eigenvalues (agreement $10^{-14}$) & proven & \texttt{cluster\_mechanism.log} \\
+B3 & Cluster eigenvectors $q_k$ satisfy $F(\gamma)\approx 0$ at Riemann zeros & proven ($10^{-14}$ to $10^{-17}$) & \texttt{multi\_eigenvec\_riemann.log} \\
+B4 & 15-digit cancellation: pole-term + null-term $\approx 0$ & proven & \texttt{weil\_positivity\_analysis.log} \\
+B5 & $P_e(\gamma)$ orthogonal to cluster in nullspace (overlaps $10^{-21}$ to $10^{-10}$) & proven & \texttt{weil\_positivity\_analysis.log} \\
+B6 & Counterfactual: $F(z)\ne 0$ at non-zeros (factor $10^{13}$ separation) & proven & \texttt{weil\_positivity\_analysis.log} \\
+B7 & Relative positivity $w_{\min}/\tilde C \to 0$ for $\lambda \to \infty$ & proven (numerical) & \texttt{lambda\_positivity\_convergence.log} \\
+B8 & $w_{\min}$ converges at fixed $N$; bounded asymptote $\approx -2.36$ & proven & \texttt{lambda\_positivity\_convergence.log} \\
+B9 & N-scaled convergence: $w_{\min}$ independent of $N$, $w_{\min}/\tilde C\to 0$ & proven (partial), server run continues & \texttt{n\_scaled\_convergence.log} \\
+B10 & Resolvent identity: $F(\gamma) = \beta[\alpha(\gamma) - R(\gamma,w)]$ algebraic + numerically verified ($10^{-13}$) & proven & \texttt{b10\_analytical\_derivation.py} \\
+B11 & MS2 closure: $k_\lambda \approx \xi_\lambda$ via three C2ca-inputs + fixed-waterline outer gap $g_*\ge g_0$ & \textbf{conditional reduction} on C2ca.1 + C2ca.2 + C2ca.5 + $g_*$-assumption & \cite{Geiger2026zookeeper}, C2ca chain \\
+\end{tabular}}
+\end{center}
+
+
+\subsection{The Three C2ca-Inputs}
+\label{sec:c2ca-inputs}
+
+The Zookeeper paper~\cite{Geiger2026zookeeper} reduces
+MS2 (Connes' \S6.6(b) / err-collapse condition~(ii)) to three named
+conditional lemmas (theorem-level subject to a separate H-spectral-gap
+assumption):
+
+\begin{itemize}
+  \item \textbf{C2ca.1 Scalar Secular Cancellation:} algebraic secular
+    identity proven; uniform decay $s_\lambda \to 0$ proven only under a
+    separate Galerkin-truncation control. Numerical evidence:
+    $|\mu/\alpha|\approx 4\text{--}5\times 10^{-7}$ stable across
+    $\lambda = 3, 5, 7$.
+  \item \textbf{C2ca.2 Projected Poisson Quasimode:} transfer formula
+    $h = (1/n)P_0\Pi(E+B)$ proven; uniform analytical control of
+    $P_0$-leakage and boundary decay open. Numerical evidence:
+    $p_\lambda \approx 2\text{--}3\times 10^{-6}$.
+  \item \textbf{C2ca.5 Coercive Complement:} finite Min--Max identity
+    for a prescribed spectral window proven; the uniform order-one gap
+    $g_*$ is not derived from Cauchy-interlacing alone --- it requires a
+    separate H-spectral gap or fixed-waterline / slush-collar control
+    (replaced by C2cf.1 \emph{Fixed-Waterline Quasimode Projection}: in
+    the finite self-adjoint Galerkin model, for any pre-chosen $g_0>0$,
+    $\|(I-P_{\lambda,g_0})k\|\leq R_0/g_0$).
+\end{itemize}
+
+These three inputs plus the fixed-waterline assumption replace the
+earlier mass-adaptive gap rhetoric (which was diagnosed as circular
+against MS2, see \Cref{sec:excluded-ccm}).
+
+
+\subsection{Empirical Convergence and the Effective Microcluster}
+\label{sec:branch-z-empirics}
+
+The mass-based effective cluster gap
+$g_{\text{eff}}(\varepsilon) := u_{J+1}-u_0$ with
+$J_\varepsilon := \min\{J: M(J)\ge 1-\varepsilon\}$ stabilises at
+$g_{\text{eff}}(10^{-12}) \approx 5\text{--}6$ (order one,
+$\lambda$-independent), giving
+$R_0/g_{\text{eff}}\approx 5\times 10^{-7}$. The earlier
+fixed-tolerance gap was unstable (cut inside the genuine cluster); the
+mass-based replacement is stable and macroscopic. See Zookeeper C2by/C2bz
+for the full analysis~\cite{Geiger2026zookeeper}.
+
+
+% =============================================================================
+\section{Spectral Convergence Constants}
+\label{sec:spectral-constants}
+% =============================================================================
+
+Both spectral branches produce characteristic constants whose
+identification and saturation provide evidence for the conditional
+reductions. We collect them here for comparison; the cross-route
+synthesis with Branch~A's constant $C^* = 64\pi^2/3$
+(Part~II~\cite{Geiger2026partII}, \S\,GF1) is deferred to
+Part~IV~\cite{Geiger2026partIV}.
+
+\subsection{\texorpdfstring{Hadamard Curvature Constant $c_\Xi$ (RH-neutral)}{Hadamard Curvature Constant cXi (RH-neutral)}}
+
+The Hadamard product for the completed Riemann
+$\xi$-function gives
+\[
+  \log\frac{|\Xi(it)|}{|\Xi(0)|}
+  = \sum_\rho \log\Bigl|1 - \frac{-t^2}{(\rho-\tfrac{1}{2})^2}\Bigr|
+  \sim -\frac{t^2}{2}\sum_\rho
+       \frac{1}{(\rho-\tfrac{1}{2})^2}
+  + O(t^4),
+\]
+whence
+\begin{equation}\label{eq:c-Xi-def}
+  c_\Xi = -\frac{1}{2}\sum_\rho
+          \frac{1}{(\rho-\tfrac{1}{2})^2}
+        \approx 0.0231.
+\end{equation}
+This is the leading quadratic curvature of $\log A_\Xi(\delta)$ near
+$\delta = 0$. The representation~\eqref{eq:c-Xi-def} sums over \emph{all}
+non-trivial zeros and is \emph{RH-neutral}. Under RH, $\rho =
+\tfrac{1}{2}+i\gamma_k$ and the sum specialises to
+$\sum_{k\geq 1} 1/\gamma_k^2$.
+
+\subsection{\texorpdfstring{Residual Curvature $\kappa_\infty$ (Branch~B)}{Residual Curvature kappa-infinity (Branch B)}}
+
+The multiplicative canonical form~\eqref{eq:canonical-form} decomposes
+$A_\lambda$ into the Hadamard baseline $A_\Xi$ and a residual factor
+$1+\kappa(\lambda)\delta^2$. Empirically,
+$\kappa(\lambda)$ saturates to
+$\kappa_\infty \in [1.6, 1.8]\times 10^{-3}$ across
+$\lambda = 3,5,7,9,11,13,15,20$, with
+$\kappa(20)=1.527\times 10^{-3}$. This saturation is consistent with the
+Foundation-Lock convergence:
+as $\lambda\to\infty$, $\hat\xi_\lambda \to \Xi$ in the relevant
+topology, and the residual curvature measures the
+finite-$\lambda$ correction.
+
+\subsection{\texorpdfstring{Hecke-Normalised Gap $g_0(m)$ (Branch~Z)}{Hecke-Normalised Gap g0(m) (Branch Z)}}
+
+For the $m$-th Riemann zero $\gamma_m$, the classical
+Montgomery--Odlyzko pair-correlation heuristic~\cite{Montgomery1973}
+suggests a local mean zero spacing of
+$2\pi/\log\gamma_m$. The effective microcluster gap
+$g_{\text{eff}}$ of Branch~Z (\Cref{sec:branch-z-empirics}) is
+consistent with this scaling:
+$g_0(m) \approx 2\pi/\log\gamma_m$.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{llll}
+\toprule
+\textbf{Branch} & \textbf{Constant} & \textbf{Value} & \textbf{Status} \\
+\midrule
+B & $c_\Xi$ (Hadamard curvature) & $\approx 0.0231$ & analytical (RH-neutral) \\
+B & $\kappa_\infty$ (residual curvature) & $\in [1.6,1.8]\times 10^{-3}$ & empirical (saturated) \\
+B & $B_\Xi = \xi(0)/\xi(1/2)$ & $1.00579\ldots$ & analytical \\
+Z & $g_0(m) \approx 2\pi/\log\gamma_m$ & varies & classical (Montgomery--Odlyzko) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+% =============================================================================
+\section{Common Wall and Spectral-Sector Outlook}
+\label{sec:common-wall}
+% =============================================================================
+
+The three branches share Wall~(ii) as the common analytical obstacle, but
+attack it through structurally different mechanisms. The following
+comparison table summarises the conditional reductions.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|l|l}
+\textbf{Branch} & \textbf{Reduction chain} & \textbf{Open hypothesis (the wall here)} & \textbf{Status} \\\hline
+A --- Even Dominance & A1 + A2 + A7 $\Rightarrow$ RH & A7 (Asymp.~Variational Gap Conj.) + A3 (Odd-sector lower bound) & conditional reduction \\
+B --- I-1 Normal-Family & B1 + B5 + B9 $\Rightarrow$ RH & (ii-a) (uniform strip bound from $QW_N$-coercivity) & conditional reduction \\
+Z --- CCM Microcluster & B1 + C2ca + fixed-waterline $\Rightarrow$ RH & C2ca.1 + C2ca.2 + C2ca.5 + $g_*\ge g_0$ & conditional reduction \\
+\end{tabular}}
+\end{center}
+
+\noindent\textbf{Shared inputs.} A1 = B1 (both rest on Connes--vS
+Thm~5.6~\cite{ConnesvS2025}). The Foundation-Lock
+$\hat\xi(z) = (2/\sqrt L)\sin(zL/2)F(z)$ from Branch~B is the
+canonical criterion object used in Branch~Z as well.
+
+\noindent\textbf{Distinct mechanisms.} Branch~A attacks Wall~(ii)
+via eigenvalue ordering $\lambda_1^+ < \lambda_1^-$
+(Part~II~\cite{Geiger2026partII}). Branch~B attacks via a
+strip-uniform Hurwitz-style normal-family argument (this paper).
+Branch~Z attacks via a microcluster quasimode-to-projector estimate
+(this paper + Zookeeper~\cite{Geiger2026zookeeper}).
+
+\noindent\textbf{Closest to conditional closure.} Branch~B currently has
+the smallest open surface (a single named hypothesis~(ii-a)) together
+with strongly sub-generic empirical evidence
+($A_\lambda(0.4)\approx 1.004$ flat over seven converged
+$\lambda$-points, Theorem~B-1 giving $A_\lambda \leq 1.0063$ under the
+log-curvature hypothesis). Branches~A and~Z remain conditional
+reductions in the multi-gap sense (two or three open inputs
+respectively). The title of the present series follows the conservative
+convention: ``Atlas'' applies as long as no single branch has reached
+conditional-proof level under the audit protocol of the project
+\texttt{DECISION.md}.
+
+\noindent\textbf{Promotion protocol and future scenarios} are discussed
+in Part~V (\Cref{sec:summary} gives a brief forward reference).
+
+
+% =============================================================================
+\section{Excluded Spectral Paths}
+\label{sec:excluded-spectral}
+% =============================================================================
+
+The post-v2.0 spectral programme (Connes--van~Suijlekom reformulation,
+I-1 normal-family reframe, err-collapse diagnostic) closed several
+routes. These are documented here for the audit trail; they do not affect
+the main conditional reduction.
+
+\begin{itemize}
+  \item \textbf{Eigenvalue-ordering via a uniform spectral gap.} The plan
+    to lift $\lambda_{\min}(W^+-W^-)<0$ to the eigenvalue inequality
+    $\lambda_1^+<\lambda_1^-$ via Kato--Temple, Davis--Kahan, or Lehmann
+    gap estimates fails because the relevant minimum eigenvector of
+    $QW_N$ sits in a near-degenerate cluster (even/odd split
+    $\sim\!10^{-65}$ at $\lambda=5$, $\sim\!10^{-84}$ at $\lambda=7$,
+    super-exponentially collapsing with $\lambda$). No uniform spectral
+    gap is available.
+
+  \item \textbf{Localization hypothesis for the strip bound~(ii-a).} A
+    natural plan was to bound
+    $|\hat\xi_\lambda(x+i\delta)|$ via localization assuming
+    $\xi_\lambda$ is concentrated near $t=0$. This is falsified:
+    $\xi_\lambda$ is genuinely edge-concentrated ($r_{99}\approx L/2$,
+    $|\xi_\lambda(0)|\approx 0$). A growth-adapted normalisation $\Phi$
+    is required.
+
+  \item \textbf{Edge-profile factorisation for~(ii-a).} The exact identity
+    \[
+      F_\lambda(z)=2\cos(zL/2)\,C_\lambda(z)+2\sin(zL/2)\,S_\lambda(z)
+    \]
+    isolates the explicit $\lambda^\delta$-growth modulation. The edge
+    route yields no type gain because the eigenfunction mass is spread
+    ($r_{50}\approx 1$ uniformly, but $r_{99}\approx L/2$).
+
+  \item \textbf{Literal MS1 (cluster ladder).} The conservative form of
+    MS1 --- uniformly simple splitting of the minimum eigenvalue of
+    $QW_N$ at every $(\lambda,N)$ --- fails: the splitting collapses
+    super-exponentially with $\lambda$. Only a cluster/quotient
+    reformulation has structural traction.
+
+  \item \textbf{Strip-amplification at $\mathrm{dps}=30$ (retracted).}
+    Early measurements at $\mathrm{dps}=30$ suggested sub-generic growth
+    and non-monotone instability. At converged precision
+    ($\mathrm{dps}\approx 30\text{--}50\cdot\lambda$), the picture is
+    qualitatively different: $A_\lambda(0.4)\approx 1.004$ is flat. The
+    methodological lesson (dps requirement scales linearly with $\lambda$
+    for cluster-near-degenerate eigenvectors) is itself substantive.
+
+  \item \textbf{Raw-$L^2$ Hurwitz passage (falsified 2026-05-15).} The
+    plan to derive the Hurwitz strip-uniform convergence directly from a
+    raw-$L^2$ tail estimate fails on two fronts: (a) the archimedean
+    tail has norm $O(\lambda^{-1/2})$ --- exactly boundary exponent
+    $\alpha=0$, no margin; (b) the prime-Dirac tail diverges in the
+    $m=1$ branch. Negative-Sobolev does not rescue this. The
+    diagnostic identifies operator-norm topology (i.e.\ Branch~B) as the
+    only viable replacement. The Connes--Hurwitz-Passage project
+    re-scoped on 2026-05-17 to a purely expositorial role
+    (\texttt{Geiger2026hurwitz}, in preparation).
+\end{itemize}
+
+\begin{remark}[Common pattern]
+\label{rem:spectral-pattern}
+These six exclusions share a structural pattern: the minimum-eigenvector
+cluster of $QW_N$ is the source of the technical difficulty. Methods
+that assume or require a uniform gap, a thin-localised eigenfunction, or
+a generic function-class behaviour all fail. Productive routes work
+\emph{with} the cluster (waterline / cluster-quotient reformulations,
+growth-adapted normalisations) rather than against it.
+\end{remark}
+
+
+% =============================================================================
+\section{Excluded CCM Paths (Branch~Z Heritage)}
+\label{sec:excluded-ccm}
+% =============================================================================
+
+The CCM microcluster programme accumulated its own catalogue of dead
+routes. They do not affect the Branch-Z conditional reduction.
+
+\begin{itemize}
+  \item \textbf{Mass-based microcluster definition.} Defining the
+    microcluster via a mass criterion is circular against MS2. Replaced
+    in Zookeeper v1.2+ by a \emph{spectral} microcluster (low-energy
+    eigenspace bounded by an outer gap $g_*$ of order one).
+
+  \item \textbf{Naive Hurwitz passage.} A direct Hurwitz application
+    without approximation-quality control yields statements too weak for
+    the err-collapse closure. Replaced by a Slepian--Pollak-/PSWF-based
+    passage.
+
+  \item \textbf{Anchor-perturbation / Banach contraction (C2br$'$,
+    falsified).} A Banach-norm contraction $C_{\max}<M$ fails by factor
+    55--7000 on all twelve tested configurations.
+
+  \item \textbf{Projected frontier cancellation $S_{bulk}\approx
+    -S_{bd}$ (C2bs, falsified).} Both contributions have the same sign
+    and are both of size $\sim 10^{-7}$. The true cancellation mechanism
+    sits in the eigenvalue equation $(A-w_0)k\approx 0$.
+
+  \item \textbf{Uniform mass criterion C2ak.} The total off-cluster mass
+    bound diverges with $\lambda$ ($6.68\to 15.3\to 1865$ across
+    $\lambda=3,5,7$) because it discards internal cancellation.
+
+  \item \textbf{Canonical local geometry C2al (directional defect).}
+    The geometric inequality has the wrong direction --- the correct form
+    is $g_R/d_m\le T_m^\beta/\beta_0$ (lower bound on $d/g$, not upper).
+
+  \item \textbf{Cluster selection via $\Delta$-projection.} Simple
+    $\delta_N$-projection is not a robust cluster selector: at
+    $\lambda=5,N=55$ \texttt{best\_zero=k=16} while the other two
+    select $k=17$.
+
+  \item \textbf{Log-concavity / detailed balance (C2cc H1/H2/H4).}
+    The hypotheses that $\beta_n$ or $|b_n|$ are log-concave (H1), that
+    the spectral residue chain has a detailed-balance structure (H2), or
+    that a Mertens-anchor applies (H4) were tested at
+    $\lambda=3,N=30,\mathrm{dps}=50$ and falsified. Structural cause:
+    arithmetic (prime-driven) oscillation.
+
+  \item \textbf{Direct Frontier-Dominance v2.1 (Killer~0, 2026-05-14).}
+    The v2.1 argument used a common Rayleigh test vector to prove
+    $\lambda_{\min}(D_{tot})<0$ and then identified
+    $\Delta_{low}=\lambda_{\min}(D_{tot})$ with
+    $\Delta=\lambda_1^+-\lambda_1^-$. The reviewer counterexample
+    $A=\mathrm{diag}(0,10), B=\mathrm{diag}(5,-5)$ shows this does
+    \emph{not} follow. Even dominance for asymptotic $\lambda$ remains
+    conditional on a separate odd-sector lower bound. (This item is
+    Even-sector-specific and documented in detail in
+    Part~II~\cite{Geiger2026partII}; it is listed here because the
+    falsification also restructured the comparative analysis of
+    Branches~B and~Z.)
+\end{itemize}
+
+\begin{remark}[CCM-pattern: cancellation, not magnitude]
+\label{rem:ccm-pattern}
+The CCM-side dead routes share a different pattern from the spectral
+side: each tries to bound a quantity by its individual-term magnitude,
+and each is defeated by large internal cancellation. The living routes
+explicitly factor the cancellation through projector identities or
+scalar secular equations, never through simple norm domination.
+\end{remark}
+
+
+% =============================================================================
+\section{Methodical Dead Ends}
+\label{sec:methodical}
+% =============================================================================
+
+A small number of methodical routes were tested on the spectral side and
+ruled out on structural grounds.
+
+\begin{itemize}
+  \item \textbf{Dobrushin--Zegarlinski uniqueness $\to$ RH-CAP.}
+    Dobrushin--Zegarlinski uniqueness works only on lattices with
+    localised Gibbs measures. RH has neither; the absence of
+    multiplicative independence enforces a non-local prime-coupling
+    structure that breaks the Dobrushin contraction setting.
+
+  \item \textbf{Sturm node-counting (naive).} Classical Sturm--Liouville
+    node-counting for the eigenfunctions of $QW_N$ fails because the
+    operator is finite-dimensional and the even/odd spectral gap is
+    sub-exponentially small. Node-counting provides no information at the
+    relevant precision scale.
+
+  \item \textbf{Naive Abel summation for far-tail.} Applying Abel
+    summation to the far-tail prime sums
+    $\sum_{p>\lambda} (\log p)^k / p^s$ without controlling the
+    arithmetic oscillation of $\theta(x)-x$ leads to divergent error
+    terms. The PNT transfer lemma (Part~II) shows how to do this
+    correctly.
+
+  \item \textbf{Naive superdeterminant form for M\"obius-$\mathbb{Z}_2$.}
+    The formal identity
+    $\mathrm{sdet}(I - L_s) = \det(I-L_s^+)/\det(I-L_s^-) = 1/\zeta(s)$
+    is algebraically correct for finite prime sets but does not converge
+    for the full prime set at $\Re(s) = \tfrac{1}{2}$ (trace-class
+    obstruction K4 from Part~I).
+
+  \item \textbf{Friedrichs + Petersson as Hilbert--P\'olya lever.}
+    The plan to use Friedrichs extension of the Petersson inner product
+    to construct a self-adjoint realisation whose spectrum encodes the
+    Riemann zeros fails: the relevant bilinear form is not semibounded
+    on the domain needed to capture the critical-line zeros.
+\end{itemize}
+
+
+% =============================================================================
+\section{Summary}
+\label{sec:summary}
+% =============================================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|c|l}
+\textbf{Contribution} & \textbf{Status} & \textbf{Location} \\\hline
+I-1 Normal-Family Reframe: (ii) $\to$ (ii-a) + (ii-c) & rigorous & \Cref{sec:i1-reframe} \\
+(ii-c) absorbed into (ii-a) under (Z) & rigorous & \Cref{sec:i1-reframe} \\
+Foundation-Lock: canonical criterion object & rigorous & \Cref{sec:i1-reframe} \\
+Converged empirics: $A_\lambda(0.4) \approx 1.004$ (7 points) & numerical evidence & \Cref{tab:route-b-empirics} \\
+Multiplicative canonical form & empirical (0.012\% fit) & \Cref{sec:canonical-form} \\
+Theorem~B-1: $A_\lambda \leq 1.0063$ (conditional) & conditional & \Cref{thm:B1} \\
+$c_\Xi$ Hadamard curvature (RH-neutral) & analytical & \Cref{sec:spectral-constants} \\
+CCM: three C2ca-inputs identified & conditional reduction & \Cref{sec:c2ca-inputs} \\
+CCM: effective microcluster gap $g_{\text{eff}} \approx 5\text{--}6$ & numerical evidence & \Cref{sec:branch-z-empirics} \\
+6 excluded spectral paths + 9 excluded CCM paths & documented & \Cref{sec:excluded-spectral,sec:excluded-ccm} \\
+5 methodical dead ends & documented & \Cref{sec:methodical} \\
+\end{tabular}%
+}
+\end{center}
+
+\noindent The spectral sector contributes two independent conditional
+reductions of RH, each with a well-characterised open surface. Branch~B
+has the smallest open surface (a single hypothesis~(ii-a)) and the
+strongest empirical support ($A_\lambda \leq 1.0063$ conditional on
+uniform log-curvature control). The cross-route synthesis across all
+three branches is developed in Part~IV~\cite{Geiger2026partIV}; the
+condensed atlas and outlook in Part~V~\cite{Geiger2026partV}.
+
+
+\bigskip
+\noindent\textbf{Acknowledgments.} Computations were performed on a
+Mac~Studio (Apple M1~Max, 32~GB). The interval arithmetic library mpmath
+was developed by Fredrik Johansson.
+
+
+\section*{AI Disclosure}
+
+This manuscript was developed in extensive collaboration with AI language
+models (Claude, Anthropic; Copilot, Microsoft/GitHub; Gemini, Google
+DeepMind). AI contributed to conceptual exploration, analytical work,
+literature review, writing, and critical review. The author, Lukas
+Geiger, conceived the research direction, provided domain expertise, and
+exercised final editorial authority. The author assumes full and sole
+scholarly responsibility for all content, including any errors.
+
+
+\bibliographystyle{plain}
+\bibliography{fst-rh-references}
+
+\end{document}

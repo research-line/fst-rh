@@ -1,0 +1,421 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\emergencystretch=1.5em
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{needspace}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{The Riemann Hypothesis: Conclusio\\[4pt]
+\large Part~V of a Five-Part Series}
+\author{Lukas Geiger\\
+\small Bernau, Germany\\
+\small ORCID: \href{https://orcid.org/0009-0005-7296-1534}{0009-0005-7296-1534}}
+\date{\today}
+
+\begin{document}
+\overfullrule=0pt
+\maketitle
+
+\begin{abstract}\footnotesize
+This paper concludes a five-part investigation of the Riemann Hypothesis
+through spectral analysis, arithmetic thermodynamics, and the Weil
+quadratic form:
+\begin{description}[font=\bfseries,leftmargin=2em]
+  \item[Part~I \cite{Geiger2026partI}:] Foundations and Obstructions.
+  \item[Part~II \cite{Geiger2026partII}:] Even Dominance (Branch~A).
+  \item[Part~III \cite{Geiger2026partIII}:] Spectral Routes
+    (Branches~B and~Z).
+  \item[Part~IV \cite{Geiger2026partIV}:] Cross-Route Synthesis.
+  \item[Part~V (this paper):] Conclusio.
+\end{description}
+
+\noindent We present the condensed atlas: three independent conditional
+reductions of RH (Even Dominance, Hadamard Strip, CCM Microcluster),
+three structural identifications
+($c_\Xi \approx 0.0231$, $C^* = 64\pi^2/3$ as a $\lambda=5,7$
+boundary-moment benchmark with $\lambda=11$ still open,
+$g_0(m) \approx 2\pi/\log\gamma_m$),
+two conditional theorems (B-1, GF1), and two
+isolated open proof slots. The series title remains ``From Landscape to
+Atlas''; promotion to ``From Atlas to Proof'' is governed by a five-gate
+audit protocol triggered only by a substantive mathematical breakthrough.
+
+\medskip\noindent
+\textbf{Series status (v3.0, 2026-05-26; criticality-lens update 2026-05-31).}
+Five-part series; all three conditional reductions unchanged from v2.2.
+Structural reorganisation only; no new proof claims. A 2026 working phase adds a
+\emph{heuristic} criticality lens ($\mathrm{RH}\Leftrightarrow\Lambda=0$), a sharper
+common-wall localization, and a computable Laguerre--P\'olya/Herglotz diagnostic
+(Part~IV~\cite{Geiger2026partIV}); these re-weight priorities and close four
+\emph{concrete constructions}, but make no new proof claim.
+\end{abstract}
+
+{\footnotesize
+\noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75\\
+\textbf{Keywords:} Riemann Hypothesis, conditional reduction, atlas,
+assessment, open problems, outlook
+}
+
+\clearpage
+
+
+% =============================================================================
+\section{Atlas Overview}
+\label{sec:atlas}
+% =============================================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|l|l|l}
+\textbf{Route} & \textbf{Sector} & \textbf{Status} & \textbf{Key result} & \textbf{Paper} \\\hline
+A (Even Dom.) & Even (Part~II) & conditional & A1--A8 chain + GF1 benchmark with $C^* = 64\pi^2/3$ for $\lambda=5,7$; $\lambda=11$ open & \cite{Geiger2026partII} \\
+B (Hadamard) & Spectral (Part~III) & conditional & $A_\lambda \leq 1.0063$ under log-curvature control & \cite{Geiger2026partIII} \\
+Z (CCM) & Spectral (Part~III) & conditional & C2ca.1 + C2ca.2 + C2ca.5; $g_0(m) = 2\pi/\log\gamma_m$ & \cite{Geiger2026partIII, Geiger2026zookeeper} \\
+Cross-Route & Combined (Part~IV) & empirical & shared Galerkin pattern; 2026 criticality lens + sharpened common wall ($\Re s=1$ continuation) & \cite{Geiger2026partIV} \\
+\end{tabular}}
+\end{center}
+
+
+% =============================================================================
+\section{Result Summary}
+\label{sec:results}
+% =============================================================================
+
+\subsection{Three Structural Identifications}
+
+\begin{enumerate}
+  \item \textbf{Hadamard curvature constant (RH-neutral):}
+    \[
+      c_\Xi = -\frac{1}{2}\sum_\rho
+              \frac{1}{(\rho-\tfrac{1}{2})^2}
+            \approx 0.0231.
+    \]
+    Under RH, this specialises to $\sum_{k\geq 1} 1/\gamma_k^2$.
+    (Part~III~\cite{Geiger2026partIII}.)
+
+  \item \textbf{Boundary-moment constant:}
+    $C^* = 64\pi^2/3 \approx 210.55$,
+    identified as a candidate via
+    $16\int_0^\infty t^2/\sinh^2(t/2)\,dt$; the factor~$16$ is
+    conjectured to arise from the DZT2 ladder normalisation. This is a
+    $\lambda=5,7$ benchmark, with $\lambda=3$ retained as a separate
+    low-bandwidth guardrail and $\lambda=11$ retained as an open
+    discriminator after the $N=200$ point.
+    (Part~II~\cite{Geiger2026partII}.)
+
+  \item \textbf{Hecke-normalised gap:}
+    $g_0(m) \approx 2\pi/\log\gamma_m$, classical
+    Montgomery--Odlyzko.
+    (Part~III~\cite{Geiger2026partIII}.)
+\end{enumerate}
+
+\subsection{Two Conditional Theorems}
+
+\begin{itemize}
+  \item \textbf{Theorem B-1} (Part~III): Under uniform log-curvature
+    control $H_\lambda(\delta) \leq K\delta^2$ with
+    $K \leq 1.8\times 10^{-3}$:
+    \[
+      A_\lambda(\delta)
+      \leq B_\Xi \cdot \exp(K/4) \leq 1.0063,
+    \]
+    where $B_\Xi = \xi(0)/\xi(\tfrac{1}{2}) = 1.00579\ldots$ is
+    analytical.
+
+  \item \textbf{Theorem GF1} (Part~II): Under eigenmode-weighted kernel
+    convergence producing the effective factor~$16$:
+    \[
+      \mathrm{sLI}
+      = \frac{64\pi^2}{3}\,\frac{\lambda}{NL} + o(\cdot).
+    \]
+    This is formulated for the non-exceptional converged regime; the
+    $\lambda=3$ sweep and the open $\lambda=11$ discriminator prevent an
+    all-$\lambda$ universal reading.
+\end{itemize}
+
+
+\subsection{Two Isolated Open Proof Slots}
+
+\begin{enumerate}
+  \item \textbf{B-1 slot:} Uniform log-curvature control from
+    Foundation-Lock structure. Closes Branch~B.
+  \item \textbf{GF1 slot:} Kernel convergence + factor-16 identification
+    from DZT2 definitions. Closes Branch~A's non-exceptional
+    boundary-moment benchmark, with the low-bandwidth branch kept explicit.
+\end{enumerate}
+
+
+% =============================================================================
+\section{Localization Tables}
+\label{sec:localization}
+% =============================================================================
+
+\subsection{Li Coefficient Perspective}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|l|l|l}
+\textbf{Step} & \textbf{Statement} & \textbf{Status} & \textbf{Method} \\\hline
+S1 & Define $\xi(s)$, functional equation & proven & definition \\
+S2 & Li coefficients via Bombieri--Lagarias & proven & \cite{BombieriLagarias1999} \\
+S3 & Decomposition $\lambda_n = \lambda_n^{(\infty)} + \lambda_n^{(\mathrm{fin})}$ & proven & Part~I \\
+S4 & Archimedean dominance: $\lambda_n^{(\infty)} \sim \frac{n}{2}\log n$ & proven & Stirling \\
+\textbf{S5} & \textbf{$\lambda_n \geq 0$ for all $n \geq 1$} & \textbf{OPEN}${}^{\ast}$ & \textbf{$\Longleftrightarrow$ RH} \\
+S6 & All zeros on $\Re(s) = 1/2$ & $\Leftrightarrow$ S5 & Li (1997) \\
+S7 & Prime counting: $\pi(x) = \mathrm{Li}(x) + O(\sqrt{x}\log x)$ & $\Leftarrow$ S6 & von Koch
+\end{tabular}%
+}
+\end{center}
+
+{\footnotesize\noindent${}^{\ast}$ S5 is equivalent to RH (Li, 1997).
+The present series gives only conditional reductions.\par}
+
+
+\subsection{Even Dominance Perspective}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|l|l|l}
+\textbf{Step} & \textbf{Statement} & \textbf{Status} & \textbf{Method} \\\hline
+E1 & Weil explicit formula & proven & Weil (1952) \\
+E2 & Weil quadratic form $\mathrm{QW}_\lambda$ & proven & \cite{Connes2026} \\
+E3 & Even/odd decomposition of $\mathrm{QW}_\lambda$ & proven & Part~II \\
+E4 & Shift Parity Lemma: each prime favors even & proven & Part~II \\
+E5 & Gap diagnostics at $33$ values, $\lambda \leq 1{,}300{,}000$ & evidence / conditional & Part~II \\
+E5b & Euler--Maclaurin: $\rho^{\mathrm{EM}} < 0$ for $\lambda \geq 1.2\mathrm{M}$ & proven & Part~II \\
+\textbf{E6} & \textbf{Cumulative step: even dominance for all $\lambda$} & \textbf{conditional reduction} & \textbf{= A6} \\
+E7 & Connes' Theorem~6.1 + Hurwitz bridge $\Rightarrow$ RH & conditional on E6 & \cite{Connes2026}
+\end{tabular}%
+}
+\end{center}
+
+
+% =============================================================================
+\section{Remaining Open Problems}
+\label{sec:open-problems}
+% =============================================================================
+
+\begin{remark}[OP1: Cumulative Even Dominance --- reduced to the odd-sector lower bound (v2.2)]
+The cumulative even dominance problem is reduced to a single spectral
+question: a quantitative lower bound for $\lambda_1^-(\lambda)$
+(Asymptotic Variational Gap Conjecture, Part~II).
+\end{remark}
+
+\begin{remark}[OP2 resolved: Simplicity of $\lambda_1^+$]
+Certified as simple for all $33$ certificate values by interval
+arithmetic. The intra-even gap grows as $\sim\!\sqrt{\lambda}$
+(Part~II).
+\end{remark}
+
+\begin{conjecture}[OP3: Analytical Proof of Index Rigidity]
+The negative inertia index of $K_\sigma^{\mathrm{sym}}$ is exactly~$2$
+for all $N$ sufficiently large and
+$\sigma \in (1, \sigma_{\max})$.
+\end{conjecture}
+
+\begin{conjecture}[OP4: Nuclear Transfer Operator for $\xi$]
+Construct a separable Hilbert space $\mathcal{V}$ and a nuclear family
+$s \mapsto \mathcal{L}_s$ with
+$\xi(s)/\xi(0) = \det(I - \mathcal{L}_s)$, spectral radius $< 1$ for
+$\Re(s) > 1/2$, and eigenvalue $1$ at the zeros.
+\end{conjecture}
+
+\begin{conjecture}[OP5: Nevanlinna Property of $\log\det_2$]
+Is $\log\det_2(I - zR)$ a Nevanlinna function if and only if all zeros
+lie on the real axis?
+\end{conjecture}
+
+\noindent OP2 is resolved. OP1 is reduced to a single asymptotic step.
+OP3--OP5 remain structural questions.
+
+
+% =============================================================================
+\section{Assessment and Outlook}
+\label{sec:outlook}
+% =============================================================================
+
+\subsection{What Has Been Achieved}
+
+\begin{enumerate}
+  \item A \textbf{complete structural analysis} of the gauge-theoretic
+    approach (Part~I: R1--R9, K1--K4).
+  \item The \textbf{Shift Parity Lemma} and \textbf{$33$
+    computer-assisted finite-range diagnostics} (Part~II).
+  \item The \textbf{conditional reduction A1--A8} with analytical
+    backbone (M1$''$, Euler--Maclaurin, PNT transfer) and the GF1
+    boundary-moment benchmark with $C^* = 64\pi^2/3$ for $\lambda=5,7$
+    (Part~II).
+  \item Two \textbf{independent spectral conditional reductions}
+    (Branches~B and~Z, Part~III).
+  \item The \textbf{cross-route synthesis} identifying shared Galerkin
+    pattern and two isolated proof slots (Part~IV).
+  \item \textbf{Fifteen excluded paths} (spectral + CCM) and
+    \textbf{five methodical dead ends} (Parts~III--IV).
+  \item A 2026 \textbf{criticality lens} ($\mathrm{RH}\Leftrightarrow\Lambda=0$,
+    heuristic) re-weighting the routes toward exact-structural mechanisms; a
+    sharper \textbf{common-wall} localization (the analytic continuation across
+    $\Re s=1$); a computable \textbf{Laguerre--P\'olya/Herglotz diagnostic}; and
+    four closures of \emph{concrete constructions} (not routes) --- all without
+    changing the conditional-reduction status (Part~IV~\cite{Geiger2026partIV}).
+\end{enumerate}
+
+
+\subsection{Current Atlas Status}
+
+The series title remains ``From Landscape to Atlas: Multi-Route
+Cartography of an Ongoing Expedition Toward the Riemann Hypothesis.''
+All three living routes are conditional reductions; no single branch has
+reached conditional-proof level under the project's audit protocol.
+
+\textbf{Promotion protocol.} The title migration from ``Atlas'' to
+``From Atlas to Proof'' is governed by a five-gate audit:
+(1)~single named hypothesis $H$;
+(2)~every step from $H$ to RH at theorem-level;
+(3)~two independent reviews including a sceptical refuter;
+(4)~2--3 day cool-off;
+(5)~explicit Decision Record entry.
+Default: Atlas remains.
+
+
+\subsection{Future Scenarios}
+
+\begin{itemize}
+  \item \textbf{One branch dies} (its open hypothesis refuted):
+    documented as dead route; the other two continue.
+  \item \textbf{One branch matures unconditionally}: that proof stands
+    as RH; other branches retained for independent verification.
+  \item \textbf{Both/all three mature}: rare, but mathematically
+    valuable as multi-route verification.
+  \item \textbf{None matures, but partial progress continues}: research
+    programme continues; the Landscape preserves the audit. This is the
+    default outlook.
+\end{itemize}
+
+
+\subsection{Outlook}
+
+Concrete next steps (not time-bound):
+\begin{itemize}
+  \item Rigorous derivation of the two open proof slots (B-1
+    log-curvature, GF1 factor-16).
+  \item Resolution of the $\lambda=11$ GF1 discriminator, validation at
+    higher $\lambda$, and a theorem-level separation of the $\lambda=3$
+    low-bandwidth branch.
+  \item $\kappa_\infty$-asymptotics for $\lambda \to \infty$.
+  \item Promotion-gate audit if a slot closes.
+  \item Develop the exact-structural lines (M~$=$~Bost--Connes\,$\leftrightarrow$\,Meyer;
+    P-A~$=$~global adelic trace route) that the 2026 criticality lens elevates, in
+    parallel with the two margin-type proof slots (Part~IV~\cite{Geiger2026partIV}).
+\end{itemize}
+
+
+% =============================================================================
+\section{Connections to the Wider Landscape}
+\label{sec:connections}
+% =============================================================================
+
+\subsection{Connes' Program}
+
+The work in this series fits directly into Connes' spectral approach to
+RH~\cite{Connes2026}. The Shift Parity Lemma (Part~II) provides
+analytical evidence for the even dominance hypothesis (Theorem~6.1). The
+I-1 Normal-Family reframe (Part~III) decomposes Wall~(ii) into a single
+named condition~(ii-a). The CCM Microcluster Programme (Part~III)
+attacks the same wall through the Fourier model.
+
+\subsection{Nyman--Beurling--Baez-Duarte}
+
+The Li criterion, the Weil positivity criterion, the Nyman--Beurling
+criterion, and the Baez-Duarte criterion are all equivalent to RH.
+Direct implications between them (without passing through RH) are known
+only in two cases: Weil $\Rightarrow$ Li
+(\cite{BombieriLagarias1999}) and Nyman--Beurling $\Rightarrow$
+Baez-Duarte (trivial).
+
+\subsection{The Trace-Class Obstruction as Universal Pattern}
+
+Obstruction~K4 (trace-class failure at $\Re(s) = 1/2$, Part~I) appears
+across QFT (UV divergences), statistical mechanics (thermodynamic limit),
+and NCG (zeta-function regularisation). The Even Dominance approach
+circumvents this by working with finite-dimensional Galerkin blocks
+rather than infinite-dimensional transfer operators.
+
+
+% =============================================================================
+\section{Full Summary Table}
+\label{sec:full-summary}
+% =============================================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|c|l}
+\textbf{Contribution} & \textbf{Status} & \textbf{Paper} \\\hline
+Thermodynamic formalism for $\zeta$ & established & I \\
+9 unconditional structural results (R1--R9) & proven & I \\
+4 excluded paths (K1--K4) & proven & I \\
+Shift Parity Lemma & proven (analytic) & II \\
+Gap diagnostics ($33$ values, $\lambda \leq 1{,}300{,}000$) & evidence / conditional & II \\
+Leading-Mode Cancellation ($c = 2+\sqrt{2}$) & proven & II \\
+Euler--Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ & proven & II \\
+GF1 benchmark: $\mathrm{sLI} \sim C^*\lambda/(NL)$ for $\lambda=5,7$; $\lambda=3$ separate, $\lambda=11$ open & conditional (Thm GF1) & II \\
+I-1 Normal-Family Reframe: (ii) $\to$ (ii-a) & rigorous & III \\
+Foundation-Lock + converged empirics & rigorous + numerical & III \\
+Theorem B-1: $A_\lambda \leq 1.0063$ (conditional) & conditional & III \\
+$c_\Xi$ Hadamard curvature (RH-neutral) & analytical & III \\
+CCM three C2ca-inputs & conditional reduction & III \\
+6 excluded spectral + 9 excluded CCM paths & documented & III \\
+Cross-route Galerkin pattern & empirical & IV \\
+11 systematically explored alternatives & documented & IV \\
+Hypothesis correction chain (GF1 Iter 15--27) & documented & IV \\
+\textbf{Cumulative step (A6)} & \textbf{conditional reduction (v2.2)} & II \\
+\textbf{Riemann Hypothesis} & \textbf{conditional reduction (v2.2)} & I--V
+\end{tabular}%
+}
+\end{center}
+
+
+\bigskip
+\noindent\textbf{Acknowledgments.} Computations were performed on a
+Mac~Studio (Apple M1~Max, 32~GB) and a Hetzner CCX13 cloud server
+(2~dedicated vCPU, 8~GB). The interval arithmetic library mpmath was
+developed by Fredrik Johansson.
+
+
+\section*{AI Disclosure}
+
+This manuscript was developed in extensive collaboration with AI language
+models (Claude, Anthropic; Copilot, Microsoft/GitHub; Gemini, Google
+DeepMind). AI contributed to conceptual exploration, analytical work,
+literature review, writing, and critical review. The author, Lukas
+Geiger, conceived the research direction, provided domain expertise, and
+exercised final editorial authority. The author assumes full and sole
+scholarly responsibility for all content, including any errors.
+
+
+\bibliographystyle{plain}
+\bibliography{fst-rh-references}
+
+\end{document}

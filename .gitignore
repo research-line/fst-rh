@@ -95,3 +95,11 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Internal strategy / drafts / QA / readiness (not for publication) [2026-05-31 GitHub-sync]
+DECISION.md
+_pdfcheck/
+_designcheck*/
+*.bak
+paper/_v3_draft/
+_READINESS_*.md

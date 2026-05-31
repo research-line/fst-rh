@@ -1,0 +1,709 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\emergencystretch=1.5em
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{needspace}
+\usepackage[capitalise,noabbrev,ngerman]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Korollar}
+\newtheorem{conjecture}[theorem]{Vermutung}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Bemerkung}
+
+\title{Die Riemannsche Vermutung: Cross-Route-Synthese\\[4pt]
+\large Teil~IV einer fünfteiligen Serie}
+\author{Lukas Geiger\\
+\small Bernau, Deutschland\\
+\small ORCID: \href{https://orcid.org/0009-0005-7296-1534}{0009-0005-7296-1534}}
+\date{\today}
+
+\begin{document}
+\overfullrule=0pt
+\maketitle
+
+\begin{abstract}\footnotesize
+Dieses Paper, Teil~IV einer fünfteiligen Serie
+\cite{Geiger2026partI,Geiger2026partII,Geiger2026partIII,Geiger2026partV},
+sammelt drei Klassen von Material, die nicht in den Umfang von Teil~II
+(Even Dominance) oder III (Spektrale Routen) passen: die Cross-Route-Synthese,
+die alle drei aktiven Zweige~A, B, Z vergleicht; die ruhenden Routen und
+externen Linien der weiteren Landschaft; sowie eine selbstkorrigierende
+Dokumentation der Hypothesen-Korrekturen im iterativen Forschungsprozess.
+
+Die Cross-Route-Synthese identifiziert ein gemeinsames Galerkin-Muster über
+die Zweige hinweg --- jede bedingte Reduktion beinhaltet eine
+Fixed-Parameter-Positivstruktur, die zu einer Uniform-Limit-Aussage über
+einen wachsenden Parameter $N(\lambda)$, $d(\lambda)$ oder $m(\lambda)$
+befördert werden muss --- und tabuliert die charakteristischen Konstanten
+($C^* = 64\pi^2/3$ als aktueller Boundary-Moment-Benchmark für
+$\lambda=5,7$ in Zweig~A, $\kappa_\infty \in [1{,}6,1{,}8]\times 10^{-3}$
+für Zweig~B, $g_0(m) \approx 2\pi/\log\gamma_m$ für Zweig~Z).
+
+\medskip\noindent
+\textbf{Serien-Status (v3.0, 2026-05-26; Kritikalitäts-Linsen-Update 2026-05-31).}
+Die Serie wurde von einer Trilogie zu einer fünfteiligen Serie umstrukturiert;
+der Status der bedingten Reduktion aus v2.2 ist unverändert. Eine Arbeitsphase 2026
+ergänzt \cref{sec:sharpened-wall}: eine \emph{heuristische} Kritikalitäts-Linse
+($\mathrm{RH}\Leftrightarrow\Lambda=0$), die die Routen strategisch neu gewichtet,
+eine schärfere Lokalisierung der gemeinsamen Wand (die analytische Fortsetzung über
+$\Re s=1$), eine berechenbare Diagnostik aus dem \emph{klassischen}
+Laguerre--P\'olya/Herglotz-Kriterium sowie vier ehrliche Schließungen
+\emph{konkreter Konstruktionen} (keine Routen, mehrere davon Selbstkorrekturen
+intern vorgeschlagener Konstruktionen). Keine davon schließt RH, widerlegt eine
+Route oder ändert den Status der bedingten Reduktion.
+\end{abstract}
+
+{\footnotesize
+\noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75\\
+\textbf{Schlüsselwörter:} Riemannsche Vermutung, Cross-Route-Synthese,
+Galerkin-Muster, ruhende Routen, Hypothesen-Korrekturen,
+Landschaftsübersicht
+}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+
+% =============================================================================
+\section{Einleitung}
+\label{sec:intro}
+% =============================================================================
+
+Dieses Paper, Teil~IV einer fünfteiligen Serie, dient als die
+,,Vermischtes und Kombination''-Komponente des Landschaftsatlas:
+\begin{description}[font=\bfseries,leftmargin=2em]
+  \item[Teil~I \cite{Geiger2026partI}:] Grundlagen und Obstruktionen.
+  \item[Teil~II \cite{Geiger2026partII}:] Even Dominance (Zweig~A).
+  \item[Teil~III \cite{Geiger2026partIII}:] Spektrale Routen
+    (Zweige~B und~Z).
+  \item[Teil~IV (dieses Paper):] Cross-Route-Synthese, ruhende Routen,
+    externe Linien, methodische Sackgassen, Hypothesen-Korrekturen.
+  \item[Teil~V \cite{Geiger2026partV}:] Conclusio.
+\end{description}
+
+Die drei aktiven Zweige~A (Even Dominance), B (Hadamard Strip / I-1
+Normal-Family) und Z (CCM Microcluster) werden ausführlich in den
+Teilen~II und~III entwickelt. Dieses Paper identifiziert die strukturellen
+Muster, die sie teilen, überblickt die weitere Landschaft ruhender und
+externer Routen und liefert eine transparente Dokumentation der
+Hypothesen-Korrekturen während der iterativen Entwicklung.
+
+
+% =============================================================================
+\section{Cross-Route-Synthese}
+\label{sec:cross-route}
+% =============================================================================
+
+\subsection{Charakteristische Konstanten}
+
+Jeder aktive Zweig produziert eine charakteristische Konstante oder ein
+Skalierungsgesetz, dessen Identifikation die bedingte Reduktion verankert:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|l|l}
+\textbf{Zweig} & \textbf{Konstante} & \textbf{Skalierungsgesetz} & \textbf{Theoretische Identifikation} \\\hline
+A (Even Dom.) & $C^* = 64\pi^2/3 \approx 210{,}55$ & $\mathrm{sLI} \sim C^*\,\lambda/(NL)$ für den $\lambda=5,7$-Benchmark; $\lambda=3$ separat und $\lambda=11$ offen & $16\int_0^\infty t^2/\sinh^2(t/2)\,dt$ (Rückwärtskandidat; exakter Collar-Kern bekannt) \\
+B (Hadamard) & $\kappa_\infty \in [1{,}6,1{,}8]\times 10^{-3}$ & sättigt mit $\lambda$ & Finite-Part-Residualkrümmung des Foundation-Lock \\
+Z (CCM) & $g_0(m) \approx 2\pi/\log\gamma_m$ & logarithmisch abnehmend & Montgomery--Odlyzko (klassisch) \\
+\end{tabular}}
+\end{center}
+
+\begin{remark}[Identifikationsstatus]
+Die Konstante $C^* = 64\pi^2/3$ für Zweig~A ist ein Identifikationskandidat
+für den $\lambda=5,7$-Benchmark. Der Audit vom 27.~Mai zeigt, dass die
+einfache Endpoint-Kern-Faktorisierung falsch ist; der exakte Collar-Kern
+lautet $K(t)=e^t\cosh(t)/(2\sinh^2t)$, sodass eine rigorose Herleitung über
+die Eigenmoden-Asymptotik laufen muss. Der $\lambda=3$-Sweep wird als
+Niedrigband-Ausreißer geführt, während der einzelne Punkt
+$\lambda=11,N=200$ ($C_{\mathrm{eff}}\approx168$) ein offener
+Diskriminator bleibt
+(Teil~II~\cite{Geiger2026partII}, Bemerkung zum Herleitungskandidaten). Die
+Konstante $\kappa_\infty$ für Zweig~B ist empirisch im konservativen Bereich
+$[1{,}6,1{,}8]\times 10^{-3}$ etabliert (Teil~III~\cite{Geiger2026partIII}). Die Lücke
+$g_0(m)$ für Zweig~Z beruht auf klassischer Paarkorrelationsheuristik.
+\end{remark}
+
+
+\subsection{Das gemeinsame Galerkin-Muster}
+
+Trotz ihrer unterschiedlichen analytischen Mechanismen teilen alle drei
+Zweige ein gemeinsames strukturelles Muster:
+
+\begin{enumerate}
+  \item \textbf{Fixed-Parameter-Positivstruktur:} Bei jedem endlichen
+    $(\lambda, N)$ (bzw.\ $(\lambda, m)$ für Zweig~Z) ist die relevante
+    Größe berechenbar und hat das korrekte Vorzeichen bzw.\ die korrekte
+    Schranke.
+  \item \textbf{Uniform-Limit-Anforderung:} Die bedingte Reduktion
+    erfordert die Beförderung der Fixed-Parameter-Aussage zu einer
+    uniformen Aussage für $\lambda \to \infty$ mit einem Parameter
+    ($N(\lambda)$, $d(\lambda)$, $m(\lambda)$), der mitwächst.
+  \item \textbf{Transientes vs.\ konvergiertes Regime:} Der Aufwärmparameter
+    ist zweigabhängig. Für den GF1/$C^*$-Zweig ist die aktuelle diagnostische
+    Skala $\xi=NL/\lambda$, nicht $N/L$: Die $\lambda=5,7$-Zeilen betreten
+    das Benchmark-Fenster nahe $\xi\approx 50$, während der Punkt
+    $\lambda=11,N=200$ ein offener Präkonvergenz-Diskriminator bleibt. Andere
+    Galerkin-Zweige führen weiterhin ihre eigenen Auflösungsquotienten.
+\end{enumerate}
+
+Dieses Muster ist konsistent mit einer \emph{Bernstein--Galerkin-Vermutung}:
+die Galerkin-Trunkierung der Weil-Quadratform bei Dimension $N$ konvergiert
+gegen die unendlichdimensionale Form in der relevanten Operatortopologie,
+und die Konvergenz ist uniform in $\lambda$ nach einer
+$\lambda$-abhängigen Aufwärmphase.
+
+\begin{remark}[Status der Vermutung]
+Das Bernstein--Galerkin-Muster ist eine empirische Beobachtung aus
+5--7 Datenpunkten pro Zweig. Es wurde nicht als mathematische Aussage
+formalisiert. Seine Rolle ist heuristisch: es liefert eine mechanistische
+Erklärung dafür, warum alle drei Zweige ähnliche strukturelle Lücken
+aufweisen (Fixed-Parameter $\checkmark$, Uniform-Limit offen).
+\end{remark}
+
+
+\subsection{Zwei isolierte offene Beweisslots}
+
+Die Cross-Route-Analyse identifiziert zwei konkrete, isolierte offene
+Beweisslots, deren Lösung einen oder mehrere Zweige schließen würde:
+
+\begin{enumerate}
+  \item \textbf{B-1: Uniforme Log-Krümmungskontrolle aus dem Foundation-Lock.}
+    Falls $H_\lambda(\delta) \leq K\delta^2$ mit
+    $K \leq 1{,}8\times 10^{-3}$ aus der Foundation-Lock-Struktur
+    hergeleitet wird, dann liefert Theorem~B-1
+    (Teil~III~\cite{Geiger2026partIII})
+    $A_\lambda \leq 1{,}0063$, was Zweig~B schließt.
+  \item \textbf{GF1: Eigenmoden-Asymptotik + Faktor-16-Identifikation.}
+    Falls der exakte Collar-Kern und die $q_a(k)$-Eigenmoden-Asymptotik
+    rigoros den Faktor~$16$ in $C^* = 16\cdot 4\pi^2/3$ erzeugen und der
+    $\lambda=11$-Diskriminator nicht als separater Ast persistiert, dann liefert
+    Theorem~GF1 (Teil~II~\cite{Geiger2026partII}) einen
+    Randmomenten-Benchmark für das nicht-ausnahmsartige Zweig-A-Regime;
+    der $\lambda=3$-Ast bleibt ein konservativer Guardrail.
+\end{enumerate}
+
+Diese beiden Slots sind \emph{unabhängig}: die Lösung des einen beeinflusst
+den anderen nicht. Jeder ist ein wohlgestelltes analytisches Problem, das mit
+Standardwerkzeugen zugänglich ist (komplexe Analysis für B-1; Fourier-Analysis
+und Spektraltheorie für GF1).
+
+\begin{remark}[Beide Slots sind Marge-artig --- ein strategisches Caveat]
+\label{rem:slots-margin}
+Beide Slots sind \emph{Marge-/Koerzivitäts}-Aussagen: eine uniforme Schranke, die
+eine Lücke schließt. Sie bleiben wohlgestellte offene Probleme, und nichts im
+Folgenden widerlegt sie. \Cref{sec:sharpened-wall} ergänzt eine \emph{heuristische}
+Kritikalitäts-Linse: da RH (falls wahr) beim kritischen Wert $\Lambda=0$ ohne Puffer
+sitzt (\cref{sec:lambda-lens}), verdienen exakt-strukturelle Mechanismen (Identität,
+Symmetrie, Spektralrealisierung) \emph{zusätzliches} strategisches Gewicht neben
+diesen Marge-artigen Slots. Dies ist eine Neugewichtung der Prioritäten, kein
+Theorem und keine Widerlegung (siehe das Caveat in \cref{rem:lambda-caveat}).
+\end{remark}
+
+
+% =============================================================================
+\section{Die geschärfte gemeinsame Wand: eine Kritikalitäts-Linse und eine Analytische-Fortsetzungs-Lokalisierung}
+\label{sec:sharpened-wall}
+% =============================================================================
+
+Eine Arbeitsphase 2026 untersuchte alle Zweige erneut unter einer Frage ---
+\emph{welche Art von Argument kann die Lücke schließen?} --- und lokalisierte die
+gemeinsame Obstruktion schärfer. Alles in diesem Abschnitt ist eine
+\textbf{strategische Linse und eine diagnostische Lokalisierung}, keine neue
+Schließung von RH und keine Widerlegung einer Route. Mehrere Punkte sind ehrliche
+Selbstkorrekturen intern vorgeschlagener Konstruktionen. Der Status der bedingten
+Reduktion der Teile~II/III ist unverändert.
+
+\subsection{Eine Kritikalitäts-Linse (heuristisch, kein Theorem)}
+\label{sec:lambda-lens}
+
+Die de~Bruijn--Newman-Konstante $\Lambda$ erfüllt $\Lambda\le 0\Leftrightarrow$ RH;
+Rodgers und Tao (\emph{Ann.\ of Math.}\ 2020) bewiesen $\Lambda\ge 0$. Somit
+$\mathrm{RH}\Leftrightarrow\Lambda=0$: falls RH gilt, sitzt sie \emph{exakt} beim
+kritischen Wert, ohne Marge.
+
+\begin{remark}[Kritikalitäts-Linse --- und ihr essenzielles Caveat]
+\label{rem:lambda-caveat}
+Dies lädt zu einer \emph{strategischen} Dichotomie von Beweismechanismen ein:
+\emph{Marge-suchend} (eine uniforme Lücken-/Koerzivitäts-/Smallness-Schranke) versus
+\emph{exakt-strukturell} (eine Identität, eine Symmetrie oder eine
+Spektralrealisierung, die die Schlussfolgerung ohne Spielraum erzwingt). Die
+heuristische Lesart ist, dass ein Mechanismus, der eine strikte uniforme Marge
+erzeugt, etwas mit Puffer etablieren würde, was schwer mit einer kritischen Wahrheit
+bei $\Lambda=0$ vereinbar ist.
+\textbf{Caveat (essenziell, gegen Overclaiming).} Der Schritt ,,eine uniforme Marge
+würde $\Lambda<0$ erzwingen`` ist eine \emph{Analogie}, kein Theorem. Die
+zweigspezifischen Margen --- die Even-Dominance-Lücke $\lambda_1^+<\lambda_1^-$, die
+Hadamard-Konstante $\kappa$, die CCM-Residual-Smallness --- sind \emph{nicht} als
+eine de~Bruijn--Newman-Aussage gezeigt; $\Lambda$ und diese Größen sind
+verschiedene Objekte. Folglich widerlegt die Linse die wohlgestellten Beweisslots
+aus \cref{sec:cross-route} \emph{nicht} (\cref{rem:slots-margin}); sie legt nur nahe,
+exakt-strukturelle Routen \emph{zusätzlich} zu gewichten. Es ist eine Neugewichtung
+der Prioritäten, kein Ergebnis.
+\end{remark}
+
+Unter dieser Linse sortieren sich die Routen nach \emph{Typ}, nicht nach
+Tragfähigkeit: die Marge-artigen Zweige~A (A7/AVG-Lücke), B ((ii-a)-Koerzivität), Z
+(Residual-Smallness) behalten ihre exakten Kerne als Assets, während die
+exakt-strukturellen Linien --- M (Bost--Connes\,$\leftrightarrow$\,Meyer, mit dem
+KMS-Phasenübergang bei $\beta=1$ in der Rolle eingebauter Kritikalität) und die
+globale adelische Trace-Route (Connes--Consani-Scaling-Site / $\mathbb{F}_1$, wo das
+einzig fehlende Datum die Hodge-Index-Positivität einer ansonsten verfügbaren
+Lorentz-Form ist) --- zusätzliches strategisches Gewicht erhalten. Die empirische
+Signatur ist konsistent: die Even-Dominance-Marge wächst wie ein Potenzgesetz
+$\sim\lambda^{0{,}72}$ (eine Kritikalitäts-Signatur, kein Puffer). Diese
+Neugewichtung ist im Projekt-Entscheidungslog festgehalten; sie ändert den formalen
+Status keiner Route.
+
+\subsection{Die gemeinsame Wand: analytische Fortsetzung über $\Re s=1$}
+\label{sec:common-wall-ac}
+
+Unabhängig von der Linse teilen die korrekt typisierten Routen einen einzigen
+konkreten Endpunkt. Drei Arbeitslinien --- der Möbius-Primzahlhub, die
+Wiener--Hopf-Faktorisierung und die Sonin/Toeplitz-Konstruktion (Connes--Consani)
+--- sind jeweils \emph{lokal/endlich} kontrollierbar, brechen aber an \emph{exakt}
+derselben Stelle: dem globalen Limes, wo sich die lokalen Daten zu $\zeta$
+zusammensetzen müssen. Die einheitliche Beschreibung ist die
+Weyl--Titchmarsh-Funktion $M_\infty$ des unbeschränkten Limes-Operators; das
+fehlende Datum ist uniforme Kontrolle dieses Limes aus lokalen Daten \emph{ohne}
+$\zeta$ zu importieren.
+
+\begin{remark}[Die Wand ist ein klassisches Faktum, hier scharf lokalisiert]
+\label{rem:wall-folklore}
+Ein endliches Euler-Produkt $\prod_{p\in P}(1-p^{-s})^{-1}$ hat nach der Substitution
+$z=-\mathrm{i}(s-\tfrac12)$ einen Pol-Kamm in der oberen Halbebene bei
+$z_{p,k}=2\pi k/\log p+\mathrm{i}/2$ (auf $\Im z=\tfrac12$), mit einem gemeinsamen Pol
+bei $z=\mathrm{i}/2$ der Ordnung $|P|$; folglich ist seine logarithmische Ableitung
+keine Herglotz-Funktion. Der Kamm wird nur durch $\zeta$'s analytische Fortsetzung
+entfernt ($\zeta(0)$ endlich; der Pol bei $s=1$). Dies ist
+\textbf{Euler-Produkt-Folklore} (das Produkt konvergiert nur für $\Re s>1$). Es ist
+keine neue Obstruktion: es ist eine \emph{präzise Lokalisierung} der bekannten Wand
+--- das fehlende Datum ist die analytische Fortsetzung über $\Re s=1$, d.\,h.\ ein
+globales/Funktionalgleichungs-Phänomen, das endliche arithmetisch-plus-archimedische
+Daten strukturell nicht liefern.
+\end{remark}
+
+\subsection{Eine berechenbare Diagnostik aus dem klassischen Laguerre--P\'olya/Herglotz-Kriterium}
+\label{sec:diagnostic}
+
+Sei $\Xi(z)=\xi(\tfrac12+\mathrm{i}z)$ und $M_\Xi=-\Xi'/\Xi$. Die Kette
+\[
+\mathrm{RH}\ \Longleftrightarrow\ \Xi\in\text{Laguerre--P\'olya}
+\ \Longleftrightarrow\ M_\Xi\ \text{Herglotz}
+\ \Longleftrightarrow\ \tfrac{(M_\Xi(z)-\overline{M_\Xi(w)})}{z-\bar w}\succeq 0
+\]
+ist \textbf{klassisch} (Hermite--Biehler; die Laguerre--P\'olya-Charakterisierung
+reell-nullstelliger ganzer Funktionen; die Positivität $\Re\,\xi'/\xi>0$ für
+$\Re s>\tfrac12$ ist das Voros-Kriterium). \emph{Wir beanspruchen keine Neuheit für
+das Kriterium selbst.} Der Beitrag ist ein \emph{berechenbares, nicht-zirkuläres
+Test-Protokoll}, das diese klassische Äquivalenz in ein diagnostisches Instrument
+verwandelt: ein Euler-Anker, der $M_\Xi$ aus $\xi'/\xi$ in der konvergenten Region
+$\Re w>1$ liefert (numerisch auf $\sim 10^{-31}$ verifiziert), eine Leiter von Gates
+(Normalisierung; Tail-Tightness; eine Stieltjes-Identität; eine Off-Axis-Poisson-
+Tomographie, die einzelne Residuen auflöst), und ein Detector-Lemma, durch das eine
+Off-Line-Nullstelle eine negative $1\times1$-Pick-Minore knapp unterhalb des
+gewanderten Pols erzwingt. Das Instrument ist empirisch validiert: es detektiert
+Off-Line-Nullstellen und unterscheidet das echte Nullstellen-Spektrum von einer
+glatten, dichte-angepassten Kontrolle.
+
+\begin{remark}[Was die Diagnostik an einem echten Operator etablierte]
+Eine unabhängige, nicht-zirkuläre Diskretisierung des Connes--Moscovici-Prolaten-
+Operators (arXiv:2112.05500) wurde durch das volle Instrument geführt. Sie
+reproduziert Riemanns Nullstellen-Zählfunktion $N(E)$ auf $\sim 3\%$ im UV --- die
+\emph{archimedische Hälfte} (die glatte Dichte, führender Term
+$\tfrac12\log(y/2\pi)$), eine unabhängige nicht-zirkuläre Bestätigung der
+CCM-Dichte-Behauptung. Aber ihre Pole sitzen $O(1)$ \emph{neben} den Nullstellen,
+sodass die arithmetische Feinstruktur (die \emph{Positionen}) nicht erfasst wird; und
+die relative-Determinante-/Krein-Konstruktion entfernt den Euler-Pol-Kamm
+\emph{nicht}, weil der prolate Hintergrund selbst Herglotz (kammfrei) ist, sodass
+nichts zu kürzen bleibt. Beide Befunde bestätigen \cref{rem:wall-folklore} erneut:
+Dichte ja, Positionen nein; die Wand ist die analytische Fortsetzung. Das genuine
+positive Nebenprodukt --- dass der Determinanten-Kanal $-D'/D$
+(Residuen~$=$~Multiplizitäten), nicht bloße Eigenwert-Konvergenz, das Objekt ist, das
+konvergieren muss ($\det_{\mathrm{reg}}(A-z)\to C\cdot\Xi$) --- schärft die
+CCM-Frontlinie und ist unter den unabhängigen Ergebnissen festgehalten
+(\cref{sec:independent-results}).
+\end{remark}
+
+\subsection{Vier Schließungen konkreter Konstruktionen (keine Routen)}
+\label{sec:four-closures}
+
+Die Phase brachte vier genuine Negativ-Resultate hervor, jedes über ein
+\emph{spezifisches konstruiertes Objekt bzw.\ eine Technik}. Keines schließt eine
+ganze Route; jedes re-typisiert die Route oder benennt einen Nachfolger.
+
+\begin{enumerate}
+  \item \textbf{Osterwalder--Schrader-Reflexion, natürliche Form.} Der
+    Reflexionsblock $Q_+(x)=\iint_0^\infty \overline{x(t)}\,K(t+s)\,x(s)$ ist
+    indefinit, weil die Prim-Distributionen $\delta(t+s-\log p)$ im Weil-Kern die
+    Halbachse $t+s=\log p$ treffen; die Toeplitz-Alternative $K(t-s)$ kollabiert zu
+    globaler Weil-Positivität $=$ RH. Die OS-Route in ihrer natürlichsten Form
+    (Inversions-Reflexion auf $\{|g|\ge 1\}$) ist geschlossen-negativ; eine andere
+    Halbraum-Wahl wäre nötig.
+  \item \textbf{Möbius-$\mathbb{Z}_2$-Primzahlhub, naives $L_s^-$.} Ein
+    Obstruktions-Theorem: jede Fortsetzung der divergenten Prim-Spuren
+    $\operatorname{Tr}T_s=P(s)$, $\operatorname{Tr}T_s^2=P(2s)$ bis $\Re s=\tfrac12$
+    importiert $\zeta$ und seine Nullstellen via
+    $P(s)=\sum_n \mu(n)/n\cdot\log\zeta(ns)$ --- also zirkulär. (Projekt-intern;
+    kein literatur-verifizierter Standard.)
+  \item \textbf{Toeplitz-Symbol-Submethode (Zweig~A).} $A_{\sin}$ ist nicht Toeplitz
+    ($m$-abhängige oszillierende Diagonalen $\Rightarrow$ kein wohldefiniertes Symbol
+    $f(\theta)$); ein struktureller Defekt des konstruierten Objekts, nicht bloß
+    ,,die Methode gleicht dem offenen Problem``. Nachfolger: die endliche
+    Sylvester-Inertia-Schranke (erledigt) plus GLT-/Outlier-Kontrolle.
+  \item \textbf{Relative-Determinante-/Krein-Bypass.} Die relative Determinante
+    $-\partial_z\log[\det(A-z)/\det(A^0-z)]$ entfernt den Euler-Pol-Kamm \emph{nicht}:
+    ist $A^0$ der prolate Hintergrund, so ist er selbst kammfrei (nichts zu kürzen,
+    und $\det(\text{Euler}\cdot\text{prolat})/\det(\text{prolat})=\det(\text{Euler})$
+    behält den Kamm); die einzige kammfreie Alternative braucht einen
+    selbstadjungierten Prim-Faktor, der zirkulär ist ($=$ RH). Dies ist eine ehrliche
+    Selbstkorrektur einer intern vorgeschlagenen ,,richtigen Technologie``; der
+    Vorgeschlagen-dann-widerlegt-Bogen ist in \cref{sec:sammler-disziplin}
+    festgehalten.
+\end{enumerate}
+
+\noindent
+Entscheidend: der \emph{Determinanten-Kanal} $-D'/D$ als \emph{Schärfung} der
+CCM-Frontlinie bleibt gültig (\cref{sec:independent-results}); nur die
+\emph{relative} Determinante als \emph{Bypass} der Fortsetzungs-Wand ist widerlegt.
+Beide dürfen nicht verwechselt werden.
+
+
+% =============================================================================
+\section{Ruhende Routen}
+\label{sec:dormant}
+% =============================================================================
+
+Eine kleine Anzahl konstruierter Routen ist ruhend statt tot: es handelt
+sich um explizite Reduktionen oder Teilkonstruktionen, die nicht widerlegt
+wurden, aber derzeit keine aktive Entwicklung erfahren. Das interne Register
+(\texttt{AKTIONSPLAN.md}) führt das vollständige Inventar; die folgenden
+vier werden hier zusammengefasst, da jede eine direkte Brücke zu einem
+der aktiven Zweige aufweist.
+
+\begin{itemize}
+  \item \textbf{D-CCM (Dirichlet--CCM-Operator
+    $D^{(\lambda,N,\chi)}_{\log}$).} Eine direkte $\chi$-Twistung der
+    CCM-Rang-$N$-Störungskonstruktion. Adressiert GRH, nicht RH
+    direkt --- der triviale Charakter $\chi_0$ (Riemann-Fall) ist in
+    diesem Skalierungsregime praktisch nicht testbar. Begleiter von
+    Zweig~Z.
+
+  \item \textbf{D-Twist ($\chi$-getwistete Defektnorm).} Diagnostische
+    Blaupause mit abgeschlossenem Pilot~v2 und Milestone~2$_\chi$-Arbeit;
+    umformuliert als $\lambda$-asymptotische Aussage. Erste Tests bei
+    $\chi_{21}, \chi_{33}$; Riemann in dieser Skala unerreichbar.
+
+  \item \textbf{D-PW (Paley--Wiener-Sektordifferenz
+    $\psi_\chi = \phi_\chi^+ - \phi_\chi^-$).} Klassifikation der
+    fünf Paley--Wiener-Schritte abgeschlossen: S1, S2, S4 mechanisch;
+    S3, S5 charakterspezifisch. Fortsetzung des veröffentlichten
+    Dirichlet Character Atlas v2 (Zenodo~\texttt{20241612}).
+
+  \item \textbf{P-M (Möbius-graduierter $\mathbb{Z}_2$-Primzahlhub).}
+    Bedingtes Lemma für endliche Primzahlmenge bewiesen (Möbius-Identität
+    exakt); volle Primzahlmenge konvergiert nur für $\Re(s)>1$;
+    $\mathbb{Z}_2$-Sektoraussage für nichttriviale Nullstellen offen.
+    Strukturell ansprechende Alternativinterpretation des Prime Orbit
+    Axioms (Teil~I, Definition~2.1). Ein Obstruktions-Theorem 2026 schärft
+    dies (\cref{sec:four-closures}): es existiert kein nicht-zirkuläres $L_s^-$,
+    da die divergenten Prim-Spuren nur durch Import von $\zeta$ und seinen
+    Nullstellen bis $\Re s=\tfrac12$ fortgesetzt werden können. Dies re-typisiert
+    P-M als die \emph{Prim-Hälfte} einer P-M$+$M-Fusion --- ihr fehlt beweisbar die
+    archimedisch-modulare Hälfte ($s\leftrightarrow 1-s$), die Route~M liefert
+    (projekt-intern).
+\end{itemize}
+
+Die übrigen ruhenden Einträge (P-A, P-C, P-B, M, R, H) werden hier nicht
+einzeln aufgeführt; siehe \texttt{AKTIONSPLAN.md} für das vollständige Inventar.
+Zwei davon werden durch die Kritikalitäts-Linse aus \cref{sec:lambda-lens}
+\emph{strategisch aufgewertet}: \textbf{M} (Bost--Connes\,$\leftrightarrow$\,Meyer)
+und die globale adelische Trace-Route \textbf{P-A} (Connes--Consani-Scaling-Site)
+sind vom exakt-strukturellen Typ und erhalten nun zusätzliches strategisches
+Gewicht; \textbf{P-C} wird durch einen aktiven Zweig mit-gelöst; \textbf{P-B}
+(Berry--Keating) ist vom richtigen Typ, aber unkonstruiert (Selbstadjungiertheit
+ist das fehlende Hilbert--P\'olya-Theorem); \textbf{R}, \textbf{H} sind
+Framework/expositorisch.
+
+
+% =============================================================================
+\section{Externe Linien}
+\label{sec:external}
+% =============================================================================
+
+Die Landschaft liegt innerhalb eines weiteren Forschungsökosystems. Die
+folgenden Linien werden als Ankerpunkte zitiert; nur die direkt
+beweisrelevanten Einträge erscheinen hier.
+
+\begin{itemize}
+  \item \textbf{Connes 2026 Mainline} \cite{Connes2026}
+    (arXiv:2602.04022). Reformuliert die Riemannschen Nullstellen als
+    Infrarotspektrum eines selbstadjungierten Operators und identifiziert
+    die zentrale offene Hypothese MS2 (\S6.6(b)). Die Zweige~A, B, Z
+    konditionieren alle auf diese Linie.
+
+  \item \textbf{Connes--van~Suijlekom 2025} \cite{ConnesvS2025}
+    (arXiv:2511.23257). Theorem~5.6: der 1-dimensionale gerade Kern der
+    trunkierten Weil-Form impliziert reelle Nullstellen von $\hat\eta$.
+    Dies ist A1~=~B1 in der vorliegenden Landschaft.
+
+  \item \textbf{Connes--Consani--Moscovici 2025}
+    \cite{ConnesMoscovici2023} (arXiv:2511.22755). Grundlage der
+    Rang-eins-Störung $D^{(\lambda,N)}_{\log}$. Verankert Zweig~B's
+    Foundation-Lock und Zweig~Z's Microcluster-Konstruktion.
+
+  \item \textbf{Groskin 2026} (arXiv:2605.20224). Unabhängige
+    Implementierung der CCM-Galerkin-Matrix bei sechzehn Cutoffs
+    $c=13\ldots 67, 100$ bei hoher Präzision (Aitken-Extrapolation,
+    $\sim 10^{-334}$ Tiefe). Dient als externer Validator für die
+    Zweige~B und~Z.
+
+  \item \textbf{\'Sliwi\'nski 2026} (arXiv:2601.12133). Gegenregime:
+    in der $\lambda = N$-Konfiguration mit niedriger Präzision wird eine
+    invers-logarithmische Dissonanz-Unterschranke bewiesen,
+    $\epsilon(\lambda,N)\ge 1/(4\ln\lambda)$. Schränkt das
+    Fixed-$\lambda$-, $N\gg\lambda$-, Hochpräzisions-Setup dieser
+    Serie nicht ein; steht als Warnung gegen naive $\lambda = N$-Limites.
+
+  \item \textbf{Watson 2026} (arXiv:2602.01248), ,,The Riemann $\Xi$-function from
+    primitive Markovian cycles~I.`` Konstruiert eine Laguerre--P\'olya-Funktion
+    $\Psi$ aus endlicher reversibler Markov-Dynamik, ,,entirely Archimedean, using
+    no Euler products, primes, or arithmetic spectral input``; kein RH-Beweis --- es
+    isoliert ,,a single remaining analytic problem relating $\Psi$ to
+    $\Xi(2\cdot)$``. Eine unabhängige Triangulation der gemeinsamen Wand: von der
+    archimedischen Seite erreicht es denselben \emph{Identifikations}-Schritt (das
+    konstruierte Objekt mit $\Xi$ zu identifizieren), den die Routen dieser Serie
+    von der arithmetischen Seite erreichen (\cref{sec:common-wall-ac}).
+
+  \item \textbf{Franchi Vicer\'e 2026} (Zenodo~19546495). Beansprucht
+    einen unbedingten RH-Beweis über Apeiroeder / semi-lokale spektrale
+    Abstiegsmethode. Untersucht und als nicht tragfähig befunden: das
+    Stabilisierungsargument verwechselt punktweise mit
+    streifenuniformer Konvergenz; der Apeiroeder-Limes-Schritt ist nicht
+    rigoros; Randbedingungen ersetzen nicht den Even-Sector / MS1-Input.
+    Siehe \texttt{AKTIONSPLAN.md} \S Klasse~8.
+\end{itemize}
+
+
+% =============================================================================
+\section{Systematisch erkundete Alternativen}
+\label{sec:explored-alternatives}
+% =============================================================================
+
+Elf alternative Strategien (BI-1 bis BI-11) wurden während der
+Entwicklung systematisch erkundet. Diese erschöpfende Suche ist selbst ein
+Meta-Ergebnis: der Lösungsraum ist kartiert.
+
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|p{4.8cm}|l|l}
+\textbf{Ansatz} & \textbf{Kernidee} & \textbf{Ergebnis} & \textbf{Status} \\\hline
+BI-1: $\det_2$ / Carleman & Auf Hilbert--Schmidt-Klasse erweitern & Kein Positivitätsersatz & Widerlegt \\
+BI-2: RG-Fixpunkt & Weil-Positivität unter Skalierung & Nicht formalisierbar & Verworfen \\
+BI-3: Universelle Eigenschaft & Physikalische Plausibilität $\Rightarrow$ RH & Zu abstrakt & Verworfen \\
+BI-5: Liftprogramme & Weil $\to$ Grothendieck $\to$ RMT & Alle offen außer $\mathbb{F}_q$ & Nicht nutzbar \\
+BI-6: Implikationsring & Li $\leftrightarrow$ Weil $\leftrightarrow$ NB $\leftrightarrow$ BD & Ring existiert nicht & Widerlegt \\
+BI-7: Pöschl--Teller-Streuung & Gamma-Struktur analog zu $\xi$ & Keine Off-Line-Stabilität & Negativ \\
+\textbf{BI-8: Stabilität zweiter Ordnung} & \textbf{RH als Variationsproblem} & \textbf{Architektur korrekt} & \textbf{Realisiert} \\
+BI-9: Solitonenmodelle & Topologische Stabilität & Coulomb-Gas instabil & Widerlegt \\
+\textbf{BI-10: Bausteine} & \textbf{No-Coordination, Shift-Struktur} & \textbf{Erfolgreich wiederverwendet} & \textbf{Integriert} \\
+\textbf{BI-11: Connes 2026} & \textbf{Even Dominance über $Q_W$} & \textbf{Durchbruch} & \textbf{Kernpfad}
+\end{tabular}}
+\end{center}
+
+\noindent Der gewählte Pfad (BI-8 + BI-10 + BI-11) kombiniert die
+Variationsarchitektur, die arithmetischen Bausteine und Connes'
+spektrales Framework. Die Routen~A und~B (totale Positivität,
+kommutierender Operator) waren Ausschlüsse, die strukturelle
+Entdeckungen darstellen: Even Dominance gilt \emph{trotz} ihrer
+Abwesenheit, was verdeutlicht, dass der Mechanismus genuinen
+arithmetisch-statistischen und nicht algebraischen Charakter hat
+(Teil~II~\cite{Geiger2026partII}).
+
+
+% =============================================================================
+\section{Unabhängige Ergebnisse}
+\label{sec:independent-results}
+% =============================================================================
+
+Mehrere Ergebnisse dieses Programms sind von unabhängigem Interesse,
+ungeachtet des Status des Hauptbeweises:
+
+\begin{center}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{4.2cm}|p{3.2cm}|p{4.2cm}|l}
+\textbf{Ergebnis} & \textbf{Kontext} & \textbf{Bedeutung} & \textbf{Status} \\\hline
+\multicolumn{4}{l}{\emph{Positive Ergebnisse}} \\[2pt]
+Shift Parity Lemma & Arithmetische Trigonometrie & Jede Primzahl bevorzugt gerade Eigenfunktionen & Bewiesen \\
+No-Coordination Lemma & Multiplikative Unabhängigkeit & Arithmetischer Ersatz für Entropieterm & Bewiesen \\
+Leading-Mode Cancellation ($c = 2+\sqrt{2}$) & Resolventenanalyse & Universelle paarweise Auslöschungskonstante & Bewiesen \\
+Euler--Maclaurin: $\rho^{\mathrm{EM}} < 0$ & PNT-Asymptotik & Globaler Stabilitätsanker & Bewiesen \\
+$33$ endliche CAP-Diagnostiken & Intervallarithmetik & Bedingte Brücke & Evidenz \\
+Konzentrations-Lemma & Even-Dominance-Bildmaß & Keine feste Primzahlmenge kontrolliert einen positiven Anteil der Primmasse & Bewiesen \\
+Endliche Sylvester-Inertia ($\nu_-=0$) & Intervallarithmetik, $\lambda=100$ & Finite Even Dominance rigoros, kein Symbol nötig & Verifiziert \\
+Residue-Calibration-Kanal & Weyl-Funktions-Diagnostik & Eigenwert-Konv.\ $\neq$ Weyl-Konv.; Kanal ist $-D'/D$, $\det_{\mathrm{reg}}\!\to C\Xi$ & Diagnostik \\[4pt]
+\multicolumn{4}{l}{\emph{Negative Ergebnisse}} \\[2pt]
+Obstruktionen K1--K4 & Sackgassen-Analyse & Kartiert unmögliche Strategien & Dokumentiert \\
+Kein absolutes $\mathrm{PF}_\infty$ für $A_\lambda$ & Primzahl-Shift-Multiplikator & $M(\xi)$ negativ auf $\sim49\,\%$ des Definitionsbereichs & Bewiesen \\
+Kein universeller kommutierender Operator & Sturm--Liouville-Suche & Kern von $[T, D_N(r)]$ ist $\{c \cdot I\}$ & Bewiesen \\[4pt]
+\multicolumn{4}{l}{\emph{Strukturelle Einsichten}} \\[2pt]
+Invertierte-Hesse-Struktur & YM/TU/RH-Vergleich & RH ist ein Maximum, kein Minimum & Bestätigt \\
+Interdisziplinärer Katalog & Regularisierung & $11$ Felder teilen Spurklassen-Obstruktion & Dokumentiert
+\end{tabular}}
+\end{center}
+
+\noindent Die negativen Ergebnisse schützen zukünftige Forschende davor,
+Sackgassen-Strategien zu wiederholen. Das Shift Parity Lemma, die
+Obstruktionsanalyse (K1--K4) und die Mellin-Abklingbarriere sind
+unabhängig publizierbar.
+
+
+% =============================================================================
+\section{Hypothesen-Korrekturen im iterativen Forschungsprozess}
+\label{sec:sammler-disziplin}
+% =============================================================================
+
+Die iterative Entwicklung brachte mehrere Hypothesen-Korrekturen hervor,
+die hier als Dokumentation ehrlicher Forschungspraxis festgehalten werden
+(Sammler-Disziplin).
+
+\subsection{GF1-Korrekturkette (Iterationen 15--29)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|l|l}
+\toprule
+\textbf{Iter.} & \textbf{Hypothese} & \textbf{Status} \\
+\midrule
+15 & $C_m \approx 8$ universell & falsifiziert (Randeffekt) \\
+18 & $C_m(\lambda=5) \approx 4{,}3$ & falsifiziert (kein Plateau) \\
+19 & $\mathrm{sLI} \sim 1/N$ & bestätigt, aber ohne $\lambda$-Skalierung \\
+20 & $N \cdot \mathrm{sLI} \approx 329$ universell & falsifiziert \\
+\textbf{27} & $\mathbf{\mathrm{sLI} = C^*\,\lambda/(NL) + o(\cdot)}$ & bestätigt für $\lambda=5,7$, $C^* = 64\pi^2/3$ \\
+28 & $\lambda=3$ All-$\lambda$-Prüfung & Niedrigband-Ausreißer; Zwei-Regime-Guardrail \\
+29 & $\lambda=11$-Diskriminator und Endpoint-Kern-Audit & $C_{\mathrm{eff}}\approx168$ bei $N=200$; einfache Endpoint-Faktorisierung falsifiziert \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+
+\subsection{\texorpdfstring{B-1-Korrekturen und RH-neutrale Form von $c_\Xi$}{B-1-Korrekturen und RH-neutrale Form von cXi}}
+
+Die Hadamard-Konstante $c_\Xi$ wurde zunächst in der RH-spezialisierten
+Form $\sum_{k\geq 1} 1/\gamma_k^2$ geschrieben (Summe über die
+Imaginärteile der Nullstellen auf der kritischen Geraden). Ein externes
+Audit korrigierte dies zur RH-neutralen Form
+$c_\Xi = -\tfrac{1}{2}\sum_\rho 1/(\rho-\tfrac{1}{2})^2$
+(Summe über alle nichttrivialen Nullstellen). Dies ist eine
+Sammler-Disziplin-Korrektur: die RH-neutrale Form ist mathematisch
+allgemeiner und setzt nicht voraus, was bewiesen werden soll.
+
+
+\subsection{Der Relative-Determinante-Bypass: vorgeschlagen und widerlegt (2026)}
+
+In der Phase 2026 wurde die relative Determinante (Krein-Spektral-Shift)
+$-\partial_z\log[\det(A-z)/\det(A^0-z)]$ intern als die ,,richtige Technologie``
+vorgeschlagen, um den Euler-Pol-Kamm in der oberen Halbebene zu entfernen und so die
+Fortsetzungs-Wand zu umgehen (\cref{rem:wall-folklore}). Ein anschließender Test am
+echten Connes--Moscovici-Prolaten-Hintergrund widerlegte dies als Bypass: der
+prolate $A^0$ ist selbst Herglotz (kammfrei), sodass nichts zu kürzen ist
+($\det(\text{Euler}\cdot\text{prolat})/\det(\text{prolat})=\det(\text{Euler})$ behält
+den Kamm), und die einzige kammfreie Alternative braucht einen selbstadjungierten
+Prim-Faktor, der zirkulär ist ($=$~RH). Der Vorschlag wird daher als Bypass
+zurückgezogen. Der \emph{separate} Befund --- dass der Determinanten-Kanal $-D'/D$,
+nicht bloße Eigenwert-Konvergenz, das korrekte zu konvergierende Objekt ist
+($\det_{\mathrm{reg}}(A-z)\to C\,\Xi$) --- bleibt gültig
+(\cref{sec:independent-results}); beide dürfen nicht vermengt werden.
+
+Eine zweite Korrektur: ein internes Phasen-Lemma
+$\Theta_\sigma=\xi(\sigma-\mathrm{i}z)/\xi(\sigma+\mathrm{i}z)$ war vorzeichenfalsch
+(seine Pole kommen aus dem Nenner, sodass es unter RH Pole \emph{hat}); das korrekte
+Objekt ist die reziproke Phase
+$\widehat\Theta_\sigma=\xi(\sigma+\mathrm{i}z)/\xi(\sigma-\mathrm{i}z)$, mit
+RH~$\Leftrightarrow\widehat\Theta_\sigma$ polfrei in der oberen Halbebene für alle
+$\sigma>\tfrac12$.
+
+
+\subsection{Wert der Korrektur-Dokumentation}
+
+Diese Korrekturen zeigen, dass der Forschungsprozess selbstkorrigierend
+ist. Jede Korrektur schärfte das theoretische Gerüst: die GF1-Kette
+bewegte sich von einer naiven Konstante ($C_m \approx 8$) über mehrere
+Zwischenformen zum $\lambda=5,7$-Boundary-Moment-Benchmark
+$\mathrm{sLI} \sim C^*\lambda/(NL)$; der $\lambda=3$-Sweep und der offene
+$\lambda=11$-Diskriminator verhindern eine All-$\lambda$-Satzlesart, und die $c_\Xi$-Korrektur entfernte eine
+zirkuläre RH-Abhängigkeit aus einer Schlüsselkonstante.
+
+
+% =============================================================================
+\section{Zusammenfassung}
+\label{sec:summary}
+% =============================================================================
+
+Teil~IV liefert die Cross-Route-Perspektive: die drei aktiven Zweige
+teilen ein Galerkin-Muster (Fixed-Parameter positiv, Uniform-Limit offen),
+und zwei isolierte offene Beweisslots (B-1 Log-Krümmung, GF1
+Faktor-16-Identifikation) sind die konkreten analytischen Ziele, die
+wohlgestellte offene Probleme bleiben. \Cref{sec:sharpened-wall} ergänzt dann eine
+\emph{heuristische} Kritikalitäts-Linse ($\mathrm{RH}\Leftrightarrow\Lambda=0$), die
+die Routen zu exakt-strukturellen Mechanismen hin neu gewichtet (ohne die
+Marge-artigen Slots zu widerlegen), lokalisiert die gemeinsame Wand als die
+analytische Fortsetzung über $\Re s=1$, dokumentiert eine berechenbare
+Laguerre--P\'olya/Herglotz-Diagnostik (ein klassisches Kriterium als
+Test-Instrument) und berichtet vier Schließungen \emph{konkreter Konstruktionen}
+--- die OS-Reflexion in natürlicher Form, das naive Möbius-$L_s^-$, die
+Toeplitz-Symbol-Submethode und den relative-Determinante-Bypass --- keine davon
+schließt eine Route oder RH. Die
+ruhenden und externen Routen werden der Vollständigkeit halber
+katalogisiert; die Hypothesen-Korrektur-Dokumentation liefert Transparenz.
+Der komprimierte Atlas und die Gesamtbewertung folgen in
+Teil~V~\cite{Geiger2026partV}.
+
+
+\bigskip
+\noindent\textbf{Danksagungen.} Berechnungen wurden auf einem
+Mac~Studio (Apple M1~Max, 32~GB) und einem Hetzner CCX13 Cloud-Server
+(2~dedizierte vCPU, 8~GB) durchgeführt. Die Intervallarithmetik-Bibliothek
+mpmath wurde von Fredrik Johansson entwickelt.
+
+
+\section*{KI-Offenlegung}
+
+Dieses Manuskript wurde in umfangreicher Zusammenarbeit mit
+KI-Sprachmodellen entwickelt (Claude, Anthropic; Copilot,
+Microsoft/GitHub; Gemini, Google DeepMind). KI trug zur konzeptuellen
+Exploration, analytischen Arbeit, Literaturrecherche, zum Schreiben und
+zur kritischen Überprüfung bei. Der Autor, Lukas Geiger, konzipierte die
+Forschungsrichtung, brachte Domänenexpertise ein und übte die endgültige
+redaktionelle Autorität aus. Der Autor übernimmt die volle und alleinige
+wissenschaftliche Verantwortung für alle Inhalte, einschließlich
+etwaiger Fehler.
+
+
+\bibliographystyle{plain}
+\bibliography{fst-rh-references}
+
+\end{document}

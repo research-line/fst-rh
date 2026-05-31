@@ -1,0 +1,431 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\emergencystretch=3em
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{needspace}
+\usepackage[capitalise,noabbrev,ngerman]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Korollar}
+\newtheorem{conjecture}[theorem]{Vermutung}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Bemerkung}
+
+\title{Die Riemannsche Vermutung: Conclusio\\[4pt]
+\large Teil~V einer fünfteiligen Serie}
+\author{Lukas Geiger\\
+\small Bernau, Deutschland\\
+\small ORCID: \href{https://orcid.org/0009-0005-7296-1534}{0009-0005-7296-1534}}
+\date{\today}
+
+\begin{document}
+\overfullrule=0pt
+\maketitle
+
+\begin{abstract}\footnotesize
+Dieses Paper schließt eine fünfteilige Untersuchung der Riemannschen
+Vermutung durch Spektralanalyse, arithmetische Thermodynamik und die
+Weil'sche quadratische Form ab:
+\begin{description}[font=\bfseries,leftmargin=2em]
+  \item[Teil~I \cite{Geiger2026partI}:] Grundlagen und Obstruktionen.
+  \item[Teil~II \cite{Geiger2026partII}:] Even Dominance (Zweig~A).
+  \item[Teil~III \cite{Geiger2026partIII}:] Spektrale Routen
+    (Zweige~B und~Z).
+  \item[Teil~IV \cite{Geiger2026partIV}:] Routenübergreifende Synthese.
+  \item[Teil~V (dieses Paper):] Conclusio.
+\end{description}
+
+\noindent Wir präsentieren den kondensierten Atlas: drei unabhängige
+bedingte Reduktionen der RH (Even Dominance, Hadamard Strip, CCM
+Microcluster), drei strukturelle Identifikationen
+($c_\Xi \approx 0.0231$, $C^* = 64\pi^2/3$ als $\lambda=5,7$-
+Boundary-Moment-Benchmark mit offenem $\lambda=11$-Diskriminator,
+$g_0(m) \approx 2\pi/\log\gamma_m$), zwei
+bedingte Theoreme (B-1, GF1) und zwei
+isolierte offene Beweis-Slots. Der Serientitel bleibt \glqq From
+Landscape to Atlas\grqq{}; die Heraufstufung zu \glqq From Atlas to
+Proof\grqq{} wird durch ein Fünf-Tore-Audit gesteuert, das nur durch
+einen substantiellen mathematischen Durchbruch ausgelöst wird.
+
+\medskip\noindent
+\textbf{Serienstatus (v3.0, 26.05.2026; Kritikalitäts-Linsen-Update 31.05.2026).}
+Fünfteilige Serie; alle drei bedingten Reduktionen unverändert seit v2.2.
+Nur strukturelle Reorganisation; keine neuen Beweisbehauptungen. Eine Arbeitsphase
+2026 ergänzt eine \emph{heuristische} Kritikalitäts-Linse
+($\mathrm{RH}\Leftrightarrow\Lambda=0$), eine schärfere Lokalisierung der
+gemeinsamen Wand und eine berechenbare Laguerre--P\'olya/Herglotz-Diagnostik
+(Teil~IV~\cite{Geiger2026partIV}); diese gewichten die Prioritäten neu und schließen
+vier \emph{konkrete Konstruktionen}, machen aber keine neue Beweisbehauptung.
+\end{abstract}
+
+{\footnotesize
+\noindent\textbf{MSC 2020:} 11M26, 11M36, 47A75\\
+\textbf{Schlüsselwörter:} Riemannsche Vermutung, bedingte Reduktion,
+Atlas, Bewertung, offene Probleme, Ausblick
+}
+
+\clearpage
+
+
+% =============================================================================
+\section{Atlas-Übersicht}
+\label{sec:atlas}
+% =============================================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|l|l|l|l}
+\textbf{Route} & \textbf{Sektor} & \textbf{Status} & \textbf{Schlüsselergebnis} & \textbf{Paper} \\\hline
+A (Even Dom.) & Even (Teil~II) & bedingt & A1--A8-Kette + GF1-Benchmark mit $C^* = 64\pi^2/3$ für $\lambda=5,7$; $\lambda=11$ offen & \cite{Geiger2026partII} \\
+B (Hadamard) & Spektral (Teil~III) & bedingt & $A_\lambda \leq 1.0063$ unter Log-Krümmungskontrolle & \cite{Geiger2026partIII} \\
+Z (CCM) & Spektral (Teil~III) & bedingt & C2ca.1 + C2ca.2 + C2ca.5; $g_0(m) = 2\pi/\log\gamma_m$ & \cite{Geiger2026partIII, Geiger2026zookeeper} \\
+Routenübergreifend & Kombiniert (Teil~IV) & empirisch & gemeinsames Galerkin-Muster; 2026 Kritikalitäts-Linse + geschärfte gemeinsame Wand ($\Re s=1$-Fortsetzung) & \cite{Geiger2026partIV} \\
+\end{tabular}}
+\end{center}
+
+
+% =============================================================================
+\section{Ergebnis-Zusammenfassung}
+\label{sec:results}
+% =============================================================================
+
+\subsection{Drei strukturelle Identifikationen}
+
+\begin{enumerate}
+  \item \textbf{Hadamard-Krümmungskonstante (RH-neutral):}
+    \[
+      c_\Xi = -\frac{1}{2}\sum_\rho
+              \frac{1}{(\rho-\tfrac{1}{2})^2}
+            \approx 0.0231.
+    \]
+    Unter der RH spezialisiert sich dies zu $\sum_{k\geq 1} 1/\gamma_k^2$.
+    (Teil~III~\cite{Geiger2026partIII}.)
+
+  \item \textbf{Randmoment-Konstante:}
+    $C^* = 64\pi^2/3 \approx 210.55$,
+    identifiziert als Kandidat über
+    $16\int_0^\infty t^2/\sinh^2(t/2)\,dt$; der Faktor~$16$ wird
+    als aus der DZT2-Leiternormalisierung stammend vermutet. Dies ist
+    ein $\lambda=5,7$-Benchmark; $\lambda=3$ bleibt als eigener
+    Niedrigband-Guardrail ausgewiesen, und $\lambda=11$ bleibt nach dem
+    $N=200$-Punkt ein offener Diskriminator.
+    (Teil~II~\cite{Geiger2026partII}.)
+
+  \item \textbf{Hecke-normalisierte Lücke:}
+    $g_0(m) \approx 2\pi/\log\gamma_m$, klassisch
+    Montgomery--Odlyzko.
+    (Teil~III~\cite{Geiger2026partIII}.)
+\end{enumerate}
+
+\subsection{Zwei bedingte Theoreme}
+
+\begin{itemize}
+  \item \textbf{Theorem B-1} (Teil~III): Unter uniformer
+    Log-Krümmungskontrolle $H_\lambda(\delta) \leq K\delta^2$ mit
+    $K \leq 1.8\times 10^{-3}$:
+    \[
+      A_\lambda(\delta)
+      \leq B_\Xi \cdot \exp(K/4) \leq 1.0063,
+    \]
+    wobei $B_\Xi = \xi(0)/\xi(\tfrac{1}{2}) = 1.00579\ldots$
+    analytisch ist.
+
+  \item \textbf{Theorem GF1} (Teil~II): Unter eigenmodengewichteter
+    Kernkonvergenz, die den effektiven Faktor~$16$ erzeugt:
+    \[
+      \mathrm{sLI}
+      = \frac{64\pi^2}{3}\,\frac{\lambda}{NL} + o(\cdot).
+    \]
+    Dies ist für das nicht-ausnahmsartige konvergierte Regime formuliert;
+    der $\lambda=3$-Sweep und der offene $\lambda=11$-Diskriminator
+    verhindern eine All-$\lambda$-Lesart.
+\end{itemize}
+
+
+\subsection{Zwei isolierte offene Beweis-Slots}
+
+\begin{enumerate}
+  \item \textbf{B-1-Slot:} Uniforme Log-Krümmungskontrolle aus der
+    Foundation-Lock-Struktur. Schließt Zweig~B.
+  \item \textbf{GF1-Slot:} Kernkonvergenz + Faktor-16-Identifikation
+    aus DZT2-Definitionen. Schließt den nicht-ausnahmsartigen
+    Boundary-Moment-Benchmark von Zweig~A, mit separatem Niedrigband-Ast.
+\end{enumerate}
+
+
+% =============================================================================
+\section{Lokalisierungstabellen}
+\label{sec:localization}
+% =============================================================================
+
+\subsection{Li-Koeffizienten-Perspektive}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|l|l|l}
+\textbf{Schritt} & \textbf{Aussage} & \textbf{Status} & \textbf{Methode} \\\hline
+S1 & Definition von $\xi(s)$, Funktionalgleichung & bewiesen & Definition \\
+S2 & Li-Koeffizienten via Bombieri--Lagarias & bewiesen & \cite{BombieriLagarias1999} \\
+S3 & Zerlegung $\lambda_n = \lambda_n^{(\infty)} + \lambda_n^{(\mathrm{fin})}$ & bewiesen & Teil~I \\
+S4 & Archimedische Dominanz: $\lambda_n^{(\infty)} \sim \frac{n}{2}\log n$ & bewiesen & Stirling \\
+\textbf{S5} & \textbf{$\lambda_n \geq 0$ für alle $n \geq 1$} & \textbf{OFFEN}${}^{\ast}$ & \textbf{$\Longleftrightarrow$ RH} \\
+S6 & Alle Nullstellen auf $\Re(s) = 1/2$ & $\Leftrightarrow$ S5 & Li (1997) \\
+S7 & Primzahlzählung: $\pi(x) = \mathrm{Li}(x) + O(\sqrt{x}\log x)$ & $\Leftarrow$ S6 & von Koch
+\end{tabular}%
+}
+\end{center}
+
+{\footnotesize\noindent${}^{\ast}$ S5 ist äquivalent zur RH (Li, 1997).
+Die vorliegende Serie gibt nur bedingte Reduktionen.\par}
+
+
+\subsection{Even-Dominance-Perspektive}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|l|l|l}
+\textbf{Schritt} & \textbf{Aussage} & \textbf{Status} & \textbf{Methode} \\\hline
+E1 & Weil'sche explizite Formel & bewiesen & Weil (1952) \\
+E2 & Weil'sche quadratische Form $\mathrm{QW}_\lambda$ & bewiesen & \cite{Connes2026} \\
+E3 & Gerade/ungerade Zerlegung von $\mathrm{QW}_\lambda$ & bewiesen & Teil~II \\
+E4 & Shift Parity Lemma: jede Primzahl bevorzugt gerade & bewiesen & Teil~II \\
+E5 & Lückendiagnostik bei $33$ Werten, $\lambda \leq 1{,}300{,}000$ & Evidenz / bedingt & Teil~II \\
+E5b & Euler--Maclaurin: $\rho^{\mathrm{EM}} < 0$ für $\lambda \geq 1.2\mathrm{M}$ & bewiesen & Teil~II \\
+\textbf{E6} & \textbf{Kumulativer Schritt: Even Dominance für alle $\lambda$} & \textbf{bedingte Reduktion} & \textbf{= A6} \\
+E7 & Connes' Theorem~6.1 + Hurwitz-Brücke $\Rightarrow$ RH & bedingt auf E6 & \cite{Connes2026}
+\end{tabular}%
+}
+\end{center}
+
+
+% =============================================================================
+\section{Verbleibende offene Probleme}
+\label{sec:open-problems}
+% =============================================================================
+
+\begin{remark}[OP1: Kumulative Even Dominance --- reduziert auf die untere Schranke des ungeraden Sektors (v2.2)]
+Das kumulative Even-Dominance-Problem ist auf eine einzelne spektrale
+Frage reduziert: eine quantitative untere Schranke für $\lambda_1^-(\lambda)$
+(Asymptotic Variational Gap Conjecture, Teil~II).
+\end{remark}
+
+\begin{remark}[OP2 gelöst: Einfachheit von $\lambda_1^+$]
+Für alle $33$ Zertifikatswerte durch Intervallarithmetik als einfach
+zertifiziert. Die intra-gerade Lücke wächst wie $\sim\!\sqrt{\lambda}$
+(Teil~II).
+\end{remark}
+
+\begin{conjecture}[OP3: Analytischer Beweis der Indexrigidität]
+Der negative Trägheitsindex von $K_\sigma^{\mathrm{sym}}$ ist exakt~$2$
+für alle hinreichend großen $N$ und
+$\sigma \in (1, \sigma_{\max})$.
+\end{conjecture}
+
+\begin{conjecture}[OP4: Nuklearer Transferoperator für $\xi$]
+Man konstruiere einen separablen Hilbertraum $\mathcal{V}$ und eine
+nukleare Familie $s \mapsto \mathcal{L}_s$ mit
+$\xi(s)/\xi(0) = \det(I - \mathcal{L}_s)$, Spektralradius $< 1$ für
+$\Re(s) > 1/2$ und Eigenwert $1$ an den Nullstellen.
+\end{conjecture}
+
+\begin{conjecture}[OP5: Nevanlinna-Eigenschaft von $\log\det_2$]
+Ist $\log\det_2(I - zR)$ genau dann eine Nevanlinna-Funktion, wenn alle
+Nullstellen auf der reellen Achse liegen?
+\end{conjecture}
+
+\noindent OP2 ist gelöst. OP1 ist auf einen einzelnen asymptotischen
+Schritt reduziert. OP3--OP5 bleiben strukturelle Fragen.
+
+
+% =============================================================================
+\section{Bewertung und Ausblick}
+\label{sec:outlook}
+% =============================================================================
+
+\subsection{Was erreicht wurde}
+
+\begin{enumerate}
+  \item Eine \textbf{vollständige strukturelle Analyse} des
+    eichtheoretischen Ansatzes (Teil~I: R1--R9, K1--K4).
+  \item Das \textbf{Shift Parity Lemma} und \textbf{$33$ Finite-Range-Diagnostiken}
+    mit Computerunterstützung (Teil~II).
+  \item Die \textbf{bedingte Reduktion A1--A8} mit analytischem
+    Rückgrat (M1$''$, Euler--Maclaurin, PNT-Transfer) und dem
+    GF1-Boundary-Moment-Benchmark mit $C^* = 64\pi^2/3$ für
+    $\lambda=5,7$ (Teil~II).
+  \item Zwei \textbf{unabhängige spektrale bedingte Reduktionen}
+    (Zweige~B und~Z, Teil~III).
+  \item Die \textbf{routenübergreifende Synthese} mit Identifikation
+    des gemeinsamen Galerkin-Musters und zweier isolierter Beweis-Slots
+    (Teil~IV).
+  \item \textbf{Fünfzehn ausgeschlossene Pfade} (spektral + CCM) und
+    \textbf{fünf methodische Sackgassen} (Teile~III--IV).
+  \item Eine 2026er \textbf{Kritikalitäts-Linse} ($\mathrm{RH}\Leftrightarrow\Lambda=0$,
+    heuristisch), die die Routen zu exakt-strukturellen Mechanismen hin neu
+    gewichtet; eine schärfere \textbf{Lokalisierung der gemeinsamen Wand} (die
+    analytische Fortsetzung über $\Re s=1$); eine berechenbare
+    \textbf{Laguerre--P\'olya/Herglotz-Diagnostik}; und vier Schließungen
+    \emph{konkreter Konstruktionen} (keine Routen) --- alles ohne Änderung des
+    Status der bedingten Reduktion (Teil~IV~\cite{Geiger2026partIV}).
+\end{enumerate}
+
+
+\subsection{Aktueller Atlas-Status}
+
+Der Serientitel bleibt \glqq From Landscape to Atlas: Multi-Route
+Cartography of an Ongoing Expedition Toward the Riemann Hypothesis.\grqq{}
+Alle drei lebenden Routen sind bedingte Reduktionen; kein einzelner Zweig
+hat unter dem Audit-Protokoll des Projekts das Niveau eines bedingten
+Beweises erreicht.
+
+\textbf{Heraufstufungs-Protokoll.} Die Titelmigration von \glqq Atlas\grqq{}
+zu \glqq From Atlas to Proof\grqq{} wird durch ein Fünf-Tore-Audit
+gesteuert:
+(1)~einzelne benannte Hypothese $H$;
+(2)~jeder Schritt von $H$ zur RH auf Theorem-Niveau;
+(3)~zwei unabhängige Reviews einschließlich eines skeptischen Widerleger;
+(4)~2--3 Tage Abkühlungsphase;
+(5)~expliziter Decision-Record-Eintrag.
+Standard: Atlas bleibt.
+
+
+\subsection{Zukunftsszenarien}
+
+\begin{itemize}
+  \item \textbf{Ein Zweig stirbt} (seine offene Hypothese widerlegt):
+    als tote Route dokumentiert; die anderen beiden laufen weiter.
+  \item \textbf{Ein Zweig reift} (bedingungslos): dieser Beweis steht
+    als RH; andere Zweige werden zur unabhängigen Verifikation beibehalten.
+  \item \textbf{Beide/alle drei reifen}: selten, aber mathematisch
+    wertvoll als Multi-Routen-Verifikation.
+  \item \textbf{Keiner reift, aber partieller Fortschritt geht weiter}:
+    das Forschungsprogramm wird fortgesetzt; die Landscape bewahrt das
+    Audit. Dies ist der Standard-Ausblick.
+\end{itemize}
+
+
+\subsection{Ausblick}
+
+Konkrete nächste Schritte (nicht zeitgebunden):
+\begin{itemize}
+  \item Rigorose Herleitung der zwei offenen Beweis-Slots (B-1
+    Log-Krümmung, GF1 Faktor-16).
+  \item Klärung des $\lambda=11$-GF1-Diskriminators, Validierung bei
+    höheren $\lambda$ und theoremstarke Trennung des
+    $\lambda=3$-Niedrigband-Asts.
+  \item $\kappa_\infty$-Asymptotik für $\lambda \to \infty$.
+  \item Fünf-Tore-Audit, falls ein Slot geschlossen wird.
+  \item Entwicklung der exakt-strukturellen Linien (M~$=$~Bost--Connes\,$\leftrightarrow$\,Meyer;
+    P-A~$=$~globale adelische Trace-Route), die die 2026er Kritikalitäts-Linse
+    aufwertet, parallel zu den zwei Marge-artigen Beweis-Slots
+    (Teil~IV~\cite{Geiger2026partIV}).
+\end{itemize}
+
+
+% =============================================================================
+\section{Verbindungen zur breiteren Landschaft}
+\label{sec:connections}
+% =============================================================================
+
+\subsection{Connes' Programm}
+
+Die Arbeit in dieser Serie fügt sich direkt in Connes' spektralen Ansatz
+zur RH~\cite{Connes2026} ein. Das Shift Parity Lemma (Teil~II) liefert
+analytische Evidenz für die Even-Dominance-Hypothese (Theorem~6.1). Der
+I-1 Normal-Family Reframe (Teil~III) zerlegt Wall~(ii) in eine einzelne
+benannte Bedingung~(ii-a). Das CCM-Microcluster-Programm (Teil~III)
+greift dieselbe Wand über das Fourier-Modell an.
+
+\subsection{Nyman--Beurling--Baez-Duarte}
+
+Das Li-Kriterium, das Weil'sche Positivitätskriterium, das
+Nyman--Beurling-Kriterium und das Baez-Duarte-Kriterium sind alle
+äquivalent zur RH. Direkte Implikationen zwischen ihnen (ohne den Umweg
+über die RH) sind nur in zwei Fällen bekannt: Weil $\Rightarrow$ Li
+(\cite{BombieriLagarias1999}) und Nyman--Beurling $\Rightarrow$
+Baez-Duarte (trivial).
+
+\subsection{Die Spurklassen-Obstruktion als universelles Muster}
+
+Obstruktion~K4 (Spurklassen-Versagen bei $\Re(s) = 1/2$, Teil~I) tritt
+quer durch QFT (UV-Divergenzen), statistische Mechanik (thermodynamischer
+Limes) und NCG (Zetafunktions-Regularisierung) auf. Der
+Even-Dominance-Ansatz umgeht dies, indem er mit endlich-dimensionalen
+Galerkin-Blöcken statt mit unendlich-dimensionalen Transferoperatoren
+arbeitet.
+
+
+% =============================================================================
+\section{Gesamtzusammenfassungs-Tabelle}
+\label{sec:full-summary}
+% =============================================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|c|l}
+\textbf{Beitrag} & \textbf{Status} & \textbf{Paper} \\\hline
+Thermodynamischer Formalismus für $\zeta$ & etabliert & I \\
+9 unbedingte strukturelle Resultate (R1--R9) & bewiesen & I \\
+4 ausgeschlossene Pfade (K1--K4) & bewiesen & I \\
+Shift Parity Lemma & bewiesen (analytisch) & II \\
+Lückendiagnostik ($33$ Werte, $\lambda \leq 1{,}300{,}000$) & Evidenz / bedingt & II \\
+Leading-Mode Cancellation ($c = 2+\sqrt{2}$) & bewiesen & II \\
+Euler--Maclaurin: $\rho^{\mathrm{EM}}(13) < 0$ & bewiesen & II \\
+GF1-Benchmark: $\mathrm{sLI} \sim C^*\lambda/(NL)$ für $\lambda=5,7$; $\lambda=3$ separat, $\lambda=11$ offen & bedingt (Thm GF1) & II \\
+I-1 Normal-Family Reframe: (ii) $\to$ (ii-a) & rigoros & III \\
+Foundation-Lock + konvergierte Empirie & rigoros + numerisch & III \\
+Theorem B-1: $A_\lambda \leq 1.0063$ (bedingt) & bedingt & III \\
+$c_\Xi$ Hadamard-Krümmung (RH-neutral) & analytisch & III \\
+CCM drei C2ca-Inputs & bedingte Reduktion & III \\
+6 ausgeschlossene spektrale + 9 ausgeschlossene CCM-Pfade & dokumentiert & III \\
+Routenübergreifendes Galerkin-Muster & empirisch & IV \\
+11 systematisch explorierte Alternativen & dokumentiert & IV \\
+Hypothesenkorrektur-Kette (GF1 Iter 15--27) & dokumentiert & IV \\
+\textbf{Kumulativer Schritt (A6)} & \textbf{bedingte Reduktion (v2.2)} & II \\
+\textbf{Riemannsche Vermutung} & \textbf{bedingte Reduktion (v2.2)} & I--V
+\end{tabular}%
+}
+\end{center}
+
+
+\bigskip
+\noindent\textbf{Danksagungen.} Berechnungen wurden auf einem Mac~Studio
+(Apple M1~Max, 32~GB) und einem Hetzner CCX13 Cloud-Server (2~dedizierte
+vCPU, 8~GB) durchgeführt. Die Intervallarithmetik-Bibliothek mpmath wurde
+von Fredrik Johansson entwickelt.
+
+
+\section*{KI-Offenlegung}
+
+Dieses Manuskript wurde in intensiver Zusammenarbeit mit KI-Sprachmodellen
+(Claude, Anthropic; Copilot, Microsoft/GitHub; Gemini, Google DeepMind)
+erstellt. KI trug zu konzeptioneller Exploration, analytischer Arbeit,
+Literaturrecherche, Schreiben und kritischer Überprüfung bei. Der Autor,
+Lukas Geiger, konzipierte die Forschungsrichtung, brachte Fachexpertise
+ein und übte die redaktionelle Letztverantwortung aus. Der Autor trägt die
+alleinige wissenschaftliche Verantwortung für alle Inhalte, einschließlich
+etwaiger Fehler.
+
+
+\bibliographystyle{plain}
+\bibliography{fst-rh-references}
+
+\end{document}

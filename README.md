@@ -1,14 +1,14 @@
-# From Landscape to Proof: The Even-Dominance Route to the Riemann Hypothesis
+# From Landscape to Atlas: Multi-Route Cartography of an Ongoing Expedition Toward the Riemann Hypothesis
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19035640.svg)](https://doi.org/10.5281/zenodo.19035640)
 
-A three-part Landscape and audit-trail series for the even-dominance route to
-the Riemann Hypothesis via Connes' spectral program (arXiv:2602.04022). It
-documents the proof path, failed routes, obstruction analysis, computational
-certificates, and the transition from the broader research landscape to the
-separately published proof-only extraction.
+A five-part Landscape/Atlas and audit-trail series mapping multiple routes
+toward the Riemann Hypothesis via Connes' spectral program (arXiv:2602.04022).
+It documents the explored routes, failed paths, obstruction analysis,
+computational certificates, and the transition from the broader research
+landscape to the separately published proof-only extraction (Even Dominance).
 
-Proof-only extraction: https://doi.org/10.5281/zenodo.20011910
+Proof-only extraction (Even Dominance, Concept-DOI): https://doi.org/10.5281/zenodo.19764771
 
 This public repository is the curated reproducibility package for the
 Landscape series. It intentionally includes the paper sources, public scripts,
@@ -18,35 +18,39 @@ private until a full project closeout permits release.
 
 **Submitted to:** Communications in Mathematics (cm:17829, 2026-03-27)
 
-## Current Status (v2.5, 2026-05-24 sync)
+## Current Status (v3.1, 2026-05-31 sync)
 
-The public paper package now reflects the v2.3 status correction, the v2.4
-parallel-programme update, and the v2.5 Part-III excluded-paths catalog
-extension. The finite range `100 <= lambda <= 1,300,000` remains strong
-numerical evidence and a conditional finite bridge; theorem-level finite even
-dominance still depends on validating the odd-sector tail lower bound for
-`lambda_1^-`. The asymptotic step is reduced to the
+The series has been restructured from the former three-part Trilogy into a
+five-part Atlas (Parts I-V; structural reorganization only -- the conditional
+reduction status is unchanged). The finite range `100 <= lambda <= 1,300,000`
+remains strong numerical evidence and a conditional finite bridge; theorem-level
+finite even dominance still depends on validating the odd-sector tail lower
+bound for `lambda_1^-`. The asymptotic step is reduced to the
 `Asymptotic Variational Gap Conjecture`.
 
-Part III now records five post-v2.0 spectral-programme routes that were
-explicitly excluded in the public audit trail: uniform-gap eigenvalue ordering,
-naive strip localisation, edge-profile factorisation, literal MS1 cluster
-splitting, and the retracted low-precision strip-amplification readings. The
+Parts III-IV now carry the spectral programme explicitly: Part III documents the
+live spectral routes (Branch B: I-1 normal-family / Hadamard-strip, wall (ii-a);
+Branch Z: CCM microcluster closure, MS2), while Part IV collects the cross-route
+synthesis, dormant/external routes, and the excluded-paths catalog (uniform-gap
+eigenvalue ordering, naive strip localisation, edge-profile factorisation,
+literal MS1 cluster splitting, retracted low-precision strip readings). The
 common obstruction pattern is the near-degenerate minimum-eigenvector cluster
 of `QW_N`, which explains why productive routes have to work with cluster /
 quotient reformulations and growth-adapted normalisations rather than with
 uniform-gap or thin-localisation heuristics.
 
-## Paper Series (3 Parts, EN + DE)
+## Paper Series (5 Parts, EN + DE)
 
-| Paper | File | Pages (EN/DE) | Content |
-|-------|------|---------------|---------|
-| **Part I** | `RH_I_Foundations` | 14 / 14 | Foundations and Obstructions: thermodynamic landscape (R1-R9), dead ends (K1-K4), reorientation to Connes |
-| **Part II** | `RH_II_Even_Dominance` | 51 / 53 | **Main paper.** Shift Parity Lemma, 33 finite-range diagnostics, the M1'' variational framework, Leading-Mode Cancellation (c=2+sqrt(2)), Higher-Mode Decay (Lemma B), Resolvent Truncation (Lemma C), PNT Transfer, Euler-Maclaurin Proposition, Direct Frontier-Dominance, and the v2.3 status revision |
-| **Part III** | `RH_III_Conclusio` | 22 / 21 | Synthesis of the proof architecture, revised v2.2 status table, explored alternatives (BI-1..11), the v2.4 parallel programme, the v2.5 excluded-paths catalog, independent results, and the remaining asymptotic gap problem |
+| Paper | File | Pages (EN) | Content |
+|-------|------|------------|---------|
+| **Part I** | `RH_I_Foundations` | 15 | Foundations, obstructions, and reorientation: thermodynamic landscape (R1-R9), dead ends (K1-K4), reorientation to Connes |
+| **Part II** | `RH_II_Even_Dominance` | 55 | **Main route (A).** Shift Parity Lemma, 33 finite-range diagnostics, the M1'' variational framework, Leading-Mode Cancellation (c=2+sqrt(2)), Higher-Mode Decay (Lemma B), Resolvent Truncation (Lemma C), PNT Transfer, Euler-Maclaurin Proposition, Direct Frontier-Dominance |
+| **Part III** | `RH_III_SpectralPaths` | 13 | **Spectral routes (B, Z).** Branch B (I-1 normal-family / Hadamard-strip, wall (ii-a)); Branch Z (CCM microcluster closure, MS2); spectral dead ends |
+| **Part IV** | `RH_IV_CrossRoute` | 13 | Cross-route synthesis and remaining paths: inter-branch diagnostics, the sharpened common wall, dormant routes (D-CCM/Twist/PW, P-M, M), external lines, excluded-paths catalog, methodological dead ends |
+| **Part V** | `RH_V_Conclusio` | 7 | Conclusio: what is proven, what is excluded, and what remains |
 
 All papers are available in English and German (DE suffix).
-Combined English version: `paper/RH_Complete_Series_EN.pdf` (87 pages).
+Combined English version: `paper/RH_Complete_Series_EN.pdf` (103 pages).
 
 ## Proof Architecture
 
@@ -163,6 +167,8 @@ even block and float64 with Cauchy tail bounds for the odd block.
 
 ## Version History
 
+- **3.1** (2026-05-31): Repo sync of the Atlas pentalogy; companion Even-Dominance paper updated to v1.9 (`10.5281/zenodo.20479145`); Part I rebuilt for the five-part framing; combined EN PDF regenerated (103 pages); internal strategy/QA files kept private via `.gitignore`
+- **3.0** (2026-05-26): Restructured the three-part Trilogy ("From Landscape to Proof") into the five-part Atlas ("From Landscape to Atlas"): Part III split into Spectral Routes (III), Cross-Route Synthesis (IV), and Conclusio (V); structural reorganization only, conditional-reduction status unchanged
 - **2.5** (2026-05-24): Public repo synced to the Part-III excluded-paths catalog extension; Part III EN/DE and combined PDFs rebuilt; local agent-control files kept private via `.gitignore`
 - **2.4** (2026-05-23): Parallel programme added to Part III; companion Even-Dominance DOI updated to `10.5281/zenodo.20291994`
 - **2.3** (2026-05-15): Conditioning clarified from unconditional closure to conditional reduction; public paper package synced to the variational-gap revision

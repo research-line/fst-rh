@@ -8,8 +8,11 @@
 \usepackage[ngerman]{babel}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{aliascnt}
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage{enumitem}
+\usepackage{etoolbox}
 \usepackage{geometry}
 \usepackage{makecell}
 \usepackage{xurl}
@@ -19,33 +22,56 @@
 \geometry{margin=1in}
 \setlength{\emergencystretch}{2em}
 
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Korollar}
-\newtheorem{definition}[theorem]{Definition}
+\newtheorem{theorem}{Satz}[section]
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Korollar}
+\aliascntresetthe{corollary}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Bemerkung}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Bemerkung}
+\aliascntresetthe{remark}
 \theoremstyle{plain}
-\newtheorem{conjecture}[theorem]{Vermutung}
-\crefname{theorem}{Theorem}{Theoreme}
+\newaliascnt{conjecture}{theorem}
+\newtheorem{conjecture}[conjecture]{Vermutung}
+\aliascntresetthe{conjecture}
+\crefname{theorem}{Satz}{Sätze}
 \crefname{lemma}{Lemma}{Lemmata}
 \crefname{proposition}{Proposition}{Propositionen}
 \crefname{corollary}{Korollar}{Korollare}
 \crefname{definition}{Definition}{Definitionen}
 \crefname{remark}{Bemerkung}{Bemerkungen}
 \crefname{conjecture}{Vermutung}{Vermutungen}
+\crefname{section}{Abschnitt}{Abschnitte}
+\crefname{equation}{Gleichung}{Gleichungen}
+\crefname{table}{Tabelle}{Tabellen}
+\crefname{figure}{Abbildung}{Abbildungen}
+\AtBeginEnvironment{thebibliography}{%
+  \small
+  \setlength{\itemsep}{0.2em}%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parsep}{0pt}%
+}
 
 \newcommand{\QW}{\mathrm{QW}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\projectrepo}{\href{https://github.com/research-line/rh-even-dominance}{\path{github.com/research-line/rh-even-dominance}}}
+\newcommand{\projectrepo}{\href{https://github.com/research-line/rh-even-dominance}{\path{research-line/rh-even-dominance}}}
 \DeclareMathOperator{\Tr}{Tr}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \title{Eine bedingte Reduktion der Riemannschen Vermutung auf gerade Dominanz der Weilschen quadratischen Form}
 \author{Lukas Geiger\\Unabhängiger Forscher, Bernau\\ORCID: 0009-0005-7296-1534}
-\date{Entwurf v1.7 -- 23. Mai 2026}
+\date{Entwurf v1.9 -- 29. Mai 2026}
 
 \hypersetup{
   unicode=true,
@@ -59,9 +85,9 @@
 \maketitle
 
 \begin{abstract}
-Dieses Paper präsentiert eine bedingte Reduktion der Riemannschen Vermutung, extrahiert aus einer dreiteiligen Landscape-Reihe. Die Landscape-Paper dokumentieren den vollständigen Forschungsprozess, einschließlich fehlgeschlagener Routen, Obstruktionstheoreme, rechnergestützter Zertifikate und alternativer Strategien. Das vorliegende Paper behält nur die beweisrelevante Kette bei.
-Folgend auf Connes' Reduktion der Riemannschen Vermutung auf eine Bedingung der geraden Dominanz für die Weilsche quadratische Form leisten wir zwei unabhängige Beiträge. Erstens berichtet die Landscape-Rechnung für den endlichen Bereich $100\leq\lambda\leq 1{,}300{,}000$ negative intervall-eingeschlossene Galerkin-Lücken an 33 Gitterpunkten. Ein Audit vom 15. Mai 2026 zeigt jedoch, dass die aktuelle Sin-Block-Lower-Bound-Konstruktion noch eine heuristische geometrische Tail-Extrapolation enthält; die endlichen Daten werden daher hier als computergestützte numerische Evidenz behandelt, nicht als CAP-Beweis auf Theoremniveau. Zweitens wird für das asymptotische Regime $\lambda\to\infty$ über ein gemeinsames Rayleigh-Vektor-Argument gezeigt, dass $\lambda_{\min}(W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}})=-\Theta(\sqrt\lambda)$ auf dem relevanten Drei-Modus-Galerkin-Block gilt. Die Lücke zwischen dieser Variations-Aussage und der eigentlichen Eigenwert-Anordnung $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ im asymptotischen Bereich erfordert eine separate quantitative untere Schranke für $\lambda_1^-$; wir formulieren dies als \emph{Asymptotische Variationsgap-Vermutung} und skizzieren in \Cref{sec:asymptotic-lower-bound} eine Route über entartete Störungstheorie.
-Der hier präsentierte Beweis der Riemannschen Vermutung ist daher bedingt auf (i) Connes--van Suijlekoms Reell-Nullstellen-Kriterium und die Hurwitz-Brücke aus~\cite{Connes2026}, deren Fact~6.4-Konvergenz dort als Slepian--Pollak-Folge dargestellt wird, sowie (ii) die Asymptotische Variationsgap-Vermutung für den minimalen Eigenwert im ungeraden Sektor. Das Shift-Parity-Lemma bleibt unbedingt; die intervallarithmetischen Zertifikate bleiben numerische Evidenz, bis eine rigorose Lower-Bound-Schließung vorliegt. Die ausgeschlossenen Eich-, Total-Positivitäts- und universellen Kommutator-Routen werden nicht verwendet und es wird auf die Landscape-Reihe verwiesen.
+Dieser Beitrag präsentiert eine bedingte Reduktion der Riemannschen Vermutung, extrahiert aus einer dreiteiligen Landscape-Reihe. Die Landscape-Beiträge dokumentieren den vollständigen Forschungsprozess, einschließlich fehlgeschlagener Routen, Obstruktionstheoreme, rechnergestützter Zertifikate und alternativer Strategien. Der vorliegende Beitrag behält nur die beweisrelevante Kette bei.
+Im Anschluss an Connes' Reduktion der Riemannschen Vermutung auf eine Bedingung der geraden Dominanz für die Weilsche quadratische Form leisten wir zwei unabhängige Beiträge. Erstens berichtet die Landscape-Rechnung für den endlichen Bereich $100\leq\lambda\leq 1{,}300{,}000$ negative intervall-eingeschlossene Galerkin-Lücken an 33 Gitterpunkten. Ein Audit vom 15. Mai 2026 zeigt jedoch, dass die aktuelle Konstruktion einer unteren Schranke im Sin-Block noch eine heuristische geometrische Tail-Extrapolation enthält; die endlichen Daten werden daher hier als computergestützte numerische Evidenz behandelt, nicht als CAP-Beweis auf Theoremniveau. Zweitens wird für das asymptotische Regime $\lambda\to\infty$ über ein gemeinsames Rayleigh-Vektor-Argument gezeigt, dass $\lambda_{\min}(W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}})=-\Theta(\sqrt\lambda)$ auf dem relevanten Drei-Modus-Galerkin-Block gilt. Die Lücke zwischen dieser Variations-Aussage und der eigentlichen Eigenwert-Anordnung $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ im asymptotischen Bereich erfordert eine separate quantitative untere Schranke für $\lambda_1^-$; wir formulieren dies als \emph{Asymptotische Variationsgap-Vermutung} und skizzieren in \Cref{sec:asymptotic-lower-bound} eine Route über entartete Störungstheorie.
+Der hier analysierte Reduktionsweg zur Riemannschen Vermutung ist daher bedingt auf (i) Connes--van Suijlekoms Reell-Nullstellen-Kriterium und die Hurwitz-Brücke aus~\cite{Connes2026}, deren Fact~6.4-Konvergenz dort als Slepian--Pollak-Folge dargestellt wird, sowie (ii) die Asymptotische Variationsgap-Vermutung für den minimalen Eigenwert im ungeraden Sektor. Das Shift-Parity-Lemma bleibt unbedingt; die intervallarithmetischen Zertifikate bleiben numerische Evidenz, bis eine rigorose Schließung über eine untere Schranke vorliegt. Die ausgeschlossenen Eich-, Total-Positivitäts- und universellen Kommutator-Routen werden nicht verwendet; für diese Pfade wird auf die Landscape-Reihe verwiesen.
 \end{abstract}
 
 \noindent\textbf{Schlüsselwörter:} Riemannsche Vermutung, Weilsche quadratische Form, gerade Dominanz (even dominance), Connes-Programm, Shift-Parity-Lemma, computergestützte Evidenz.
@@ -69,7 +95,7 @@ Der hier präsentierte Beweis der Riemannschen Vermutung ist daher bedingt auf (
 \newpage
 \section{Zweck und Bezug zur Landscape-Reihe}
 
-Dieses Paper ist kein vierter Teil der Landscape-Reihe. Es ist eine rein auf den Beweis fokussierte Extraktion. Die Landscape-Paper~\cite{GeigerLandscapeI,GeigerLandscapeII,GeigerLandscapeIII} behalten den gesamten Prozess bei: den ursprünglichen eichtheoretischen Ansatz, die Obstruktionsanalyse, Nicht-Existenz-Theoreme für zwei attraktive, aber falsche strukturelle Routen, Gutachtenberichte und rechnergestützte Übergaben. Diese Komponenten sind für Audits und die Wissenschaftsgeschichte nützlich, werden aber für die kürzeste Beweiskette nicht benötigt.
+Dieser Beitrag ist kein vierter Teil der Landscape-Reihe. Er ist eine rein auf den Beweis fokussierte Extraktion. Die Landscape-Beiträge~\cite{GeigerLandscapeI,GeigerLandscapeII,GeigerLandscapeIII} behalten den gesamten Prozess bei: den ursprünglichen eichtheoretischen Ansatz, die Obstruktionsanalyse, Nicht-Existenz-Theoreme für zwei attraktive, aber falsche strukturelle Routen, Gutachtenberichte und rechnergestützte Übergaben. Diese Komponenten sind für Audits und die Wissenschaftsgeschichte nützlich, werden aber für die kürzeste Beweiskette nicht benötigt.
 
 Das hier präsentierte Argument verwendet folgende zweiteilige Kette:
 \[
@@ -86,12 +112,12 @@ zusammen mit
 \Longrightarrow\ \text{RH via Connes und Hurwitz (\Cref{thm:rh})}.
 \end{gathered}
 \]
-Die erste Zeile ist diagnostisch: Das Shift-Parity-Lemma bleibt unbedingt, während die aktuellen endlichen Zertifikate erst nach einer rigorosen Lower-Bound-Schließung im ungeraden Sektor Theoremniveau erreichen. Die zweite Zeile führt zwei bedingte Eingaben ein: das Connes-Programm (extern) und die Asymptotische Variationsgap-Vermutung (\Cref{conj:avg}, intern zu diesem Ansatz; vgl.\ \Cref{sec:asymptotic-lower-bound}).
+Die erste Zeile ist diagnostisch: Das Shift-Parity-Lemma bleibt unbedingt, während die aktuellen endlichen Zertifikate erst nach einer rigorosen Schließung über eine untere Schranke im ungeraden Sektor Theoremniveau erreichen. Die zweite Zeile führt zwei bedingte Eingaben ein: das Connes-Programm (extern) und die Asymptotische Variationsgap-Vermutung (\Cref{conj:avg}, intern zu diesem Ansatz; vgl.\ \Cref{sec:asymptotic-lower-bound}).
 
 \section{Connes' Reduktion (v1.5-Neuformulierung)}
 
 \paragraph{Hinweis zur v1.5-Neuformulierung.}
-Frühere Entwürfe dieses Papers (bis einschließlich v1.4) stellten die Weilsche quadratische Form auf $L^2([-L,L])$ mit reeller Cosinus/Sinus-Basis dar und identifizierten die Even/Odd-Sektoren mit Parität unter $t\mapsto -t$. Eine Überprüfung der Operatordefinition im Mai 2026 gegen Connes--van Suijlekom \cite{ConnesvS2025} zeigte, dass die dort bewiesene Form auf $L^2([0,L])$ mit komplexer Exponentialbasis wirkt und die relevanten Paritätssektoren über die Frequenzreflektion $U_n\leftrightarrow U_{-n}$ auf diesem Raum definiert sind. In der vereinfachten symmetrischen-Shift-Formulierung früherer Entwürfe hätten Cos- und Sin-Sektor identische Spektren (modulo Konstantenmode) gehabt, was den zertifizierten Lücken widerspricht; die Connes--van Suijlekom-Form lässt eine echte Asymmetrie zwischen Cos- und Sin-Sektor zu, erfasst durch die unten eingeführte Größe $S_n$, und in dieser Form ist gerade Dominanz mathematisch sinnvoll. Der vorliegende Abschnitt formuliert das Setup um, sodass es zur bewiesenen Form passt; \Cref{sec:asymptotic-lower-bound} bewahrt einen Bericht der früheren Formulierung und die diagnostische Kette, die zu dieser Revision führte.
+Frühere Entwürfe dieses Beitrags (bis einschließlich v1.4) stellten die Weilsche quadratische Form auf $L^2([-L,L])$ mit reeller Cosinus/Sinus-Basis dar und identifizierten die geraden bzw.\ ungeraden Sektoren mit Parität unter $t\mapsto -t$. Eine Überprüfung der Operatordefinition im Mai 2026 gegen Connes--van Suijlekom \cite{ConnesvS2025} zeigte, dass die dort bewiesene Form auf $L^2([0,L])$ mit komplexer Exponentialbasis wirkt und die relevanten Paritätssektoren über die Frequenzreflektion $U_n\leftrightarrow U_{-n}$ auf diesem Raum definiert sind. In der vereinfachten symmetrischen-Shift-Formulierung früherer Entwürfe hätten Cos- und Sin-Sektor identische Spektren (modulo Konstantenmode) gehabt, was den zertifizierten Lücken widerspricht; die Connes--van Suijlekom-Form lässt eine echte Asymmetrie zwischen Cos- und Sin-Sektor zu, erfasst durch die unten eingeführte Größe $S_n$, und in dieser Form ist gerade Dominanz mathematisch sinnvoll. Der vorliegende Abschnitt formuliert den Aufbau so um, dass er zur bewiesenen Form passt; \Cref{sec:asymptotic-lower-bound} bewahrt einen Bericht der früheren Formulierung und die diagnostische Kette, die zu dieser Revision führte.
 
 \paragraph{Hilbertraum und Basis.} Sei $L=\log\lambda$. Folgend \cite[Sektion~4]{ConnesvS2025}, betrachten wir den Hilbertraum
 \[
@@ -184,7 +210,7 @@ wobei $\lambda_1^{\bullet}(\lambda):=\min\sigma(A_\lambda^{\bullet})$. Wir behal
 Eine direkte Berechnung von $D_n$ und $S_n$ aus \eqref{eq:Dn-Sn} für die Weil-Distribution \eqref{eq:weil-distribution} bestätigt, dass $S_n$ nicht-vernachlässigbar ist: für $\lambda=1000$ und $n=1$ findet man $D_1\approx 11{,}89$ und $S_1\approx 8{,}63$, sodass die Cos-Sektor-Diagonale $D_1-S_1\approx 3{,}26$ und die Sin-Sektor-Diagonale $D_1+S_1\approx 20{,}52$ ist (Skript \path{_proof-notes/verify_connes_vs_form.py}). Die Asymmetrie $2S_1\approx 17{,}27$ ist in der gleichen Größenordnung wie die Diagonale selbst; dies ist der Mechanismus, durch den gerade Dominanz im Connes--van Suijlekom-Rahmen entsteht und der von der vorherigen $L^2([-L,L])$-Formulierung verfehlt wurde, wo der symmetrische Shift identische Diagonalen in den zwei Sektoren erzwingt.
 \end{remark}
 
-\paragraph{Folge-Sektionen (v1.5).} Die obige Neuformulierung supersediert die symmetrische-Shift $L^2([-L,L])$-Form von v1.4. Folge-Sektionen (\Cref{sec:parity-matrix} und folgend) wurden im Legacy-Rahmen geschrieben und benötigen parallele Updates: die $3\times 3$ Paritätsmatrix $D_3(r)$ aus \Cref{sec:parity-matrix} entspricht jetzt der Cos/Sin-Asymmetrie an einem einzelnen Shift, mit $D_3(r)$-Einträgen verknüpft mit $S_n$-Beiträgen von einer einzelnen Primzahl; die finiten Zertifikate brauchen rekonstruierte CAP-Matrizen in der $\{U_n\}$-Basis; das direkte Frontier-Argument trägt sich übertragen, sobald $C_f$ als untere Schranke auf $S_n$ an Frontier-Prime-Beiträgen neu hergeleitet ist. Das Shift-Parity-Lemma (\Cref{thm:shift-parity}) und die Obstruktionstheoreme NE-A, NE-B der Landscape-Reihe bleiben unberührt. Diese Migration ist in der vorliegenden Revision teilweise: die neue Section~2 oben ist die korrigierte Operator-Definition, während die Downstream-Propagation als offene Aufgabe in \Cref{sec:k0-strengthened} registriert ist.
+\paragraph{Folge-Sektionen (v1.5).} Die obige Neuformulierung ersetzt die symmetrische-Shift $L^2([-L,L])$-Form von v1.4. Folge-Sektionen (\Cref{sec:parity-matrix} und folgend) wurden im Legacy-Rahmen geschrieben und benötigen parallele Updates: die $3\times 3$ Paritätsmatrix $D_3(r)$ aus \Cref{sec:parity-matrix} entspricht jetzt der Cos/Sin-Asymmetrie an einem einzelnen Shift, mit $D_3(r)$-Einträgen verknüpft mit $S_n$-Beiträgen von einer einzelnen Primzahl; die finiten Zertifikate brauchen rekonstruierte CAP-Matrizen in der $\{U_n\}$-Basis; das direkte Frontier-Argument trägt sich übertragen, sobald $C_f$ als untere Schranke auf $S_n$ an Frontier-Prime-Beiträgen neu hergeleitet ist. Das Shift-Parity-Lemma (\Cref{thm:shift-parity}) und die Obstruktionstheoreme NE-A, NE-B der Landscape-Reihe bleiben unberührt. Diese Migration ist in der vorliegenden Revision teilweise: der neue Abschnitt~2 oben ist die korrigierte Operator-Definition, während die Fortführung in die nachfolgenden Abschnitte als offene Aufgabe in \Cref{sec:k0-strengthened} registriert ist.
 
 \paragraph{Guardrail zum Legacy-Material.}  Die folgenden Legacy-Abschnitte
 bleiben als diagnostische Lemmata und Routen-Dokumentation erhalten. Sie sind
@@ -205,7 +231,7 @@ Wenn gerade Dominanz für eine Folge $\lambda_n\to\infty$ gilt, dann folgt darau
 \end{corollary}
 
 \begin{proof}
-Für jedes $\lambda_n$ liefert \Cref{thm:connes} reelle Nullstellen für die entsprechende trunkierte Fourier-Transformation $\widehat\eta_{\lambda_n}$. Die Hurwitz-Brücke des Connes-Programms~\cite[Fact~6.4 und Sections~6.4--6.6]{Connes2026} etabliert:
+Für jedes $\lambda_n$ liefert \Cref{thm:connes} reelle Nullstellen für die entsprechende trunkierte Fourier-Transformation $\widehat\eta_{\lambda_n}$. Die Hurwitz-Brücke des Connes-Programms~\cite[Fact~6.4 und Abschnitte~6.4--6.6]{Connes2026} etabliert:
 \begin{enumerate}[label=(\alph*),leftmargin=*]
   \item Die trunkierten Kerne $k_{\lambda_n}$ konvergieren lokal gleichmäßig gegen die vollständige Riemannsche $\Xi$-Funktion auf jeder kompakten Teilmenge von $\mathbb{C}$ mit einer Rate von $O(\lambda_n^{-1/2-\alpha})$ für ein $\alpha>0$.
   \item Alle $k_{\lambda_n}$ und $\Xi$ sind ganze Funktionen der Ordnung eins.
@@ -246,7 +272,7 @@ würde drei Bestandteile benötigen:
     wie es der Satz von Hurwitz zum Transfer aller Nullstellen benötigt.
 \end{enumerate}
 Schritt~(i) wird von Connes mittels der Spektraltheorie seines Hilbertraums in
-\cite[Fact~6.4 und Sections~6.4--6.6]{Connes2026} bewiesen;
+\cite[Fact~6.4 und Abschnitte~6.4--6.6]{Connes2026} bewiesen;
 die Schritte~(ii) und~(iii) sind klassisch.
 Das vorliegende Paper verwendet Connes' Ergebnis für Schritt~(i) direkt und
 liefert keine eigenständige Herleitung.
@@ -255,7 +281,7 @@ liefert keine eigenständige Herleitung.
 \begin{remark}[Bedingtheit und Hypothesen]
 \label{rem:conditioning}
 Der vorliegende Beweis beruht auf dem Reell-Nullstellen-Kriterium für quadratische Formen von Connes und van Suijlekom~\cite{ConnesvS2025} sowie auf Connes' Identifizierung der geraden Dominanz als der verbleibenden spektralen Bedingung~\cite{Connes2026}. Beide Ergebnisse sind derzeit als arXiv-Preprints verfügbar. Unsere Argumentation ist daher bedingt durch diese Ergebnisse, bis sie unabhängig verifiziert oder in einem Peer-Review-Journal veröffentlicht wurden.
-Die Hypothesen von \Cref{thm:connes} erfordern: (i)~dass $A_\lambda$ nach unten beschränkt ist, was gilt, weil der archimedische Kern integrierbar ist und die Primsumme absolut konvergiert; (ii)~dass der niedrigste Spektralwert einfach und isoliert ist --- dies ist der Inhalt der unten bewiesenen Bedingung der geraden Dominanz; und (iii)~lokal gleichmäßige Konvergenz der Fourier-Transformationen der trunkierten Eigenfunktionen, etabliert in~\cite[Section~4]{Connes2026}.
+Die Hypothesen von \Cref{thm:connes} erfordern: (i)~dass $A_\lambda$ nach unten beschränkt ist, was gilt, weil der archimedische Kern integrierbar ist und die Primsumme absolut konvergiert; (ii)~dass der niedrigste Spektralwert einfach und isoliert ist --- dies ist der Inhalt der unten bewiesenen Bedingung der geraden Dominanz; und (iii)~lokal gleichmäßige Konvergenz der Fourier-Transformationen der trunkierten Eigenfunktionen, etabliert in~\cite[Abschnitt~4]{Connes2026}.
 \end{remark}
 
 \section{Die Paritätsmatrix einer einzelnen Verschiebung}
@@ -266,7 +292,7 @@ Die Hypothesen von \Cref{thm:connes} erfordern: (i)~dass $A_\lambda$ nach unten 
 \subsection{Connes--van-Suijlekom Single-Shift-Asymmetrie}
 \label{subsec:parity-cvs-de}
 
-Im korrigierten Setup von Section~2 trägt eine einzelne Dirac-Masse bei $y\in(0,L)$ mit Gewicht $w$ in der Weil-Distribution $D$ zu den Diagonalen bei:
+Im korrigierten Setup von Abschnitt~2 trägt eine einzelne Dirac-Masse bei $y\in(0,L)$ mit Gewicht $w$ in der Weil-Distribution $D$ zu den Diagonalen bei:
 \[
   \Delta D_n = w\cdot 2(1-y/L)\cos(2\pi n y/L),
   \qquad
@@ -398,7 +424,7 @@ Die Zertifikate werden mit Pythons \texttt{mpmath} Bibliothek im Intervallarithm
 
 \begin{remark}[Rechtfertigung der Galerkin-Asymmetrie]
 \label{rem:galerkin-asymmetry}
-Die asymmetrische Trunkierung $N_{\cos}=4$ vs.\ $N_{\sin}\geq 40$ wird gerechtfertigt durch den strukturellen Unterschied zwischen den beiden Sektoren, der in \cite[Section~2.4 und Bemerkung zur Low-Mode Dominanz]{GeigerLandscapeII} beobachtet wurde: Der gerade Block konvergiert schnell, weil die führende gerade Mode $n=1$ die Galerkin-Diagonale $(W_{\mathrm{prime}})_{11}^+ \sim -\sqrt\lambda$ besitzt (getrieben vom Auto-Überlappungswert $h_1(1)=-1/4$ am Laplace-Endpunkt, siehe \Cref{def:auto-overlap}), wobei der $k\times k$ minimale Eigenwert sich bei $k=4$ für jedes getestete $\lambda$ auf bis zu $10^{-2}$ stabilisiert. Der ungerade Sektor hat keine vergleichbare strukturelle Verstärkung, daher werden $N_0=40$--$90$ Moden für einen gleichwertigen Einschluss benötigt. Entscheidend ist, dass der Landscape-Zertifizierer berichtet:
+Die asymmetrische Trunkierung $N_{\cos}=4$ vs.\ $N_{\sin}\geq 40$ wird gerechtfertigt durch den strukturellen Unterschied zwischen den beiden Sektoren, der in \cite[Abschnitt~2.4 und Bemerkung zur Low-Mode Dominanz]{GeigerLandscapeII} beobachtet wurde: Der gerade Block konvergiert schnell, weil die führende gerade Mode $n=1$ die Galerkin-Diagonale $(W_{\mathrm{prime}})_{11}^+ \sim -\sqrt\lambda$ besitzt (getrieben vom Auto-Überlappungswert $h_1(1)=-1/4$ am Laplace-Endpunkt, siehe \Cref{def:auto-overlap}), wobei der $k\times k$ minimale Eigenwert sich bei $k=4$ für jedes getestete $\lambda$ auf bis zu $10^{-2}$ stabilisiert. Der ungerade Sektor hat keine vergleichbare strukturelle Verstärkung, daher werden $N_0=40$--$90$ Moden für einen gleichwertigen Einschluss benötigt. Entscheidend ist, dass der Landscape-Zertifizierer berichtet:
 \(
   \lambda_{\min}(\mathrm{QW}_{\sin}^{(N)})\;>\;\lambda_{\min}(\mathrm{QW}_{\cos}^{(4)})
 \)
@@ -408,7 +434,7 @@ für \emph{alle} $N\leq 90$ bei jedem getesteten $\lambda$; das stützt, beweist
 \begin{remark}[Sicherheitsfaktor der Trunkierung]
 \label{rem:truncation-safety}
 \begin{sloppypar}
-Der berichtete Galerkin-/Tail-Trunkierungsfehler des Landscape-Zertifizierers bei $\lambda=100$ ist maximal $0.061$ (Frobenius-Intervallradius $\leq 0.0025$ im geraden Block, gesamter ungerader Tail $\leq 0.059$ via Cauchy-Interlacing plus ein float64-Rundungsspielraum), während $|\mathrm{cert\_gap}|=2.25$ ist -- ein diagnostischer Sicherheitsfaktor $\geq 34\times$. Für $\lambda\geq 200$ übersteigt der diagnostische Sicherheitsfaktor $65\times$ und wächst monoton mit $\lambda$ im gesamten beprobten Bereich~\cite[Section~2.9 und Zertifikats-Metadaten]{GeigerLandscapeII}.
+Der berichtete Galerkin-/Tail-Trunkierungsfehler des Landscape-Zertifizierers bei $\lambda=100$ ist maximal $0.061$ (Frobenius-Intervallradius $\leq 0.0025$ im geraden Block, gesamter ungerader Tail $\leq 0.059$ via Cauchy-Interlacing plus ein float64-Rundungsspielraum), während $|\mathrm{cert\_gap}|=2.25$ ist -- ein diagnostischer Sicherheitsfaktor $\geq 34\times$. Für $\lambda\geq 200$ übersteigt der diagnostische Sicherheitsfaktor $65\times$ und wächst monoton mit $\lambda$ im gesamten beprobten Bereich~\cite[Abschnitt~2.9 und Zertifikats-Metadaten]{GeigerLandscapeII}.
 \end{sloppypar}
 \end{remark}
 
@@ -455,7 +481,7 @@ Der asymptotische Beweis nutzt die Tatsache, dass Primzahlen nahe der sich beweg
 
 Definieren wir die Low-Mode kumulative Differenzmatrix:
 \medskip\noindent\textbf{v1.5-Zusammenfassung.}
-In der Connes--van-Suijlekom-Form von Section~2 ist das Analog der Frontier-Dominanz die asymptotische Positivität des Cos/Sin-Sektor-Asymmetriekoeffizienten $S_n$ für jeden Mode~$n$. Für $n=1$ liefert eine Abel-Summation und Laplace-Asymptotik
+In der Connes--van-Suijlekom-Form von Abschnitt~2 ist das Analog der Frontier-Dominanz die asymptotische Positivität des Cos/Sin-Sektor-Asymmetriekoeffizienten $S_n$ für jeden Mode~$n$. Für $n=1$ liefert eine Abel-Summation und Laplace-Asymptotik
 \begin{equation}
 \label{eq:S1-asymptotic-cvs-de}
   S_1(\lambda) \;\sim\; \frac{8\sqrt\lambda}{\log\lambda}
@@ -617,7 +643,7 @@ Das Verifikationsskript \path{verify_lambda_star.py} ist im Begleit-Repository
 \section{Tail-Kontrolle und das Hochziehen zur Weil-Form}
 \label{sec:tail}
 
-\paragraph{v1.5-Hinweis.} Dieser Abschnitt, geschrieben in der Legacy-$L^2([-L,L])$-Basis, kontrolliert die Tail-Beiträge höherer Moden in diesem Rahmen. In der Connes--van-Suijlekom-Form von Section~2 ist die analoge Aufgabe die Kontrolle der Off-Diagonalen $\langle U_m | Q | U_n\rangle$ für $|m|, |n| > N$. Die unten gegebenen Abschätzungen markieren nur die analogen Terme: die relevanten Überlapp-Funktionen wären $\sin(2\pi m y/L) - \sin(2\pi n y/L)$ statt $D_3(r)$, und die Schur-Komplement-Schranke müsste über die Off-Block-Norm der Connes--van-Suijlekom-Matrix laufen. Insbesondere ersetzt die subleading-Asymptotik $S_n \sim 8\sqrt\lambda/[L(1+16n^2\pi^2/L^2)]$ den führenden $\Theta(\sqrt\lambda)$-Beitrag des Legacy-Direct-Frontier-Bound, was eine $O(\sqrt\lambda/\log\lambda)$-Skala für die Cos-Sin-Diagonal-Lücke gibt.
+\paragraph{v1.5-Hinweis.} Dieser Abschnitt, geschrieben in der Legacy-$L^2([-L,L])$-Basis, kontrolliert die Tail-Beiträge höherer Moden in diesem Rahmen. In der Connes--van-Suijlekom-Form von Abschnitt~2 ist die analoge Aufgabe die Kontrolle der Off-Diagonalen $\langle U_m | Q | U_n\rangle$ für $|m|, |n| > N$. Die unten gegebenen Abschätzungen markieren nur die analogen Terme: die relevanten Überlapp-Funktionen wären $\sin(2\pi m y/L) - \sin(2\pi n y/L)$ statt $D_3(r)$, und die Schur-Komplement-Schranke müsste über die Off-Block-Norm der Connes--van-Suijlekom-Matrix laufen. Insbesondere ersetzt die subleading-Asymptotik $S_n \sim 8\sqrt\lambda/[L(1+16n^2\pi^2/L^2)]$ den führenden $\Theta(\sqrt\lambda)$-Beitrag des Legacy-Direct-Frontier-Bound, was eine $O(\sqrt\lambda/\log\lambda)$-Skala für die Cos-Sin-Diagonal-Lücke gibt.
 
 \paragraph{Guardrail.}  Die untenstehenden Abschätzungen dokumentieren die
 Stabilität der Legacy-Low-Mode-Rechnung. Sie werden in v1.5 nicht als bereits
@@ -741,12 +767,12 @@ An jedem beprobten Gitterpunkt wird diese analytische Schranke durch den bericht
 \end{lemma}
 
 \begin{proof}
-Die Schur-Komplement-Schranke ist Standard~\cite{Kato1966}. \Cref{lem:higher-mode}(i) liefert $\norm{B_{\mathrm{tail}}}_{\mathrm{op}}\leq 8\pi\sqrt\lambda/L$. \Cref{lem:higher-mode}(ii) liefert $g_{N_0+1}\geq 4\pi^2 N_0^2\sqrt\lambda/L^2 \gg \norm{B_{\mathrm{tail}}}_{\mathrm{op}}$ für $N_0\geq 40$, weshalb der Nenner von $g_{N_0+1}$ dominiert wird. Die gezeigte Schranke $16\sqrt\lambda/N_0^2$ folgt daraus. Die berichtete Lücke nutzt den schärferen intervallarithmetischen Einschluss aus \cite[Section~2.9]{GeigerLandscapeII} mit der diagnostischen Cauchy-Tail-Schranke, die in \Cref{rem:truncation-safety} beschrieben ist.
+Die Schur-Komplement-Schranke ist Standard~\cite{Kato1966}. \Cref{lem:higher-mode}(i) liefert $\norm{B_{\mathrm{tail}}}_{\mathrm{op}}\leq 8\pi\sqrt\lambda/L$. \Cref{lem:higher-mode}(ii) liefert $g_{N_0+1}\geq 4\pi^2 N_0^2\sqrt\lambda/L^2 \gg \norm{B_{\mathrm{tail}}}_{\mathrm{op}}$ für $N_0\geq 40$, weshalb der Nenner von $g_{N_0+1}$ dominiert wird. Die gezeigte Schranke $16\sqrt\lambda/N_0^2$ folgt daraus. Die berichtete Lücke nutzt den schärferen intervallarithmetischen Einschluss aus \cite[Abschnitt~2.9]{GeigerLandscapeII} mit der diagnostischen Cauchy-Tail-Schranke, die in \Cref{rem:truncation-safety} beschrieben ist.
 \end{proof}
 
 \section{Haupttheorem und offene Vermutung}
 
-\paragraph{v1.5-Status des Haupttheorems.}  In der Connes-vS-Form von Section~2 ist das Haupttheorem (RH bedingt auf das Connes-Programm und die Asymptotische Variationsgap-Vermutung) unverändert. Was sich ändert, ist die präzise Formulierung der Conditioning:
+\paragraph{v1.5-Status des Haupttheorems.}  In der Connes-vS-Form von Abschnitt~2 ist das Haupttheorem (RH bedingt auf das Connes-Programm und die Asymptotische Variationsgap-Vermutung) unverändert. Was sich ändert, ist die präzise Formulierung der Conditioning:
 \begin{itemize}[leftmargin=*]
   \item \emph{Externe Preprint-Eingabe aus Connes 2026 §6.5 (Fact 6.4):} Die Fourier-Transformierte der Educated-Guess-Eigenfunktion $k_\Lambda$ konvergiert gegen $\Xi$ gleichmäßig auf Substreifen $|\Im z|<\delta<1/2$ mit Rate $O(\Lambda^{-1/2-\delta})$. Dies wird in \cite{Connes2026} als Folge der klassischen Slepian--Pollak-Theorie prolater sphäroidaler Wellenfunktionen ([Theorem~1 of reference~47]{Connes2026}) formuliert, nicht als Conjecture.
   \item \emph{Externe Preprint-Eingabe aus Connes--van Suijlekom 2025 \cite{ConnesvS2025}:} Das fixed-$\Lambda$-Quadratform-Reell-Nullstellen-Kriterium, bewiesen innerhalb dieses Preprints.
@@ -798,7 +824,7 @@ wobei $L=\log\lambda$. Insbesondere gilt $\lambda_1^+(\lambda)<\lambda_1^-(\lamb
 
 \begin{theorem}[Die Riemannsche Vermutung, bedingt]
 \label{thm:rh}
-Angenommen, \Cref{conj:avg} (Asymptotische Variationsgap) und das Connes-Programm, namentlich das Reell-Nullstellen-Kriterium für quadratische Formen aus~\cite{ConnesvS2025} zusammen mit der Hurwitz-Brücke aus \cite[Fact~6.4 und Section~6.4--6.6]{Connes2026}, gelten. Dann liegen alle nichttrivialen Nullstellen der Riemannschen Zetafunktion~\cite{Riemann1859} auf der kritischen Geraden $\Re(s)=1/2$.
+Angenommen, \Cref{conj:avg} (Asymptotische Variationsgap) und das Connes-Programm, namentlich das Reell-Nullstellen-Kriterium für quadratische Formen aus~\cite{ConnesvS2025} zusammen mit der Hurwitz-Brücke aus \cite[Fact~6.4 und Abschnitt~6.4--6.6]{Connes2026}, gelten. Dann liegen alle nichttrivialen Nullstellen der Riemannschen Zetafunktion~\cite{Riemann1859} auf der kritischen Geraden $\Re(s)=1/2$.
 \end{theorem}
 
 \begin{proof}
@@ -915,7 +941,7 @@ Dieses Update entspricht der Behandlung des vorliegenden Manuskripts als kontinu
 \subsection{Update (15. Mai 2026): Connes-vS-Form löst K0-Spannung; rigorose CAP-Schließung bleibt offen}
 \label{sec:k0-cvs-resolution}
 
-Eine spätere Vergleichanalyse der Operatordefinition gegen Connes--van Suijlekom \cite{ConnesvS2025} klärte, dass die verschärfte K0-Sorge (die spektrale Äquivalenz $\sigma(A^+) = \sigma(A^-) \cup \{\mu^+_0\}$) ein Artefakt der Legacy-Operator-Realisierung auf $L^2([-L,L])$ mit reeller Cosinus/Sinus-Basis unter $t\mapsto -t$-Symmetrie war, nicht des tatsächlichen Connes-Operators. Der bewiesene Connes--van-Suijlekom-Operator wirkt auf $L^2([0,L])$ mit der komplexen Exponentialbasis $U_n$, und die Cosinus/Sinus-Paritätssektoren werden über die Frequenzreflektion $U_n\leftrightarrow U_{-n}$ definiert. In dieser korrigierten Formulierung (Section~2 v1.5-Reformulierung) unterscheiden sich die Diagonalen $\langle\cos_n|Q|\cos_n\rangle = D_n - S_n$ und $\langle\sin_n|Q|\sin_n\rangle = D_n + S_n$ um die genuin nicht-triviale Asymmetrie $2S_n$. Direkte Berechnung (Skript \texttt{verify\_connes\_vs\_form.py}) ergibt $S_n > 0$ für die Weil-Distribution und alle getesteten $\lambda$.
+Eine spätere Vergleichanalyse der Operatordefinition gegen Connes--van Suijlekom \cite{ConnesvS2025} klärte, dass die verschärfte K0-Sorge (die spektrale Äquivalenz $\sigma(A^+) = \sigma(A^-) \cup \{\mu^+_0\}$) ein Artefakt der Legacy-Operator-Realisierung auf $L^2([-L,L])$ mit reeller Cosinus/Sinus-Basis unter $t\mapsto -t$-Symmetrie war, nicht des tatsächlichen Connes-Operators. Der bewiesene Connes--van-Suijlekom-Operator wirkt auf $L^2([0,L])$ mit der komplexen Exponentialbasis $U_n$, und die Cosinus/Sinus-Paritätssektoren werden über die Frequenzreflektion $U_n\leftrightarrow U_{-n}$ definiert. In dieser korrigierten Formulierung (Abschnitt~2, v1.5-Reformulierung) unterscheiden sich die Diagonalen $\langle\cos_n|Q|\cos_n\rangle = D_n - S_n$ und $\langle\sin_n|Q|\sin_n\rangle = D_n + S_n$ um die genuin nicht-triviale Asymmetrie $2S_n$. Direkte Berechnung (Skript \texttt{verify\_connes\_vs\_form.py}) ergibt $S_n > 0$ für die Weil-Distribution und alle getesteten $\lambda$.
 
 Die verbleibende Aufgabe ist eine \emph{rigorose} CAP-Schließung von $\lambda_1^{\cos}(\lambda) < \lambda_1^{\sin}(\lambda)$ in dieser Form. Eine systematische Analyse der verfügbaren rigorosen Lower-Bound-Techniken ist in \path{_proof-notes/K0_LEHMANN_ANALYSIS.md} dokumentiert: Temple's Ungleichung, Lehmann--Mähly, Bauer-Fike, Operator-Norm-Bound, Schur-Komplement und Gerschgorin scheitern alle aus einem gemeinsamen strukturellen Grund: Es ist keine a-priori Lower-Bound auf $\lambda_2$ verfügbar, die das Galerkin-Variationsprinzip allein nicht liefert. Drei mittelfristige Forschungsrichtungen sind dort skizziert: Mollifikation, Toeplitz-Approximation, Reverse-Engineering aus Connes--vS 2025.
 
@@ -976,6 +1002,356 @@ sie stellt keinen Beweis von~(ii-a) dar. Frühere Messungen in
 ($\mathrm{dps}=30$) bei Cluster-Beinahe-Entartung des minimalen geraden
 Eigenwerts retrahiert; nur die konvergierten §E.18-Werte sind verlässlich.
 
+\paragraph{Guardrail vom 26. Mai 2026.}
+Zwei spätere Audits schärfen den Status, ohne die Theorembehauptungen zu
+stärken. Erstens liefert der $\lambda=20$-Streifenlauf
+$\kappa(20)=1{,}527\times10^{-3}$; ein Sechs-Punkt-Refit setzt die
+residuale Krümmungssättigung nun konservativ in den Bereich
+$\kappa_\infty\in[1{,}6,1{,}8]\times10^{-3}$. Theorem~B-1 ist daher mit
+der Schranke $A_\lambda(\delta)\leq1{,}0063$ nur bedingt auf uniforme
+Log-Krümmungskontrolle zu lesen, nicht als bereits bewiesener
+Streifensatz. Zweitens ist der GF1-Chebyshev-Leiter-Audit zweiregimig:
+Für $\lambda=5,7$ stützen die konvergierten Daten den
+Boundary-Moment-Benchmark $\mathrm{sLI}\sim(64\pi^2/3)\lambda/(NL)$,
+während $\lambda=3$ ein Niedrigband-Ausreißer ist, dessen ältere
+$C_m$-Normierung gegen etwa~$7$ statt gegen das $\lambda=5,7$-Plateau
+nahe $1{,}5$--$2{,}0$ läuft. Der Audit vom 27.~Mai ergänzt einen zweiten
+Guardrail: Der einzelne Punkt $\lambda=11,N=200$ ergibt
+$C_{\mathrm{eff}}\approx168$, also etwa $20\,\%$ unter $64\pi^2/3$;
+$\lambda=11$ bleibt daher ein Diskriminator, bis die größeren
+$N$-Läufe abgeschlossen sind. GF1 bleibt damit ein konservatives
+Diagnoseziel, kein uniformer All-$\lambda$-Satz und kein DZT2-/MS2-/
+RH-Abschluss. Beide Diagnostiken sind empfindlich gegenüber der
+Galerkin-Ordnung: Bei $\xi = NL/\lambda \lesssim 50$ überschreitet die
+gemessene $\mathrm{sLI}$ in den $\lambda=5,7$-Sweeps die asymptotische
+$C^*/\xi$-Gesetzmäßigkeit, während der $\lambda=11$-Punkt zeigt, dass
+die Schwelle $\lambda$-abhängig sein kann. Die einfache
+Endpoint-Kern-Faktorisierung wurde ebenfalls falsifiziert; der exakte
+Collar-Kern lautet $K(t)=e^t\cosh(t)/(2\sinh^2t)$, und der fehlende
+Input ist die Eigenmoden-Asymptotik. Die b1-Krümmungskoeffizienten
+$\kappa(\lambda)$ verwenden verschiedene $N$ pro~$\lambda$ ohne separate
+$N$-Konvergenzverifikation. Konvergierte GF1-Diagnostik erfordert ein
+validiertes $\xi$-Fenster, aktuell gestützt für $\lambda \in \{5,7\}$;
+der $\lambda = 11$-Sweep ist ausstehend.
+
+\paragraph{GF1-Kernupdate vom 29. Mai 2026.}
+Der GF1-Audit trennt inzwischen eine geschlossene analytische Identität
+vom verbleibenden Eigenmodenproblem. Die folgende Proposition dient nur
+als strukturelle Normierung des Chebyshev-Leiter-Observables; sie ist
+kein Beweis von DZT2, MS2, gerader Dominanz oder RH.
+
+\begin{proposition}[GF1-Cauchy-Leiterkern und das \(C^*\)-Moment]
+\label{prop:gf1-collar-kernel-cstar}
+Sei
+\[
+  K_\gamma(p):=\frac{2(\gamma^2+p^2)}{(\gamma^2-p^2)^2}
+\]
+das gepaarte Cauchy-Gewicht der GF1-Fernleiterdiagnostik. Für die
+reflektierte Momentvariable
+\[
+  s=\min\{(p/\gamma)^2,(\gamma/p)^2\}\in[0,1)
+\]
+gilt exakt
+\[
+  \frac{\gamma^2}{2}K_\gamma(p)
+  =G(s):=\frac{1+s}{(1-s)^2}
+  =\sum_{r\ge0}(2r+1)s^r.
+\]
+Mit \(s=e^{-2t}\) ist dies der exakte Collar-Kern
+\[
+  K_{\rm collar}(t)
+  =\frac{e^t\cosh t}{2\sinh^2t}
+  =\frac12\coth^2t+\frac12\coth t
+  =\Bigl(\frac12+\frac12\operatorname{csch}^2t\Bigr)
+    +\frac12\coth t .
+\]
+Der gerade singuläre Anteil ist also
+\(\frac12\operatorname{csch}^2t\), der ungerade singuläre Anteil
+\(\frac12\coth t\), und
+\[
+  K_{\rm collar}(t)
+  =\frac{1}{2t^2}+\frac{1}{2t}+\frac13+\frac{t}{6}
+    +\frac{t^2}{30}+O(t^3).
+\]
+Mit \(u=2t\) ist der phänomenologische GF1-Benchmark-Kern genau der
+\(2u^2\)-gewichtete Pullback der gerade singulären Komponente:
+\[
+  \varphi(u):=\frac{u^2}{\sinh^2(u/2)}
+  =2u^2\Bigl(\frac12\operatorname{csch}^2(u/2)\Bigr).
+\]
+Folglich
+\[
+  C^*:=16\int_0^\infty \varphi(u)\,du
+  =\frac{64\pi^2}{3}.
+\]
+\end{proposition}
+
+\begin{proof}
+Die erste Identität ist algebraisch:
+\[
+  \frac{\gamma^2}{2}K_\gamma(p)
+  =\frac{1+(p/\gamma)^2}{(1-(p/\gamma)^2)^2}
+\]
+auf der inneren Seite, und derselbe Ausdruck mit \(p/\gamma\) ersetzt
+durch \(\gamma/p\) nach äußerer Reflektion. Die Taylor-Reihe folgt aus
+\((1+s)/(1-s)^2=\sum_{r\ge0}(2r+1)s^r\). Einsetzen von \(s=e^{-2t}\)
+ergibt
+\[
+  G(e^{-2t})=\frac{e^t\cosh t}{2\sinh^2t}.
+\]
+Die angezeigte Zerlegung folgt aus \(e^t=\cosh t+\sinh t\) und
+\(\coth^2t=1+\operatorname{csch}^2t\); die Laurent-Entwicklung ist die
+Standardentwicklung von \(\coth\) und \(\operatorname{csch}^2\) am
+Ursprung. Schließlich gilt für \(u>0\)
+\[
+  \frac{1}{\sinh^2(u/2)}
+  =4\sum_{n\ge1}n e^{-nu},
+\]
+also
+\[
+  \int_0^\infty \frac{u^2}{\sinh^2(u/2)}\,du
+  =4\sum_{n\ge1}n\int_0^\infty u^2e^{-nu}\,du
+  =8\sum_{n\ge1}\frac1{n^2}
+  =\frac{4\pi^2}{3}.
+\]
+Multiplikation mit dem GF1-Normierungsfaktor \(16\) liefert
+\(C^*=64\pi^2/3\).
+\end{proof}
+
+\begin{lemma}[GF1-Collar-Kanal-Aufhebung unter \(q\)-Orthogonalität]
+\label{lem:gf1-q-orthogonality-annihilation}
+Sei \(I\) eine endliche Indexmenge, seien
+\(t_i\in\mathbb{R}\setminus\{0\}\) (mit zugelassenem Grenzwert
+\(t_i=+\infty\)) und \(c_i\in\mathbb{R}\). Setze
+\[
+  E_{\rm sing}(t):=\frac12\operatorname{csch}^2t,
+  \qquad
+  E_{\rm const}:=\frac12,
+  \qquad
+  O(t):=\frac12\coth t .
+\]
+Dann gilt \(K_{\rm collar}=E_{\rm const}+E_{\rm sing}+O\). Wenn der
+Koeffizientenvektor orthogonal zum konstanten und zum ungeraden
+Collar-Kanal ist,
+\[
+  \sum_{i\in I}c_i=0,
+  \qquad
+  \sum_{i\in I}c_i\,\coth t_i=0,
+\]
+dann enthält die signierte Collar-Summe nur den gerade singulären Kanal:
+\[
+  \sum_{i\in I}c_i K_{\rm collar}(t_i)
+  =\frac12\sum_{i\in I}c_i\,\operatorname{csch}^2t_i .
+\]
+Außerdem gilt für \(u_i=2t_i\)
+\[
+  \varphi(u_i)
+  =\frac{u_i^2}{\sinh^2(u_i/2)}
+  =2u_i^2 E_{\rm sing}(t_i),
+\]
+also ist das \(\varphi\)-Observable genau die \(u^2\)-regularisierte
+Version des überlebenden gerade singulären Kanals.
+\end{lemma}
+
+\begin{proof}
+Die Zerlegung von \(K_{\rm collar}\) lautet nach
+\Cref{prop:gf1-collar-kernel-cstar}
+\[
+  K_{\rm collar}(t)
+  =\frac12+\frac12\operatorname{csch}^2t+\frac12\coth t .
+\]
+Daher ist
+\[
+  \sum_{i\in I}c_iK_{\rm collar}(t_i)
+  =
+  \frac12\sum_{i\in I}c_i
+  +\frac12\sum_{i\in I}c_i\,\operatorname{csch}^2t_i
+  +\frac12\sum_{i\in I}c_i\,\coth t_i .
+\]
+Der erste und dritte Term verschwinden aufgrund der beiden angegebenen
+Orthogonalitätsrelationen. Aus \(u_i=2t_i\) folgt schließlich
+\(\sinh^2(u_i/2)=\sinh^2t_i\), also
+\(\varphi(u_i)=u_i^2\operatorname{csch}^2t_i
+=2u_i^2E_{\rm sing}(t_i)\).
+\end{proof}
+
+\begin{proposition}[Production-Splitting-Moden und \(q_a\)-Orthogonalitätstest]
+\label{prop:gf1-production-q-orthogonality-status}
+In den GF1-ECL-Auditskripten
+\path{_proof-notes/gf1_ecl_oddconst_annihilation_audit.py} und
+\path{_proof-notes/gf1_ecl_phi_norm_audit.py} sind die Koeffizienten
+\(q_a(k)\) keine abstrakten Testkoeffizienten. Für feste
+\((\lambda,N)\) konstruieren die Skripte
+\[
+  M_{\rm even},U_{\rm even}
+  =\texttt{project\_to\_parity}(
+      \texttt{build\_QW\_mp}(N,\lambda,\ldots),N,\texttt{even}),
+\]
+diagonalisieren \(M_{\rm even}\) und setzen für \(a=1,2\)
+\[
+  q_a(k)
+  =
+  \texttt{half\_vector}(
+    \texttt{embed}(Q,U_{\rm even},a,2N+1,N+1),N)[k],
+  \qquad 0\leq k\leq N,
+\]
+mit der in \(\texttt{half\_vector}\) implementierten Vorzeichenkonvention.
+Für eine Nullstelle \(\gamma_j\) sei \(p_k=2\pi k/L\), und
+\[
+  \mathcal{F}_j
+  :=\{0\}\cup\{1\leq k\leq N:\ |p_k/\gamma_j-1|>\eta\},
+  \qquad \eta=0.12,
+\]
+sei die von den Audits verwendete Fern-Indexmenge. Für \(k\geq1\) schreibe
+\(t_k=\log(\gamma_j/p_k)\); für \(k=0\) verwenden wir die Grenzkonvention
+\(\coth t_0=1\), \(\operatorname{csch}^2t_0=0\), \(K_{\rm collar}(t_0)=1\).
+
+Die Anwendung von \Cref{lem:gf1-q-orthogonality-annihilation} auf den
+Production-Mode mit \(c_k=-q_a(k)\) ist daher äquivalent zu den zwei
+konkreten endlichen Identitäten
+\[
+  \mathcal{E}^{(0)}_{a,j}
+  :=\sum_{k\in\mathcal{F}_j}q_a(k)=0,
+  \qquad
+  \mathcal{E}^{(1)}_{a,j}
+  :=\sum_{k\in\mathcal{F}_j}q_a(k)\coth t_k=0 .
+\]
+Das Skript berechnet diese Defekte exakt als die zwei glatten
+Collar-Kanäle:
+\[
+  S_{\rm const}=-\frac12\mathcal{E}^{(0)}_{a,j},
+  \qquad
+  S_{\rm odd}=-\frac12\mathcal{E}^{(1)}_{a,j}.
+\]
+Das Lemma liefert also eine saubere production-seitige Aufhebung des
+konstanten und des ungeraden Kanals genau dann, wenn diese beiden
+angezeigten Defekte verschwinden, oder in der normalisierten Grenze des
+Audit-Observables verschwinden.
+
+Die aktuellen Smoke-Daten beweisen diese beiden Relationen für die rohen
+Production-Moden nicht. Im Gegenteil: Die in
+\path{_proof-notes/K0_DZT2_QA_GF1_ECL_FAR_ANNIHILATION_FINDING_2026-05-29.md}
+dokumentierten Läufe für \(\lambda=3,N=40\) und \(\lambda=5,N=55\)
+zeigen, dass die glatten Kanäle \(S_{\rm const}\) und \(S_{\rm odd}\)
+überleben, während der rohe \(S_{\rm csch}\)-Kanal für höhere Nullstellen
+gegen null gedrückt wird und der \(u^2\)-gewichtete Kanal \(S_\varphi\)
+überlebt. Die stärkste derzeitige Aussage für die rohen \(q_a\) ist daher
+eine exakte Obstruktion samt Testkriterium: Die beiden Größen
+\(\mathcal{E}^{(0)}_{a,j}\) und \(\mathcal{E}^{(1)}_{a,j}\) sind genau das,
+was klein gezeigt werden muss, bevor
+\Cref{lem:gf1-q-orthogonality-annihilation} als production-seitiger Beweis
+verwendet werden kann.
+\end{proposition}
+
+\begin{proof}
+Die angezeigte Definition von \(q_a(k)\) ist die wörtliche Konstruktion in
+den Auditskripten: \(\texttt{embed}\) bildet den \(a\)-ten Eigenvektor der
+Even-Parity-Galerkin-Matrix zurück in den vollständigen
+\((-N,\ldots,N)\)-Koordinatenvektor, und \(\texttt{half\_vector}\) behält
+die nicht-negativen Frequenzen mit fester Vorzeichenkonvention. Die
+Zerlegungsroutine setzt anschließend \(c_k=-q_a(k)\) und akkumuliert
+\[
+\begin{aligned}
+  S_{\rm total}
+    &= \sum_{k\in\mathcal{F}_j} c_k K_{\rm collar}(t_k),\\
+  S_{\rm csch}
+    &= \frac12\sum_{k\in\mathcal{F}_j} c_k \operatorname{csch}^2 t_k,\\
+  S_{\rm const}
+    &= \frac12\sum_{k\in\mathcal{F}_j} c_k,\\
+  S_{\rm odd}
+    &= \frac12\sum_{k\in\mathcal{F}_j} c_k \coth t_k.
+\end{aligned}
+\]
+Einsetzen von \(c_k=-q_a(k)\) liefert die beiden Defektidentitäten oben.
+Die bedingte Implikation ist genau
+\Cref{lem:gf1-q-orthogonality-annihilation}; die letzte Aussage ist der
+dokumentierte Befund der zitierten Smoke-Tests und kein Grenzsatz auf
+Theoremniveau.
+\end{proof}
+
+\begin{remark}[Was nach der Kernidentität offen bleibt]
+\label{rem:gf1-phi-cheb-ladder-open}
+Die Identität in \Cref{prop:gf1-collar-kernel-cstar} fixiert den exakten
+Kern und den Normierungsbenchmark. \Cref{lem:gf1-q-orthogonality-annihilation}
+notiert die abstrakte algebraische Auslöschung, während
+\Cref{prop:gf1-production-q-orthogonality-status} die konkreten
+Production-\(q_a\) und die exakten endlichen Defekte identifiziert, die
+eine direkte Anwendung blockieren. Der Phi-Norm-Smoke
+vom 29. Mai 2026 zeigt, dass der rohe Quotient
+aus
+\[
+  S_\varphi=\sum_k(-q_a(k))\,
+      \frac{u_k^2}{\sinh^2(u_k/2)}
+\]
+nach der naiven mode-2/mode-1-Normierung \(C^*\) \emph{nicht}
+reproduziert: bei \(\lambda=3,N=40\) liefert er
+\(C_{\rm eff}^{\varphi}\approx1.022\), weit unter
+\(64\pi^2/3\). Damit bleibt \(S_\varphi\) der strukturell richtige
+\(u^2\)-gewichtete Träger des gerade singulären Kanals; der offene Slot
+ist jedoch das production-gematchte
+\[
+  \texttt{GF1\_PHI\_CHEBYSHEV\_LADDER\_MATCH}.
+\]
+Er muss die echten Chebyshev-Leiter-Koeffizienten
+\[
+  P_a(d)=\sum_{n\le d}\bigl(b_n^{\rm in}M_{a,n}^{\rm in}
+        +b_n^{\rm out}M_{a,n}^{\rm out}\bigr)
+\]
+und dieselbe Leiter-Imbalance-Normierung wie der production-Audit
+verwenden, nicht den nackten \(S_\varphi\)-über-\(L^1\)-Quotienten. Bis
+dieser Match bewiesen oder falsifiziert ist, ist \(C^*\) ein scharfer
+struktureller Benchmark für GF1, aber keine Vorwärtsherleitung von DZT2,
+MS2, gerader Dominanz oder RH.
+\end{remark}
+
+\subsection{Update (31. Mai 2026): Cross-Route-Diagnostikphase --- unbedingte Strukturresultate, die \texorpdfstring{$\Lambda=0$}{Lambda=0}-Linse, und warum die Route lebt}
+
+Eine Cross-Route-Diagnostikphase 2026 (konsolidiert in der Landscape-Mutter,
+Teil~IV) brachte drei Befunde mit Bezug zur Even-Dominance-Route hervor. Keiner
+schließt die Route, keiner ändert ihren Status der bedingten Reduktion.
+
+\medskip\noindent\textbf{Zwei unbedingte Strukturresultate (routen-stärkend).}
+\begin{itemize}[leftmargin=*]
+  \item \emph{Konzentrations-Lemma.} Für ein festes Modenfenster kontrolliert keine
+    feste endliche Menge von $K$ Prim-Atomen einen positiven Anteil der absoluten
+    Primmasse ($\mathrm{Top}\text{-}K/A_\lambda(W)\to 0$). Rigoros: die
+    Even-Dominance-Route hat \emph{keinen} Wenig-Prim-/lokalen Schlüssel --- der
+    Mechanismus ist genuin das volle Prim-Ensemble. Unbedingt; kein RH.
+  \item \emph{Endliche Sylvester-Inertia $\nu_-=0$.} Intervallarithmetische
+    $\mathrm{LDL}^\top$-Inertia ($\lambda=100$, $N\le 40$) zertifiziert die endliche
+    Even-Dominance-Positivität direkt --- stärker als das Lemma verlangte, ohne
+    Symbol, ohne $\lVert E\rVert$, ohne Temple-Schranke. Das hebt die endliche Stufe
+    von A3 von heuristischer Tail-Extrapolation auf rigorose
+    Finite-Section-Positivität.
+\end{itemize}
+
+\medskip\noindent\textbf{Eine genuin geschlossene Sub-Methode, eine re-typisierte.}
+Die \emph{Toeplitz-Symbol}-Untergrenze-Sub-Methode ist geschlossen: $A_{\sin}$ ist
+nicht Toeplitz ($m$-abhängige oszillierende Diagonalen, also kein wohldefiniertes
+Symbol $f(\theta)$); der Nachfolger ist die endliche Sylvester-Inertia-Schranke
+oben plus GLT-/Outlier-Kontrolle. Die \emph{Monotonie-Fortsetzungs}-Brücke
+(endlich $\to$ asymptotisch) ist kein struktureller Defekt, sondern A7-äquivalent
+(sie re-encodiert das offene Problem) --- re-typisiert, nicht geschlossen.
+
+\begin{remark}[Die $\Lambda=0$-Linse ist heuristisch, kein Unmöglichkeitssatz --- die Route lebt]
+Da $\mathrm{RH}\Leftrightarrow\Lambda=0$ (de~Bruijn--Newman; Rodgers--Tao
+$\Lambda\ge 0$), sitzt RH --- falls wahr --- exakt bei Kritikalität ohne Marge.
+Das \emph{legt nahe}, dass eine Marge-suchende Schließung (der asymptotische
+Variationsgap $\lambda_1^+<\lambda_1^-$ des vorigen Abschnitts) der weniger
+aussichtsreiche \emph{Typ} Mechanismus ist und dass exakt-strukturelle Routen
+(Bost--Connes\,$\leftrightarrow$\,Meyer; die globale adelische Trace-Route)
+zusätzliches strategisches Gewicht verdienen. \textbf{Das ist eine strategische
+Linse, kein Theorem:} die Even-Dominance-Marge ist \emph{nicht} als
+de~Bruijn--Newman-Aussage gezeigt (\glqq eine Marge würde $\Lambda<0$ erzwingen\grqq{}
+ist eine Analogie). Folglich ist die Route \emph{nicht} widerlegt --- der
+asymptotische Variationsgap bleibt ein wohlgestelltes offenes Problem, der exakte
+Kern (Shift-Parität, die geschlossene Weil-/Hankel-Form) bleibt ein wertvolles
+Asset, und die Route \emph{lebt}. Sie ist strategisch deprioritisiert gegenüber den
+exakt-strukturellen Routen, \emph{nicht} geschlossen. Wir haben \emph{nicht}
+gezeigt, dass Even Dominance nicht zu einem Beweis führen kann.
+\end{remark}
+
+
 \section{Was nicht verwendet wird}
 
 Dieser Beweis verwendet folgendes Material der Landscape-Reihe ausdrücklich nicht:
@@ -998,11 +1374,12 @@ Alle expliziten numerischen Konstanten, die im Beweis verwendet wurden, mit ihre
 \begin{center}
 \footnotesize
 \renewcommand{\arraystretch}{1.25}
-\begin{tabular}{p{2.6cm}|p{2.0cm}|p{6.2cm}|p{2.6cm}}
+\begin{tabular}{L{2.6cm}|L{2.0cm}|L{6.2cm}|L{2.6cm}}
 \textbf{Konstante} & \textbf{Wert} & \textbf{Rolle / Quelle} & \textbf{Verifikation} \\\hline
 $C_f$ & $0.4685$ & Gemeinsamer Frontier-Rayleigh-Quotient $-d_{11}(r)\geq C_f$ auf $r\in[0.7,1]$ (\Cref{lem:common-vector}) & IA auf $[0.7,1]$ (1D)\\
 $C_n$ & $2.2847$ & Operator-Norm-Schranke $\sup_{r\in(0,2)}\norm{D_3(r)}_{\mathrm{op}}\leq C_n$ (\Cref{lem:nonfrontier}) & IA auf $(0,2)$ (3D)\\
 $c_{\mathrm{gap}}$ & $\geq 4\pi^2/L\geq 2.8$ & Spectral-Gap-Konstante für $L\leq 14$ (\Cref{lem:higher-mode}(ii)) & Laplace Asymptotik\\
+$C^*$ & $64\pi^2/3$ & GF1-Cauchy-Leiter-Momentbenchmark aus der \(u^2\)-gewichteten gerade singulären Collar-Komponente (\Cref{prop:gf1-collar-kernel-cstar}); nur diagnostische Normierung & Geschlossene Identität\\
 $N_{\cos}$ & $4$ & Even-Block Galerkin-Trunkierung (\Cref{rem:galerkin-asymmetry}) & Stabilitätscheck $k=3,4,5$\\
 $N_{\sin}$ & $40$--$90$ & Odd-Block Galerkin-Trunkierung (\Cref{rem:galerkin-asymmetry}) & Cauchy Tail-Schranke\\
 $\Lambda_*$ & $\leq 175{,}000$ & Asymptotische Schwelle; Primsummen-Berechnung (\Cref{rem:lambda-star-improved}); konservative Schranke $\leq 1{,}300{,}000$ (\Cref{prop:frontier-dominance}) & Exakte Primenumeration\\
