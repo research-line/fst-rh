@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the Zenodo record and the GitHub repository."
+title: "From Landscape to Atlas: Multi-Route Cartography of an Ongoing Expedition Toward the Riemann Hypothesis"
+authors:
+  - family-names: "Geiger"
+    given-names: "Lukas"
+    orcid: "https://orcid.org/0009-0005-7296-1534"
+version: "3.1"
+date-released: "2026-05-31"
+doi: "10.5281/zenodo.20479302"
+repository-code: "https://github.com/research-line/rh-even-dominance"
+url: "https://doi.org/10.5281/zenodo.19035640"
+license: "CC-BY-4.0"
+abstract: "Public reproducibility package and audit-trail atlas for a multi-route research programme toward the Riemann Hypothesis. The repository documents conditional reductions, explored routes, failed paths, obstruction analysis, public scripts, certificate outputs, and the separately published Even-Dominance companion record."
+keywords:
+  - "Riemann Hypothesis"
+  - "number theory"
+  - "spectral theory"
+  - "Connes spectral program"
+  - "Weil quadratic form"
+  - "conditional reduction"
+  - "reproducible research"
+  - "Zenodo"

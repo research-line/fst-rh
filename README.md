@@ -2,11 +2,25 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19035640.svg)](https://doi.org/10.5281/zenodo.19035640)
 
+**Research status:** public reproducibility package and audit-trail atlas. This
+repository documents conditional reductions, explored routes, failed paths, and
+computer-assisted certificates. It does **not** claim an unconditional proof of
+the Riemann Hypothesis.
+
 A five-part Landscape/Atlas and audit-trail series mapping multiple routes
 toward the Riemann Hypothesis via Connes' spectral program (arXiv:2602.04022).
 It documents the explored routes, failed paths, obstruction analysis,
 computational certificates, and the transition from the broader research
 landscape to the separately published proof-only extraction (Even Dominance).
+
+## Citation and Machine-Readable Context
+
+- Landscape/Atlas Concept DOI: [10.5281/zenodo.19035640](https://doi.org/10.5281/zenodo.19035640)
+- Latest verified Landscape/Atlas record: [10.5281/zenodo.20479302](https://doi.org/10.5281/zenodo.20479302) (v3.1)
+- Companion Even-Dominance Concept DOI: [10.5281/zenodo.19764771](https://doi.org/10.5281/zenodo.19764771)
+- Latest verified Even-Dominance record: [10.5281/zenodo.20479145](https://doi.org/10.5281/zenodo.20479145) (v1.9)
+- Citation metadata: [`CITATION.cff`](CITATION.cff)
+- LLM/crawler context: [`llms.txt`](llms.txt)
 
 Proof-only extraction (Even Dominance, Concept-DOI): https://doi.org/10.5281/zenodo.19764771
 

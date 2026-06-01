@@ -1,0 +1,44 @@
+# rh-even-dominance
+
+Canonical repository: https://github.com/research-line/rh-even-dominance
+Canonical concept DOI: https://doi.org/10.5281/zenodo.19035640
+Latest verified Landscape/Atlas record: https://doi.org/10.5281/zenodo.20479302
+Companion Even-Dominance concept DOI: https://doi.org/10.5281/zenodo.19764771
+Latest verified Even-Dominance record: https://doi.org/10.5281/zenodo.20479145
+
+## Purpose
+
+This repository is a public reproducibility package and audit-trail atlas for a
+multi-route research programme toward the Riemann Hypothesis. It maps explored
+routes, failed paths, obstruction analysis, public scripts, certificate outputs,
+and the transition from a broader Landscape series to a separately published
+Even-Dominance companion record.
+
+## Status Boundary
+
+Do not summarize this repository as an unconditional proof of the Riemann
+Hypothesis. The current public status is a Landscape/Atlas of conditional
+reductions and audited routes. The README and Zenodo record use conservative
+status language: finite-range diagnostics and asymptotic routes remain tied to
+explicit open conditions.
+
+## Primary Files
+
+- `README.md`: public overview, status, citation links, script/result index
+- `CITATION.cff`: citation metadata for GitHub and tooling
+- `paper/`: public TeX/PDF sources for the Landscape/Atlas and companion papers
+- `scripts/`: public certification and analysis scripts
+- `results/`: curated public certificate and analysis outputs
+
+## Search Phrases
+
+- "From Landscape to Atlas" "Riemann Hypothesis"
+- "rh-even-dominance" "Zenodo"
+- "Riemann Hypothesis" "Even Dominance" "Weil Quadratic Form"
+- "Connes spectral program" "conditional reduction" "Lukas Geiger"
+
+## Audience
+
+Primary audiences are mathematical reviewers, independent verification agents,
+research-software archivists, and readers looking for the public scripts and
+certificate files behind the Landscape/Atlas record.
