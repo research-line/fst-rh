@@ -46,8 +46,9 @@ single open hypothesis~(ii-a): a uniform growth-adapted strip bound on the
 family $\{\hat\xi_\lambda\}$ derived from $QW_N$-coercivity. The
 multiplicative canonical form
 $A_\lambda(\delta) = A_\Xi(\delta)\bigl(1+\kappa(\lambda)\delta^2\bigr)$
-with saturating $\kappa_\infty \in [1.6, 1.8]\times 10^{-3}$ is
-established empirically, yielding Theorem~B-1 (conditional):
+with $|\kappa_\infty|\lesssim 10^{-4}$ (corrected from the preliminary
+$[1.6,1.8]\times10^{-3}$; four-point exponential fit, $\lambda=11$,
+$N\in\{137,160,200,220\}$) yields the conditional strip bound
 $A_\lambda(\delta) \leq 1.0063$ under uniform log-curvature control.
 
 Branch~Z (CCM Microcluster Programme) reduces RH to three C2ca-inputs
@@ -467,14 +468,18 @@ $\sum_{k\geq 1} 1/\gamma_k^2$.
 The multiplicative canonical form~\eqref{eq:canonical-form} decomposes
 $A_\lambda$ into the Hadamard baseline $A_\Xi$ and a residual factor
 $1+\kappa(\lambda)\delta^2$. Empirically,
-$\kappa(\lambda)$ saturates to
-$\kappa_\infty \in [1.6, 1.8]\times 10^{-3}$ across
-$\lambda = 3,5,7,9,11,13,15,20$, with
-$\kappa(20)=1.527\times 10^{-3}$. This saturation is consistent with the
-Foundation-Lock convergence:
-as $\lambda\to\infty$, $\hat\xi_\lambda \to \Xi$ in the relevant
-topology, and the residual curvature measures the
-finite-$\lambda$ correction.
+$\kappa(\lambda)$ was initially reported as saturating at
+$[1.6,1.8]\times 10^{-3}$; however, a dedicated $N$-convergence study
+(four-point exponential fit at $\lambda=11$, $N\in\{137,160,200,220\}$)
+shows $|\kappa_\infty(11)|\lesssim 10^{-4}$, approximately $15\times$
+smaller. The earlier values conflated transient $\kappa(N)$ with the
+asymptotic limit. The sign of $\kappa_\infty$ remains open
+($\kappa_\infty(3)\approx -2.3\times10^{-3}$, negative and flat).
+As $\lambda\to\infty$, $\hat\xi_\lambda \to \Xi$ in the relevant
+topology; the residual curvature measures the
+finite-$\lambda$ correction. The load-bearing requirement for
+Branch~B\,(ii-a) is $\sup_\lambda|\kappa(\lambda)|<\infty$
+(boundedness), not a specific sign.
 
 \subsection{\texorpdfstring{Hecke-Normalised Gap $g_0(m)$ (Branch~Z)}{Hecke-Normalised Gap g0(m) (Branch Z)}}
 
@@ -494,7 +499,7 @@ $g_0(m) \approx 2\pi/\log\gamma_m$.
 \textbf{Branch} & \textbf{Constant} & \textbf{Value} & \textbf{Status} \\
 \midrule
 B & $c_\Xi$ (Hadamard curvature) & $\approx 0.0231$ & analytical (RH-neutral) \\
-B & $\kappa_\infty$ (residual curvature) & $\in [1.6,1.8]\times 10^{-3}$ & empirical (saturated) \\
+B & $\kappa_\infty$ (residual curvature) & $|\kappa_\infty(11)|\lesssim 10^{-4}$ & corrected (preliminary $[1.6,1.8]\times10^{-3}$ was transient) \\
 B & $B_\Xi = \xi(0)/\xi(1/2)$ & $1.00579\ldots$ & analytical \\
 Z & $g_0(m) \approx 2\pi/\log\gamma_m$ & varies & classical (Montgomery--Odlyzko) \\
 \bottomrule

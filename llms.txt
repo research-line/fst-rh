@@ -42,3 +42,5 @@ explicit open conditions.
 Primary audiences are mathematical reviewers, independent verification agents,
 research-software archivists, and readers looking for the public scripts and
 certificate files behind the Landscape/Atlas record.
+
+## Last-checked: 2026-06-10

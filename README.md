@@ -175,7 +175,7 @@ for both lambda values.
 
 ## Server Computation
 
-Certificates are computed on ellmos-services (Hetzner CCX13, 2 vCPU, 8 GB RAM).
+Certificates were computed on a dedicated cloud instance (2 vCPU, 8 GB RAM).
 The certifier uses interval arithmetic (mpmath.iv, 50-digit precision) for the
 even block and float64 with Cauchy tail bounds for the odd block.
 

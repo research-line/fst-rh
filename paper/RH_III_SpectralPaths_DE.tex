@@ -48,8 +48,9 @@ eine einzige offene Hypothese~(ii-a): eine uniforme, wachstumsadaptierte
 Streifenschranke auf der Familie $\{\hat\xi_\lambda\}$, abgeleitet aus
 $QW_N$-Koerzivität. Die multiplikative kanonische Form
 $A_\lambda(\delta) = A_\Xi(\delta)\bigl(1+\kappa(\lambda)\delta^2\bigr)$
-mit sättigendem $\kappa_\infty \in [1.6, 1.8]\times 10^{-3}$ wird
-empirisch etabliert und liefert Theorem~B-1 (bedingt):
+mit $|\kappa_\infty|\lesssim 10^{-4}$ (korrigiert gegenüber dem
+vorläufigen $[1.6,1.8]\times10^{-3}$; Vier-Punkt-Exponentialfit, $\lambda=11$,
+$N\in\{137,160,200,220\}$) liefert die bedingte Streifenschranke
 $A_\lambda(\delta) \leq 1.0063$ unter uniformer Log-Krümmungskontrolle.
 
 Branch~Z (CCM-Mikrocluster-Programm) reduziert RH auf drei C2ca-Eingaben
@@ -478,14 +479,19 @@ $\sum_{k\geq 1} 1/\gamma_k^2$.
 
 Die multiplikative kanonische Form~\eqref{eq:canonical-form} zerlegt
 $A_\lambda$ in die Hadamard-Basislinie $A_\Xi$ und einen Restfaktor
-$1+\kappa(\lambda)\delta^2$. Empirisch sättigt
-$\kappa(\lambda)$ zu
-$\kappa_\infty \in [1.6, 1.8]\times 10^{-3}$ über
-$\lambda = 3,5,7,9,11,13,15,20$, mit
-$\kappa(20)=1{,}527\times 10^{-3}$. Diese Sättigung ist konsistent mit der
-Foundation-Lock-Konvergenz: für $\lambda\to\infty$ konvergiert
-$\hat\xi_\lambda \to \Xi$ in der relevanten Topologie, und die residuale
-Krümmung misst die Finite-$\lambda$-Korrektur.
+$1+\kappa(\lambda)\delta^2$. Der Wert $\kappa(\lambda)$ wurde zunächst als
+sättigend bei $[1.6,1.8]\times 10^{-3}$ berichtet; eine dedizierte
+$N$-Konvergenzstudie (Vier-Punkt-Exponentialfit bei $\lambda=11$,
+$N\in\{137,160,200,220\}$) zeigt jedoch
+$|\kappa_\infty(11)|\lesssim 10^{-4}$, ca.\ $15\times$ kleiner. Die
+früheren Werte verwechselten transientes $\kappa(N)$ mit dem asymptotischen
+Limes. Das Vorzeichen von $\kappa_\infty$ bleibt offen
+($\kappa_\infty(3)\approx -2{,}3\times10^{-3}$, negativ und flach).
+Für $\lambda\to\infty$ konvergiert $\hat\xi_\lambda \to \Xi$ in der
+relevanten Topologie; die residuale Krümmung misst die
+Finite-$\lambda$-Korrektur. Die tragende Voraussetzung für
+Branch~B\,(ii-a) ist $\sup_\lambda|\kappa(\lambda)|<\infty$
+(Beschränktheit), nicht ein bestimmtes Vorzeichen.
 
 \subsection{\texorpdfstring{Hecke-normierte Lücke $g_0(m)$ (Branch~Z)}{Hecke-normierte Luecke g0(m) (Branch Z)}}
 
@@ -508,7 +514,7 @@ mit dieser Skalierung konsistent:
 \textbf{Branch} & \textbf{Konstante} & \textbf{Wert} & \textbf{Status} \\
 \midrule
 B & $c_\Xi$ (Hadamard-Krümmung) & $\approx 0.0231$ & analytisch (RH-neutral) \\
-B & $\kappa_\infty$ (residuale Krümmung) & $\in [1.6,1.8]\times 10^{-3}$ & empirisch (gesättigt) \\
+B & $\kappa_\infty$ (residuale Krümmung) & $|\kappa_\infty(11)|\lesssim 10^{-4}$ & korrigiert (vorläufiges $[1.6,1.8]\times10^{-3}$ war transient) \\
 B & $B_\Xi = \xi(0)/\xi(1/2)$ & $1.00579\ldots$ & analytisch \\
 Z & $g_0(m) \approx 2\pi/\log\gamma_m$ & variiert & klassisch (Montgomery--Odlyzko) \\
 \bottomrule

@@ -84,16 +84,16 @@ This paper presents a conditional reduction of the Riemann Hypothesis,
 extracted from a three-part Landscape series. The Landscape papers document
 the full research process, including failed routes, obstruction theorems,
 computational certificates, and alternative strategies. The present paper
-keeps only the proof-relevant chain.
-Following Connes' reduction of the Riemann Hypothesis to an even-dominance
-condition for the Weil quadratic form, we make two independent contributions.
+retains only the proof-relevant chain.
+Starting from Connes' reduction of the Riemann Hypothesis to an even-dominance
+condition for the Weil quadratic form, we isolate two independent contributions.
 First, for the finite range $100\leq\lambda\leq 1{,}300{,}000$, the Landscape
-computation reports negative interval-enclosed Galerkin gaps at 33 grid points.
+computations produce negative interval-enclosed Galerkin gaps at 33 grid points.
 A 15 May 2026 audit shows that the current sine-block lower-bound construction
-still contains a heuristic geometric tail extrapolation; the finite-range data
-are therefore treated here as computer-assisted numerical evidence, not as a
-theorem-level CAP proof. Second, for the asymptotic regime $\lambda\to\infty$,
-we establish via
+still relies on a heuristic geometric tail extrapolation; accordingly, the
+finite-range data are treated here as computer-assisted numerical evidence, not
+as a theorem-level CAP proof. Second, for the asymptotic regime
+$\lambda\to\infty$, we show via
 a common Rayleigh-vector argument that
 $\lambda_{\min}(W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}})=-\Theta(\sqrt\lambda)$
 on the relevant three-mode Galerkin block. Closing the gap between this
@@ -102,17 +102,17 @@ $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ for asymptotic $\lambda$ requires a
 separate quantitative lower bound for $\lambda_1^-$; we formulate this as the
 \emph{Asymptotic Variational Gap Conjecture} and outline a degenerate
 perturbation-theory route in Section~\ref{sec:asymptotic-lower-bound}.
-The route toward RH analysed here is therefore conditional on (i) the
+Accordingly, the route to RH analysed here is conditional on (i) the
 Connes program (Connes--van Suijlekom real-zero criterion
 \cite{ConnesvS2025}, which is fully proven at fixed $L$, together with
 the Hurwitz limit-passage of \cite[Sec.~6.4--6.6]{Connes2026}, whose
 Fact~6.4 convergence is presented there as a Slepian--Pollak consequence),
 and (ii) the
 Asymptotic Variational Gap Conjecture for the odd-sector minimum
-eigenvalue. The Shift Parity Lemma is unconditional. The
-interval-arithmetic certificates as currently implemented use a
-heuristic geometric extrapolation for the sin-block lower bound; the
-14 May 2026 v1.4 revision documents this honestly in
+eigenvalue. The Shift Parity Lemma is unconditional. The current
+interval-arithmetic certificates use a heuristic geometric extrapolation
+for the sin-block lower bound; the 14 May 2026 v1.4 revision documents
+this explicitly in
 \cref{sec:k0-strengthened}.
 
 \medskip\noindent
@@ -139,7 +139,7 @@ has been rewritten accordingly; downstream sections retain their
 legacy structure and require parallel adaptation.
 
 The excluded gauge, total-positivity, and universal-commutator routes
-are not used and are referred to the Landscape series.
+are not used here and are deferred to the Landscape series.
 \end{abstract}
 
 \noindent\textbf{Keywords:} Riemann Hypothesis, Weil quadratic form, even dominance, Connes program, Shift Parity Lemma, computer-assisted evidence.
@@ -147,12 +147,12 @@ are not used and are referred to the Landscape series.
 \newpage
 \section{Purpose and Relation to the Landscape Series}
 
-This paper is not a fourth installment of the Landscape series. It is a
+This paper is not a fourth installment of the Landscape series; it is a
 proof-only extraction. The Landscape papers~\cite{GeigerLandscapeI,GeigerLandscapeII,GeigerLandscapeIII}
 retain the full process: the original gauge-theoretic approach, the obstruction
 analysis, non-existence theorems for two attractive but false structural routes,
 review reports, and computational handoffs. Those components are useful for
-audit and scientific history, but they are not needed in the shortest proof
+auditing and scientific history, but they are not needed in the shortest proof
 chain.
 
 The argument presented here uses the following two-part chain:
@@ -170,9 +170,9 @@ together with
 \Longrightarrow\ \text{RH via Connes and Hurwitz (\Cref{thm:rh})}.
 \end{gathered}
 \]
-The first line is diagnostic: the Shift Parity Lemma is unconditional, while
-the current finite certificates still require a rigorous odd-sector lower-bound
-closure before they become theorem-level CAP. The second line introduces two
+The first line is diagnostic: the Shift Parity Lemma is unconditional, whereas
+the current finite certificates still require a rigorous odd-sector lower bound
+before they can be treated as theorem-level CAP. The second line introduces two
 conditional inputs: the Connes program (external) and the Asymptotic Variational
 Gap Conjecture (\Cref{conj:avg}, internal to this approach;
 \Cref{sec:asymptotic-lower-bound}).
@@ -1729,8 +1729,13 @@ type $\hat\xi(z) = (2/\sqrt L)\sin(zL/2)\cdot F(z)$, centered, even,
 real-on-real) and a limit-identification condition~(ii-c); and (ii-c)
 is absorbed into~(ii-a) rigorously via parity and Hadamard order
 (modulo a zero-coincidence assumption~(Z), \S{}E.14 of the notes).
-The remaining open blocker for Route~B is therefore the single
-a-priori uniform strip bound~(ii-a) from $QW_N$ coercivity.
+The remaining open blockers for Route~B are therefore the
+a-priori uniform strip bound~(ii-a) from $QW_N$ coercivity
+and the zero-coincidence assumption~(Z) itself, which the
+normal-family bound~(ii-a) does not supply: a locally uniform
+limit~$G$ inherits the zeros of the approximants by Hurwitz's
+theorem, but identical zeros do not force $G=\Xi$ (the
+Hadamard factorisation leaves an exponential factor free).
 
 Converged empirical measurements on the canonical objects (Mac Studio,
 $\mathrm{dps} \approx 30\text{--}50\cdot\lambda$, $\lambda \in
@@ -1770,12 +1775,16 @@ reliable.
 \paragraph{26 May 2026 guardrail.}
 Two subsequent audits sharpen the status without strengthening the
 theorem claims. First, the $\lambda=20$ strip run gives
-$\kappa(20)=1.527\times10^{-3}$; a six-point refit now places the
-residual-curvature saturation in the conservative range
-$\kappa_\infty\in[1.6,1.8]\times10^{-3}$. Thus the conditional
-Theorem~B-1 should be read with the bound $A_\lambda(\delta)\leq
-1.0063$ only under uniform log-curvature control, not as an established
-strip theorem. Second, the GF1 Chebyshev-ladder audit is two-regime:
+$\kappa(20)=1.527\times10^{-3}$; however, a dedicated $N$-convergence
+study (four-point exponential fit at $\lambda=11$, $N\in\{137,160,200,220\}$,
+7~June~2026) shows that the earlier six-point refit conflated transient
+$\kappa(N)$ with the asymptotic limit: the corrected magnitude is
+$|\kappa_\infty(11)|\lesssim 10^{-4}$, approximately $15\times$ smaller
+than the preliminary range $[1.6,1.8]\times10^{-3}$.
+The conditional strip-bound statement ($A_\lambda(\delta)\leq 1.0063$)
+holds \emph{a fortiori} with the smaller residual curvature; it should
+still be read only under uniform log-curvature control, not as an
+established strip theorem. Second, the GF1 Chebyshev-ladder audit is two-regime:
 for $\lambda=5,7$ the converged data support the boundary-moment
 benchmark $\mathrm{sLI}\sim(64\pi^2/3)\lambda/(NL)$, whereas
 $\lambda=3$ is a low-bandwidth outlier whose older $C_m$ normalisation
