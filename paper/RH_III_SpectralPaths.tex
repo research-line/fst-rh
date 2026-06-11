@@ -57,7 +57,7 @@ complement) via the Connes--Consani--Moscovici Fourier
 model~\cite{ConnesMoscovici2023}.
 
 Both branches share Wall~(ii) as the common analytical obstacle.
-Fifteen excluded spectral and CCM paths are catalogued, establishing the
+Nineteen excluded spectral and CCM paths are catalogued, establishing the
 productive routes as the only viable approaches in the current landscape.
 
 \medskip\noindent
@@ -393,9 +393,14 @@ assumption):
 \begin{itemize}
   \item \textbf{C2ca.1 Scalar Secular Cancellation:} algebraic secular
     identity proven; uniform decay $s_\lambda \to 0$ proven only under a
-    separate Galerkin-truncation control. Numerical evidence:
-    $|\mu/\alpha|\approx 4\text{--}5\times 10^{-7}$ stable across
-    $\lambda = 3, 5, 7$.
+    separate Galerkin-truncation control. Numerical evidence
+    ($N$-convergence-gated, 2026-06): $|\mu/\alpha|\approx
+    4\text{--}5\times 10^{-7}$ across $\lambda = 3,5,7,9$, stable in $N$
+    (drifts $\le 6\%$ up to $N{=}80$, digit-stable in precision) ---
+    i.e.\ a genuine finite Galerkin limit, \emph{mildly increasing} in
+    $\lambda$ ($\approx 4.1 \to 4.9 \times 10^{-7}$). This supports
+    \emph{smallness}, not decay: the closure input $s_\lambda \to 0$
+    remains a purely analytical obligation.
   \item \textbf{C2ca.2 Projected Poisson Quasimode:} transfer formula
     $h = (1/n)P_0\Pi(E+B)$ proven; uniform analytical control of
     $P_0$-leakage and boundary decay open. Numerical evidence:
@@ -426,6 +431,81 @@ $R_0/g_{\text{eff}}\approx 5\times 10^{-7}$. The earlier
 fixed-tolerance gap was unstable (cut inside the genuine cluster); the
 mass-based replacement is stable and macroscopic. See Zookeeper C2by/C2bz
 for the full analysis~\cite{Geiger2026zookeeper}.
+
+
+\subsection{The Determinant Channel: Zero-Counting Reformulation and
+Normalisation Ledger}
+\label{sec:det-channel}
+
+After the literal MS1 (uniformly simple cluster splitting) was excluded
+(\Cref{sec:excluded-spectral}), the working reformulation of MS1 is
+\emph{zero counting}: compare the CCM secular function
+\[
+  F_N(z) \;=\; \sum_{j=-N}^{N} \frac{\xi_j}{z-p_j},
+  \qquad p_j = \frac{2\pi j}{\log c},
+\]
+($\xi$ = even ground state of the Galerkin matrix) against the completed
+$\Xi$ via the argument principle on contours, instead of asking for
+eigenvalue simplicity. Writing $P(z) := F_N(z)\prod_{j}(z-p_j)$ for the
+degree-$2N$ secular polynomial, a dedicated measurement campaign
+(2026-06; scripts \texttt{ms1\_det\_zero\_counting\_harness.py},
+\texttt{ms1\_newton\_power\_sum\_balance.py},
+\texttt{ms1\_cartwright\_ledger.py}; full audit trail in the Zookeeper
+companion~\cite{Geiger2026zookeeper}) established the following
+RH-neutral structure ($c = 9, 14, 25$; $N \le 48$; all statements
+numerical, no MS1/MS2 closure is claimed).
+
+\begin{itemize}
+  \item \textbf{Root anatomy.} All $2N$ roots of $P$ are real, in
+    $\pm$-pairs: $K_h$ hit pairs matching $\gamma_k$ to $\ge 30$ decimal
+    digits inside the comb range (earlier $\sim\!10^{-15}$ reports were
+    limited by hard-coded reference zeros, not by the roots), a
+    graduated degradation governed by the comb reach
+    $p_N = 2\pi N/\log c$ as the \emph{only} empirically supported scale
+    (a conjectured density-equality scale $T^* = 2\pi c$ left no
+    signature in six dedicated runs), \emph{no} comb-shadow roots, and a
+    $c$-dependent but $N$-stable number of outer tail roots
+    ($5/7/10$ pairs at $c=9/14/25$).
+  \item \textbf{Far field.} The tail roots carry the Newton power-sum
+    defects exactly ($S_m(\text{tail})/c_m = 1.000$ for $m=4,6$ at all
+    three $c$): the Hadamard envelope of $\Xi$ is realised by $P$ as a
+    thinned outer node cloud (reminiscent of Gaussian-quadrature nodes;
+    the analogy is used descriptively only).
+  \item \textbf{Near field (exact ledger).} On a packet contour around
+    $\{\gamma_1,\gamma_2\}$ the logarithm of the pairing ratio
+    decomposes exactly into four blocks --- hit mismatch, tail cloud,
+    uncancelled zeros, comb --- and the decomposition reconstructs every
+    measured Rouch\'e margin to 3--4 significant digits
+    (35 configurations). The block hierarchy is
+    comb $\gg$ uncancelled zeros $\gg$ tail $\gg$ hit mismatch.
+  \item \textbf{Canonical pairing.} Scanning all comb-compensation
+    windows, the margin minimum sits at the \emph{bare} pairing $P$
+    vs.\ $C\,\Xi$ --- no comb factor in the reference (margins
+    $1.56/1.65/1.73$ at $c=9/14/25$, $N=40$). Completing the comb to its
+    closed form $\prod_{j\ge 1}(1-z^2/p_j^2) = \operatorname{sinc}(z\log
+    c/2)$ is the \emph{worst} reference: its exponential type
+    $(\log c)/2$ in $\operatorname{Im} z$ clashes with the polynomial
+    $P$ --- the Cartwright-type obstruction in pure form.
+  \item \textbf{Local convergence rate.} The bare-pairing margin falls
+    from $3.86$ ($N=16$) to $1.65$ ($N=40$) and is nearly
+    $c$-independent at fixed $N$. Its source is almost exclusively the
+    uncancelled zeros above the hit reach $T_{\mathrm{hit}}(N)$
+    ($\approx 50$ at $N=16$, $\approx 100$ at $N=40$); the measured
+    spread ratio matches the prediction
+    $\sigma_1(\gamma > T_{\mathrm{hit}})$ from the Riemann--von~Mangoldt
+    density~\cite{Titchmarsh1986} within $1\%$.
+\end{itemize}
+
+\noindent\textbf{Honest wall statement.} The channel settles the
+normalisation question of the regularised-determinant formulation at
+finite $N$: the reference is the bare $C_N\,\Xi$, and the local
+convergence $P_N \to C_N\,\Xi$ is quantified to first order with rate
+$\sigma_1(\gamma > T_{\mathrm{hit}}(N)) \sim \log(T_{\mathrm{hit}})/
+T_{\mathrm{hit}}$. That $T_{\mathrm{hit}}(N)\to\infty$ --- the
+hyperconvergence of the secular roots onto the zeros --- is exactly the
+unproven content of MS1; nothing in the ledger circumvents it. The open
+surface of the determinant channel is thereby concentrated in a single
+quantified rate.
 
 
 % =============================================================================
@@ -688,6 +768,37 @@ routes. They do not affect the Branch-Z conditional reduction.
     Part~II~\cite{Geiger2026partII}; it is listed here because the
     falsification also restructured the comparative analysis of
     Branches~B and~Z.)
+
+  \item \textbf{Euler-diagonal determinant (Z1, closed by Schatten
+    trichotomy, 2026-06-09).} Realising the counting object as a
+    regularised determinant over the Euler diagonal fails structurally:
+    on $\operatorname{Re} s = 1/2$ the diagonal lies in
+    $\mathcal{S}_3\setminus\mathcal{S}_2$ ($\det_2$ diverges via
+    Mertens), while $\det_3$ loses the arithmetic $k=1,2$ kernel. Only a
+    different singular-value class (Ruelle-transfer type) remains
+    unexplored.
+
+  \item \textbf{Contour counting inside $\Omega_E$ alone (F3,
+    2026-06-09).} Closing the zero count by contours lying entirely
+    within the region of established convergence fails by a convexity
+    lemma; any gain re-imports positivity/tightness a~priori.
+
+  \item \textbf{Constant-$C$ packet Rouch\'e / infinite-comb reference
+    (2026-06-10/11).} On packet contours, Rouch\'e domination against a
+    constant multiple of $\Xi$ fails in the $N\to\infty$ limit at all
+    tested $c$ (margin plateau $1.541$ at $c=9$; rising through
+    $\approx 0.95$ at $c=14$); completing the comb to its sinc closed
+    form makes the reference strictly worse (exponential-type clash).
+    The $z$-dependent normalisation question is settled in
+    \Cref{sec:det-channel}.
+
+  \item \textbf{Root-pairing bulk models ($B_K$, PolyB, 2026-06-09/10).}
+    Modelling the bulk factor by pairing outer secular roots against
+    outer zeros is inert (the roots hit the zeros below measurement
+    floor, $B_K \equiv 1$); the bare local root polynomial against
+    $C\,\Xi$ fails by two orders of magnitude (margin $35$). The bulk is
+    carried exclusively by the compensation polynomial and the $\Xi$
+    envelope.
 \end{itemize}
 
 \begin{remark}[CCM-pattern: cancellation, not magnitude]
@@ -762,7 +873,8 @@ Theorem~B-1: $A_\lambda \leq 1.0063$ (conditional) & conditional & \Cref{thm:B1}
 $c_\Xi$ Hadamard curvature (RH-neutral) & analytical & \Cref{sec:spectral-constants} \\
 CCM: three C2ca-inputs identified & conditional reduction & \Cref{sec:c2ca-inputs} \\
 CCM: effective microcluster gap $g_{\text{eff}} \approx 5\text{--}6$ & numerical evidence & \Cref{sec:branch-z-empirics} \\
-6 excluded spectral paths + 9 excluded CCM paths & documented & \Cref{sec:excluded-spectral,sec:excluded-ccm} \\
+Determinant channel: exact ledger, bare $P\!\leftrightarrow\!\Xi$ pairing, rate $\sigma_1(\gamma>T_{\mathrm{hit}})$ & numerical evidence & \Cref{sec:det-channel} \\
+6 excluded spectral paths + 13 excluded CCM paths & documented & \Cref{sec:excluded-spectral,sec:excluded-ccm} \\
 5 methodical dead ends & documented & \Cref{sec:methodical} \\
 \end{tabular}%
 }

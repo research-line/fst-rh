@@ -1,3 +1,5 @@
+## Last-checked: 2026-06-11
+
 # rh-even-dominance
 
 Canonical repository: https://github.com/research-line/rh-even-dominance
@@ -32,15 +34,15 @@ explicit open conditions.
 
 ## Search Phrases
 
-- "From Landscape to Atlas" "Riemann Hypothesis"
-- "rh-even-dominance" "Zenodo"
-- "Riemann Hypothesis" "Even Dominance" "Weil Quadratic Form"
-- "Connes spectral program" "conditional reduction" "Lukas Geiger"
+```
+"From Landscape to Atlas" "Riemann Hypothesis"
+"rh-even-dominance" "Zenodo"
+"Riemann Hypothesis" "Even Dominance" "Weil Quadratic Form"
+"Connes spectral program" "conditional reduction" "Lukas Geiger"
+```
 
 ## Audience
 
 Primary audiences are mathematical reviewers, independent verification agents,
 research-software archivists, and readers looking for the public scripts and
 certificate files behind the Landscape/Atlas record.
-
-## Last-checked: 2026-06-10

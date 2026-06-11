@@ -58,7 +58,7 @@ Branch~Z (CCM-Mikrocluster-Programm) reduziert RH auf drei C2ca-Eingaben
 Komplement) via das Connes--Consani--Moscovici-Fourier-Modell~\cite{ConnesMoscovici2023}.
 
 Beide Branches teilen Wand~(ii) als gemeinsames analytisches Hindernis.
-Fünfzehn ausgeschlossene spektrale und CCM-Wege werden katalogisiert,
+Neunzehn ausgeschlossene spektrale und CCM-Wege werden katalogisiert,
 wodurch die produktiven Wege als die einzig gangbaren Ansätze in der
 aktuellen Landschaft etabliert werden.
 
@@ -403,9 +403,14 @@ H-Spektrallücken-Annahme):
   \item \textbf{C2ca.1 Skalare säkulare Auslöschung:} algebraische
     säkulare Identität bewiesen; uniforme Abnahme $s_\lambda \to 0$ nur
     unter einer separaten Galerkin-Trunkierungskontrolle bewiesen.
-    Numerische Evidenz:
-    $|\mu/\alpha|\approx 4\text{--}5\times 10^{-7}$ stabil über
-    $\lambda = 3, 5, 7$.
+    Numerische Evidenz ($N$-konvergenz-gegated, 2026-06):
+    $|\mu/\alpha|\approx 4\text{--}5\times 10^{-7}$ über
+    $\lambda = 3,5,7,9$, stabil in $N$ (Drifts $\le 6\,\%$ bis $N{=}80$,
+    präzisions-stellengenau) --- also ein echter endlicher
+    Galerkin-Limes, \emph{mild steigend} in $\lambda$
+    ($\approx 4{,}1 \to 4{,}9 \times 10^{-7}$). Das stützt
+    \emph{Kleinheit}, nicht Zerfall: der Schließungs-Input
+    $s_\lambda \to 0$ bleibt eine rein analytische Verpflichtung.
   \item \textbf{C2ca.2 Projizierte Poisson-Quasimode:} Transferformel
     $h = (1/n)P_0\Pi(E+B)$ bewiesen; uniforme analytische Kontrolle
     des $P_0$-Lecks und der Randdämpfung offen. Numerische Evidenz:
@@ -437,6 +442,87 @@ $R_0/g_{\text{eff}}\approx 5\times 10^{-7}$ ergibt. Die frühere
 Festtoleranzlücke war instabil (Schnitt innerhalb des echten Clusters);
 der massebasierte Ersatz ist stabil und makroskopisch. Siehe Zookeeper
 C2by/C2bz für die vollständige Analyse~\cite{Geiger2026zookeeper}.
+
+
+\subsection{Der Determinanten-Kanal: Zero-Counting-Reformulierung und
+Normalisierungs-Buchhaltung}
+\label{sec:det-channel}
+
+Nachdem das literale MS1 (uniform einfache Cluster-Aufspaltung)
+ausgeschlossen wurde (\Cref{sec:excluded-spectral}), ist die
+Arbeitsreformulierung von MS1 das \emph{Nullstellen-Zählen}: Vergleiche
+die CCM-Säkularfunktion
+\[
+  F_N(z) \;=\; \sum_{j=-N}^{N} \frac{\xi_j}{z-p_j},
+  \qquad p_j = \frac{2\pi j}{\log c},
+\]
+($\xi$ = gerader Grundzustand der Galerkin-Matrix) gegen das
+vervollständigte $\Xi$ über das Argument-Prinzip auf Konturen, statt
+Eigenwert-Einfachheit zu verlangen. Mit
+$P(z) := F_N(z)\prod_{j}(z-p_j)$, dem Säkularpolynom vom Grad $2N$,
+hat eine eigene Messkampagne (2026-06; Scripts
+\texttt{ms1\_det\_zero\_counting\_harness.py},
+\texttt{ms1\_newton\_power\_sum\_balance.py},
+\texttt{ms1\_cartwright\_ledger.py}; vollständiger Audit-Trail im
+Zookeeper-Companion~\cite{Geiger2026zookeeper}) die folgende RH-neutrale
+Struktur etabliert ($c = 9, 14, 25$; $N \le 48$; alle Aussagen
+numerisch, kein MS1-/MS2-Abschluss wird beansprucht).
+
+\begin{itemize}
+  \item \textbf{Wurzel-Anatomie.} Alle $2N$ Wurzeln von $P$ sind reell,
+    in $\pm$-Paaren: $K_h$ Treffer-Paare, die $\gamma_k$ im Kamm-Bereich
+    auf $\ge 30$ Dezimalstellen treffen (frühere
+    $\sim\!10^{-15}$-Angaben waren durch hartkodierte Referenz-Nullstellen
+    limitiert, nicht durch die Wurzeln), eine graduelle Degradation, die
+    von der Kamm-Reichweite $p_N = 2\pi N/\log c$ als \emph{einziger}
+    empirisch belegter Skala gesteuert wird (eine konjizierte
+    Dichtegleichstands-Skala $T^* = 2\pi c$ hinterließ in sechs
+    dedizierten Läufen keine Signatur), \emph{keine}
+    Kamm-Schatten-Wurzeln, sowie eine $c$-abhängige, aber $N$-stabile
+    Anzahl äußerer Tail-Wurzeln ($5/7/10$ Paare bei $c=9/14/25$).
+  \item \textbf{Fernfeld.} Die Tail-Wurzeln tragen die
+    Newton-Potenzsummen-Defekte exakt
+    ($S_m(\text{Tail})/c_m = 1{,}000$ für $m=4,6$ bei allen drei $c$):
+    Die Hadamard-Hüllkurve von $\Xi$ wird von $P$ als ausgedünnte äußere
+    Knoten-Wolke realisiert (an Gauß-Quadratur-Knoten erinnernd; die
+    Analogie wird nur deskriptiv verwendet).
+  \item \textbf{Nahfeld (exakte Buchhaltung).} Auf einer Paket-Kontur um
+    $\{\gamma_1,\gamma_2\}$ zerfällt der Logarithmus des
+    Paarungs-Quotienten exakt in vier Blöcke --- Treffer-Mismatch,
+    Tail-Wolke, ungekürzte Nullstellen, Kamm --- und die Zerlegung
+    rekonstruiert jede gemessene Rouch\'e-Margin auf 3--4 signifikante
+    Stellen (35 Konfigurationen). Die Block-Hierarchie ist
+    Kamm $\gg$ ungekürzte Nullstellen $\gg$ Tail $\gg$ Treffer-Mismatch.
+  \item \textbf{Kanonische Paarung.} Beim Scan aller
+    Kamm-Kompensationsfenster sitzt das Margin-Minimum bei der
+    \emph{nackten} Paarung $P$ vs.\ $C\,\Xi$ --- ohne Kamm-Faktor in der
+    Referenz (Margins $1{,}56/1{,}65/1{,}73$ bei $c=9/14/25$, $N=40$).
+    Die Vervollständigung des Kamms zu seiner geschlossenen Form
+    $\prod_{j\ge 1}(1-z^2/p_j^2) = \operatorname{sinc}(z\log c/2)$ ist
+    die \emph{schlechteste} Referenz: ihr exponentieller Typ
+    $(\log c)/2$ in $\operatorname{Im} z$ kollidiert mit dem Polynom $P$
+    --- die Cartwright-Typ-Obstruktion in Reinform.
+  \item \textbf{Lokale Konvergenzrate.} Die Margin der nackten Paarung
+    fällt von $3{,}86$ ($N=16$) auf $1{,}65$ ($N=40$) und ist bei festem
+    $N$ nahezu $c$-unabhängig. Ihre Quelle sind fast ausschließlich die
+    ungekürzten Nullstellen oberhalb der Treffer-Reichweite
+    $T_{\mathrm{hit}}(N)$ ($\approx 50$ bei $N=16$, $\approx 100$ bei
+    $N=40$); das gemessene Spread-Verhältnis trifft die Vorhersage
+    $\sigma_1(\gamma > T_{\mathrm{hit}})$ aus der
+    Riemann--von~Mangoldt-Dichte~\cite{Titchmarsh1986} auf $1\,\%$.
+\end{itemize}
+
+\noindent\textbf{Ehrliche Wand-Aussage.} Der Kanal klärt die
+Normalisierungsfrage der regularisierten Determinanten-Formulierung bei
+endlichem $N$: Die Referenz ist das nackte $C_N\,\Xi$, und die lokale
+Konvergenz $P_N \to C_N\,\Xi$ ist in erster Ordnung quantifiziert mit
+Rate $\sigma_1(\gamma > T_{\mathrm{hit}}(N)) \sim
+\log(T_{\mathrm{hit}})/T_{\mathrm{hit}}$. Dass
+$T_{\mathrm{hit}}(N)\to\infty$ --- die Hyperkonvergenz der
+Säkular-Wurzeln auf die Nullstellen --- ist exakt der unbewiesene Gehalt
+von MS1; nichts in der Buchhaltung umgeht ihn. Die offene Fläche des
+Determinanten-Kanals ist damit in einer einzigen quantifizierten Rate
+konzentriert.
 
 
 % =============================================================================
@@ -714,6 +800,41 @@ angesammelt. Sie beeinflussen die bedingte Reduktion von Branch~Z nicht.
     Teil~II~\cite{Geiger2026partII} detailliert dokumentiert; er wird
     hier aufgeführt, weil die Falsifikation auch die vergleichende
     Analyse der Branches~B und~Z umstrukturierte.)
+
+  \item \textbf{Euler-Diagonal-Determinante (Z1, geschlossen durch
+    Schatten-Trichotomie, 2026-06-09).} Die Realisierung des
+    Zähl-Objekts als regularisierte Determinante über die
+    Euler-Diagonale scheitert strukturell: Auf
+    $\operatorname{Re} s = 1/2$ liegt die Diagonale in
+    $\mathcal{S}_3\setminus\mathcal{S}_2$ ($\det_2$ divergiert via
+    Mertens), während $\det_3$ den arithmetischen $k=1,2$-Kern verliert.
+    Nur eine andere Singulärwert-Klasse (Ruelle-Transfer-Typ) bleibt
+    unerforscht.
+
+  \item \textbf{Kontur-Zählung allein innerhalb von $\Omega_E$ (F3,
+    2026-06-09).} Den Nullstellen-Zähler durch Konturen zu schließen,
+    die ganz im Bereich etablierter Konvergenz liegen, scheitert an
+    einem Konvexitäts-Lemma; jeder Gewinn re-importiert
+    Positivitäts-/Tightness-Apriori.
+
+  \item \textbf{Konstantes-$C$ Paket-Rouch\'e / Unendlich-Kamm-Referenz
+    (2026-06-10/11).} Auf Paket-Konturen scheitert die
+    Rouch\'e-Dominanz gegen ein konstantes Vielfaches von $\Xi$ im
+    $N\to\infty$-Limes bei allen getesteten $c$ (Margin-Plateau
+    $1{,}541$ bei $c=9$; steigend durch $\approx 0{,}95$ bei $c=14$);
+    die Vervollständigung des Kamms zu seiner geschlossenen Sinc-Form
+    macht die Referenz strikt schlechter (Typ-Kollision). Die
+    $z$-abhängige Normalisierungsfrage ist in \Cref{sec:det-channel}
+    geklärt.
+
+  \item \textbf{Wurzel-Paarungs-Bulk-Modelle ($B_K$, PolyB,
+    2026-06-09/10).} Den Bulk-Faktor durch Paarung äußerer
+    Säkular-Wurzeln gegen äußere Nullstellen zu modellieren ist
+    wirkungslos (die Wurzeln treffen die Nullstellen unter Mess-Floor,
+    $B_K \equiv 1$); das nackte lokale Wurzelpolynom gegen $C\,\Xi$
+    scheitert um zwei Größenordnungen (Margin $35$). Der Bulk wird
+    ausschließlich vom Kompensationspolynom und der $\Xi$-Hüllkurve
+    getragen.
 \end{itemize}
 
 \begin{remark}[CCM-Muster: Auslöschung, nicht Betrag]
@@ -792,7 +913,8 @@ Theorem~B-1: $A_\lambda \leq 1.0063$ (bedingt) & bedingt & \Cref{thm:B1} \\
 $c_\Xi$ Hadamard-Krümmung (RH-neutral) & analytisch & \Cref{sec:spectral-constants} \\
 CCM: drei C2ca-Eingaben identifiziert & bedingte Reduktion & \Cref{sec:c2ca-inputs} \\
 CCM: effektive Mikroclusterlücke $g_{\text{eff}} \approx 5\text{--}6$ & numerische Evidenz & \Cref{sec:branch-z-empirics} \\
-6 ausgeschlossene spektrale Wege + 9 ausgeschlossene CCM-Wege & dokumentiert & \Cref{sec:excluded-spectral,sec:excluded-ccm} \\
+Determinanten-Kanal: exakte Buchhaltung, nackte $P\!\leftrightarrow\!\Xi$-Paarung, Rate $\sigma_1(\gamma>T_{\mathrm{hit}})$ & numerische Evidenz & \Cref{sec:det-channel} \\
+6 ausgeschlossene spektrale Wege + 13 ausgeschlossene CCM-Wege & dokumentiert & \Cref{sec:excluded-spectral,sec:excluded-ccm} \\
 5 methodische Sackgassen & dokumentiert & \Cref{sec:methodical} \\
 \end{tabular}%
 }
