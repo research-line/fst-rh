@@ -20,6 +20,9 @@
 
 \geometry{margin=1in}
 \setlength{\emergencystretch}{2em}
+\makeatletter
+\def\HyperDestNameFilter#1{en.#1}
+\makeatother
 
 \newtheorem{theorem}{Theorem}[section]
 \newaliascnt{lemma}{theorem}
@@ -50,8 +53,8 @@
 \crefname{remark}{Remark}{Remarks}
 \crefname{conjecture}{Conjecture}{Conjectures}
 \AtBeginEnvironment{thebibliography}{%
-  \small
-  \setlength{\itemsep}{0.2em}%
+  \footnotesize
+  \setlength{\itemsep}{0pt}%
   \setlength{\parskip}{0pt}%
   \setlength{\parsep}{0pt}%
 }
@@ -66,7 +69,7 @@
 
 \title{A Conditional Reduction of the Riemann Hypothesis to Even Dominance of the Weil Quadratic Form}
 \author{Lukas Geiger\\Independent Researcher, Bernau\\ORCID: 0009-0005-7296-1534}
-\date{Draft v1.9 -- 29 May 2026}
+\date{Draft, June 2026}
 
 \hypersetup{
   unicode=true,
@@ -2178,7 +2181,8 @@ for the present extraction is mirrored at \projectrepo.
 
 \noindent\textbf{Statement on the Use of AI Tools}
 
-\medskip
+\smallskip
+\small
 
 \begin{sloppypar}
 \noindent
@@ -2187,7 +2191,7 @@ models (Claude, Anthropic; Gemini, Google; ChatGPT, OpenAI). The use
 encompassed the following areas:
 \end{sloppypar}
 
-\begin{itemize}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt,parsep=0pt]
   \item \textit{Research:} Assistance with systematic literature search,
         identification and summarisation of relevant research literature.
   \item \textit{Structuring:} Support in outlining and logically organising
@@ -2197,8 +2201,8 @@ encompassed the following areas:
         and paragraphs based on core arguments and theses specified by
         the author.
   \item \textit{Language:} Grammar and spell checking, linguistic revision.
-  \item \textit{Formatting:} Preparation and verification of citations and
-        bibliographies; \LaTeX{} typesetting support.
+  \item \textit{Formatting:} Preparation and verification of citations,
+        bibliographies, and \LaTeX{} typesetting.
   \item \textit{Internal review:} A 7-phase model-based review chain
         (constructive, expert, adversarial) was used to identify and
         address structural and citation issues prior to submission.
@@ -2214,11 +2218,13 @@ reviewed, revised, and where appropriate rejected. The author reviewed all
 content to the best of his knowledge but cannot guarantee complete
 independent verification of all factual claims and references.
 
-\medskip
+\smallskip
 
 \noindent
 Full scholarly and substantive responsibility for this article rests with
 the author, Lukas Geiger.
+
+\normalsize
 
 \bibliographystyle{plain}
 \bibliography{references}

@@ -21,6 +21,9 @@
 
 \geometry{margin=1in}
 \setlength{\emergencystretch}{2em}
+\makeatletter
+\def\HyperDestNameFilter#1{ger.#1}
+\makeatother
 
 \newtheorem{theorem}{Satz}[section]
 \newaliascnt{lemma}{theorem}
@@ -55,8 +58,8 @@
 \crefname{table}{Tabelle}{Tabellen}
 \crefname{figure}{Abbildung}{Abbildungen}
 \AtBeginEnvironment{thebibliography}{%
-  \small
-  \setlength{\itemsep}{0.2em}%
+  \footnotesize
+  \setlength{\itemsep}{0pt}%
   \setlength{\parskip}{0pt}%
   \setlength{\parsep}{0pt}%
 }
@@ -71,7 +74,7 @@
 
 \title{Eine bedingte Reduktion der Riemannschen Vermutung auf gerade Dominanz der Weilschen quadratischen Form}
 \author{Lukas Geiger\\Unabhängiger Forscher, Bernau\\ORCID: 0009-0005-7296-1534}
-\date{Entwurf v1.9 -- 29. Mai 2026}
+\date{Entwurf, Juni 2026}
 
 \hypersetup{
   unicode=true,
@@ -966,8 +969,14 @@ $\hat\xi(z) = (2/\sqrt L)\sin(zL/2)\cdot F(z)$, zentriert, gerade,
 reell-auf-reell) und eine Limesidentifikationsbedingung~(ii-c); und
 (ii-c) wird rigoros in~(ii-a) absorbiert via Parität und Hadamard-Ordnung
 (modulo Nullstellen-Koinzidenz-Annahme~(Z), §E.14 der Notizen).
-Der verbleibende offene Blocker für Route~B ist daher die einzige
-uniforme A-priori-Streifenschranke~(ii-a) aus $QW_N$-Koerzitivität.
+Die verbleibenden offenen Blocker für Route~B sind daher die
+uniforme A-priori-Streifenschranke~(ii-a) aus $QW_N$-Koerzitivität
+und die Nullstellen-Koinzidenz-Annahme~(Z) selbst, die die
+Normalfamilien-Schranke~(ii-a) allein nicht liefert: ein lokal
+gleichmäßiger Limes~$G$ erbt die Nullstellen der Approximanten
+nach dem Satz von Hurwitz, doch identische Nullstellen erzwingen
+nicht $G=\Xi$ (die Hadamard-Faktorisierung lässt einen
+Exponentialfaktor frei).
 
 Konvergierte empirische Messungen an den kanonischen Objekten (Mac Studio,
 $\mathrm{dps} \approx 30\text{--}50\cdot\lambda$, $\lambda \in
@@ -1405,27 +1414,30 @@ siehe~\cite[\path{scripts/}]{GeigerLandscapeII}. Ein spezielles Begleit-Reposito
 
 \noindent\textbf{Erklärung zur Nutzung von KI-Sprachmodellen}
 
-\medskip
+\smallskip
+\small
 
 \noindent
 Dieses Manuskript wurde mit moderater Unterstützung durch KI-basierte Sprachmodelle (Claude, Anthropic; Gemini, Google; ChatGPT, OpenAI) erstellt. Die Nutzung umfasste folgende Bereiche:
 
-\begin{itemize}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt,parsep=0pt]
   \item \textit{Recherche:} Unterstützung bei systematischer Literatursuche, Identifikation und Zusammenfassung von relevanter Forschungsliteratur.
   \item \textit{Strukturierung:} Unterstützung bei der Skizzierung und logischen Organisation des Manuskripts, insbesondere der auf den Beweis fokussierten Extraktion aus der Landscape-Reihe.
   \item \textit{Entwurf:} Unterstützung bei der Formulierung einzelner Abschnitte und Paragraphen basierend auf zentralen, vom Autor vorgegebenen Argumenten und Thesen.
   \item \textit{Sprache:} Grammatik- und Rechtschreibprüfung, sprachliche Überarbeitung.
-  \item \textit{Formatierung:} Vorbereitung und Überprüfung von Zitaten und Bibliografien; \LaTeX{}-Satz-Unterstützung.
+  \item \textit{Formatierung:} Vorbereitung und Überprüfung von Zitaten, Bibliografien und \LaTeX{}-Satz.
   \item \textit{Internes Review:} Ein 7-Phasen-Reviewprozess unter Verwendung von Sprachmodellen (konstruktiv, Expertenprüfung, adversariell) wurde verwendet, um strukturelle Probleme und Zitationsfehler vor der Einreichung zu identifizieren und zu beheben.
 \end{itemize}
 
 \noindent
 Der gesamte Forschungsprozess -- einschließlich der Fragestellung, der methodischen Entscheidungen, der substanziellen Argumentation, der kritischen Quellenbewertung und der Schlussfolgerungen -- wurde vom Autor erdacht, gelenkt und verantwortet. Alle computergestützten Zertifikate wurden von deterministischen numerischen Skripten unabhängig von der KI berechnet. Alle KI-generierten Vorschläge wurden kritisch geprüft, überarbeitet und gegebenenfalls verworfen. Der Autor hat alle Inhalte nach bestem Wissen und Gewissen geprüft, kann jedoch nicht für die vollständige unabhängige Überprüfung sämtlicher Faktendarstellungen und Referenzen garantieren.
 
-\medskip
+\smallskip
 
 \noindent
 Die volle wissenschaftliche und inhaltliche Verantwortung für diesen Artikel liegt beim Autor, Lukas Geiger.
+
+\normalsize
 
 \bibliographystyle{plain}
 \bibliography{references}
