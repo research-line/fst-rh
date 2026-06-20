@@ -2,6 +2,9 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\input{glyphtounicode}
+\pdfgentounicode=1
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage[ngerman]{babel}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=red,urlcolor=blue]{hyperref}
@@ -12,8 +15,26 @@
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage[capitalise,noabbrev]{cleveref}
+\crefname{section}{Abschnitt}{Abschnitte}
+\Crefname{section}{Abschnitt}{Abschnitte}
+\crefname{subsection}{Abschnitt}{Abschnitte}
+\Crefname{subsection}{Abschnitt}{Abschnitte}
+\crefname{subsubsection}{Abschnitt}{Abschnitte}
+\Crefname{subsubsection}{Abschnitt}{Abschnitte}
+\crefname{theorem}{Satz}{Sätze}
+\Crefname{theorem}{Satz}{Sätze}
+\crefname{lemma}{Lemma}{Lemmata}
+\Crefname{lemma}{Lemma}{Lemmata}
+\crefname{proposition}{Proposition}{Propositionen}
+\Crefname{proposition}{Proposition}{Propositionen}
+\crefname{corollary}{Korollar}{Korollare}
+\Crefname{corollary}{Korollar}{Korollare}
+\crefname{definition}{Definition}{Definitionen}
+\Crefname{definition}{Definition}{Definitionen}
+\crefname{remark}{Bemerkung}{Bemerkungen}
+\Crefname{remark}{Bemerkung}{Bemerkungen}
 
-\newtheorem{theorem}{Theorem}[section]
+\newtheorem{theorem}{Satz}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Korollar}
@@ -39,7 +60,7 @@
 \maketitle
 
 \begin{abstract}\small
-Dies ist die zweite Arbeit in einer fünfteiligen Serie (Teil~I: Grundlagen und Hindernisse \cite{Geiger2026partI}; Teil~III: Spektrale Wege \cite{Geiger2026partIII}; Teil~IV: Cross-Route-Synthese \cite{Geiger2026partIV}; Teil~V: Conclusio \cite{Geiger2026partV}). Wir befassen uns mit dem offenen Problem, das in Connes' \"Ubersicht von 2026 \cite{Connes2026} identifiziert wurde: ob der kleinste Eigenwert der quadratischen Weil-Form~$\mathrm{QW}_\lambda$ einfach ist und eine gerade Eigenfunktion besitzt. Wir etablieren drei Hauptergebnisse. Erstens das \emph{Shift-Parity-Lemma}: Die Differenzmatrix zwischen den Operatoren des geraden und ungeraden Sektors hat f\"ur alle $N \geq 3$ Moden und alle normierten Verschiebungen $r \in (0,2)$ einen streng negativen kleinsten Eigenwert, was impliziert, dass jede Primzahl individuell gerade Eigenfunktionen bevorzugt. Zweitens dokumentieren wir eine starke computergestützte finite-range Gap-Diagnostik für $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$; diese wird als bedingte endliche Brücke geführt, bis der Odd-Sektor-Tail-Lower-Bound unabhängig validiert ist. Drittens beweisen wir das \emph{Leading-Mode-Cancellation-Lemma}: Die \"Uberlappungsdifferenzen zwischen dem geraden und ungeraden Sektor heben sich paarweise mit der exakten Konstanten $c = 2 + \sqrt{2}$ auf, was $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$ ergibt. Dieser Resolventen-ged\"ampfte Rahmen reduziert den verbleibenden analytischen Schritt (M1$''$) auf klassische Fourier-Analyse und den Primzahlsatz. In v2.0 f\"ugen wir zwei Nicht-Existenz-Theoreme (Theoreme~\ref{thm:NE-A} und~\ref{thm:NE-B}) hinzu, die die L\"osungswege \"uber absolute Totalpositivit\"at und universelle kommutierende Operatoren formal ausschlie\ss{}en und damit zeigen, dass gerade Dominanz notwendigerweise ein arithmetisch-statistisches und kein rein algebraisches Ph\"anomen ist. In v2.1 f\"ugen wir einen robusten direkten Frontier-Dominanz-Beweis (Abschnitt~\ref{sec:direct-frontier}, Proposition~\ref{prop:direct-frontier}) hinzu, der auf einem gemeinsamen Rayleigh-Testvektor im Frontier-Fenster $r\in[0.7,1]$ beruht. In der v2.3-Lesart beweist diese Fassung das asymptotische Variationsvorzeichen $\lambda_{\min}(W^+-W^-)<0$, nicht jedoch allein die Eigenwertordnung $\lambda_1^+<\lambda_1^-$; die Reduktionskette A1--A8 bleibt daher bedingt auf die Asymptotische Variationsgap-Vermutung bzw. eine validierte untere Schranke für $\lambda_1^-$.
+Dies ist die zweite Arbeit in einer fünfteiligen Serie (Teil~I: Grundlagen und Hindernisse \cite{Geiger2026partI}; Teil~III: Spektrale Wege \cite{Geiger2026partIII}; Teil~IV: Cross-Route-Synthese \cite{Geiger2026partIV}; Teil~V: Conclusio \cite{Geiger2026partV}). Wir befassen uns mit dem offenen Problem, das in Connes' \"Ubersicht von 2026 \cite{Connes2026} identifiziert wurde: ob der kleinste Eigenwert der quadratischen Weil-Form~$\mathrm{QW}_\lambda$ einfach ist und eine gerade Eigenfunktion besitzt. Wir etablieren drei Hauptergebnisse. Erstens das \emph{Shift-Parity-Lemma}: Die Differenzmatrix zwischen den Operatoren des geraden und ungeraden Sektors hat f\"ur alle $N \geq 3$ Moden und alle normierten Verschiebungen $r \in (0,2)$ einen streng negativen kleinsten Eigenwert, was impliziert, dass jede Primzahl individuell gerade Eigenfunktionen bevorzugt. Zweitens dokumentieren wir eine starke computergestützte Gap-Diagnostik auf endlichem Bereich für $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$; diese wird als bedingte endliche Brücke geführt, bis die untere Tail-Schranke des ungeraden Sektors unabhängig validiert ist. Drittens beweisen wir das \emph{Leading-Mode-Cancellation-Lemma}: Die \"Uberlappungsdifferenzen zwischen dem geraden und ungeraden Sektor heben sich paarweise mit der exakten Konstanten $c = 2 + \sqrt{2}$ auf, was $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$ ergibt. Dieser Resolventen-ged\"ampfte Rahmen reduziert den verbleibenden analytischen Schritt (M1$''$) auf klassische Fourier-Analyse und den Primzahlsatz. In v2.0 f\"ugen wir zwei Nicht-Existenz-Theoreme (Theoreme~\ref{thm:NE-A} und~\ref{thm:NE-B}) hinzu, die die L\"osungswege \"uber absolute Totalpositivit\"at und universelle kommutierende Operatoren formal ausschlie\ss{}en und damit zeigen, dass gerade Dominanz notwendigerweise ein arithmetisch-statistisches und kein rein algebraisches Ph\"anomen ist. In v2.1 f\"ugen wir einen robusten direkten Frontier-Dominanz-Beweis (Abschnitt~\ref{sec:direct-frontier}, Proposition~\ref{prop:direct-frontier}) hinzu, der auf einem gemeinsamen Rayleigh-Testvektor im Frontier-Fenster $r\in[0.7,1]$ beruht. In der v2.3-Lesart beweist diese Fassung das asymptotische Variationsvorzeichen $\lambda_{\min}(W^+-W^-)<0$, nicht jedoch allein die Eigenwertordnung $\lambda_1^+<\lambda_1^-$; die Reduktionskette A1--A8 bleibt daher bedingt auf die Asymptotische Variationsgap-Vermutung bzw. eine validierte untere Schranke für $\lambda_1^-$.
 
 \medskip\noindent
 \textbf{Strukturelles Update (v3.0, 2026-05-26).}
@@ -65,7 +86,7 @@ Diese Arbeit ist die zweite in einer fünfteiligen Serie, die die Riemannsche Ve
 Hier entwickeln wir den Spektralansatz vollst"andig. Gem"a\ss{} Connes' "Ubersicht von 2026 \cite{Connes2026} untersuchen wir die quadratische Weil-Form $\mathrm{QW}_\lambda$ und ihre Gerade-Ungerade-Zerlegung. Unsere drei Hauptbeitr"age sind:
 \begin{enumerate}
   \item Das \textbf{Shift-Parity-Lemma} (\Cref{sec:shift-parity}): Ein rein algebraisches Ergebnis, das zeigt, dass jede Primzahl einzeln gerade Eigenfunktionen bevorzugt, bewiesen "uber trigonometrische Eintr"age in geschlossener Form.
-  \item \textbf{Computergestützte finite-range Diagnostik} (\Cref{sec:certificates}): Starke negative Gap-Diagnostik für $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$ mittels Intervallarithmetik; als theoremstarke gerade Dominanz bleibt sie bedingt auf die validierte untere Schranke im ungeraden Sektor.
+  \item \textbf{Computergestützte Gap-Diagnostik auf endlichem Bereich} (\Cref{sec:certificates}): Starke negative Gap-Diagnostik für $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$ mittels Intervallarithmetik; als theoremstarke gerade Dominanz bleibt sie bedingt auf die validierte untere Schranke im ungeraden Sektor.
   \item Das \textbf{Leading-Mode-Cancellation-Lemma} (\Cref{lem:leading-cancel}): Die "Uberlappungsdifferenzen zwischen den Sektoren heben sich paarweise mit der exakten Konstanten $c = 2 + \sqrt{2}$ auf, was das analytische Gap (M1$''$) auf die Fourier-Analyse und den Primzahlsatz reduziert.
 \end{enumerate}
 
@@ -87,11 +108,11 @@ Connes konstruiert einen selbstadjungierten Operator $A_\lambda$ auf $L^2([-\log
 \end{multline*}
 wobei $T_u$ den Shift-Operator bezeichnet, $\gamma$ die Euler-Mascheroni-Konstante ist und der archimedische Kern $e^{u/2}/(2\sinh u)$ aus dem Variablenwechsel $x = e^u$ resultiert, angewendet auf Connes' Gleichung~(10) in \cite{Connes2026}, mit $x^{1/2}/(x-x^{-1})\,d^*\!x = e^{u/2}/(2\sinh u)\,du$. Der Operator $A_\lambda$ ist nach unten beschr"ankt mit kompaktem Resolventen (daher diskretes Spektrum).
 
-\begin{theorem}[Connes, Theorem 6.1 in \cite{Connes2026}; bewiesen in \cite{ConnesvS2025}]
+\begin{theorem}[Connes, Satz 6.1 in \cite{Connes2026}; bewiesen in \cite{ConnesvS2025}]
 Sei $L > 0$ und $D$ eine reelle Distribution auf $[0,L]$ mit gerader Erweiterung $\tilde{D}$ auf $[-L,L]$. Angenommen, die quadratische Form mit Kern $\tilde{D}(x-y)$ definiert einen nach unten beschränkten selbstadjungierten Operator auf $L^2([-L/2,\,L/2])$, dessen minimales Eigenwert einfach und isoliert ist, mit gerader Eigenfunktion $\eta$. Dann liegen alle Nullstellen von $\tilde{\eta}(z)$ auf der reellen Achse.
 \end{theorem}
 
-\noindent Connes' Abschnitt~6.6 besagt: „Um Theorem~6.1 anwenden zu können, muss man zeigen, dass der kleinste Eigenwert von $\mathrm{QW}_\lambda$ \emph{einfach} mit \emph{gerader} Eigenfunktion ist." Dies ist der verbleibende offene Schritt.
+\noindent Connes' Abschnitt~6.6 besagt: „Um Satz~6.1 anwenden zu können, muss man zeigen, dass der kleinste Eigenwert von $\mathrm{QW}_\lambda$ \emph{einfach} mit \emph{gerader} Eigenfunktion ist." Dies ist der verbleibende offene Schritt.
 
 \subsection{Galerkin-Diskretisierung}
 
@@ -99,13 +120,13 @@ Wir approximieren $A_\lambda$ in der Cosinusbasis $\{\varphi_n\}_{n=0}^{N-1}$ (g
 
 \subsection{Ergebnis 1: Spektrales Gap im geraden Sektor}
 
-Innerhalb des geraden Sektors verifizieren wir $\mathrm{gap}(\lambda) = \lambda_2^+ - \lambda_1^+ > 0$ über Cauchy interlacing mit $N$-Konvergenz. Server-Berechnungen ($\lambda \in [5,200]$, $N$ bis 80, korrigierte orthogonale Basis $\cos(n\pi t/L)$) bestätigen:
+Innerhalb des geraden Sektors verifizieren wir $\mathrm{gap}(\lambda) = \lambda_2^+ - \lambda_1^+ > 0$ über Cauchy-Interlacing mit $N$-Konvergenz. Server-Berechnungen ($\lambda \in [5,200]$, $N$ bis 80, korrigierte orthogonale Basis $\cos(n\pi t/L)$) bestätigen:
 
 \medskip
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{r|c|c|c}
-$\lambda$ & $N_{\mathrm{final}}$ & $\mathrm{gap}^+ = \lambda_2^+ - \lambda_1^+$ & Cauchy bound \\\hline
+$\lambda$ & $N_{\mathrm{final}}$ & $\mathrm{gap}^+ = \lambda_2^+ - \lambda_1^+$ & Cauchy-Schranke \\\hline
 5 & 30 & $3.52\times 10^{-1}$ & $3.52\times 10^{-1}$ \\
 10 & 30 & $2.28\times 10^{-1}$ & $2.28\times 10^{-1}$ \\
 20 & 30 & $1.39\times 10^{-1}$ & $1.39\times 10^{-1}$ \\
@@ -120,18 +141,17 @@ $\lambda$ & $N_{\mathrm{final}}$ & $\mathrm{gap}^+ = \lambda_2^+ - \lambda_1^+$ 
 
 \begin{lemma}[Einfachheit von $\lambda_1^+$]
 \label{lem:simplicity}
-Für alle $33$ Zertifikatswerte $\lambda \in [100,\, 1{,}300{,}000]$, der Grundzustand des geraden Sektors einfach:
 Für alle $33$ Zertifikatswerte $\lambda \in [100,\, 1{,}300{,}000]$ ist der Grundzustand des geraden Sektors einfach:
 \[
   \lambda_2^+(\lambda) - \lambda_1^+(\lambda) \geq g_{\min}^+(\lambda) > 0,
 \]
-certified by interval arithmetic on the $4 \times 4$ even Galerkin block. Selected values:
+zertifiziert durch Intervallarithmetik auf dem geraden $4 \times 4$-Galerkin-Block. Ausgewählte Werte:
 
 \medskip
 \begin{center}
 \renewcommand{\arraystretch}{1.15}
 \begin{tabular}{r|r|r|r}
-$\lambda$ & $\lambda_1^+$ & $\lambda_2^+$ & gap$^+$ (certified) \\\hline
+$\lambda$ & $\lambda_1^+$ & $\lambda_2^+$ & Gap$^+$ (zertifiziert) \\\hline
 $100$ & $-11.18$ & $-2.49$ & $\geq 8.69$ \\
 $500$ & $-34.06$ & $-8.77$ & $\geq 25.29$ \\
 $10{,}000$ & $-195.46$ & $-61.97$ & $\geq 133.48$ \\
@@ -141,30 +161,30 @@ $320{,}000$ & $-1220.97$ & $-489.97$ & $\geq 731.00$
 \end{center}
 
 \medskip\noindent
-Das Gap wächst monoton wie $\sim\!\sqrt{\lambda}$, konsistent mit der analytischen Vorhersage aus der Galerkin-Diagonal-Asymptotik: der führende Modus ($n = 1$) hat $W_{11}^+ \sim -\sqrt{\lambda}$, während der nächste Modus ($n = 0$) hat $W_{00}^+ \sim -c'\sqrt{\lambda}$ mit $c' < c$. Sobald die untere Schranke im ungeraden Sektor validiert ist, zertifiziert dies, dass der globale Grundzustand von $A_\lambda$ einfach und gerade ist, wie von Connes' Theorem~6.1 gefordert.
+Das Gap wächst monoton wie $\sim\!\sqrt{\lambda}$, konsistent mit der analytischen Vorhersage aus der Galerkin-Diagonal-Asymptotik: der führende Modus ($n = 1$) hat $W_{11}^+ \sim -\sqrt{\lambda}$, während der nächste Modus ($n = 0$) $W_{00}^+ \sim -c'\sqrt{\lambda}$ mit $c' < c$ aufweist. Sobald die untere Schranke im ungeraden Sektor validiert ist, zertifiziert dies, dass der globale Grundzustand von $A_\lambda$ einfach und gerade ist, wie von Connes' Satz~6.1 gefordert.
 \end{lemma}
 
 \subsection{Ergebnis 2: Vergleich zwischen geradem und ungeradem Sektor}
 
-Für Theorem~6.1 muss das Minimum von $A_\lambda$ über den \emph{vollen} Raum $L^2([-L,L])$ einfach und gerade sein. Da $A_\lambda$ mit der Parität kommutiert ($f(t)\mapsto f(-t)$), entkoppeln die geraden und ungeraden Sektoren. Wir vergleichen $\lambda_1^+$ (gerade) mit $\lambda_1^-$ (ungerade):
+Für Satz~6.1 muss das Minimum von $A_\lambda$ über den \emph{vollen} Raum $L^2([-L,L])$ einfach und gerade sein. Da $A_\lambda$ mit der Parität kommutiert ($f(t)\mapsto f(-t)$), entkoppeln die geraden und ungeraden Sektoren. Wir vergleichen $\lambda_1^+$ (gerade) mit $\lambda_1^-$ (ungerade):
 
 \medskip
 \begin{center}
 \small
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{r|c|c|c|c|c}
-$\lambda$ & $N$ & $\lambda_1^+$ & $\lambda_1^-$ & Sector & Thm.\ 6.1 \\\hline
-5 & 30 & $-4.31$ & $-4.28$ & EVEN & \checkmark$^*$ \\
-10 & 30 & $-5.01$ & $-5.19$ & ODD & \textbf{---} \\
-20 & 30 & $-5.81$ & $-5.84$ & ODD & \textbf{---} \\
-25 & 60 & $-6.39$ & $-6.39$ & EVEN$^*$ & \checkmark$^*$ \\
-28 & 60 & $-6.53$ & $-6.53$ & ODD$^*$ & \textbf{---}$^*$ \\
-30 & 60 & $-6.64$ & $-6.63$ & EVEN$^*$ & \checkmark$^*$ \\
-50 & 60 & $-6.96$ & $-6.94$ & EVEN$^*$ & \checkmark$^*$ \\
-55 & 60 & $-7.20$ & $-6.70$ & EVEN & \checkmark \\
-100 & 80 & $-11.25$ & $-9.06$ & EVEN & \checkmark \\
-200 & 80 & $-19.27$ & $-15.05$ & EVEN & \checkmark \\
-500 & 80 & $-34.51$ & $-26.88$ & EVEN & \checkmark \\
+$\lambda$ & $N$ & $\lambda_1^+$ & $\lambda_1^-$ & Sektor & Satz~6.1 \\\hline
+5 & 30 & $-4.31$ & $-4.28$ & GERADE & \checkmark$^*$ \\
+10 & 30 & $-5.01$ & $-5.19$ & UNGERADE & \textbf{---} \\
+20 & 30 & $-5.81$ & $-5.84$ & UNGERADE & \textbf{---} \\
+25 & 60 & $-6.39$ & $-6.39$ & GERADE$^*$ & \checkmark$^*$ \\
+28 & 60 & $-6.53$ & $-6.53$ & UNGERADE$^*$ & \textbf{---}$^*$ \\
+30 & 60 & $-6.64$ & $-6.63$ & GERADE$^*$ & \checkmark$^*$ \\
+50 & 60 & $-6.96$ & $-6.94$ & GERADE$^*$ & \checkmark$^*$ \\
+55 & 60 & $-7.20$ & $-6.70$ & GERADE & \checkmark \\
+100 & 80 & $-11.25$ & $-9.06$ & GERADE & \checkmark \\
+200 & 80 & $-19.27$ & $-15.05$ & GERADE & \checkmark \\
+500 & 80 & $-34.51$ & $-26.88$ & GERADE & \checkmark \\
 \end{tabular}
 \end{center}
 
@@ -172,13 +192,13 @@ $\lambda$ & $N$ & $\lambda_1^+$ & $\lambda_1^-$ & Sector & Thm.\ 6.1 \\\hline
 $^*$\,\textit{Marginal: $|\lambda_1^+ - \lambda_1^-| < 0.05$.}
 
 \medskip\noindent
-\textbf{Honest assessment:}
+\textbf{Nüchterne Einordnung:}
 \begin{itemize}
-  \item Für $\lambda \geq 55$: Robuste gerade Dominanz mit Spannweiten, die wie $\sim\!\sqrt{\lambda}$ wachsen. Das Gap erreicht $|\Delta| > 0.5$ bei $\lambda = 55$ und übersteigt $475$ bei $\lambda = 1{,}300{,}000$. Die Voraussetzungen von Theorem~6.1 sind für $33$ Werte bis $\lambda = 1{,}300{,}000$ bestätigt.
+  \item Für $\lambda \geq 55$: Robuste negative Gap-Diagnostik mit Spannweiten, die wie $\sim\!\sqrt{\lambda}$ wachsen. Das diagnostische Gap erreicht $|\Delta| > 0.5$ bei $\lambda = 55$ und übersteigt $475$ bei $\lambda = 1{,}300{,}000$. Die Voraussetzungen von Satz~6.1 sind damit für $33$ Werte bis $\lambda = 1{,}300{,}000$ bedingt gestützt, vorbehaltlich der Validierung der unteren Schranke im ungeraden Sektor.
   \item Für $25 \leq \lambda \leq 50$: Grenzregime ($|\Delta| < 0.02$). Die Gerade/Ungerade-Ordnung oszilliert mit $\lambda$ bei $N = 60$: $\lambda = 25, 30, 40, 50$ zeigen gerade Dominanz, während $\lambda = 28, 35, 45$ ungerade Dominanz zeigen. Kein Sektor dominiert robust.
-  \item Für $\lambda = 10$ und $\lambda = 20$: Der ungerade Sektor hat das niedrigere Minimum. Theorem~6.1 ist \emph{nicht direkt anwendbar} in diesem Regime.
-  \item \textbf{Non-monotone transition:} The crossover from odd to even ground state is not sharp but spreads over $\lambda \in [25, 55]$. For $\lambda \geq 55$, gerade Dominanz robust ist und das Gap ungebunden w"achst.
-  \item \textbf{Computer-gestützte Diagnostik (Intervallarithmetik):} Für $33$ Werte von $\lambda$ von $100$ bis $1{,}300{,}000$ wurde eine negative finite-range Gap-Diagnostik mittels Intervallarithmetik (mpmath.iv, 50~Ziffern) für den geraden Block und float64-Tail-Extrapolation für den ungeraden Block dokumentiert. Das Gap wächst monoton wie $\sim\!\sqrt{\lambda}$, von $-2.25$ bei $\lambda = 100$ bis $-475.83$ bei $\lambda = 1{,}300{,}000$; theoremstark ist dies bedingt auf die Odd-Sektor-Lower-Bound-Validierung (siehe \Cref{sec:certificates}).
+  \item Für $\lambda = 10$ und $\lambda = 20$: Der ungerade Sektor hat das niedrigere Minimum. Satz~6.1 ist \emph{nicht direkt anwendbar} in diesem Regime.
+  \item \textbf{Nicht-monotoner Übergang:} Der Übergang vom ungeraden zum geraden Grundzustand ist nicht scharf, sondern erstreckt sich über $\lambda \in [25, 55]$. Für $\lambda \geq 55$ ist die gerade Dominanz robust, und das Gap wächst ohne erneuten Vorzeichenwechsel.
+  \item \textbf{Computer-gestützte Diagnostik (Intervallarithmetik):} Für $33$ Werte von $\lambda$ von $100$ bis $1{,}300{,}000$ wurde eine negative Gap-Diagnostik auf endlichem Bereich mittels Intervallarithmetik (mpmath.iv, 50~Ziffern) für den geraden Block und float64-Tail-Extrapolation für den ungeraden Block dokumentiert. Das Gap wächst monoton wie $\sim\!\sqrt{\lambda}$, von $-2.25$ bei $\lambda = 100$ bis $-475.83$ bei $\lambda = 1{,}300{,}000$; theoremstark ist dies bedingt auf die Validierung der unteren Schranke im ungeraden Sektor (siehe \Cref{sec:certificates}).
 \end{itemize}
 
 \subsection{Diskussion}
@@ -186,18 +206,18 @@ $^*$\,\textit{Marginal: $|\lambda_1^+ - \lambda_1^-| < 0.05$.}
 Unsere numerischen Ergebnisse adressieren das offene Problem von Connes (Abschnitt~6.6 von \cite{Connes2026}) von zwei Seiten:
 \begin{enumerate}
   \item \textbf{Einfachheit im geraden Sektor:} Die Cauchy-Interlacing-Schranke liefert rigorose (bis auf Diskretisierungsfehler) Belege dafür, dass $\lambda_1^+$ einfach ist. Dies gilt für alle getesteten $\lambda \in [5, 200]$.
-  \item \textbf{Gerade Dominanz f\"ur gro\ss e $\lambda$:} F\"ur $\lambda \geq 25$ hat der gerade Sektor das globale Minimum, was beide Voraussetzungen von Theorem~6.1 best\"atigt. Die Marge w\"achst mit $\lambda$.
-  \item \textbf{Ungerade Dominanz f\"ur kleine $\lambda$:} F\"ur $\lambda = 10$ und $\lambda = 20$ ist der ungerade Sektor niedriger. Theorem~6.1 ist in diesem Regime nicht direkt anwendbar.
+  \item \textbf{Gerade Dominanz für große $\lambda$:} Für $\lambda \geq 25$ legen die endlichdimensionalen Diagnosen in den meisten getesteten Bereichen einen niedrigeren geraden Sektor nahe. Die theoremstarke unendlichdimensionale Eigenwertordnung benötigt weiterhin die untere Schranke für den ungeraden Sektor.
+  \item \textbf{Ungerade Dominanz für kleine $\lambda$:} Für $\lambda = 10$ und $\lambda = 20$ ist der ungerade Sektor niedriger. Satz~6.1 ist in diesem Regime nicht direkt anwendbar.
 \end{enumerate}
 
 Drei strukturelle Merkmale treten hervor:
 
 \begin{enumerate}
-  \item \textbf{Diffuse crossover:} At $N=60$, der "Ubergang von ungerader zu gerader Dominanz erstreckt sich "uber $\lambda \in [25, 55]$, with oscillating sign and $|\Delta| < 0.02$. At $\lambda \geq 55$, die gerade Dominanz setzt robust ein ($|\Delta| > 0.5$) and grows without reversal through $\lambda = 500$.
+  \item \textbf{Diffuser Übergang:} Bei $N=60$ erstreckt sich der Übergang von ungerader zu gerader Dominanz über $\lambda \in [25, 55]$, mit oszillierendem Vorzeichen und $|\Delta| < 0.02$. Ab $\lambda \geq 55$ setzt die gerade Dominanz robust ein ($|\Delta| > 0.5$) und wächst ohne erneuten Vorzeichenwechsel bis mindestens $\lambda = 500$.
 
-  \item \textbf{Growing even-sector gap:} For $\lambda \geq 55$, the gap $\Delta(\lambda) = \lambda_1^+ - \lambda_1^-$ grows in magnitude, reaching $\Delta \approx -7.6$ at $\lambda = 500$ and $\Delta \approx -476$ at $\lambda = 1{,}300{,}000$ (see \Cref{sec:gap-asymptotics,sec:certificates}). Das Wachstum skaliert wie $\sim\!\sqrt{\lambda}$ (analytically, via PNT; the earlier fit $\sim\!(\log\lambda)^{4.2}$ basierte auf einem begrenzten Bereich).
+  \item \textbf{Wachsendes Gap zwischen den Sektoren:} Für $\lambda \geq 55$ wächst das Gap $\Delta(\lambda) = \lambda_1^+ - \lambda_1^-$ betragsmäßig und erreicht $\Delta \approx -7.6$ bei $\lambda = 500$ sowie $\Delta \approx -476$ bei $\lambda = 1{,}300{,}000$ (siehe \Cref{sec:gap-asymptotics,sec:certificates}). Das Wachstum skaliert wie $\sim\!\sqrt{\lambda}$ (analytisch über den Primzahlsatz; die frühere Anpassung $\sim\!(\log\lambda)^{4.2}$ beruhte auf einem begrenzten Bereich).
 
-  \item \textbf{Finite-range diagnostics:} For $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$, the interval-arithmetic diagnostics give a strong conditional bridge, pending the odd-sector lower-bound validation (see \Cref{sec:certificates}).
+  \item \textbf{Gap-Diagnostik auf endlichem Bereich:} Für $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$ liefern die Intervallarithmetik-Diagnosen eine starke bedingte Brücke, vorbehaltlich der Validierung der unteren Schranke im ungeraden Sektor (siehe \Cref{sec:certificates}).
 
   \item Ein \textbf{direkter Frontier-Dominanz-Beweis} (v2.1, Abschnitt~\ref{sec:direct-frontier}): ein unabhängiger Beweis von Proposition~A6, der einen gemeinsamen Rayleigh-Testvektor auf der Primzahl-Frontier, PNT-Partialsummation, Mertens' Satz und die vorhandene endliche CAP-Brücke verwendet und beide v2.0-Caveats entfallen lässt.
 \end{enumerate}
@@ -208,12 +228,12 @@ Unsere Daten zeigen robuste negative Gap-Diagnostik für $\lambda \geq 50$ (mit 
 
 \subsection{Zerlegungsanalyse: Quelle der geraden Dominanz}
 
-Um den Mechanismus hinter gerader Dominanz zu verstehen, zerlegen wir $\mathrm{QW}_\lambda = W_{\mathrm{diag}} + W_{\mathrm{arch}} + W_{\mathrm{prime}}$ and compute each Beitrag separat f"ur den geraden und ungeraden Sektor:
+Um den Mechanismus hinter gerader Dominanz zu verstehen, zerlegen wir $\mathrm{QW}_\lambda = W_{\mathrm{diag}} + W_{\mathrm{arch}} + W_{\mathrm{prime}}$ und berechnen jeden Beitrag separat für den geraden und ungeraden Sektor:
 
 \begin{itemize}
-  \item $W_{\mathrm{diag}} = (\log 4\pi + \gamma)\,I$: identical in both sectors.
+  \item $W_{\mathrm{diag}} = (\log 4\pi + \gamma)\,I$: in beiden Sektoren identisch.
   \item $W_{\mathrm{arch}}$: der archimedische Kern $e^{u/2}/(2\sinh u)$ erzeugt \emph{nahezu identische} Minimum-Eigenwerte in beiden Sektoren ($\Delta < 10^{-3}$ bei $\lambda = 100$). Der archimedische Beitrag ist parität-neutral.
-  \item $W_{\mathrm{prime}}$: the prime shift operators $S_{m\log p} + S_{-m\log p}$ are the \emph{sole driver} of even-dominance. At $\lambda = 100$: $\lambda_1^+(W_{\mathrm{prime}}) \approx -14.5$ vs.\ $\lambda_1^-(W_{\mathrm{prime}}) \approx -12.3$.
+  \item $W_{\mathrm{prime}}$: Die Primzahl-Shift-Operatoren $S_{m\log p} + S_{-m\log p}$ sind der \emph{alleinige Treiber} der geraden Dominanz. Bei $\lambda = 100$ gilt: $\lambda_1^+(W_{\mathrm{prime}}) \approx -14.5$ gegenüber $\lambda_1^-(W_{\mathrm{prime}}) \approx -12.3$.
 \end{itemize}
 
 Der Mechanismus wird auf die Produktformel für trigonometrische Funktionen zurückgeführt. Für die Cosinus-(gerade) Basis enthalten Shift-Überlap-Integrale den konstruktiven Term $\cos((k_n + k_m)t)$:
@@ -227,14 +247,14 @@ Für die Sinus-(ungerade) Basis tritt der zweite Term mit einem Minuszeichen auf
 
 Die Zerlegungsanalyse zeigt, dass die gerade Dominanz durch die Primzahl-Shift-Operatoren getrieben wird. Eine tiefere Analyse offenbart eine bemerkenswerte algebraische Struktur: \emph{jede einzelne Primzahl bevorzugt individuell den geraden Sektor}, und diese Eigenschaft ist unabhängig vom Cutoff-Parameter~$L$.
 
-\begin{definition}[Difference matrix]
+\begin{definition}[Differenzmatrix]
 \label{def:D-matrix}
-For $N \in \mathbb{N}$ and $r \in (0,2)$, define the $N \times N$ symmetric matrix $D_N(r)$ by
+Für $N \in \mathbb{N}$ und $r \in (0,2)$ definieren wir die symmetrische Matrix $D_N(r)$ der Größe $N \times N$ durch
 \[
   D_{nm}(r) = \langle \varphi_n,\, (S_{rL} + S_{-rL})\,\varphi_m \rangle
             - \langle \psi_n,\, (S_{rL} + S_{-rL})\,\psi_m \rangle,
 \]
-where $\varphi_n(t) = \cos(n\pi t/L)/\sqrt{L}$ (even basis) and $\psi_n(t) = \sin((n+1)\pi t/L)/\sqrt{L}$ (odd basis), and $S_s$ denotes the shift operator on $L^2([-L,L])$.
+wobei $\varphi_n(t) = \cos(n\pi t/L)/\sqrt{L}$ die gerade Basis, $\psi_n(t) = \sin((n+1)\pi t/L)/\sqrt{L}$ die ungerade Basis und $S_s$ den Shift-Operator auf $L^2([-L,L])$ bezeichnet.
 \end{definition}
 
 \begin{lemma}[$L$-Unabh"angigkeit]
@@ -243,7 +263,7 @@ Die Matrix $D_N(r)$ hängt nur von $r = s/L$ ab, nicht von $L$ separat. Insbeson
 \end{lemma}
 
 \begin{proof}[Beweis]
-Durch Substitution $u = t/L$ in den Shift-Überlap-Integralen heben sich alle Faktoren von $L$ aufgrund der Normalisierung der Basisfunktionen auf. Dies wird numerisch auf Maschinengenauigkeit verifiziert ($\text{spread} < 10^{-15}$) across $L \in \{1, 2, 5, 10, 20\}$.
+Durch Substitution $u = t/L$ in den Shift-Überlap-Integralen heben sich alle Faktoren von $L$ aufgrund der Normalisierung der Basisfunktionen auf. Dies wird numerisch auf Maschinengenauigkeit verifiziert ($\text{spread} < 10^{-15}$) für $L \in \{1, 2, 5, 10, 20\}$.
 \end{proof}
 
 Mit $L=1$ erlauben die Matrixeinträge geschlossene Ausdrücke.
@@ -268,7 +288,7 @@ Diese geschlossenen Formen offenbaren bemerkenswerte strukturelle Eigenschaften:
 
 \begin{corollary}[Struktur bei $r = 1$]
 \label{cor:r-one}
-$D_N(1) = \operatorname{diag}(2, -2, 2, -2, \ldots)$, i.e., $D_{nm}(1) = 2(-1)^n \delta_{nm}$.
+$D_N(1) = \operatorname{diag}(2, -2, 2, -2, \ldots)$, d.\,h. $D_{nm}(1) = 2(-1)^n \delta_{nm}$.
 \end{corollary}
 
 \begin{proof}[Beweis]
@@ -277,7 +297,7 @@ Bei $r = 1$: $\cos(n\pi) - \cos((n{+}1)\pi) = (-1)^n - (-1)^{n+1} = 2(-1)^n$, un
 
 \begin{corollary}[Nebendiagonale Antisymmetrie]
 \label{cor:antisym}
-For $n \neq m$: $D_{nm}(r) = -D_{nm}(2-r)$.
+Für $n \neq m$ gilt: $D_{nm}(r) = -D_{nm}(2-r)$.
 \end{corollary}
 
 \begin{theorem}[Shift-Parity-Lemma]
@@ -286,7 +306,7 @@ Für $N \geq 3$ und alle $r \in (0, 2)$:
 \[
   \lambda_1(D_N(r)) < 0,
 \]
-where $\lambda_1$ denotes the minimum eigenvalue. For $N = 2$, the statement is false (counterexample at $r \approx 0.45$ where $\lambda_1 \approx +0.36$).
+wobei $\lambda_1$ den kleinsten Eigenwert bezeichnet. Für $N = 2$ ist die Aussage falsch (Gegenbeispiel bei $r \approx 0.45$, wo $\lambda_1 \approx +0.36$ gilt).
 \end{theorem}
 
 \begin{proof}[Beweis]
@@ -304,7 +324,7 @@ Die Determinante $\det(D_3(r))$ ist ein expliziter (wenn auch länglicher) trigo
 Der Beweis verwendet ein Zwei-Fälle-Argument. Sei $R_1 = \{r \in (0,2) : \det D_3(r) < 0\}$ und $R_2 = \{r \in (0,2) : \det D_3(r) \geq 0\}$.
 
 \medskip
-\noindent\textbf{Case 1} ($r \in R_1$, approximately $93.3\%$ of $(0,2)$):
+\noindent\textbf{Fall 1} ($r \in R_1$, ungefähr $93.3\%$ von $(0,2)$):
 Wenn $\det D_3(r) < 0$, dann haben die drei Eigenwerte gemischte Vorzeichen (das Produkt der Eigenwerte gleicht der Determinante), daher $\lambda_1 < 0$.
 
 \medskip
@@ -394,11 +414,11 @@ Wenn $\lambda$ wächst, nimmt die Anzahl der Frontier-Primzahlen zu (nach dem Pr
 Die Ergebnisse dieses Abschnitts liefern die folgende Reduktion:
 
 \begin{enumerate}
-  \item \textbf{Basis decomposition:} $W_{\mathrm{prime}} = \sum_p W_p$, wobei jedes $W_p$ auf gerade und ungerade Sektoren separat wirkt.
-  \item \textbf{Shift Parity Lemma (\Cref{thm:shift-parity}):} Jedes $W_p$ erfüllt einzeln $\lambda_1(W_p^+) < \lambda_1(W_p^-)$.
-  \item \textbf{Cumulative effect:} Die Summe über Primzahlen verstärkt die gerade Präferenz (nicht nur bewahrt sie).
-  \item \textbf{Parity-neutral archimedean term:} $W_{\mathrm{diag}} + W_{\mathrm{arch}}$ erzeugt $|\lambda_1^+ - \lambda_1^-| < 10^{-3}$ (numerisch verifiziert).
-  \item \textbf{Conclusion:} Gerade Dominanz von $\mathrm{QW}_\lambda$ folgt aus dem kumulativen Primeffekt.
+  \item \textbf{Basiszerlegung:} $W_{\mathrm{prime}} = \sum_p W_p$, wobei jedes $W_p$ auf gerade und ungerade Sektoren separat wirkt.
+  \item \textbf{Shift-Parity-Lemma (\Cref{thm:shift-parity}):} Jedes $W_p$ erfüllt einzeln $\lambda_1(W_p^+) < \lambda_1(W_p^-)$.
+  \item \textbf{Kumulativer Effekt:} Die Summe über Primzahlen verstärkt die gerade Präferenz (sie bewahrt sie nicht nur).
+  \item \textbf{Paritätsneutraler archimedischer Term:} $W_{\mathrm{diag}} + W_{\mathrm{arch}}$ erzeugt $|\lambda_1^+ - \lambda_1^-| < 10^{-3}$ (numerisch verifiziert).
+  \item \textbf{Schlussfolgerung:} Gerade Dominanz von $\mathrm{QW}_\lambda$ folgt aus dem kumulativen Primzahl-Effekt.
 \end{enumerate}
 
 \noindent Die verbleibende Lücke für einen vollständigen Beweis ist Schritt~(3): zu zeigen, dass der kumulative Effekt der Summation von $W_p$ über alle $p \leq \lambda$ die einzelnen geraden Präferenzen bewahrt (und verstärkt). Dies ist nicht automatisch, weil Eigenwert-Ungleichungen nicht additiv für Summen von Matrizen sind. Jedoch ist die numerische Evidenz überwältigend: das kumulative Gap vertieft sich monoton für $\lambda \geq 55$ und skaliert als $|\mathrm{cert\_gap}| \sim c\sqrt{\lambda}$ über fast $4$ Größenordnungen ($33$ zertifizierte Werte, $\lambda = 100$ bis $1{,}300{,}000$).
@@ -609,7 +629,7 @@ Darüber hinaus bleibt $\lambda_1(\mathrm{QW}_\lambda^-[{:}N])$ über $\lambda_1
 \label{sec:computer-proof}
 \subsubsection{Computergestützte Gap-Diagnostik mittels Intervallarithmetik}
 
-Für $\lambda = 100$ und $\lambda = 200$ haben wir eine computergestützte finite-range Diagnostik unter Verwendung von Intervallarithmetik (mpmath.iv mit 50-stelliger Genauigkeit) abgeschlossen. Im aktuellen v2.4-Status ist dies eine bedingte Zertifikats-Pipeline mit drei Komponenten:
+Für $\lambda = 100$ und $\lambda = 200$ haben wir eine computergestützte Gap-Diagnostik auf endlichem Bereich unter Verwendung von Intervallarithmetik (mpmath.iv mit 50-stelliger Genauigkeit) abgeschlossen. Im aktuellen v2.4-Status ist dies eine bedingte Zertifikats-Pipeline mit drei Komponenten:
 
 \begin{enumerate}
 \item \textbf{Oberschranke auf $\lambda_1^+$:} Die $4 \times 4$ Galerkin-Matrix $\mathrm{QW}^+[{:}4]$ wird mit zertifizierten Intervallen berechnet: Primzahl-Shift-Integrale werden in Intervallarithmetik evaluiert (Breite $< 10^{-12}$), und der archimedische Kern wird via zusammengesetzter Gauss--Legendre-Quadratur mit Interval-Einschließung integriert (Breite $< 10^{-3}$). Der kleinste Eigenwert der Interval-Matrix ergibt eine zertifizierte Oberschranke.
@@ -673,7 +693,7 @@ Die Hellmann--Feynman-Analyse (\Cref{tab:hf-results}) liefert eine strukturelle 
 \label{sec:weighted-compactness}
 % =============================================================================
 
-Die vorangegangenen Abschnitte etablieren eine starke finite-range Gap-Diagnostik für endlich viele $\lambda$ ($33$ Werte bis $\lambda = 1{,}300{,}000$; numerisch für alle $\lambda \geq 55$). Um den bedingten Beweis für \emph{alle} großen $\lambda$ zu schließen, skizzieren wir eine funktional-analytische Strategie basierend auf gewichteter Kompaktheit, die den kumulativen algebraischen Schritt vollständig vermeiden könnte.
+Die vorangegangenen Abschnitte etablieren eine starke Gap-Diagnostik auf endlichem Bereich für endlich viele $\lambda$ ($33$ Werte bis $\lambda = 1{,}300{,}000$; numerisch für alle $\lambda \geq 55$). Um den bedingten Beweis für \emph{alle} großen $\lambda$ zu schließen, skizzieren wir eine funktional-analytische Strategie basierend auf gewichteter Kompaktheit, die den kumulativen algebraischen Schritt vollständig vermeiden könnte.
 
 \subsection{Aufbau und Reskalierung}
 
@@ -865,11 +885,11 @@ Die gewichtete Kompaktheits-Strategie zerlegt den Beweisabschluss in vier Bauste
 \small
 \renewcommand{\arraystretch}{1.15}
 \begin{tabular}{l|l|p{5.5cm}}
-Block & Status & Evidence \\\hline
-B1: $H^1$ bound & Schur complement & $\|c_{\mathrm{high}}\|^2 = O(L^{-2})$ (\Cref{prop:mode-concentration}) \\
-B2: Rellich & Theorem & Standard (given B1) \\
-B3: Spectral limit & Open & $\lambda_1^+/L^2$ stabilizes, no element-wise convergence \\
-B4: Hurwitz bridge & Connes Fact~6.4 & $k_\lambda \to \Xi$ at rate $O(\lambda^{-1/2-\alpha})$
+Block & Status & Evidenz \\\hline
+B1: $H^1$-Schranke & Schur-Komplement & $\|c_{\mathrm{high}}\|^2 = O(L^{-2})$ (\Cref{prop:mode-concentration}) \\
+B2: Rellich & Satz & Standard (gegeben B1) \\
+B3: Spektraler Grenzwert & Offen & $\lambda_1^+/L^2$ stabilisiert sich, ohne elementweise Konvergenz \\
+B4: Hurwitz-Brücke & Connes Fakt~6.4 & $k_\lambda \to \Xi$ mit Rate $O(\lambda^{-1/2-\alpha})$
 \end{tabular}
 \end{center}
 
@@ -1009,7 +1029,7 @@ Die Weil-Explizitformel
 \[ \sum_\rho h(\rho) = h(0) + h(1) - \sum_p \sum_{m=1}^\infty \frac{\log p}{p^{m/2}}\,\hat{h}(m\log p) \]
 stellt eine direkte Brücke zwischen Nullstellen und Primzahlen her. Die Li-Koeffizienten entsprechen der Testfunktion $h_n(s) = 1-(1-1/s)^n$. Connes \cite{Connes2026} konstruiert aus dieser Formel einen selbstadjungierten Operator $A_\lambda$ und reduziert RH auf die Einfachheit seines Grundzustands mit gerader Eigenfunktion (Satz~6.1; siehe \Cref{sec:connes} für unsere numerische Untersuchung). Der prolate-sphäroidale Wellenoperator, der mit der komprimierten Fourier-Transformation kommutiert, liefert eine Analogie: seine Eigenwerte im geraden Sektor sind nachweislich einfach (Fakt~6.3 in \cite{Connes2026}). Die Erweiterung dieser Einfachheit auf $A_\lambda$ ist das verbleibende offene Problem.
 
-Vor der vorliegenden Arbeit war die Gerade-Dominanz-Eigenschaft eine \emph{unbewiesene Annahme} in all approaches: Connes \cite{Connes2026} nimmt dies an, und Connes--van~Suijlekom \cite{ConnesvS2025} nehmen dies an in their Carath\'eodory--Fej\'er truncation argument. Klassische Ansätze via Krein--Rutman (positive Kerne) oder Sturm--Liouville (Knotentheorie) sind nicht anwendbar, da $A_\lambda$ einen \emph{indefiniten} Kern hat. Die vorliegende Arbeit reduziert diese Annahme auf die Odd-Sektor-Lower-Bound-/AVG-Schließung in \Cref{prop:A6}.
+Vor der vorliegenden Arbeit war die Gerade-Dominanz-Eigenschaft eine \emph{unbewiesene Annahme} in allen Ansätzen: Connes \cite{Connes2026} setzt dies voraus, und Connes--van~Suijlekom \cite{ConnesvS2025} setzen dies in ihrem Carath\'eodory--Fej\'er-Trunkierungsargument voraus. Klassische Ansätze via Krein--Rutman (positive Kerne) oder Sturm--Liouville (Knotentheorie) sind nicht anwendbar, da $A_\lambda$ einen \emph{indefiniten} Kern hat. Die vorliegende Arbeit reduziert diese Annahme auf die Odd-Sektor-Lower-Bound-/AVG-Schließung in \Cref{prop:A6}.
 
 Unsere Zerlegungsanalyse (\Cref{sec:connes}) offenbart, dass die Primzahlbeiträge, nicht der archimedische Kern, der alleinige Treiber der geraden Dominanz sind---eine strukturelle Einsicht, die zukünftige analytische Ansätze informieren könnte.
 
@@ -1143,7 +1163,7 @@ GF1 auf der Ebene eines bedingten Ziels statt eines universellen Satzes.
 \section{Schlussfolgerung}
 % =============================================================================
 
-Diese Arbeit etabliert nicht mehr eine unbedingte gerade Dominanz der Weil-Quadratform $\mathrm{QW}_\lambda$ für alle $\lambda \geq 100$, sondern eine bedingte Reduktion. Die Architektur kombiniert drei Zutaten: (1)~das Shift-Parity-Lemma, das zeigt, dass jede Primzahl einzeln gerade Eigenfunktionen bevorzugt; (2)~33 computergestützte finite-range Diagnostiken, die starke Evidenz via Intervallarithmetik liefern; und (3)~das M1$''$-Resolventen-Framework mit PNT-Transfer, das das asymptotische Variationsvorzeichen etabliert. Das Drei-Regime-Brücken-Argument (Proposition~A6) vereinigt diese Zutaten zu einer klaren Aufgabe: der theoremstarken unteren Schranke für den ungeraden Sektor.
+Diese Arbeit etabliert nicht mehr eine unbedingte gerade Dominanz der Weil-Quadratform $\mathrm{QW}_\lambda$ für alle $\lambda \geq 100$, sondern eine bedingte Reduktion. Die Architektur kombiniert drei Zutaten: (1)~das Shift-Parity-Lemma, das zeigt, dass jede Primzahl einzeln gerade Eigenfunktionen bevorzugt; (2)~33 computergestützte Gap-Diagnostiken auf endlichem Bereich, die starke Evidenz via Intervallarithmetik liefern; und (3)~das M1$''$-Resolventen-Framework mit PNT-Transfer, das das asymptotische Variationsvorzeichen etabliert. Das Drei-Regime-Brücken-Argument (Proposition~A6) vereinigt diese Zutaten zu einer klaren Aufgabe: der theoremstarken unteren Schranke für den ungeraden Sektor.
 
 Die zentrale analytische Einsicht ist das Führende-Mode-Auslöschungs-Lemma: die Kopplungsdifferenz zwischen geraden und ungeraden Sektoren ist beschränkt durch $O(1)$, während der diagonale Vorteil $D(\lambda)$ als $\sqrt{\lambda}$ wächst, wodurch ein Verhältnis $\rho(\lambda) \to 0$ entsteht. Kombiniert mit der Euler--Maclaurin-Proposition ($\rho^{\mathrm{EM}} < 0$ für $L \geq 13$, zertifiziert durch Intervallarithmetik) und dem PNT-Transfer-Lemma ergibt dies M1$''$ (Resolventen-Subdominanz) für alle $\lambda \geq \lambda_0$.
 
@@ -1445,7 +1465,7 @@ Angenommen:
 \begin{enumerate}[label=\textup{(M\arabic*)}]
   \item\label{M1} Die Grenzwerte~\eqref{eq:ccos-limit}--\eqref{eq:csin-limit} existieren mit $c_{\cos} > c_{\sin}^{(N_0)}$.
   \item\label{M2} Die Tail-Korrektur $\mathrm{tail}(\lambda; N_0) \coloneqq \ell_{\sin}^{(N_0)}(\lambda) - \lambda_1^-(\lambda)$ erfüllt $\mathrm{tail}(\lambda; N_0) = O(\log\lambda)$.
-  \item\label{M3} The interval-arithmetic evaluator produces certified bounds with width $E(\lambda) = O(\lambda^{1/2-\varepsilon})$ for some $\varepsilon > 0$.
+  \item\label{M3} Der intervallarithmetische Auswerter erzeugt zertifizierte Schranken mit Breite $E(\lambda) = O(\lambda^{1/2-\varepsilon})$ für ein $\varepsilon > 0$.
 \end{enumerate}
 Dann existiert, bedingt auf diese Annahmen, $\lambda_0$ so, dass für alle $\lambda \geq \lambda_0$:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -1453,7 +1473,7 @@ Dann existiert, bedingt auf diese Annahmen, $\lambda_0$ so, dass für alle $\lam
   \item der Intervall-Zertifizierer terminiert und gibt ``gerade Dominanz verifiziert'' aus,
   \item $\lambda_1^+(\lambda) < \lambda_1^-(\lambda)$ (gerade Dominanz gilt).
 \end{enumerate}
-Insbesondere existiert unter denselben Tail-Bound- und Evaluator-Annahmen eine Folge $\lambda_n \to \infty$, entlang derer die Voraussetzungen von Connes' Theorem~6.1 verifiziert sind; nach Fakt~6.4 und dem Satz von Hurwitz wird der RH-Schluss dann auf diese Odd-Sektor-Lower-Bound-Schließung reduziert.
+Insbesondere existiert unter denselben Tail-Bound- und Evaluator-Annahmen eine Folge $\lambda_n \to \infty$, entlang derer die Voraussetzungen von Connes' Satz~6.1 verifiziert sind; nach Fakt~6.4 und dem Satz von Hurwitz wird der RH-Schluss dann auf diese Odd-Sektor-Lower-Bound-Schließung reduziert.
 \end{theorem}
 
 \begin{proof}[Beweis]
@@ -1463,7 +1483,7 @@ By \ref{M3}: the interval evaluator produces an interval $I(\lambda)$ containing
 
 By \ref{M2}: $\lambda_1^-(\lambda) \geq \ell_{\sin}^{(N_0)}(\lambda) - O(\log\lambda) > \ell_{\cos}^{(k)}(\lambda) \geq \lambda_1^+(\lambda)$, was die gerade Dominanz bedingt auf die Tail-Schranke etabliert.
 
-Connes' Theorem~6.1 then gives: for each such $\lambda$, the entire function associated to the ground-state eigenfunction has only real zeros. Fact~6.4 gives $k_\lambda \to \Xi$ locally uniformly. Hurwitz's theorem transfers the real-zero property to the limit $\Xi$. Hence all non-trivial zeros of $\zeta$ lie on the critical line.
+Connes' Satz~6.1 liefert dann: Für jedes solche $\lambda$ hat die der Grundzustands-Eigenfunktion zugeordnete ganze Funktion nur reelle Nullstellen. Fakt~6.4 ergibt $k_\lambda \to \Xi$ lokal gleichmäßig. Hurwitz' Satz überträgt die Reellnullstellen-Eigenschaft auf den Grenzwert $\Xi$. Folglich liegen alle nichttrivialen Nullstellen von $\zeta$ auf der kritischen Geraden.
 \end{proof}
 
 \subsection{Status der Annahmen}
@@ -1481,7 +1501,7 @@ Connes' Theorem~6.1 then gives: for each such $\lambda$, the entire function ass
 
 \noindent Die kritische Annahme ist \ref{M1}. Sie besagt, dass der $4 \times 4$ gerade-Block-Eigenwert \emph{asymptotisch negativer} ist als der $N_0 \times N_0$ ungerade-Block-Eigenwert nach Normalisierung durch $\sqrt{\lambda}$. Der Mechanismus ist die Shift-Parity-Identität (\Cref{cor:diagonal-parity}): die Kosinus-Überlappung $S^+(\delta, L) < S^-(\delta, L)$ für $\delta \in (0, L)$, die die Einträge der geraden Matrix negativer macht. Die Herausforderung besteht darin zu zeigen, dass sich diese punktweise Ungleichung bei den Überlapps durch die Eigenwertsberechnung fortpflanzt (die die vollständige Matrix betrifft, nicht nur Diagonalelemente).
 
-Numerical evidence strongly supports \ref{M1}: the ratio $\mathrm{gap}/\sqrt{\lambda}$ is monotonically increasing in magnitude from $-0.295$ ($\lambda = 100$) to $-0.458$ ($\lambda = 2000$), with no sign of reversal.
+Die numerische Evidenz stützt \ref{M1} deutlich: Das Verhältnis $\mathrm{gap}/\sqrt{\lambda}$ wächst betragsmäßig monoton von $-0.295$ ($\lambda = 100$) auf $-0.458$ ($\lambda = 2000$), ohne Anzeichen einer Umkehr.
 
 \begin{remark}[Pr"azise Form von \ref{M1}: coupling differential bound]
 \label{rem:M1-precise}
@@ -1583,7 +1603,7 @@ Die Kopplungsdifferentiale erfüllen $\sigma_1^+ = -E_{\cos}(\lambda) + O(E_{\co
 Dies ergibt $(\sigma_1^+ - \sigma_0^-)/D(\lambda) < 1$ für $\lambda \geq \lambda_0$, was genau~\eqref{eq:M1-ratio} ist.
 \end{proof}
 
-\noindent\textbf{Numerical evidence: the energy difference is bounded.} A dense grid analysis (\texttt{resolvent\_analysis.py}) with $12$ values of $\lambda$ from $50$ to $3000$ reveals the asymptotic scaling:
+\noindent\textbf{Numerische Evidenz: Die Energiedifferenz ist beschränkt.} Eine dichte Gitteranalyse (\texttt{resolvent\_analysis.py}) mit $12$ Werten von $\lambda$ zwischen $50$ und $3000$ zeigt die asymptotische Skalierung:
 
 \begin{center}
 \small
@@ -1603,12 +1623,12 @@ $\lambda$ & $D(\lambda)$ & $E_{\sin}$ & $E_{\cos}$ & $E_{\sin}\!-\!E_{\cos}$ & $
 
 \begin{remark}[Zwei-Teile-Strategie zum Beweis von \ref{M1pp}]
 \label{rem:two-parts}
-For fixed block sizes $k$ and $N_0$ (independent of $\lambda$), \ref{M1pp} decomposes into:
+Für feste Blockgrößen $k$ und $N_0$ (unabhängig von $\lambda$) zerfällt \ref{M1pp} in:
 \begin{itemize}
-  \item \textbf{Part~A (diagonal PT2):} Show $(E_{\sin} - E_{\cos})^{\mathrm{diag}} = O(1)$. Numerical evidence: the difference stabilizes at $\approx 8$--$9$ for all $\lambda \geq 100$, while $D \to \infty$.
-  \item \textbf{Part~B (resolvent comparison):} Show that replacing diagonal gaps $g_j = W_{jj} - W_{\mathrm{lead}}$ by true eigenvalue gaps introduces an error that is $o(D)$. Since $N_0$ is fixed, this reduces to controlling $\|R_0 K\|$ on a \emph{finite-dimensional} space, where $R_0$ is the diagonal resolvent and $K$ is the off-diagonal part. The Neumann series $R = R_0(I + R_0 K)^{-1}$ converges once $\|R_0 K\| < 1$, and the $4\%$ PT2 accuracy at $\lambda = 2000$ empirically confirms $\|R_0 K\| \lesssim 0.04$.
+  \item \textbf{Teil~A (diagonale PT2):} Zu zeigen ist $(E_{\sin} - E_{\cos})^{\mathrm{diag}} = O(1)$. Die numerische Evidenz zeigt: Die Differenz stabilisiert sich für alle $\lambda \geq 100$ bei ungefähr $8$--$9$, während $D \to \infty$ gilt.
+  \item \textbf{Teil~B (Resolventenvergleich):} Zu zeigen ist, dass das Ersetzen der diagonalen Gaps $g_j = W_{jj} - W_{\mathrm{lead}}$ durch echte Eigenwert-Gaps einen Fehler der Ordnung $o(D)$ einführt. Da $N_0$ fest ist, reduziert sich dies auf die Kontrolle von $\|R_0 K\|$ auf einem \emph{endlichdimensionalen} Raum, wobei $R_0$ die diagonale Resolvente und $K$ den off-diagonalen Anteil bezeichnet. Die Neumann-Reihe $R = R_0(I + R_0 K)^{-1}$ konvergiert, sobald $\|R_0 K\| < 1$, und die PT2-Genauigkeit von $4\%$ bei $\lambda = 2000$ bestätigt empirisch $\|R_0 K\| \lesssim 0.04$.
 \end{itemize}
-Die feste-$N_0$-Eigenschaft ist wesentlich: sie stellt sicher, dass alle Matrixnormen durch endlich viele Eintraege kontrolliert werden, von denen jeder eine explizite Skalierung in $\lambda$ hat.
+Die feste-$N_0$-Eigenschaft ist wesentlich: Sie stellt sicher, dass alle Matrixnormen durch endlich viele Einträge kontrolliert werden, von denen jeder eine explizite Skalierung in $\lambda$ hat.
 \end{remark}
 
 \begin{remark}[Analytische Struktur von M1$''$]
@@ -1692,7 +1712,7 @@ $\lambda$ & $\#$primes & $\ell_{\cos}^{(4)}$ & $\ell_{\sin}^{(N_0)}$ & cert\_gap
 \end{tabular}
 \end{center}
 
-\noindent Alle $33$ getesteten Werte von $\lambda \in [100, 1\,300\,000]$ ergeben $\mathrm{cert\_gap} < 0$, wobei $|\mathrm{cert\_gap}|$ monoton als $\sim\!\sqrt{\lambda}$ wächst. Dies ist eine computergestützte finite-range Diagnostik über mehr als $4$ Größenordnungen in~$\lambda$, konsistent mit der bedingten Vorhersage von \Cref{thm:meta}.
+\noindent Alle $33$ getesteten Werte von $\lambda \in [100, 1\,300\,000]$ ergeben $\mathrm{cert\_gap} < 0$, wobei $|\mathrm{cert\_gap}|$ monoton als $\sim\!\sqrt{\lambda}$ wächst. Dies ist eine computergestützte Gap-Diagnostik auf endlichem Bereich über mehr als $4$ Größenordnungen in~$\lambda$, konsistent mit der bedingten Vorhersage von \Cref{thm:meta}.
 
 \subsection{Analytischer Weg zu M1: Leading-Mode-Cancellation}
 \label{sec:leading-mode}
@@ -2169,7 +2189,7 @@ wobei die innere Summe über $m \geq 2$ nach Mertens' Satz konvergiert. Daher
 + 2 C_{\mathrm{norm}}\lambda^{0.35}
 + O(\log\lambda).
 \]
-Der negative Frontier-Term hat Exponent $1/2$, während der positive Komplementterm nur Exponent $0.35$ hat; die rechte Seite ist daher für alle hinreichend großen $\lambda$ strikt negativ. Die Auswertung dieser Schranke mit intervallzertifizierten Konstanten für die eindimensionale Frontier-Prüfung und expliziten PNT/Mertens-Restgliedern liefert eine effektive Schwelle $\Lambda_* \leq 1{,}300{,}000$. Das endliche Intervall $100\leq\lambda\leq\Lambda_*$ ist durch die finite-range Diagnostiken aus \Cref{sec:certificates} abgedeckt. Damit gilt $\lambda_{\min}(D_{\mathrm{total}}(\lambda))<0$ für alle $\lambda\geq100$; die Überführung dieser Variationsaussage in $\lambda_1^+<\lambda_1^-$ verlangt weiterhin die Odd-Sektor-Lower-Bound-Validierung.
+Der negative Frontier-Term hat Exponent $1/2$, während der positive Komplementterm nur Exponent $0.35$ hat; die rechte Seite ist daher für alle hinreichend großen $\lambda$ strikt negativ. Die Auswertung dieser Schranke mit intervallzertifizierten Konstanten für die eindimensionale Frontier-Prüfung und expliziten PNT/Mertens-Restgliedern liefert eine effektive Schwelle $\Lambda_* \leq 1{,}300{,}000$. Das endliche Intervall $100\leq\lambda\leq\Lambda_*$ ist durch die Diagnostiken auf endlichem Bereich aus \Cref{sec:certificates} abgedeckt. Damit gilt $\lambda_{\min}(D_{\mathrm{total}}(\lambda))<0$ für alle $\lambda\geq100$; die Überführung dieser Variationsaussage in $\lambda_1^+<\lambda_1^-$ verlangt weiterhin die Odd-Sektor-Lower-Bound-Validierung.
 \end{proof}
 
 \begin{remark}[Was der direkte Beweis verwendet und vermeidet]
@@ -2190,11 +2210,11 @@ Die CAP-Diagnostiken etablieren $\mathrm{cert\_gap}(\lambda_k) < 0$ an den $33$ 
 \label{rem:M1-status}
 \Cref{prop:A6} trennt jetzt die Variationsaussage von der Eigenwertordnung. Die vorhandenen Argumente zeigen:
 \begin{itemize}
-  \item \textbf{Unbedingt:} Shift-Parity-Lemma, Leading-Mode-Cancellation, NE-A sowie die endlichen NE-B-Rechnungen; außerdem negative finite-range Gap-Diagnostik auf $100\leq\lambda\leq1{,}300{,}000$ bedingt auf den Odd-Sektor-Tail-Lower-Bound.
+  \item \textbf{Unbedingt:} Shift-Parity-Lemma, Leading-Mode-Cancellation, NE-A sowie die endlichen NE-B-Rechnungen; außerdem negative Gap-Diagnostik auf endlichem Bereich für $100\leq\lambda\leq1{,}300{,}000$ bedingt auf den Odd-Sektor-Tail-Lower-Bound.
   \item \textbf{Variational:} Drei-Regime- und Direct-Frontier-Argumente liefern das asymptotische Vorzeichen von $\lambda_{\min}(W^+-W^-)$.
   \item \textbf{Bedingt:} Der Schluss auf $\lambda_1^+<\lambda_1^-$ und damit A7/A8 bleibt abhängig von der Asymptotischen Variationsgap-Vermutung bzw. einer validierten unteren Schranke für $\lambda_1^-$.
 \end{itemize}
-Zusammen mit Connes' Satz~6.1 (A1) und Fact~6.4/Hurwitz-Suffizienz (A2) ist die aktuelle Beweisarchitektur daher eine \emph{conditional reduction}, kein unbedingter Beweis der Riemannschen Vermutung.
+Zusammen mit Connes' Satz~6.1 (A1) und Fakt~6.4/Hurwitz-Suffizienz (A2) ist die aktuelle Beweisarchitektur daher eine \emph{bedingte Reduktion}, kein unbedingter Beweis der Riemannschen Vermutung.
 
 Die spektrale Lückenschranke in \Cref{lem:higher-mode-decay} wird analytisch hergeleitet via die Paritätssplit-Laplace-Asymptotik (Schritt~3): $c_{\mathrm{gap}} \geq 4\pi^2/L \geq 2.8$ für $L \leq 14$, konservativ um einen Faktor $\geq 5$ verglichen mit der früheren numerischen Schätzung $c_{\mathrm{gap}} \geq 0.5$. Kombiniert mit der Sektor-Differenzkontrolle (\Cref{lem:resolvent-truncation}) bleiben keine numerischen Konstanten im Regime~2-Argument. Im v2.1 Direkten Frontier-Dominanz-Beweis sind die numerischen Eingaben feste, von $\lambda$ unabhängige Intervallzertifikate: $C_{\mathrm{front}}=0{,}4685$ für den gemeinsamen Frontier-Rayleigh-Quotienten und $C_{\mathrm{norm}}=2{,}2847$ für die Non-Frontier-Normschranke.
 \end{remark}
