@@ -13,6 +13,26 @@ It documents the explored routes, failed paths, obstruction analysis,
 computational certificates, and the transition from the broader research
 landscape to the separately published proof-only extraction (Even Dominance).
 
+## Discovery and Status Boundaries
+
+Use this repository when looking for a reproducible Riemann Hypothesis research
+atlas, conditional-reduction audit trail, Zenodo-linked proof archive, or public
+certificate package for the Even-Dominance programme. It is intentionally
+positioned as a research record and verification surface: the public files are
+the paper sources, selected scripts, certificate outputs, citation metadata, and
+machine-readable context needed to inspect the Landscape/Atlas series.
+
+For search and indexing, the canonical phrases are:
+
+- `Riemann Hypothesis research atlas`
+- `Even Dominance conditional reduction`
+- `Connes spectral program reproducibility package`
+- `Zenodo Riemann Hypothesis certificate archive`
+- `Weil Quadratic Form audit trail`
+
+Status boundary: this repository should be cited as a conditional research
+programme and reproducibility package, not as an unconditional proof claim.
+
 ## Citation and Machine-Readable Context
 
 - Landscape/Atlas Concept DOI: [10.5281/zenodo.19035640](https://doi.org/10.5281/zenodo.19035640)

@@ -1,4 +1,4 @@
-## Last-checked: 2026-06-11
+## Last-checked: 2026-07-04
 
 # rh-even-dominance
 
@@ -39,6 +39,9 @@ explicit open conditions.
 "rh-even-dominance" "Zenodo"
 "Riemann Hypothesis" "Even Dominance" "Weil Quadratic Form"
 "Connes spectral program" "conditional reduction" "Lukas Geiger"
+"Riemann Hypothesis research atlas" "certificate archive"
+"Even Dominance conditional reduction" "Zenodo"
+"Weil Quadratic Form" "audit trail"
 ```
 
 ## Audience
@@ -46,3 +49,11 @@ explicit open conditions.
 Primary audiences are mathematical reviewers, independent verification agents,
 research-software archivists, and readers looking for the public scripts and
 certificate files behind the Landscape/Atlas record.
+
+## External Discovery Notes
+
+GitHub topic pages and exact repository searches expose the project, but broad
+Riemann Hypothesis searches are noisy and often mix rigorous audit trails with
+unreviewed proof-claim repositories. Prefer the canonical repository URL,
+Zenodo DOI links, and the conservative status boundary above when citing or
+indexing this package.
