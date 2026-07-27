@@ -60,11 +60,21 @@
 \maketitle
 
 \begin{abstract}\small
-Dies ist die zweite Arbeit in einer fünfteiligen Serie (Teil~I: Grundlagen und Hindernisse \cite{Geiger2026partI}; Teil~III: Spektrale Wege \cite{Geiger2026partIII}; Teil~IV: Cross-Route-Synthese \cite{Geiger2026partIV}; Teil~V: Conclusio \cite{Geiger2026partV}). Wir befassen uns mit dem offenen Problem, das in Connes' \"Ubersicht von 2026 \cite{Connes2026} identifiziert wurde: ob der kleinste Eigenwert der quadratischen Weil-Form~$\mathrm{QW}_\lambda$ einfach ist und eine gerade Eigenfunktion besitzt. Wir etablieren drei Hauptergebnisse. Erstens das \emph{Shift-Parity-Lemma}: Die Differenzmatrix zwischen den Operatoren des geraden und ungeraden Sektors hat f\"ur alle $N \geq 3$ Moden und alle normierten Verschiebungen $r \in (0,2)$ einen streng negativen kleinsten Eigenwert, was impliziert, dass jede Primzahl individuell gerade Eigenfunktionen bevorzugt. Zweitens dokumentieren wir eine starke computergestützte Gap-Diagnostik auf endlichem Bereich für $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$; diese wird als bedingte endliche Brücke geführt, bis die untere Tail-Schranke des ungeraden Sektors unabhängig validiert ist. Drittens beweisen wir das \emph{Leading-Mode-Cancellation-Lemma}: Die \"Uberlappungsdifferenzen zwischen dem geraden und ungeraden Sektor heben sich paarweise mit der exakten Konstanten $c = 2 + \sqrt{2}$ auf, was $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$ ergibt. Dieser Resolventen-ged\"ampfte Rahmen reduziert den verbleibenden analytischen Schritt (M1$''$) auf klassische Fourier-Analyse und den Primzahlsatz. In v2.0 f\"ugen wir zwei Nicht-Existenz-Theoreme (Theoreme~\ref{thm:NE-A} und~\ref{thm:NE-B}) hinzu, die die L\"osungswege \"uber absolute Totalpositivit\"at und universelle kommutierende Operatoren formal ausschlie\ss{}en und damit zeigen, dass gerade Dominanz notwendigerweise ein arithmetisch-statistisches und kein rein algebraisches Ph\"anomen ist. In v2.1 f\"ugen wir einen robusten direkten Frontier-Dominanz-Beweis (Abschnitt~\ref{sec:direct-frontier}, Proposition~\ref{prop:direct-frontier}) hinzu, der auf einem gemeinsamen Rayleigh-Testvektor im Frontier-Fenster $r\in[0.7,1]$ beruht. In der v2.3-Lesart beweist diese Fassung das asymptotische Variationsvorzeichen $\lambda_{\min}(W^+-W^-)<0$, nicht jedoch allein die Eigenwertordnung $\lambda_1^+<\lambda_1^-$; die Reduktionskette A1--A8 bleibt daher bedingt auf die Asymptotische Variationsgap-Vermutung bzw. eine validierte untere Schranke für $\lambda_1^-$.
+Dies ist die zweite Arbeit in einer fünfteiligen Serie (Teil~I: Grundlagen und Hindernisse \cite{Geiger2026partI}; Teil~III: Spektrale Wege \cite{Geiger2026partIII}; Teil~IV: Cross-Route-Synthese \cite{Geiger2026partIV}; Teil~V: Conclusio \cite{Geiger2026partV}). Wir befassen uns mit dem offenen Problem, das in Connes' \"Ubersicht von 2026 \cite{Connes2026} identifiziert wurde: ob der kleinste Eigenwert der quadratischen Weil-Form~$\mathrm{QW}_\lambda$ einfach ist und eine gerade Eigenfunktion besitzt. Wir trennen drei Ergebnisse mit unterschiedlichem Beweisstatus. Erstens das \emph{Shift-Parity-Lemma}: Die Differenzmatrix zwischen den Operatoren des geraden und ungeraden Sektors hat f\"ur alle $N \geq 3$ Moden und alle normierten Verschiebungen $r \in (0,2)$ einen streng negativen kleinsten Eigenwert, was impliziert, dass jede Primzahl individuell gerade Eigenfunktionen bevorzugt. Zweitens dokumentieren wir eine starke computergestützte Gap-Diagnostik auf endlichem Bereich für $33$ Werte von $\lambda$ zwischen $100$ und $1{,}300{,}000$; diese wird als bedingte endliche Brücke geführt, bis die untere Tail-Schranke des ungeraden Sektors unabhängig validiert ist. Drittens beweisen wir das \emph{Leading-Mode-Cancellation-Lemma}: Die \"Uberlappungsdifferenzen zwischen dem geraden und ungeraden Sektor heben sich paarweise mit der exakten Konstanten $c = 2 + \sqrt{2}$ auf, was $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$ ergibt. Dieser Resolventen-ged\"ampfte Rahmen reduziert den verbleibenden analytischen Schritt (M1$''$) auf klassische Fourier-Analyse und den Primzahlsatz. In v2.0 f\"ugen wir zwei Nicht-Existenz-Theoreme (Theoreme~\ref{thm:NE-A} und~\ref{thm:NE-B}) hinzu, die die L\"osungswege \"uber absolute Totalpositivit\"at und universelle kommutierende Operatoren formal ausschlie\ss{}en und damit zeigen, dass gerade Dominanz notwendigerweise ein arithmetisch-statistisches und kein rein algebraisches Ph\"anomen ist. In v2.1 f\"ugen wir einen robusten direkten Frontier-Dominanz-Beweis (Abschnitt~\ref{sec:direct-frontier}, Proposition~\ref{prop:direct-frontier}) hinzu, der auf einem gemeinsamen Rayleigh-Testvektor im Frontier-Fenster $r\in[0.7,1]$ beruht. In der v2.3-Lesart beweist diese Fassung das asymptotische Variationsvorzeichen $\lambda_{\min}(W^+-W^-)<0$, nicht jedoch allein die Eigenwertordnung $\lambda_1^+<\lambda_1^-$; die Reduktionskette A1--A8 bleibt daher bedingt auf die Asymptotische Variationsgap-Vermutung bzw. eine validierte untere Schranke für $\lambda_1^-$.
 
 \medskip\noindent
 \textbf{Strukturelles Update (v3.0, 2026-05-26).}
 Die Serie wird von einer Trilogie auf eine fünfteilige Serie umstrukturiert; der bedingte Reduktionsstatus von v2.2 bleibt unverändert. Eine neue \Cref{sec:gf1} stellt den GF1-Boundary-Moment-Benchmark $\mathrm{sLI} \sim (64\pi^2/3)\,\lambda/(NL)$ für den konvergierten $\lambda=5,7$-Benchmark vor, behandelt den Niedrig-$\lambda$-Ausreißer $\lambda=3$ separat und lässt $\lambda=11$ als offenen Diskriminator stehen.
+
+\medskip\noindent
+\textbf{Strict-Review-Update (v3.1, 2026-06-29).}
+Die N1-Arbeit mit shifted inverses wird hier nicht als Grundzustandszertifikat
+verwendet: Für $B_\lambda=(A_\lambda+MI)^{-1}$ kehrt die Spektralkarte die
+Ordnung um, so dass der Grundzustand von $A_\lambda$ dem größten isolierten
+$B_\lambda$-Eigenwert entspricht, nicht dem kleinsten. Die finiten CAP- und
+Direct-Frontier-Diagnostiken unten bleiben bedingte Legacy-/Variationsevidenz,
+bis sie im korrigierten Connes--van-Suijlekom-$U_n$-Rahmen mit validierter
+Odd-Sektor-Unterschranke erneut durchgeführt sind.
 \end{abstract}
 
 {\small
@@ -1669,6 +1679,12 @@ Das Zertifizierungsprogramm (\texttt{certifier\_production.py}) berechnet die Ga
 \end{itemize}
 Die Gap-Größe ist $\mathrm{cert\_gap} = \mathrm{upper}_{\cos} - \mathrm{lower}_{\sin}$; $\mathrm{cert\_gap} < 0$ impliziert $\lambda_1^+ < \lambda_1^-$ erst dann rigoros, wenn die untere Schranke $\lambda_1^- \geq \mathrm{lower}_{\sin}$ validiert ist. Bis dahin sind die Werte starke numerische Evidenz und eine bedingte endliche Brücke, kein finaler CAP-Beweis.
 
+\paragraph{Operatorrahmen-Caveat (Strict Review 2026-06-29).}
+Die finiten CAP- und Direct-Frontier-Diagnostiken in diesem Teil werden als
+Legacy-/Variationsevidenz geführt, solange sie nicht im korrigierten
+Connes--van-Suijlekom-$U_n$-Frequenzreflexionsrahmen erneut durchgeführt sind.
+In ihrer aktuellen Form sind sie keine theoremstarken Eigenwertordnungszertifikate.
+
 \begin{remark}[Niedrig-Moden-Dominanz]
 \label{rem:low-mode}
 Der gerade Block erfordert nur $k = 3$--$5$ Galerkin-Modi zur oberen Schranke im geraden Sektor. Für alle getesteten $\lambda$ stabilisiert sich $\lambda_1(\mathrm{QW}_{\cos}^{(k)})$ bei $k = 4$ (z.B. bei $\lambda = 100$: $k = 3$ gibt $-10.97$, $k = 4$ gibt $-11.07$, $k = 5$ gibt $-11.07$). Darüber hinaus ist $\lambda_1(\mathrm{QW}_{\sin}^{(N)}) > \lambda_1(\mathrm{QW}_{\cos}^{(4)})$ für \emph{alle} $N \leq 90$ bei jedem getesteten $\lambda$, was stark dafür spricht, dass das Gap echt ist und kein Truncation-Artefakt; theoremstark wird dies erst mit validierter Odd-Tail-Unterschranke.
@@ -2122,9 +2138,12 @@ $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ benötigt die fehlende untere Schran
 
 Version~2.1 fügte das direkte Frontier-Argument unten hinzu. Im v2.4-Status ist dies kein Beweis von A6 als Eigenwertordnungs-Aussage, sondern ein robuster Beweis des asymptotischen Variationsvorzeichens, der die alten Interpolations-/PNT-Transfer-Caveats beseitigt. Die robuste Fassung ist bewusst frei von Eigenwert-Additivität: Sie addiert keine unteren Schranken für $\lambda_{\min}(D_3(r))$ über verschiedene Primzahlen hinweg. Stattdessen wird die gesamte Frontier-Summe auf einem gemeinsamen Rayleigh-Vektor ausgewertet, während der komplementäre Anteil durch seine Operatornorm kontrolliert wird.
 
-\begin{proposition}[Direkte Frontier-Dominanz]
+\begin{proposition}[Legacy-Frontier-Dominanz, bedingte Variationsfassung]
 \label{prop:direct-frontier}
-Für alle $\lambda \geq 100$ gilt $\lambda_{\min}(D_{\mathrm{total}}(\lambda)) < 0$.
+Für alle hinreichend großen $\lambda$ gilt im Legacy-Drei-Moden-Differenzmodell
+$\lambda_{\min}(D_{\mathrm{total}}(\lambda)) < 0$. Der Nachzug bis
+$100\leq\lambda\leq\Lambda_*$ verwendet die endliche Diagnostik nur als bedingte
+Brücke, nicht als unbedingten CAP-Satz.
 \end{proposition}
 
 \begin{proof}[Beweis von \Cref{prop:direct-frontier}]
@@ -2189,7 +2208,7 @@ wobei die innere Summe über $m \geq 2$ nach Mertens' Satz konvergiert. Daher
 + 2 C_{\mathrm{norm}}\lambda^{0.35}
 + O(\log\lambda).
 \]
-Der negative Frontier-Term hat Exponent $1/2$, während der positive Komplementterm nur Exponent $0.35$ hat; die rechte Seite ist daher für alle hinreichend großen $\lambda$ strikt negativ. Die Auswertung dieser Schranke mit intervallzertifizierten Konstanten für die eindimensionale Frontier-Prüfung und expliziten PNT/Mertens-Restgliedern liefert eine effektive Schwelle $\Lambda_* \leq 1{,}300{,}000$. Das endliche Intervall $100\leq\lambda\leq\Lambda_*$ ist durch die Diagnostiken auf endlichem Bereich aus \Cref{sec:certificates} abgedeckt. Damit gilt $\lambda_{\min}(D_{\mathrm{total}}(\lambda))<0$ für alle $\lambda\geq100$; die Überführung dieser Variationsaussage in $\lambda_1^+<\lambda_1^-$ verlangt weiterhin die Odd-Sektor-Lower-Bound-Validierung.
+Der negative Frontier-Term hat Exponent $1/2$, während der positive Komplementterm nur Exponent $0.35$ hat; die rechte Seite ist daher für alle hinreichend großen $\lambda$ strikt negativ. Die Auswertung dieser Schranke mit intervallzertifizierten Konstanten für die eindimensionale Frontier-Prüfung und expliziten PNT/Mertens-Restgliedern liefert eine effektive Schwelle $\Lambda_* \leq 1{,}300{,}000$. Das endliche Intervall $100\leq\lambda\leq\Lambda_*$ ist durch die Diagnostiken auf endlichem Bereich aus \Cref{sec:certificates} nur bedingt abgedeckt. Damit ist das asymptotische Variationsvorzeichen im Legacy-Modell robust; die Lesarten „für alle $\lambda\geq100$" und „Eigenwertordnung" verlangen weiterhin die Odd-Sektor-Lower-Bound-Validierung und den korrigierten $U_n$-Replay.
 \end{proof}
 
 \begin{remark}[Was der direkte Beweis verwendet und vermeidet]

@@ -38,7 +38,7 @@
 \maketitle
 
 \begin{abstract}\footnotesize
-This is the second paper in a five-part series (Part~I: Foundations and Obstructions \cite{Geiger2026partI}; Part~III: Spectral Routes \cite{Geiger2026partIII}; Part~IV: Cross-Route Synthesis \cite{Geiger2026partIV}; Part~V: Conclusio \cite{Geiger2026partV}). We address the open problem identified in Connes' 2026 survey \cite{Connes2026}: whether the minimum eigenvalue of the Weil quadratic form~$\mathrm{QW}_\lambda$ is simple with even eigenfunction. We establish three main results. First, the \emph{Shift Parity Lemma}: the difference matrix between even and odd shift operators has strictly negative minimum eigenvalue for all $N \geq 3$ modes and all normalized shifts $r \in (0,2)$, implying that every prime individually favors even eigenfunctions. Second, we report computer-assisted finite-range gap diagnostics using interval arithmetic for $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$; these are a strong conditional bridge until the odd-sector lower bound is independently validated. Third, we prove the \emph{Leading-Mode Cancellation Lemma}: the overlap differences between even and odd sectors cancel pairwise with exact constant $c = 2 + \sqrt{2}$, yielding $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$. In v2.0 we add two non-existence theorems (Theorems~\ref{thm:NE-A} and~\ref{thm:NE-B}) that formally rule out the absolute total-positivity and universal-commuting-operator routes, establishing that even dominance is necessarily an arithmetic-statistical rather than a purely algebraic phenomenon. In v2.1 we add a robust Direct Frontier-Dominance argument (\Cref{sec:direct-frontier}, \Cref{prop:direct-frontier}) based on a common Rayleigh test vector on the frontier window $r \in [0.7,1]$.
+This is the second paper in a five-part series (Part~I: Foundations and Obstructions \cite{Geiger2026partI}; Part~III: Spectral Routes \cite{Geiger2026partIII}; Part~IV: Cross-Route Synthesis \cite{Geiger2026partIV}; Part~V: Conclusio \cite{Geiger2026partV}). We address the open problem identified in Connes' 2026 survey \cite{Connes2026}: whether the minimum eigenvalue of the Weil quadratic form~$\mathrm{QW}_\lambda$ is simple with even eigenfunction. We separate three outputs at different proof levels. First, the \emph{Shift Parity Lemma}: the difference matrix between even and odd shift operators has strictly negative minimum eigenvalue for all $N \geq 3$ modes and all normalized shifts $r \in (0,2)$, implying that every prime individually favors even eigenfunctions. Second, we report computer-assisted finite-range gap diagnostics using interval arithmetic for $33$ values of $\lambda$ from $100$ to $1{,}300{,}000$; these are a strong conditional bridge until the odd-sector lower bound is independently validated. Third, we prove the \emph{Leading-Mode Cancellation Lemma}: the overlap differences between even and odd sectors cancel pairwise with exact constant $c = 2 + \sqrt{2}$, yielding $(E_{\sin} - E_{\cos})/D(\lambda) = O(1/\log\lambda) \to 0$. In v2.0 we add two non-existence theorems (Theorems~\ref{thm:NE-A} and~\ref{thm:NE-B}) that formally rule out the absolute total-positivity and universal-commuting-operator routes, establishing that even dominance is necessarily an arithmetic-statistical rather than a purely algebraic phenomenon. In v2.1 we add a robust Direct Frontier-Dominance argument (\Cref{sec:direct-frontier}, \Cref{prop:direct-frontier}) based on a common Rayleigh test vector on the frontier window $r \in [0.7,1]$.
 
 \medskip\noindent
 \textbf{Status correction (v2.2, 2026-05-14).}
@@ -55,6 +55,16 @@ GF1 boundary-moment benchmark
 $\mathrm{sLI} \sim (64\pi^2/3)\,\lambda/(NL)$ for the converged
 $\lambda=5,7$ benchmark, records the $\lambda=3$ low-bandwidth
 outlier separately, and leaves $\lambda=11$ as an open discriminator.
+
+\medskip\noindent
+\textbf{Strict-review update (v3.1, 2026-06-29).}
+The N1 shifted-inverse finite-section work is not used here as a ground-state
+certificate: for $B_\lambda=(A_\lambda+MI)^{-1}$ the spectral map reverses
+order, so the $A_\lambda$ ground state corresponds to the largest isolated
+$B_\lambda$ eigenvalue, not the smallest. The finite CAP and Direct Frontier
+diagnostics below are retained as conditional legacy/variational evidence until
+they are replayed in the corrected Connes--van Suijlekom $U_n$ framework with a
+validated odd-sector lower bound.
 \end{abstract}
 
 {\footnotesize
@@ -1674,6 +1684,12 @@ The certifier program (\texttt{certifier\_production.py}) implements the certifi
 \end{itemize}
 The gap quantity is $\mathrm{cert\_gap} = \mathrm{upper}_{\cos} - \mathrm{lower}_{\sin}$; $\mathrm{cert\_gap} < 0$ rigorously implies $\lambda_1^+ < \lambda_1^-$ only after the odd-sector lower bound $\lambda_1^- \geq \mathrm{lower}_{\sin}$ has been validated. Until then these values are strong numerical evidence and a conditional finite bridge, not a final CAP proof.
 
+\paragraph{Operator-frame caveat (strict review 2026-06-29).}
+The finite CAP and Direct Frontier diagnostics in this part are retained as
+legacy/variational evidence unless and until they are replayed in the corrected
+Connes--van Suijlekom $U_n$ frequency-reflection framework. They are not
+theorem-level eigenvalue-ordering certificates in their present form.
+
 \begin{remark}[Low-mode dominance]
 \label{rem:low-mode}
 The even block requires only $k = 3$--$5$ Galerkin modes to certify even dominance. For all tested $\lambda$, $\lambda_1(\mathrm{QW}_{\cos}^{(k)})$ stabilizes at $k = 4$ (e.g., at $\lambda = 100$: $k = 3$ gives $-10.97$, $k = 4$ gives $-11.07$, $k = 5$ gives $-11.07$). Moreover, $\lambda_1(\mathrm{QW}_{\sin}^{(N)}) > \lambda_1(\mathrm{QW}_{\cos}^{(4)})$ for \emph{all} $N \leq 90$ at every tested $\lambda$, confirming that the gap is genuine and not a truncation artifact.
@@ -2121,9 +2137,12 @@ to the same spectral-direction caveat.
 
 Version~2.1 added the direct frontier argument below. In the v2.4 status this is not a proof of A6 as an eigenvalue-ordering statement; it is a robust proof of the asymptotic variational sign that removes the old interpolation/PNT-transfer caveats. The robust form is intentionally eigenvalue-additivity-free: it does not add lower bounds for $\lambda_{\min}(D_3(r))$ across different primes. Instead it evaluates the whole frontier sum on one common Rayleigh vector and controls the complementary part by its operator norm.
 
-\begin{proposition}[Direct Frontier-Dominance]
+\begin{proposition}[Legacy Direct Frontier-Dominance (conditional variational)]
 \label{prop:direct-frontier}
-For all $\lambda \geq 100$, $\lambda_{\min}(D_{\mathrm{total}}(\lambda)) < 0$.
+For all sufficiently large $\lambda$, the legacy three-mode difference model
+satisfies $\lambda_{\min}(D_{\mathrm{total}}(\lambda)) < 0$. The extension down
+to $100\leq\lambda\leq\Lambda_*$ uses the finite-range diagnostics as a
+conditional bridge, not as an unconditional CAP theorem.
 \end{proposition}
 
 \begin{proof}[Proof of \Cref{prop:direct-frontier}]
@@ -2188,7 +2207,7 @@ where the inner sum over $m \geq 2$ converges by Mertens's theorem. Hence
 + 2 C_{\mathrm{norm}}\lambda^{0.35}
 + O(\log\lambda).
 \]
-Since the negative frontier term has exponent $1/2$ while the positive complement has exponent $0.35$, the right-hand side is strictly negative for all sufficiently large $\lambda$. Evaluating the displayed bound with interval-certified constants for the one-dimensional frontier check and explicit PNT/Mertens remainders gives an effective threshold $\Lambda_* \leq 1{,}300{,}000$. The finite interval $100 \leq \lambda \leq \Lambda_*$ is covered by the finite-range diagnostics of \Cref{sec:certificates}. Therefore $\lambda_{\min}(D_{\mathrm{total}}(\lambda))<0$ for all $\lambda\geq100$; the conversion of this variational statement into $\lambda_1^+<\lambda_1^-$ still requires the odd-sector lower-bound validation.
+Since the negative frontier term has exponent $1/2$ while the positive complement has exponent $0.35$, the right-hand side is strictly negative for all sufficiently large $\lambda$. Evaluating the displayed bound with interval-certified constants for the one-dimensional frontier check and explicit PNT/Mertens remainders gives an effective threshold $\Lambda_* \leq 1{,}300{,}000$. The finite interval $100 \leq \lambda \leq \Lambda_*$ is covered only conditionally by the finite-range diagnostics of \Cref{sec:certificates}. Thus the asymptotic variational sign is robust in the legacy model, while the all-$\lambda\geq100$ and eigenvalue-ordering readings require the odd-sector lower-bound validation and corrected $U_n$ replay.
 \end{proof}
 
 \begin{remark}[What the direct proof uses and avoids]
