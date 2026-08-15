@@ -895,6 +895,292 @@ getestet und aus strukturellen Gründen ausgeschlossen.
 
 
 % =============================================================================
+\section{Update (v3.2): Geschlossene Einheiten, Juni--August 2026}
+\label{sec:v32-update}
+% =============================================================================
+
+Zwischen Juni und August 2026 wurde eine Reihe endlicher, auditgestützter
+Arbeitseinheiten auf und um den spektralen Sektor geschlossen. Sie werden
+hier im selben Geist dokumentiert wie die Ausschlusskataloge oben: Jeder
+Eintrag nennt, was geprüft wurde, wie weit es verifiziert ist, was es für
+die Route bedeutet und --- ausdrücklich --- was er \emph{nicht}
+beansprucht. Keine der Einheiten schließt RH, und keine ändert den Status
+der bedingten Reduktion von Branch~B und~Z aus den vorangehenden
+Abschnitten.
+
+\begin{remark}[Zum Lesen der Zahlenangaben in diesem Abschnitt]
+\label{rem:v32-counts}
+Zwei Arten von Verhältnisangaben treten unten auf und dürfen nicht gleich
+gelesen werden. Eine \emph{Verifikationsquote} --- ,,Produzent $18/18$``,
+,,unabhängiger Prüfer $22/22$`` --- nennt Prüfungen, die durchgeführt und
+bestanden wurden. Eine \emph{Fehlmengenangabe} nennt dagegen, wie viele
+geforderte Posten \emph{fehlen}: Wo unten steht, dass keine der fünfzehn
+Voraussetzungen erfüllt ist, dass keine der vierzehn beweistragenden
+Kategorien vorliegt oder dass keines der einundzwanzig Pakete existiert,
+sind das Angaben über fehlende Posten und ausdrücklich keine
+Bestehensquoten. Aus diesem Grund ist jede Fehlmenge ausgeschrieben,
+während echte Verifikationsquoten als Zahlen stehen und als solche benannt
+sind.
+\end{remark}
+
+\subsection{Block A: Die Freedman/Weyl-Kontinuumsroute}
+\label{sec:v32-block-a}
+
+\begin{itemize}
+  \item \textbf{Quotient$\to$Weyl-Verpflichtungsvertrag V1 (exakter
+    endlicher Vertrag mit Gegenmodell).} Die Einheit legt vertraglich fest,
+    was ein Lift von der endlichen Quotientenpositivität zur
+    Weyl-/Kontinuumsaussage leisten muss, und sichert dies durch ein
+    Gegenmodell ab, das den Schluss von Positivität auf $\ker R$ auf volle
+    Positivität sperrt. Verifikation: Produzent $14/14$, unabhängig
+    $16/16$, wobei ein Byte-Angriff auf die gebundenen Quellen fail-closed
+    scheitert. Eine spätere Lektüre des Projektregisters (Stand~V1.1,
+    jünger als der Planstand) präzisiert das Bild: Die Quelle erledigt die
+    Randpflichten selbst --- $\beta_{\mathrm{bdy}} = 0$ und
+    $D_{\mathrm{bdy}} = 0$ per primitiver Endpunktrechnung, und
+    $D_q|_Y = 0 \Longleftrightarrow D_q = 0$ auf $X_R$ per Dichte --- und
+    stellt die Äquivalenz
+    $D_q = 0 \Longleftrightarrow \Gamma^*\Gamma \le C
+    \Longleftrightarrow Q_\Phi \ge 0$ als direkten Lift-Satz des Originals
+    fest. Für die Routenkarte heißt das, dass der Weyl-Lift auf
+    Registerstand~V1.1 keine diffuse Liste von sieben Kontinuumspflichten
+    mehr ist, sondern auf eine einzige analytische Restpflicht konzentriert
+    ist: $\Gamma^*\Gamma \le C$ auf $X_R$, uniform in $\omega$, samt den
+    Rahmenpflichten. Der endliche Quotientenbefund allein trägt den Lift
+    weiterhin nicht. Claim-Grenze: Es wird kein PASS für
+    $\Gamma^*\Gamma \le C$, für den Lift, für Weyl, für KLM oder für RH
+    behauptet, und die ältere Formulierung ,,sieben Kontinuumspflichten
+    offen`` ist durch Registerstand~V1.1 überholt.
+
+  \item \textbf{Uniform-$\omega$-Umgewichtungsaudit V1 (endlicher
+    Negativbefund).} Positive und lokal uniform integrierbare
+    Zweiggewichte erhalten die aggregierte Quadratdomination \emph{nicht}
+    ohne Zusatzhypothese. Verifikation: Produzent $15/15$, unabhängig
+    $17/17$, fail-closed. Da der Befund endlich und exakt ist statt bloß
+    numerische Evidenz, lässt er sich unmittelbar als Routenentscheidung
+    verwenden. Seine Folge ist, dass die naheliegende
+    Umgewichtungsstrategie für $|\omega| < 1/2$ stirbt; offen bleibt die
+    operatorgebundene Alternative (zweigweise Domination, uniform
+    gewichteter Intertwiner, konjugierte Kontraktion und Parametercover mit
+    positiver Marge). Claim-Grenze: Dies ist \emph{kein} Gegenbeispiel zum
+    tatsächlichen Freedman-Kernel --- widerlegt ist die Strategie, nicht
+    die Aussage.
+
+  \item \textbf{Endpunkt$\to$Kontinuums-Folgekettenvalidierung und
+    DAG-Audit (negativ).} Elf Dashboardzeilen wurden auf vier
+    Quellenkohärenz-Schnitte reduziert, und die Folgekette Endpunkt $\to$
+    Rang $\to$ Green $\to$ Unique Continuation $\to$ Active Range wurde
+    negativ validiert. Die gebundenen Quellen führen für diese Einheit
+    keine Mutationszahlen, und es werden hier auch keine ergänzt. Der
+    Befund ist kein universelles No-Go: Er gilt negativ für genau diese
+    Kette und für keinen weiteren Anspruch. Als Nebenergebnis wurde der
+    Waisenakten-Querbezug als endliches Diagnoseinstrument geschlossen.
+    Claim-Grenze: Weder die Endpunktschicht noch das Kontinuumsziel ist
+    widerlegt; was scheitert, ist die spezifische Verkettung beider.
+
+  \item \textbf{Ganzzeit-/Kontinuums- und Pullback-Readiness-Audit V1
+    (fail-closed).} Fünfzehn Voraussetzungen einer ganzzeitfähigen,
+    kontinuumsfähigen und nichtzirkulären
+    KLM $\to$ de-Branges-Route wurden auditiert, und \emph{keine der
+    fünfzehn ist erfüllt} --- eine Fehlmengenangabe im Sinne von
+    \Cref{rem:v32-counts}, keine Bestehensquote. Das Audit selbst ist
+    sauber und führt eigene Quoten: Produzent $18/18$, unabhängiger Prüfer
+    $22/22$, Terminalstatus \texttt{NOT\_\allowbreak READY\_\allowbreak
+    MISSING\_\allowbreak BOUND\_\allowbreak CONTINUUM\_\allowbreak
+    AND\_\allowbreak PULLBACK\_\allowbreak OBJECTS\_\allowbreak
+    NEW\_\allowbreak MATHEMATICAL\_\allowbreak INPUT\_\allowbreak
+    REQUIRED}. In diesem Pfad verbleibt kein autonom ausführbarer
+    statischer oder endlicher Rechenschritt, sodass Fortschritt neuen
+    mathematischen Input erfordert statt weiterer Rechnung. Claim-Grenze:
+    Die Brücke ist unfertig, nicht widerlegt --- das Audit misst
+    Bereitschaft, nicht Wahrheit.
+\end{itemize}
+
+\subsection{Block B: Die KLM/de-Branges-Route}
+\label{sec:v32-block-b}
+
+\begin{itemize}
+  \item \textbf{KLM $\to$ de-Branges-Pull\-back\-pflicht-Audit V1
+    (Kreuz\-term-Gegen\-modell).} Aus separat nichtnegativen Tail- und
+    Boundary-Differenzen folgt \emph{nicht} volle signierte
+    Gram-Positivität. Verifikation: Produzent $17/17$, unabhängig $19/19$,
+    fail-closed. Die Routenfolge ist, dass die Strategie ,,separat
+    nichtnegativ genügt`` stirbt und die unbehandelten Kreuzterme damit als
+    Ent\-schei\-dungs\-ort für jeden Nach\-folge\-versuch benannt sind.
+    Claim-Grenze: Der tatsächliche Shifted-$\Xi$-Kern ist nicht widerlegt;
+    es fällt das Hin\-läng\-lich\-keits\-argument, und es fällt an einem
+    expliziten Gegenmodell statt an einer numerischen Marge.
+
+  \item \textbf{KLM-Träger-, Isometrie- und Defektlift-Schicht (vier
+    geschlossene Befunde).} Positiv: Ein gewichteter Vollgeraden-Träger
+    $H_\rho$ realisiert beide Mellin-Hälften (Produzent $28/28$,
+    unabhängig $34/34$), und ein zielunabhängiger Fixed-Trace-Träger
+    $\mathrm{Mu}$ wurde konstruiert (Produzent $19/19$; Prüfer mit $49$
+    Direktprüfungen plus $21/21$). Negativ: Kein Skalar $a_t T_t$ ist
+    isometrisch für $t \neq 0$, und ein exakter Gewichtskokzyklus zerstört
+    die $k_z$-Eigenrelation (Produzent $22/22$, unabhängig $28/28$); eine
+    universelle gemeinsame Kreuz-Gram-Reparatur der Defektlifts
+    $J_{(\sigma,u)}$ ist widerlegt (Produzent $26/26$, unabhängig $31/31$,
+    mit $126+378$ Kontrollen); und die
+    $(\Lambda_a, \mathrm{Mu}_z)$-Nullraumannihilation ist ab Sättigung
+    vakuos (Produzent $17/17$, unabhängig $21/21$). Die Routenlesart ist,
+    dass die Träger existieren, während die Isometrieroute und die
+    universelle Defektlift-Reparaturroute geschlossen sind --- was zugleich
+    einen früheren, als Fortschritt verbuchten Posten entwertet.
+    Claim-Grenze: Jede Negativaussage ist an ihre genannte Klasse gebunden
+    (skalare Isometrien, exakte Kokzyklen, universelle gemeinsame
+    Reparaturen), und keine von ihnen widerlegt das KLM-Pullbackziel
+    selbst.
+
+  \item \textbf{Vollständiger normalisierter KLM-Residualblock ---
+    gerichtet nicht-PSD (Endbefund).} Fünf präregistrierte Hardy-Knoten und
+    alle zehn Riesz-Vektoren stammen aus gerichteten normalisierten
+    $79\times 10$-Zweigabbildungen, und der Hardy-Zielblock wurde mit
+    Arb/Acb neu eingeschlossen ($20$ Moden, Majoranten unter $2^{-120}$).
+    Für den Residualblock $\Delta = H - C$ haben alle zehn reellen
+    Diagonalboxen strikt negative Oberränder, der größte davon
+    $\approx -0.2665171987\ldots$. Verifikation: $26/26$ Quellen
+    bytegebunden, $384$-Bit-Produzent $17/17$, unabhängiger
+    $512$-Bit-Prüfer $20/20$, fail-closed. Diese gemeinsame
+    zweigsymmetrische fünfknotige Polar- und Graphnormierung stirbt damit
+    rigoros als positiver Pullback-Kandidat, und zwar als Endbefund statt
+    als vorläufiger; zwei gröbere Varianten waren zuvor bereits numerisch
+    ausgeschlossen worden (Plus-Matching $(5,0,5)$ mit
+    $\lambda_{\min} \approx -0.11543$, Einheits-Direktsummen $(4,1,5)$ mit
+    $\lambda_{\min} = -12.2767\ldots$). Claim-Grenze: Das Resultat bindet
+    diesen einen endlichen Kandidaten; der Mellin-Split ist dadurch nicht
+    widerlegt.
+
+  \item \textbf{Operatorsemantischer Alternativen-Audit V1.} Drei
+    zugelassene Klassen wurden auf eine target-freie Alternative geprüft:
+    zweiggewichtete Graphmetriken, feste Trace-Augmentationen und
+    gekoppelte Defektkanäle. Keine der drei liefert eine eindeutige
+    target-freie Wahl, und es wurde keine Matrix erzeugt. Verifikation:
+    Produzent $15/15$, Prüfer $17/17$, Terminalstatus
+    \texttt{NO\_\allowbreak TARGET\_\allowbreak FREE\_\allowbreak
+    UNIQUE\_\allowbreak FINITE\_\allowbreak ALTERNATIVE\_\allowbreak
+    MATERIALIZED\_\allowbreak SWITCH\_\allowbreak TO\_\allowbreak
+    CONTINUUM\_\allowbreak PULLBACK}. Die Routenfolge ist, dass der finite
+    Matrixpfad erschöpft ist, was diese Linie in das Readiness-Audit von
+    Block~A oben überführt. Claim-Grenze: Erschöpfung wird allein für die
+    drei zugelassenen Klassen behauptet --- eine Klasse außerhalb dieser
+    Zulassung ist ungeprüft, nicht ausgeschlossen.
+\end{itemize}
+
+\subsection{Block C: Weil/CvS-Numerik}
+\label{sec:v32-block-c}
+
+\begin{itemize}
+  \item \textbf{RH-V4R-Fremdoperatorlauf (terminal, unabhängig
+    verifiziert).} Ein autorisierter Lauf eines Fremdoperators gab
+    Rückgabecode~$0$ zurück, mit Checkpoints bei $N = 48/56/64$. Sein
+    Terminalergebnis ist \texttt{C13\_\allowbreak FIXED\_\allowbreak
+    LADDER\_\allowbreak COMPLETE\_\allowbreak TAIL\_\allowbreak
+    GATES\_\allowbreak NOT\_\allowbreak REACHED}: Der Rayleigh-Tail
+    besteht, der Fit-Tail scheitert ($0.1273\ldots > 0.0005$). Die
+    Verifikation war auf zwei Ebenen unabhängig --- der Ergebnisprüfer
+    verwarf $10/10$ Mutationen, der Terminalumschlag-Prüfer $17/17$
+    einschließlich einer Checkpoint-Bytemutation. Die Routenlesart ist,
+    dass diese Linie gemessen, nicht bestätigt wurde; der offene Punkt
+    \texttt{CVS\_\allowbreak N\_\allowbreak RESOLUTION\_\allowbreak
+    UNRESOLVED} steht unverändert. Claim-Grenze: Der gescheiterte Fit-Tail
+    ist ein Gate-Ergebnis und keine Widerlegung der zugrunde liegenden
+    Route, und ohne neuen Vertrag ist kein Retry zulässig.
+
+  \item \textbf{K1-Skalaraudit, transitiver Quellen-Audit und
+    fail-closed Vollreplay-Eingabevertrag.} K1 bleibt auf der
+    Ursachenebene offen. Das Skalaraudit ($256$-Bit-Arb) ergibt einen
+    Fitfehlerquotienten von $3.9533\ldots$, während die Rayleigh-Seite nur
+    $1.4489\times 10^{-8}$ spannt. Der transitive Quellen-Audit zeigt, dass
+    der Wrapper den V4-Kern zwar ausführt, aber eine Provenienzlücke lässt,
+    weil Pfad und SHA in den Manifesten fehlen --- ein historischer Mangel,
+    der den Lauf nicht automatisch invalidiert. Ein fail-closed
+    Vollreplay-Eingabevertrag benennt nun exakt vierzehn beweistragende
+    Kategorien für $N = 40,\dots,64$, und \emph{keine dieser vierzehn
+    Kategorien liegt derzeit vor}; im Sinne von \Cref{rem:v32-counts} sind
+    die vierzehn die fehlenden Posten, keine bestandenen Prüfungen.
+    Claim-Grenze: Die Einheit beziffert den Preis einer Wiederaufnahme von
+    K1 exakt, nimmt sie aber weder wieder auf noch hebt sie einen Claim an.
+
+  \item \textbf{Matrix-Produktionslauf D-20260813-003 (terminal
+    verifiziert, Kandidat fehlt).} Ein einmalig autorisierter
+    Arb-Matrixlauf ($c = 13$, $N = 48/56/64$, $T = 200$, $3225.75$~s) gab
+    Rückgabecode~$0$ zurück und bestand die Verifikation. Der Prüfer
+    rekonstruierte die Matrizen $49\times 49$, $57\times 57$ und
+    $65\times 65$, bestätigte $10/10$ Primkomponenten und verwarf $12/12$
+    Mutationen; das Paket ist byteidentisch (SHA
+    \texttt{78ba72b5\ldots aab0e7}). Der Terminalstatus lautet
+    \texttt{RIGOROUS\_\allowbreak MATRIX\_\allowbreak
+    PRIMITIVES\_\allowbreak READY\_\allowbreak CANDIDATE\_\allowbreak
+    MISSING}, festgehalten mit \texttt{candidate\_\allowbreak
+    verified\_\allowbreak here=false} und \texttt{claim\_\allowbreak
+    upgrade=false}. Was der Lauf liefert, sind rigorose Matrixprimitive;
+    was er nicht liefert, ist der Kandidat --- Kandidatenrealisierung,
+    Winkelkontrolle und die Sektorbedingung
+    $\mu_{1,g^+} < \min(\mu_{2,g^-},\, \mu_{1,u^-})$ sind eigene Gates, die
+    hier nicht ausgeführt wurden. Claim-Grenze: Primitive bereit ist nicht
+    Kandidat verifiziert, und der Lauf hebt ausdrücklich keinen Claim an.
+\end{itemize}
+
+\subsection{Block D: Diagnostik und Hygiene}
+\label{sec:v32-block-d}
+
+\begin{itemize}
+  \item \textbf{CCM--Groskin-Metadatenpaket.} Einundzwanzig normalisierte
+    Zellen des Metadatenpakets wurden auditiert. Die gebundenen Quellen
+    führen für diese Einheit keine Produzenten- oder Prüferquoten, und es
+    werden hier auch keine ergänzt. Das Paket ist ausdrücklich
+    \texttt{DIAGNOSTIC\_\allowbreak ONLY\_\allowbreak NOT\_\allowbreak
+    VALIDATED}: Es trägt diagnostischen Wert, aber keine Evidenzstufe, und
+    seine Negativblöcke sind Warnsignale statt nachgewiesener
+    Spektralverschmutzung. Offen sind unter anderem die
+    $c = 100$-Runner-Bindung, die Rohspektren, die kleinste-positive
+    Zweigauswahl, die Klassifikation, der Spektralverschmutzungstest, die
+    Operatorrealisierung, die Grenztopologie und der
+    $c/N/T$-Übergang. Claim-Grenze: Nichts in diesem Paket stützt oder
+    widerlegt eine spektrale Aussage, und seine Negativblöcke als erwiesene
+    Verschmutzung zu lesen hieße, das Material zu überinterpretieren.
+
+  \item \textbf{Residuen-/Determinanten-Hygienegate
+    (Drei-Achsen-Labelaudit).} Ein Drei-Achsen-Labelaudit über $13/13$
+    Claim-Zeilen, $7/7$ aktive Akten und $21/21$ Achsen, mit $14/14$
+    verworfenen unabhängigen Mutationen, etablierte eine Buchführungsregel
+    mit Kill-Wirkung. Die Regel hält drei Kanäle strikt getrennt: das
+    numerische Eigenresiduum, das meromorphe Nullstellenresiduum und den
+    Determinantenkanal aus \Cref{sec:det-channel}. Neue Spektralakten
+    müssen diesen Vertrag fortschreiben, statt ihn nur zu wiederholen.
+    Seine operative Folge ist die Unterscheidung, dass ein technischer PASS
+    kein analytischer Kanal-PASS ist --- ein Label, das die drei vermengt,
+    ist unter dem Gate ungültig, unabhängig von den Zahlen dahinter.
+    Claim-Grenze: Das Gate ist ein Hygieneinstrument, es entscheidet also
+    über die Zulässigkeit von Labels und nicht über die Wahrheit einer
+    spektralen Aussage.
+\end{itemize}
+
+\subsection{Aktive Fronten (nur Statuszeilen)}
+\label{sec:v32-fronts}
+
+Die folgenden Fronten sind zum Zeitpunkt dieses Updates offen. Jede erhält
+eine Statuszeile und keine weiteren Details; die Substanz tragen die
+Arbeitsregister.
+
+\begin{itemize}
+  \item \textbf{Kongruenz-Reduktion / Restgate G-A/G-B.} Der Struktursatz
+    liegt vor und das Gate ist definiert, aber nicht ausgeführt, und es ist
+    ein neuer Vertrag mit gerichteter Arithmetik nötig.
+  \item \textbf{21-Knoten-Produktionslauf.} Keines der einundzwanzig
+    Pakete existiert, und ein eigener Produktionsvertrag samt Autorisierung
+    steht aus (der Entwurf verwendet $21$ Kollokationsknoten bei Ordnung
+    $200$, nicht $200$ Knoten).
+  \item \textbf{N1-/$\Phi_T$-Front.} Eine separate Front mit eigenem
+    Register; hier nicht zusammengefasst.
+  \item \textbf{KLM-Zweigabbildungen.} Bis zum normalisierten
+    Residualbefund oben fortgeschritten, ohne autonom ausführbaren Schritt
+    ohne neuen mathematischen Konstruktionsinput.
+\end{itemize}
+
+
+% =============================================================================
 \section{Zusammenfassung}
 \label{sec:summary}
 % =============================================================================

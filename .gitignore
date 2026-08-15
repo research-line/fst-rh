@@ -192,3 +192,6 @@ credentials.json
 _archive/
 Plan.txt
 # <<< RESEARCH-PIPELINE MANAGED GITIGNORE <<<
+
+# Lokale Ergaenzung (nach verwaltetem Block): aktive-Front-Compute-Skripte privat [C 2026-08-15]
+_scripts/
