@@ -89,7 +89,7 @@
 
 \begin{abstract}
 Dieser Beitrag präsentiert eine bedingte Reduktion der Riemannschen Vermutung, extrahiert aus einer dreiteiligen Landscape-Reihe. Die Landscape-Beiträge dokumentieren den vollständigen Forschungsprozess, einschließlich fehlgeschlagener Routen, Obstruktionstheoreme, rechnergestützter Zertifikate und alternativer Strategien. Der vorliegende Beitrag behält nur die beweisrelevante Kette bei.
-Im Anschluss an Connes' Reduktion der Riemannschen Vermutung auf eine Bedingung der geraden Dominanz für die Weilsche quadratische Form leisten wir zwei unabhängige Beiträge. Erstens berichtet die Landscape-Rechnung für den endlichen Bereich $100\leq\lambda\leq 1{,}300{,}000$ negative intervall-eingeschlossene Galerkin-Lücken an 33 Gitterpunkten. Ein Audit vom 15. Mai 2026 zeigt jedoch, dass die aktuelle Konstruktion einer unteren Schranke im Sin-Block noch eine heuristische geometrische Tail-Extrapolation enthält; die endlichen Daten werden daher hier als computergestützte numerische Evidenz behandelt, nicht als CAP-Beweis auf Theoremniveau. Zweitens wird für das asymptotische Regime $\lambda\to\infty$ über ein gemeinsames Rayleigh-Vektor-Argument gezeigt, dass $\lambda_{\min}(W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}})=-\Theta(\sqrt\lambda)$ auf dem relevanten Drei-Modus-Galerkin-Block gilt. Die Lücke zwischen dieser Variations-Aussage und der eigentlichen Eigenwert-Anordnung $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ im asymptotischen Bereich erfordert eine separate quantitative untere Schranke für $\lambda_1^-$; wir formulieren dies als \emph{Asymptotische Variationsgap-Vermutung} und skizzieren in \Cref{sec:asymptotic-lower-bound} eine Route über entartete Störungstheorie.
+Im Anschluss an Connes' Reduktion der Riemannschen Vermutung auf eine Bedingung der geraden Dominanz für die Weilsche quadratische Form leisten wir zwei unabhängige Beiträge. Erstens berichtet die Landscape-Rechnung für den endlichen Bereich $100\leq\lambda\leq 1{,}300{,}000$ negative intervall-eingeschlossene Galerkin-Lücken an 33 Gitterpunkten. Eine Prüfung vom 15. Mai 2026 zeigt jedoch, dass die aktuelle Konstruktion einer unteren Schranke im Sin-Block noch eine heuristische geometrische Extrapolation des Fernanteils enthält; die endlichen Daten werden daher hier als computergestützte numerische Evidenz behandelt, nicht als CAP-Beweis auf Theoremniveau. Zweitens wird für das asymptotische Regime $\lambda\to\infty$ über ein gemeinsames Rayleigh-Vektor-Argument gezeigt, dass $\lambda_{\min}(W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}})=-\Theta(\sqrt\lambda)$ auf dem relevanten Drei-Modus-Galerkin-Block gilt. Die Lücke zwischen dieser Variations-Aussage und der eigentlichen Eigenwert-Anordnung $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ im asymptotischen Bereich erfordert eine separate quantitative untere Schranke für $\lambda_1^-$; wir formulieren dies als \emph{Asymptotische Variationsgap-Vermutung} und skizzieren in \Cref{sec:asymptotic-lower-bound} eine Route über entartete Störungstheorie.
 Der hier analysierte Reduktionsweg zur Riemannschen Vermutung ist daher bedingt auf (i) Connes--van Suijlekoms Reell-Nullstellen-Kriterium und die Hurwitz-Brücke aus~\cite{Connes2026}, deren Fact~6.4-Konvergenz dort als Slepian--Pollak-Folge dargestellt wird, sowie (ii) die Asymptotische Variationsgap-Vermutung für den minimalen Eigenwert im ungeraden Sektor. Das Shift-Parity-Lemma bleibt unbedingt; die intervallarithmetischen Zertifikate bleiben numerische Evidenz, bis eine rigorose Schließung über eine untere Schranke vorliegt. Die ausgeschlossenen Eich-, Total-Positivitäts- und universellen Kommutator-Routen werden nicht verwendet; für diese Pfade wird auf die Landscape-Reihe verwiesen.
 \end{abstract}
 
@@ -154,9 +154,9 @@ wobei $\delta_a$ die Dirac-Masse bei $a$ und die Primsumme über $(p,m)$ mit $m\
   \langle f \,|\, g\rangle_Q
   \;:=\; \int_0^L \bigl[(f^* * g)(y) + (f^* * g)(-y)\bigr]\,dD(y).
 \end{equation}
-Per Identität $(f^**g)(\pm y) = \langle f, T_{\mp y}\,g\rangle$ (mit $T_u f(t):=f(t-u)$) ist dies $\int_0^L \langle f, (T_y + T_{-y})g\rangle\,dD(y)$, also eine symmetrische-Shift-Form integriert gegen $D$. Sei $A_\lambda$ der nach unten beschränkte selbstadjungierte Operator auf $\mathcal{H}$, der mit $Q$ via Friedrichs-Erweiterung assoziiert ist.
+Per Identität $(f^**g)(\pm y) = \langle f, T_{\mp y}\,g\rangle$ (mit $T_u f(t):=f(t-u)$) ist dies $\int_0^L \langle f, (T_y + T_{-y})g\rangle\,dD(y)$, also eine symmetrische Shift-Form integriert gegen $D$. Sei $A_\lambda$ der nach unten beschränkte selbstadjungierte Operator auf $\mathcal{H}$, der mit $Q$ via Friedrichs-Erweiterung assoziiert ist.
 
-\paragraph{Matrixelemente.} Eine direkte Rechnung (\cite[Gleichung~7]{ConnesvS2025}) ergibt für $y\in[0,L]$,
+\paragraph{Matrixelemente.} Eine direkte Rechnung (\cite[Gleichung~7]{ConnesvS2025} und Anhang unten) ergibt für $y\in[0,L]$,
 \begin{equation}
 \label{eq:matrix-elements-Q}
   (U_m^* * U_n)(y) + (U_m^* * U_n)(-y)
@@ -166,6 +166,14 @@ Per Identität $(f^**g)(\pm y) = \langle f, T_{\mp y}\,g\rangle$ (mit $T_u f(t):
     \displaystyle\frac{\sin(2\pi m y/L) - \sin(2\pi n y/L)}{\pi(n-m)}, & m\neq n.
   \end{cases}
 \end{equation}
+Die Matrix von $Q$ in der $\{U_n\}$-Basis ist daher
+\begin{equation}
+\label{eq:matrix-of-Q}
+  \langle U_m \,|\, U_n\rangle_Q
+  \;=\;
+  \int_0^L
+  \bigl[(U_m^* * U_n)(y) + (U_m^* * U_n)(-y)\bigr]\,dD(y).
+\end{equation}
 
 \paragraph{Diagonalen und paar-symmetrische Off-Diagonalen.} Definiere
 \begin{equation}
@@ -174,13 +182,16 @@ Per Identität $(f^**g)(\pm y) = \langle f, T_{\mp y}\,g\rangle$ (mit $T_u f(t):
   \qquad
   S_n \;:=\; \frac{1}{\pi n}\int_0^L \sin\!\Big(\tfrac{2\pi n y}{L}\Big)\,dD(y),
 \end{equation}
-für $n\neq 0$. Dann
+für $n\neq 0$, und $D_0:=\int_0^L 2(1-y/L)\,dD(y)$, $S_0:=0$. Dann
 \begin{equation}
+\label{eq:U-diag-and-pair}
   \langle U_n\,|\,U_n\rangle_Q \;=\; D_n,
   \qquad
   \langle U_n\,|\,U_{-n}\rangle_Q
+  \;=\; \langle U_{-n}\,|\,U_n\rangle_Q
   \;=\; -S_n.
 \end{equation}
+Insbesondere ist $D_{-n}=D_n$, sodass das Paar $\{U_n, U_{-n}\}$ als ein invarianter Unterraum unter der Matrix \eqref{eq:matrix-of-Q} nur in dem Sinne agiert, dass seine $2\times 2$-Einschränkung symmetrisch in $\{U_n, U_{-n}\}$ ist; vollständige Off-Diagonal-Einträge $\langle U_m | U_n \rangle_Q$ mit $m\neq \pm n$ sind im Allgemeinen ungleich Null, werden aber in der folgenden Diagonalenanalyse nicht benötigt.
 
 \paragraph{Cosinus--Sinus-Sektor-Decomposition.} Definiere die reelle orthonormierte Basis
 \[
@@ -213,7 +224,7 @@ wobei $\lambda_1^{\bullet}(\lambda):=\min\sigma(A_\lambda^{\bullet})$. Wir behal
 Eine direkte Berechnung von $D_n$ und $S_n$ aus \eqref{eq:Dn-Sn} für die Weil-Distribution \eqref{eq:weil-distribution} bestätigt, dass $S_n$ nicht-vernachlässigbar ist: für $\lambda=1000$ und $n=1$ findet man $D_1\approx 11{,}89$ und $S_1\approx 8{,}63$, sodass die Cos-Sektor-Diagonale $D_1-S_1\approx 3{,}26$ und die Sin-Sektor-Diagonale $D_1+S_1\approx 20{,}52$ ist (Skript \path{_proof-notes/verify_connes_vs_form.py}). Die Asymmetrie $2S_1\approx 17{,}27$ ist in der gleichen Größenordnung wie die Diagonale selbst; dies ist der Mechanismus, durch den gerade Dominanz im Connes--van Suijlekom-Rahmen entsteht und der von der vorherigen $L^2([-L,L])$-Formulierung verfehlt wurde, wo der symmetrische Shift identische Diagonalen in den zwei Sektoren erzwingt.
 \end{remark}
 
-\paragraph{Folge-Sektionen (v1.5).} Die obige Neuformulierung ersetzt die symmetrische-Shift $L^2([-L,L])$-Form von v1.4. Folge-Sektionen (\Cref{sec:parity-matrix} und folgend) wurden im Legacy-Rahmen geschrieben und benötigen parallele Updates: die $3\times 3$ Paritätsmatrix $D_3(r)$ aus \Cref{sec:parity-matrix} entspricht jetzt der Cos/Sin-Asymmetrie an einem einzelnen Shift, mit $D_3(r)$-Einträgen verknüpft mit $S_n$-Beiträgen von einer einzelnen Primzahl; die finiten Zertifikate brauchen rekonstruierte CAP-Matrizen in der $\{U_n\}$-Basis; das direkte Frontier-Argument trägt sich übertragen, sobald $C_f$ als untere Schranke auf $S_n$ an Frontier-Prime-Beiträgen neu hergeleitet ist. Das Shift-Parity-Lemma (\Cref{thm:shift-parity}) und die Obstruktionstheoreme NE-A, NE-B der Landscape-Reihe bleiben unberührt. Diese Migration ist in der vorliegenden Revision teilweise: der neue Abschnitt~2 oben ist die korrigierte Operator-Definition, während die Fortführung in die nachfolgenden Abschnitte als offene Aufgabe in \Cref{sec:k0-strengthened} registriert ist.
+\paragraph{Folgeabschnitte (v1.5).} Die obige Neuformulierung ersetzt die symmetrische Shift-Form auf $L^2([-L,L])$ aus v1.4. Die Folgeabschnitte (\Cref{sec:parity-matrix} und folgend) wurden im Legacy-Rahmen geschrieben und benötigen parallele Updates: die $3\times 3$ Paritätsmatrix $D_3(r)$ aus \Cref{sec:parity-matrix} entspricht jetzt der Cos/Sin-Asymmetrie an einem einzelnen Shift, mit $D_3(r)$-Einträgen verknüpft mit $S_n$-Beiträgen von einer einzelnen Primzahl; die finiten Zertifikate brauchen rekonstruierte CAP-Matrizen in der $\{U_n\}$-Basis; das direkte Frontier-Argument trägt sich übertragen, sobald $C_f$ als untere Schranke auf $S_n$ an Frontier-Prime-Beiträgen neu hergeleitet ist. Das Shift-Parity-Lemma (\Cref{thm:shift-parity}) und die Obstruktionstheoreme NE-A, NE-B der Landscape-Reihe bleiben unberührt. Diese Migration ist in der vorliegenden Revision teilweise: der neue Abschnitt~2 oben ist die korrigierte Operator-Definition, während die Fortführung in die nachfolgenden Abschnitte als offene Aufgabe in \Cref{sec:k0-strengthened} registriert ist.
 
 \paragraph{Guardrail zum Legacy-Material.}  Die folgenden Legacy-Abschnitte
 bleiben als diagnostische Lemmata und Routen-Dokumentation erhalten. Sie sind
@@ -292,8 +303,8 @@ Die Hypothesen von \Cref{thm:connes} erfordern: (i)~dass $A_\lambda$ nach unten 
 
 \paragraph{Hinweis zur v1.5-Reformulierung.} Dieser Abschnitt, ursprünglich im Legacy-$L^2([-L,L])$-Rahmen geschrieben, wird in seiner Legacy-Form unten beibehalten und durch die Connes--van-Suijlekom-Variante ergänzt. Im Legacy-Rahmen kodiert die Matrix $D_3(r)$ die Cos--Sin-Paritätsdifferenz an einer einzelnen Verschiebung direkt; im Connes--van-Suijlekom-Rahmen ist das Analog der Beitrag einer einzelnen Verschiebung zum Asymmetriekoeffizienten $S_n$ aus \eqref{eq:Dn-Sn}.
 
-\subsection{Connes--van-Suijlekom Single-Shift-Asymmetrie}
-\label{subsec:parity-cvs-de}
+\subsection{Connes--van-Suijlekom-Asymmetrie einer einzelnen Verschiebung}
+\label{subsec:parity-cvs}
 
 Im korrigierten Setup von Abschnitt~2 trägt eine einzelne Dirac-Masse bei $y\in(0,L)$ mit Gewicht $w$ in der Weil-Distribution $D$ zu den Diagonalen bei:
 \[
@@ -303,12 +314,12 @@ Im korrigierten Setup von Abschnitt~2 trägt eine einzelne Dirac-Masse bei $y\in
 \]
 Die Cos- und Sin-Sektor-Diagonalbeiträge sind daher $\Delta D_n \mp \Delta S_n$, und die Paritätsasymmetrie dieser einzelnen Verschiebung am Mode $n$ ist
 \begin{equation}
-\label{eq:single-shift-asymmetry-de}
+\label{eq:single-shift-asymmetry}
   -2\Delta S_n = -\frac{2w}{\pi n}\sin(2\pi n y/L).
 \end{equation}
 
-\begin{lemma}[Single-Shift-Asymmetrie]
-\label{lem:shift-parity-cvs-de}
+\begin{lemma}[Asymmetrie einer einzelnen Verschiebung]
+\label{lem:shift-parity-cvs}
 Sei $r:=y/L\in(0,1]$ die normierte Verschiebung. Für eine einzelne Dirac-Masse $\delta_y$ mit dem Weil-Prim-Vorzeichengewicht $w=-(\log p)/p^{m/2}$ (d.h.\ $w<0$) ist die Cos-minus-Sin-Asymmetrie am Mode $n\geq 1$:
 \[
   -2\Delta S_n = \frac{2\log p}{\pi n\cdot p^{m/2}}\sin(2\pi n r).
@@ -316,10 +327,40 @@ Sei $r:=y/L\in(0,1]$ die normierte Verschiebung. Für eine einzelne Dirac-Masse 
 Dies ist \emph{strikt negativ} (d.h.\ begünstigt den Cos-Sektor) genau dann, wenn $\sin(2\pi n r)<0$, was auf $r\in \bigcup_{k=0}^{n-1}(\tfrac{k}{n}+\tfrac{1}{2n},\,\tfrac{k+1}{n})$ gilt. Insbesondere ist für $n=1$ der günstige Bereich $r\in(\tfrac{1}{2},1)$, d.h.\ $\sqrt\lambda<p^m\le\lambda$ (Half-Frontier).
 \end{lemma}
 
-\subsection{Legacy-Paritätsmatrix (beibehalten für Kontinuität)}
-\label{subsec:parity-legacy-de}
+\begin{proof}
+Für eine einzelne Dirac-Masse $\delta_y$ mit Gewicht $w = -(\log p)/p^{m/2}$ lautet der Beitrag zur Matrix \eqref{eq:matrix-of-Q}:
+$\Delta D_n = w \cdot 2(1-y/L)\cos(2\pi n y/L)$ und $\Delta S_n = (w/\pi n)\sin(2\pi n y/L)$.
+Der Unterschied der Diagonalelemente zwischen dem Cosinus- und dem Sinus-Sektor beträgt
+\[
+  \langle \cos_n \,|\, \cos_n \rangle_Q - \langle \sin_n \,|\, \sin_n \rangle_Q
+  \;=\; (D_n - S_n) - (D_n + S_n)
+  \;=\; -2 S_n.
+\]
+Einsetzen von $\Delta S_n$ und $w = -(\log p)/p^{m/2}$ liefert
+\[
+  -2\Delta S_n \;=\; \frac{2\log p}{\pi n\cdot p^{m/2}}\sin(2\pi n r).
+\]
+Da $\log p > 0$ und $p^{m/2} > 0$, wird dieser Ausdruck genau dann negativ, wenn $\sin(2\pi n r) < 0$. Die Nullstellen der Sinusfunktion liegen bei $2\pi n r = k\pi$, also $r = k/(2n)$. Für $k$ gerade ist $\sin(2\pi n r)$ positiv-steigend, für $k$ ungerade negativ-fallend; daher ist $\sin(2\pi n r) < 0$ auf den Intervallen $(k/n + 1/(2n), (k+1)/n)$ für $k=0, \dots, n-1$.
+\end{proof}
 
-\paragraph{Hinweis.} Der Rest dieses Abschnitts ist die ursprüngliche $L^2([-L,L])$-Cos/Sin-Basis-Formulierung, die den technischen Inhalt der Folgesektionen lieferte. Siehe \Cref{subsec:parity-cvs-de} für das Connes--van-Suijlekom-Analog.
+\begin{remark}[Multimodale Abdeckung]
+\label{rem:multi-mode-coverage}
+Während ein einzelner Mode $n=1$ nur Verschiebungen im Bereich $r\in(1/2, 1)$ begünstigt, überdecken die höheren Moden $n\ge 2$ den Bereich $(0, 1/2]$ mit mehreren günstigen Teilintervallen. Da die Gesamtasymmetrie $S_n$ eine Summe über alle Primzahlen $p^m \le \lambda$ ist, ergänzen sich die Moden gegenseitig, um für alle hinreichend großen $\lambda$ eine dominante Cosinus-Sektor-Absenkung zu gewährleisten.
+\end{remark}
+
+\begin{lemma}[$L$-Unabhängigkeit der Einzelverschiebungs-Asymmetrie]
+\label{lem:L-independence-cvs}
+Für eine feste relative Verschiebung $r = y/L \in (0,1]$ ist die verhältnismäßige Asymmetrie $-2\Delta S_n / w = \frac{2}{\pi n}\sin(2\pi n r)$ unabhängig von der Intervalllänge $L$.
+\end{lemma}
+
+\begin{proof}
+Die Größe $\Delta S_n / w = \frac{1}{\pi n}\sin(2\pi n y/L) = \frac{1}{\pi n}\sin(2\pi n r)$ hängt nur vom relativen Verhältnis $r = y/L$ ab, nicht von der absoluten Intervalllänge $L$.
+\end{proof}
+
+\subsection{Legacy-Paritätsmatrix (beibehalten für Kontinuität)}
+\label{subsec:parity-legacy}
+
+\paragraph{Hinweis.} Der Rest dieses Abschnitts ist die ursprüngliche $L^2([-L,L])$-Cos/Sin-Basis-Formulierung, die den technischen Inhalt der Folgesektionen lieferte. Siehe \Cref{subsec:parity-cvs} für das Connes--van-Suijlekom-Analog.
 
 Der Beweis beginnt mit einem endlichen algebraischen Fakt. Seien
 \[
@@ -486,7 +527,7 @@ Definieren wir die Low-Mode kumulative Differenzmatrix:
 \medskip\noindent\textbf{v1.5-Zusammenfassung.}
 In der Connes--van-Suijlekom-Form von Abschnitt~2 ist das Analog der Frontier-Dominanz die asymptotische Positivität des Cos/Sin-Sektor-Asymmetriekoeffizienten $S_n$ für jeden Mode~$n$. Für $n=1$ liefert eine Abel-Summation und Laplace-Asymptotik
 \begin{equation}
-\label{eq:S1-asymptotic-cvs-de}
+\label{eq:S1-asymptotic-cvs}
   S_1(\lambda) \;\sim\; \frac{8\sqrt\lambda}{\log\lambda}
   \quad (\lambda\to\infty),
 \end{equation}
@@ -919,7 +960,7 @@ für $u \in [0, 2L]$. Die Sinus-Korrektur-Terme in asymmetrischen Shifts kanzell
   \quad
   \mu^-_{n-1} = \langle\psi_{n-1}, A_\lambda\psi_{n-1}\rangle.
 \]
-Kombiniert mit der Auto-Overlap-Äquivalenz folgt $\mu^+_n = \mu^-_{n-1}$ für jedes $n \geq 1$, sowohl im Prime-Beitrag als auch (durch dasselbe symmetrische-Shift-Argument) im Archimedes-Beitrag. Daher gilt in diesem Galerkin-Modell:
+Kombiniert mit der Auto-Overlap-Äquivalenz folgt $\mu^+_n = \mu^-_{n-1}$ für jedes $n \geq 1$, sowohl im Prime-Beitrag als auch (durch dasselbe symmetrische Shift-Argument) im Archimedes-Beitrag. Daher gilt in diesem Galerkin-Modell:
 \[
   \sigma(A_\lambda^+) \;=\; \sigma(A_\lambda^-) \cup \{\mu^+_0\},
 \]
@@ -946,7 +987,15 @@ Dieses Update entspricht der Behandlung des vorliegenden Manuskripts als kontinu
 
 Eine spätere Vergleichanalyse der Operatordefinition gegen Connes--van Suijlekom \cite{ConnesvS2025} klärte, dass die verschärfte K0-Sorge (die spektrale Äquivalenz $\sigma(A^+) = \sigma(A^-) \cup \{\mu^+_0\}$) ein Artefakt der Legacy-Operator-Realisierung auf $L^2([-L,L])$ mit reeller Cosinus/Sinus-Basis unter $t\mapsto -t$-Symmetrie war, nicht des tatsächlichen Connes-Operators. Der bewiesene Connes--van-Suijlekom-Operator wirkt auf $L^2([0,L])$ mit der komplexen Exponentialbasis $U_n$, und die Cosinus/Sinus-Paritätssektoren werden über die Frequenzreflektion $U_n\leftrightarrow U_{-n}$ definiert. In dieser korrigierten Formulierung (Abschnitt~2, v1.5-Reformulierung) unterscheiden sich die Diagonalen $\langle\cos_n|Q|\cos_n\rangle = D_n - S_n$ und $\langle\sin_n|Q|\sin_n\rangle = D_n + S_n$ um die genuin nicht-triviale Asymmetrie $2S_n$. Direkte Berechnung (Skript \texttt{verify\_connes\_vs\_form.py}) ergibt $S_n > 0$ für die Weil-Distribution und alle getesteten $\lambda$.
 
-Die verbleibende Aufgabe ist eine \emph{rigorose} CAP-Schließung von $\lambda_1^{\cos}(\lambda) < \lambda_1^{\sin}(\lambda)$ in dieser Form. Eine systematische Analyse der verfügbaren rigorosen Lower-Bound-Techniken ist in \path{_proof-notes/K0_LEHMANN_ANALYSIS.md} dokumentiert: Temple's Ungleichung, Lehmann--Mähly, Bauer-Fike, Operator-Norm-Bound, Schur-Komplement und Gerschgorin scheitern alle aus einem gemeinsamen strukturellen Grund: Es ist keine a-priori Lower-Bound auf $\lambda_2$ verfügbar, die das Galerkin-Variationsprinzip allein nicht liefert. Drei mittelfristige Forschungsrichtungen sind dort skizziert: Mollifikation, Toeplitz-Approximation, Reverse-Engineering aus Connes--vS 2025.
+Die verbleibende Aufgabe ist eine \emph{rigorose} CAP-Schließung von $\lambda_1^{\cos}(\lambda) < \lambda_1^{\sin}(\lambda)$ in dieser Form. Eine systematische Analyse der verfügbaren rigorosen Lower-Bound-Techniken ist in \path{_proof-notes/K0_LEHMANN_ANALYSIS.md} dokumentiert; sie zeigt, weshalb Standard-Eigenwertschranken scheitern:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Temple-Ungleichung:} Erfordert eine a-priori untere Schranke für den zweiten Eigenwert $\lambda_2^{\sin} > \lambda_1^{\cos}$, welche ohne Galerkin-Information höherer Ordnung nicht vorliegt.
+  \item \textbf{Lehmann--Mähly-Verfahren:} Benötigt ein Intervall $[\alpha, \beta]$, das genau einen Eigenwert enthält. Da das Spektrum nahe dem Minimum dicht ist, schlägt der Trennungsnachweis ohne explizite Schranken für den zweiten Spektralwert fehl.
+  \item \textbf{Bauer--Fike-Satz:} Bietet eine Normschranke $\|(A - E)^{-1}\|$, die für symmetrische Operatoren auf $\|A - \tilde A\|$ führt; die Off-Diagonal-Kopplung im Connes-Operator lässt sich jedoch nicht durch eine diagonale Störung dominieren.
+  \item \textbf{Operator-Norm-Schranken:} Schätzungen der Form $\|Q^{\sin} - Q^{\cos}\| = 2\|S_n\|$ erfassen zwar die Diagonaldifferenz, reichen aber nicht aus, um den Spektralabstand der Operator-Minima ohne Unterraumeinschließung abzusichern.
+  \item \textbf{Schur-Komplement / Gerschgorin-Kreise:} Die Gerschgorin-Radien $R_n = \sum_{m\neq n} |\langle U_m | Q | U_n \rangle|$ wachsen mit der Trunkierung $N$, sodass die Gerschgorin-Kreise für große $N$ überlappen und keine Spektraltrennung garantieren.
+\end{itemize}
+Alle diese Verfahren scheitern aus demselben strukturellen Grund: Es ist keine a-priori untere Schranke für $\lambda_2$ verfügbar, die das Galerkin-Variationsprinzip allein nicht liefert. Drei mittelfristige Forschungsrichtungen sind dort skizziert: Mollifikation, Toeplitz-Approximation, Reverse-Engineering aus Connes--vS 2025.
 
 \paragraph{Aktuelle ehrliche Position.}  Die Connes--van-Suijlekom-Operator-Form ist die korrekte Einstellung und zeigt gerade Dominanz numerisch mit konsistenter Margin über $\lambda$ und $N$. Die asymptotische $S_1$-Asymptotik gibt eine quantitative Cos-Sin-Diagonal-Lücke der Ordnung $\sqrt\lambda/\log\lambda$. Eine rigorose CAP-ähnliche Schließung im Sinne einer zertifizierten unteren Schranke auf $\lambda_1^{\sin}$, die strikt eine zertifizierte obere Schranke auf $\lambda_1^{\cos}$ übertrifft, bleibt offen und erfordert einen nicht-trivialen technischen Fortschritt jenseits einfachem Galerkin + Temple/Lehmann.
 
@@ -985,8 +1034,11 @@ bit-identisch über zwei unabhängige dps-Läufe, und $\lambda=15$
 bit-identisch bei $\mathrm{dps}=640$ und $\mathrm{dps}=800$) ergeben
 $A_\lambda(0{,}4) \approx 1{,}003\text{--}1{,}004$ \emph{flach} über die
 sieben konvergierten $\lambda$-Werte (der SUP-Observable
-$A_\lambda(\delta) := \sup_{x\in\mathbb{R}} |\hat\xi_\lambda(x)|^2 /
-(1+|x|^{2\delta})$, normiert) und $B_\lambda(0{,}4)/\lambda^{0{,}4}
+$A_\lambda(\delta) :=
+\sup_{|\Im z|\leq \delta}|\hat\xi_\lambda(z)|/
+\sup_{x\in\mathbb{R}}|\hat\xi_\lambda(x)|$, das globale
+Streifen-Amplifikations-Verhältnis aus den Skripten und aus §E.18) und
+$B_\lambda(0{,}4)/\lambda^{0{,}4}
 \approx 0{,}68$ Plateau ($L^2$-Observable, sub-generisches Wachstum):
 
 \begin{center}
@@ -1006,7 +1058,13 @@ $\lambda$ & $\sup|\hat\xi|_{\mathbb{R}}$ & $A_\lambda(0{,}4)$ & $B_\lambda(0{,}4
 
 Die Flachheit von $A_\lambda$ zeigt, dass das spektrale Framework gut
 konditioniert ist und mit einer uniformen Streifenschranke konsistent ist;
-sie stellt keinen Beweis von~(ii-a) dar. Frühere Messungen in
+sie stellt keinen Beweis von~(ii-a) dar. Die frühere polynomgewichtete
+Realachsen-Formel an dieser Tabelle war eine Transkriptionsabweichung; die
+Tabellenwerte sind Streifen-Amplifikations-Diagnostik. Der in den
+Beweisnotizen verwendete Bias-Vergleich mit $A_\Xi$ ist eine
+projektinterne Diagnostik und ein Falsifikationstest, keine theoremstarke
+Äquivalenz zur RH und kein Ersatz für den Beweis der A-priori-Streifenschranke.
+Frühere Messungen in
 §E.16--E.17 der Notizen wurden wegen unzureichender Präzision
 ($\mathrm{dps}=30$) bei Cluster-Beinahe-Entartung des minimalen geraden
 Eigenwerts retrahiert; nur die konvergierten §E.18-Werte sind verlässlich.
@@ -1014,12 +1072,18 @@ Eigenwerts retrahiert; nur die konvergierten §E.18-Werte sind verlässlich.
 \paragraph{Guardrail vom 26. Mai 2026.}
 Zwei spätere Audits schärfen den Status, ohne die Theorembehauptungen zu
 stärken. Erstens liefert der $\lambda=20$-Streifenlauf
-$\kappa(20)=1{,}527\times10^{-3}$; ein Sechs-Punkt-Refit setzt die
-residuale Krümmungssättigung nun konservativ in den Bereich
-$\kappa_\infty\in[1{,}6,1{,}8]\times10^{-3}$. Theorem~B-1 ist daher mit
-der Schranke $A_\lambda(\delta)\leq1{,}0063$ nur bedingt auf uniforme
-Log-Krümmungskontrolle zu lesen, nicht als bereits bewiesener
-Streifensatz. Zweitens ist der GF1-Chebyshev-Leiter-Audit zweiregimig:
+$\kappa(20)=1{,}527\times10^{-3}$; eine spätere
+$N$-Konvergenzstudie (Vier-Punkt-Exponentialfit bei $\lambda=11$,
+$N\in\{137,160,200,220\}$, 7.~Juni~2026) zeigt jedoch, dass der frühere
+Sechs-Punkt-Refit transientes $\kappa(N)$ mit dem asymptotischen Limes
+vermischt hatte: die korrigierte Größenordnung ist
+$|\kappa_\infty(11)|\lesssim 10^{-4}$, also ungefähr $15\times$ kleiner
+als der vorläufige Bereich $[1{,}6,1{,}8]\times10^{-3}$. Die bedingte
+Streifenschranken-Aussage ($A_\lambda(\delta)\leq1{,}0063$) ist mit der
+kleineren residualen Krümmung erst recht verträglich; sie bleibt aber nur
+unter uniformer Log-Krümmungskontrolle zu lesen, nicht als bereits
+bewiesener Streifensatz. Zweitens ist der GF1-Chebyshev-Leiter-Audit
+zweiregimig:
 Für $\lambda=5,7$ stützen die konvergierten Daten den
 Boundary-Moment-Benchmark $\mathrm{sLI}\sim(64\pi^2/3)\lambda/(NL)$,
 während $\lambda=3$ ein Niedrigband-Ausreißer ist, dessen ältere
@@ -1184,7 +1248,7 @@ Orthogonalitätsrelationen. Aus \(u_i=2t_i\) folgt schließlich
 =2u_i^2E_{\rm sing}(t_i)\).
 \end{proof}
 
-\begin{proposition}[Production-Splitting-Moden und \(q_a\)-Orthogonalitätstest]
+\begin{proposition}[Splitting-Moden im Production-Modus und \(q_a\)-Orthogonalitätstest]
 \label{prop:gf1-production-q-orthogonality-status}
 In den GF1-ECL-Auditskripten
 \path{_proof-notes/gf1_ecl_oddconst_annihilation_audit.py} und
@@ -1216,7 +1280,7 @@ sei die von den Audits verwendete Fern-Indexmenge. Für \(k\geq1\) schreibe
 \(\coth t_0=1\), \(\operatorname{csch}^2t_0=0\), \(K_{\rm collar}(t_0)=1\).
 
 Die Anwendung von \Cref{lem:gf1-q-orthogonality-annihilation} auf den
-Production-Mode mit \(c_k=-q_a(k)\) ist daher äquivalent zu den zwei
+Production-Modus mit \(c_k=-q_a(k)\) ist daher äquivalent zu den zwei
 konkreten endlichen Identitäten
 \[
   \mathcal{E}^{(0)}_{a,j}
@@ -1232,13 +1296,13 @@ Collar-Kanäle:
   \qquad
   S_{\rm odd}=-\frac12\mathcal{E}^{(1)}_{a,j}.
 \]
-Das Lemma liefert also eine saubere production-seitige Aufhebung des
+Das Lemma liefert also eine saubere Aufhebung im Production-Modus des
 konstanten und des ungeraden Kanals genau dann, wenn diese beiden
 angezeigten Defekte verschwinden, oder in der normalisierten Grenze des
 Audit-Observables verschwinden.
 
 Die aktuellen Smoke-Daten beweisen diese beiden Relationen für die rohen
-Production-Moden nicht. Im Gegenteil: Die in
+Production-Modi nicht. Im Gegenteil: Die in
 \path{_proof-notes/K0_DZT2_QA_GF1_ECL_FAR_ANNIHILATION_FINDING_2026-05-29.md}
 dokumentierten Läufe für \(\lambda=3,N=40\) und \(\lambda=5,N=55\)
 zeigen, dass die glatten Kanäle \(S_{\rm const}\) und \(S_{\rm odd}\)
@@ -1248,7 +1312,7 @@ gegen null gedrückt wird und der \(u^2\)-gewichtete Kanal \(S_\varphi\)
 eine exakte Obstruktion samt Testkriterium: Die beiden Größen
 \(\mathcal{E}^{(0)}_{a,j}\) und \(\mathcal{E}^{(1)}_{a,j}\) sind genau das,
 was klein gezeigt werden muss, bevor
-\Cref{lem:gf1-q-orthogonality-annihilation} als production-seitiger Beweis
+\Cref{lem:gf1-q-orthogonality-annihilation} als Beweis im Production-Modus
 verwendet werden kann.
 \end{proposition}
 
@@ -1297,7 +1361,7 @@ reproduziert: bei \(\lambda=3,N=40\) liefert er
 \(C_{\rm eff}^{\varphi}\approx1.022\), weit unter
 \(64\pi^2/3\). Damit bleibt \(S_\varphi\) der strukturell richtige
 \(u^2\)-gewichtete Träger des gerade singulären Kanals; der offene Slot
-ist jedoch das production-gematchte
+ist jedoch das an den Production-Modus angepasste
 \[
   \texttt{GF1\_PHI\_CHEBYSHEV\_LADDER\_MATCH}.
 \]
@@ -1306,7 +1370,7 @@ Er muss die echten Chebyshev-Leiter-Koeffizienten
   P_a(d)=\sum_{n\le d}\bigl(b_n^{\rm in}M_{a,n}^{\rm in}
         +b_n^{\rm out}M_{a,n}^{\rm out}\bigr)
 \]
-und dieselbe Leiter-Imbalance-Normierung wie der production-Audit
+und dieselbe Leiter-Imbalance-Normierung wie das Production-Audit
 verwenden, nicht den nackten \(S_\varphi\)-über-\(L^1\)-Quotienten. Bis
 dieser Match bewiesen oder falsifiziert ist, ist \(C^*\) ein scharfer
 struktureller Benchmark für GF1, aber keine Vorwärtsherleitung von DZT2,
@@ -1327,11 +1391,12 @@ schließt die Route, keiner ändert ihren Status der bedingten Reduktion.
     Even-Dominance-Route hat \emph{keinen} Wenig-Prim-/lokalen Schlüssel --- der
     Mechanismus ist genuin das volle Prim-Ensemble. Unbedingt; kein RH.
   \item \emph{Endliche Sylvester-Inertia $\nu_-=0$.} Intervallarithmetische
-    $\mathrm{LDL}^\top$-Inertia ($\lambda=100$, $N\le 40$) zertifiziert die endliche
-    Even-Dominance-Positivität direkt --- stärker als das Lemma verlangte, ohne
-    Symbol, ohne $\lVert E\rVert$, ohne Temple-Schranke. Das hebt die endliche Stufe
-    von A3 von heuristischer Tail-Extrapolation auf rigorose
-    Finite-Section-Positivität.
+    $\mathrm{LDL}^\top$-Inertia ($\lambda=100$, $N\le 40$) zertifiziert eine
+    Finite-Section-Inertia-Aussage für die berechnete trunkierte Matrix. Das
+    verbessert die endliche Diagnostik gegenüber der früheren heuristischen
+    Tail-Extrapolation, zertifiziert aber noch nicht den unendlichen Operator oder
+    den gesamten endlichen Bereich; ein Tail-, Feshbach- oder
+    Schur-Koerzivitätsschritt bleibt offen.
 \end{itemize}
 
 \medskip\noindent\textbf{Eine genuin geschlossene Sub-Methode, eine re-typisierte.}
@@ -1354,11 +1419,19 @@ Linse, kein Theorem:} die Even-Dominance-Marge ist \emph{nicht} als
 de~Bruijn--Newman-Aussage gezeigt (\glqq eine Marge würde $\Lambda<0$ erzwingen\grqq{}
 ist eine Analogie). Folglich ist die Route \emph{nicht} widerlegt --- der
 asymptotische Variationsgap bleibt ein wohlgestelltes offenes Problem, der exakte
-Kern (Shift-Parität, die geschlossene Weil-/Hankel-Form) bleibt ein wertvolles
-Asset, und die Route \emph{lebt}. Sie ist strategisch deprioritisiert gegenüber den
+Kern (Shift-Parität, die geschlossene Weil-/Hankel-Form) bleibt ein wertvoller
+Baustein, und die Route \emph{lebt}. Sie ist strategisch deprioritisiert gegenüber den
 exakt-strukturellen Routen, \emph{nicht} geschlossen. Wir haben \emph{nicht}
 gezeigt, dass Even Dominance nicht zu einem Beweis führen kann.
 \end{remark}
+
+\paragraph{Far-Ring-Ledger vom 17. Juni 2026.}
+Eine spätere Diagnostik zerlegt den Far-Anteil in dyadische Ringe relativ zur
+Collar-Kante und bilanziert signierte Last, $L^1$-Masse, Imbalance,
+First-Ring-Anteil und skalierte Modenquotienten. Damit wird der offene Slot von
+einer generischen signierten Far-Tail-Auslöschung zu
+\texttt{QA2\_FAR\_RING\_IMBALANCE\_BOUND} geschärft. Dies ist nur Diagnostik
+und hebt DZT2, MS2, gerade Dominanz oder RH nicht an.
 
 
 \section{Was nicht verwendet wird}
@@ -1371,14 +1444,14 @@ Dieser Beweis verwendet folgendes Material der Landscape-Reihe ausdrücklich nic
   \item Hellmann--Feynman-Monotonie zwischen Zertifikatspunkten;
   \item die narrative Dungeon/Memorial-Darstellung der ausgeschlossenen Routen.
 \end{itemize}
-Diese Ergebnisse bleiben wertvoll zur Routenklassifikation und zur Dokumentation (Audit History), sind jedoch nicht Teil der obigen Beweiskette.
+Diese Ergebnisse bleiben wertvoll zur Routenklassifikation und zur Dokumentation (Prüfhistorie), sind jedoch nicht Teil der obigen Beweiskette.
 
 \appendix
 
-\section{Audit-Tabelle der Konstanten}
+\section{Prüftabelle der Konstanten}
 \label{sec:constants-audit}
 
-Alle expliziten numerischen Konstanten, die im Beweis verwendet wurden, mit ihrer Quelle, Rolle und dem Verifikationsmechanismus. Konstanten mit der Kennzeichnung ``IA'' sind intervallarithmetisch zertifiziert (\texttt{mpmath.iv}, $50$-Stellen-Genauigkeit); ``CAP'' sind die $33$ rechnergestützten Landscape-Zertifikate; ``PNT/Mertens'' sind explizite asymptotische Restglieder.
+Alle expliziten numerischen Konstanten, die im Argument oder in der Diagnostik zitiert werden, mit ihrer Quelle, Rolle und dem Verifikationsmechanismus. Konstanten mit der Kennzeichnung ``IA'' sind intervallarithmetisch zertifiziert (\texttt{mpmath.iv}, $50$-Stellen-Genauigkeit); ``Legacy-CAP-Diagnostik'' bezeichnet die $33$ rechnergestützten Landscape-Zertifikatsrechnungen als numerische Diagnostik, nicht als theoremstarke CAP-Schließung; ``PNT/Mertens'' sind explizite asymptotische Restglieder.
 
 \begin{center}
 \footnotesize
@@ -1390,13 +1463,13 @@ $C_n$ & $2.2847$ & Operator-Norm-Schranke $\sup_{r\in(0,2)}\norm{D_3(r)}_{\mathr
 $c_{\mathrm{gap}}$ & $\geq 4\pi^2/L\geq 2.8$ & Spectral-Gap-Konstante für $L\leq 14$ (\Cref{lem:higher-mode}(ii)) & Laplace Asymptotik\\
 $C^*$ & $64\pi^2/3$ & GF1-Cauchy-Leiter-Momentbenchmark aus der \(u^2\)-gewichteten gerade singulären Collar-Komponente (\Cref{prop:gf1-collar-kernel-cstar}); nur diagnostische Normierung & Geschlossene Identität\\
 $N_{\cos}$ & $4$ & Even-Block Galerkin-Trunkierung (\Cref{rem:galerkin-asymmetry}) & Stabilitätscheck $k=3,4,5$\\
-$N_{\sin}$ & $40$--$90$ & Odd-Block Galerkin-Trunkierung (\Cref{rem:galerkin-asymmetry}) & Cauchy Tail-Schranke\\
+$N_{\sin}$ & $40$--$90$ & Odd-Block Galerkin-Trunkierung (\Cref{rem:galerkin-asymmetry}) & Diagnostische Cauchy-Tail-Schätzung\\
 $\Lambda_*$ & $\leq 175{,}000$ & Asymptotische Schwelle; Primsummen-Berechnung (\Cref{rem:lambda-star-improved}); konservative Schranke $\leq 1{,}300{,}000$ (\Cref{prop:frontier-dominance}) & Exakte Primenumeration\\
 $\theta(x)-x$ & $\leq 0.006788\,\tfrac{x}{\log x}$ & Effektive Tschebyscheff-Schranke für $x\geq 89{,}967{,}803$ (Dusart 2010, \cite{Dusart2010}) & Unbedingt\\
-$|\mathrm{cert\_gap}|$ bei $\lambda{=}100$ & $\geq 2.25$ & Erstes CAP (\Cref{prop:finite-certificates}) & CAP\\
-$|\mathrm{cert\_gap}|$ bei $\lambda{=}1.3{\cdot}10^6$ & $\geq 475.83$ & Letztes CAP & CAP\\
-Sicherheitsfaktor bei $\lambda{=}100$ & $\geq 34\times$ & $|\mathrm{cert\_gap}|$ im Vergleich zum Galerkin-/Tail-Fehler (\Cref{rem:truncation-safety}) & IA + Cauchy-Tail\\
-Sicherheitsfaktor bei $\lambda\geq 200$ & $\geq 65\times$ & Dasselbe, monoton in $\lambda$ & IA + Cauchy-Tail\\
+$|\mathrm{cert\_gap}|$ bei $\lambda{=}100$ & $\geq 2.25$ & Erste Legacy-CAP-Diagnostik (\Cref{prop:finite-certificates}) & Legacy-CAP-Diagnostik\\
+$|\mathrm{cert\_gap}|$ bei $\lambda{=}1.3{\cdot}10^6$ & $\geq 475.83$ & Letzte Legacy-CAP-Diagnostik & Legacy-CAP-Diagnostik\\
+Sicherheitsfaktor bei $\lambda{=}100$ & $\geq 34\times$ & $|\mathrm{cert\_gap}|$ im Vergleich zum Galerkin-/Tail-Fehler (\Cref{rem:truncation-safety}) & IA + diagnostische Cauchy-Tail-Schätzung\\
+Sicherheitsfaktor bei $\lambda\geq 200$ & $\geq 65\times$ & Dasselbe, monoton in $\lambda$ & IA + diagnostische Cauchy-Tail-Schätzung\\
 $c$ (Slot-Aufhebung) & $2+\sqrt 2$ & Geschlossene Form der Konstante (\Cref{lem:leading-cancel}(a)) & Symbolisch (sympy)
 \end{tabular}
 \end{center}

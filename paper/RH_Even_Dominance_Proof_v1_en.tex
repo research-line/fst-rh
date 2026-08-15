@@ -6,6 +6,7 @@
 \usepackage{cmap}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{aliascnt}
 \usepackage{array}
@@ -90,13 +91,13 @@ computational certificates, and alternative strategies. The present paper
 retains only the proof-relevant chain.
 Starting from Connes' reduction of the Riemann Hypothesis to an even-dominance
 condition for the Weil quadratic form, we isolate two independent contributions.
-First, for the finite range $100\leq\lambda\leq 1{,}300{,}000$, the Landscape
+First, for the finite range $100 \leq \lambda \leq 1{,}300{,}000$, the Landscape
 computations produce negative interval-enclosed Galerkin gaps at 33 grid points.
 A 15 May 2026 audit shows that the current sine-block lower-bound construction
 still relies on a heuristic geometric tail extrapolation; accordingly, the
 finite-range data are treated here as computer-assisted numerical evidence, not
 as a theorem-level CAP proof. Second, for the asymptotic regime
-$\lambda\to\infty$, we show via
+$\lambda \to \infty$, we show via
 a common Rayleigh-vector argument that
 $\lambda_{\min}(W^+_{\mathrm{prime}}-W^-_{\mathrm{prime}})=-\Theta(\sqrt\lambda)$
 on the relevant three-mode Galerkin block. Closing the gap between this
@@ -105,16 +106,16 @@ $\lambda_1^+(\lambda)<\lambda_1^-(\lambda)$ for asymptotic $\lambda$ requires a
 separate quantitative lower bound for $\lambda_1^-$; we formulate this as the
 \emph{Asymptotic Variational Gap Conjecture} and outline a degenerate
 perturbation-theory route in Section~\ref{sec:asymptotic-lower-bound}.
-Accordingly, the route to RH analysed here is conditional on (i) the
+Accordingly, the route to RH analysed here is conditional on (i)~the
 Connes program (Connes--van Suijlekom real-zero criterion
 \cite{ConnesvS2025}, which is fully proven at fixed $L$, together with
 the Hurwitz limit-passage of \cite[Sec.~6.4--6.6]{Connes2026}, whose
 Fact~6.4 convergence is presented there as a Slepian--Pollak consequence),
-and (ii) the
+and (ii)~the
 Asymptotic Variational Gap Conjecture for the odd-sector minimum
 eigenvalue. The Shift Parity Lemma is unconditional. The current
 interval-arithmetic certificates use a heuristic geometric extrapolation
-for the sin-block lower bound; the 14 May 2026 v1.4 revision documents
+for the sine-block lower bound; the 14 May 2026 v1.4 revision documents
 this explicitly in
 \cref{sec:k0-strengthened}.
 
@@ -134,7 +135,7 @@ $U_n\leftrightarrow U_{-n}$.  In this setting the matrix of the
 Weil quadratic form has cosine- and sine-sector diagonals
 $D_n\mp S_n$, where $S_n=(\pi n)^{-1}\int_0^L\sin(2\pi ny/L)\,dD(y)$
 captures the genuine asymmetry between the two parity sectors.
-Numerically $S_n>0$ for the Weil distribution (e.g.\
+Numerically $S_n>0$ for the Weil distribution (e.g.,
 $S_1\approx 8.63$ at $\lambda=1000$, giving cosine diagonal
 $\approx 3.26$ versus sine diagonal $\approx 20.52$), so even
 dominance is structurally present in the corrected form.  Section~2
@@ -339,7 +340,7 @@ A direct computation of $D_n$ and $S_n$ from
 for $\lambda=1000$ and $n=1$ one finds $D_1\approx 11.89$ and
 $S_1\approx 8.63$, so the cosine-sector diagonal is $D_1-S_1\approx 3.26$
 while the sine-sector diagonal is $D_1+S_1\approx 20.52$
-(script \texttt{\_proof-notes/verify\_connes\_vs\_form.py}).  The
+(script \path{_proof-notes/verify_connes_vs_form.py}).  The
 asymmetry $2S_1\approx 17.27$ is of the same order as the diagonal
 itself; this is the mechanism by which even dominance arises in the
 Connes--van Suijlekom framework and was missed by the legacy
@@ -402,7 +403,7 @@ the Connes program~\cite[Fact~6.4 and Sections~6.4--6.6]{Connes2026} establishes
 \end{enumerate}
 Since each $k_{\lambda_n}$ has only real zeros (\Cref{thm:connes}), the zeros of
 $\Xi$ are real as well. The non-trivial zeros of $\zeta(s)$ correspond bijectively
-to zeros of $\Xi$, hence they lie on the critical line~$\Re(s)=1/2$.
+to zeros of $\Xi$, hence they lie on the critical line $\Re(s)=1/2$.
 \end{proof}
 
 \begin{remark}[Analytical structure of the Hurwitz bridge]
@@ -579,7 +580,7 @@ The legacy construction begins with a finite algebraic fact. Let
   \qquad
   \psi_n(t)=\frac{\sin((n+1)\pi t/L)}{\sqrt L}
 \]
-denote the $L^2([-L,L])$-normalized even and odd basis functions. For a normalized shift $r=s/L$ define
+denote the $L^2([-L,L])$-normalised even and odd basis functions. For a normalised shift $r=s/L$ define
 the $N\times N$ difference matrix
 \[
   D_{nm}(r)=
@@ -747,7 +748,7 @@ Landscape certifier reports
   \lambda_{\min}(\mathrm{QW}_{\sin}^{(N)})\;>\;\lambda_{\min}(\mathrm{QW}_{\cos}^{(4)})
 \)
 for \emph{all} $N\leq 90$ at every tested $\lambda$, supporting, but not yet
-proving, that the gap is genuine and not a truncation artifact.
+proving that the gap is genuine and not a truncation artefact.
 \end{remark}
 
 \begin{remark}[Truncation safety factor]
@@ -827,7 +828,7 @@ with the more accurate finite-$L$ form
 $S_1(\lambda) \approx 8\sqrt\lambda/[L(1+16\pi^2/L^2)]$ where
 $L=\log\lambda$.  Numerically verified to within $5{-}10\%$ on
 $\lambda\in\{100,300,1000\}$ against the script
-\texttt{verify\_connes\_vs\_form.py}, see
+\path{verify_connes_vs_form.py}, see
 \texttt{K0\_FRONTIER\_SN\_ASYMPTOTIC.md} for the
 derivation.
 \end{sloppypar}  In this v1.5 form the cosine--minus--sine diagonal gap at
@@ -1072,7 +1073,7 @@ part is negligible for large $\lambda$.
 
 \begin{definition}[Auto-overlap profile]
 \label{def:auto-overlap}
-For the even basis function $\varphi_n$ and normalized shift $u=\delta/L\in[0,2]$,
+For the even basis function $\varphi_n$ and normalised shift $u=\delta/L\in[0,2]$,
 define $h_n(u):=\tfrac14\langle\varphi_n,(S_{uL}+S_{-uL})\varphi_n\rangle$.
 The overlap integral evaluates via the substitution $x=t/L$ and the
 product-to-sum identity
@@ -1545,14 +1546,14 @@ gives \emph{identical} auto-overlap profiles
   \;=\; 2\,(1 - u/(2L))\,\cos(n\pi u/L),
 \]
 for $u \in [0,2L]$. The sine-correction terms in the asymmetric
-shifts cancel under symmetrization. Numerical verification
+shifts cancel under symmetrisation. Numerical verification
 (script \texttt{verify\_diagonal\_fast.py}) confirms agreement of the
 corresponding prime-summed diagonal entries to machine precision for
 $\lambda \in \{100, 300, 1000\}$.
 
 \paragraph{Spectral consequence.} Since
 $\langle\varphi_n, (S_u+S_{-u})\varphi_m\rangle = 0$ for $n\neq m$ by
-Fourier orthogonality (the sine-cross-terms cancel under symmetrization),
+Fourier orthogonality (the sine-cross-terms cancel under symmetrisation),
 the Weil operator $A_\lambda$ is exactly diagonal in this Galerkin
 basis, with diagonal entries
 \[
@@ -1748,8 +1749,11 @@ bit-identical at $\mathrm{dps}=640$ and $\mathrm{dps}=800$) yield
 $A_\lambda(0.4) \approx 1.003\text{--}1.004$ \emph{flat} across the
 seven converged $\lambda$-values
 (the SUP-observable
-$A_\lambda(\delta) := \sup_{x\in\mathbb{R}} |\hat\xi_\lambda(x)|^2 /
-(1+|x|^{2\delta})$, normalised) and $B_\lambda(0.4)/\lambda^{0.4}
+$A_\lambda(\delta) :=
+\sup_{|\Im z|\leq \delta}|\hat\xi_\lambda(z)|/
+\sup_{x\in\mathbb{R}}|\hat\xi_\lambda(x)|$, the global
+strip-amplification ratio used in the scripts and in \S{}E.18) and
+$B_\lambda(0.4)/\lambda^{0.4}
 \approx 0.68$ plateau (the $L^2$-observable, sub-generic growth):
 
 \begin{center}
@@ -1769,7 +1773,13 @@ $\lambda$ & $\sup|\hat\xi|_{\mathbb{R}}$ & $A_\lambda(0.4)$ & $B_\lambda(0.4)$ &
 
 The flatness of $A_\lambda$ indicates that the spectral framework is
 well-conditioned and consistent with a uniform strip bound; it does not
-constitute a proof of~(ii-a).  Earlier measurements reported in
+constitute a proof of~(ii-a).  The earlier real-axis
+polynomial-weight formula attached to this table was a transcription
+error; the table values are strip-amplification diagnostics.  The
+bias comparison with $A_\Xi$ used in the proof notes is a
+project-internal diagnostic and falsification test, not a
+theorem-level equivalence to RH and not a substitute for proving
+the a-priori strip bound.  Earlier measurements reported in
 \S{}E.16--E.17 of the notes were retracted due to insufficient
 precision ($\mathrm{dps}=30$) near cluster near-degeneracy of the
 minimal even eigenvalue; only the converged \S{}E.18 values are
@@ -2090,10 +2100,11 @@ and none changes its conditional-reduction status.
     route has \emph{no} few-prime / local key --- the mechanism is genuinely the
     full prime ensemble. Unconditional; no RH.
   \item \emph{Finite Sylvester inertia $\nu_-=0$.} Interval-arithmetic
-    $\mathrm{LDL}^\top$ inertia ($\lambda=100$, $N\le 40$) certifies the finite
-    even-dominance positivity directly --- stronger than the lemma required, with
-    no symbol, no $\lVert E\rVert$, no Temple bound. This lifts the finite stage of
-    A3 from heuristic tail-extrapolation to rigorous finite-section positivity.
+    $\mathrm{LDL}^\top$ inertia ($\lambda=100$, $N\le 40$) certifies a
+    finite-section inertia statement for the computed truncated matrix. This
+    improves the finite-stage diagnostic beyond the earlier heuristic tail
+    extrapolation, but it does not yet certify the infinite operator or the full
+    finite range; a tail, Feshbach, or Schur coercivity step remains open.
 \end{itemize}
 
 \medskip\noindent\textbf{One genuinely closed sub-method, one re-typed.}
@@ -2121,6 +2132,14 @@ relative to the exact-structural routes, \emph{not} closed. We have \emph{not}
 shown that even dominance cannot lead to a proof.
 \end{remark}
 
+\paragraph{17 June 2026 far-ring ledger.}
+A later diagnostic splits the far contribution into dyadic rings relative to
+the collar edge and records signed load, $L^1$ mass, imbalance, first-ring
+share, and scaled mode ratios. This sharpens the open slot from a generic
+signed far-tail cancellation claim to
+\texttt{QA2\_FAR\_RING\_IMBALANCE\_BOUND}. It is diagnostic only and gives no
+DZT2, MS2, even-dominance, or RH claim upgrade.
+
 
 \section{What Is Not Used}
 
@@ -2140,10 +2159,12 @@ they are not part of the proof chain above.
 \section{Constants Audit Table}
 \label{sec:constants-audit}
 
-All explicit numerical constants used in the proof, with their source, role, and
-verification mechanism. Constants flagged ``IA'' are interval-arithmetic certified
-(\texttt{mpmath.iv}, $50$-digit precision); ``CAP'' are the $33$ Landscape
-computer-assisted certificates; ``PNT/Mertens'' are explicit asymptotic remainders.
+All explicit numerical constants cited in the argument or diagnostic audit, with
+their source, role, and verification mechanism. Constants flagged ``IA'' are
+interval-arithmetic certified (\texttt{mpmath.iv}, $50$-digit precision);
+``legacy CAP diagnostic'' refers to the $33$ Landscape computer-assisted
+certificate computations as numerical diagnostics, not as a theorem-level CAP
+closure; ``PNT/Mertens'' are explicit asymptotic remainders.
 
 \begin{center}
 \footnotesize
@@ -2155,13 +2176,13 @@ $C_n$ & $2.2847$ & Operator-norm bound $\sup_{r\in(0,2)}\norm{D_3(r)}_{\mathrm{o
 $c_{\mathrm{gap}}$ & $\geq 4\pi^2/L\geq 2.8$ & Spectral-gap constant for $L\leq 14$ (\Cref{lem:higher-mode}(ii)) & Laplace asymptotics\\
 $C^*$ & $64\pi^2/3$ & GF1 Cauchy-ladder moment benchmark from the \(u^2\)-weighted even singular collar component (\Cref{prop:gf1-collar-kernel-cstar}); diagnostic normalisation only & Closed-form identity\\
 $N_{\cos}$ & $4$ & Even-block Galerkin truncation (\Cref{rem:galerkin-asymmetry}) & Stability check $k=3,4,5$\\
-$N_{\sin}$ & $40$--$90$ & Odd-block Galerkin truncation (\Cref{rem:galerkin-asymmetry}) & Cauchy tail bound\\
+$N_{\sin}$ & $40$--$90$ & Odd-block Galerkin truncation (\Cref{rem:galerkin-asymmetry}) & Diagnostic Cauchy-tail estimate\\
 $\Lambda_*$ & $\leq 175{,}000$ & Asymptotic threshold; prime-sum computation (\Cref{rem:lambda-star-improved}); conservative bound $\leq 1{,}300{,}000$ (\Cref{prop:frontier-dominance}) & Exact prime enum.\\
 $\theta(x)-x$ & $\leq 0.006788\,\tfrac{x}{\log x}$ & Effective Chebyshev bound for $x\geq 89{,}967{,}803$ (Dusart 2010, \cite{Dusart2010}) & Unconditional\\
-$|\mathrm{cert\_gap}|$ at $\lambda{=}100$ & $\geq 2.25$ & First CAP (\Cref{prop:finite-certificates}) & CAP\\
-$|\mathrm{cert\_gap}|$ at $\lambda{=}1.3{\cdot}10^6$ & $\geq 475.83$ & Last CAP & CAP\\
-Safety factor at $\lambda{=}100$ & $\geq 34\times$ & $|\mathrm{cert\_gap}|$ vs.\ Galerkin/tail error (\Cref{rem:truncation-safety}) & IA + Cauchy tail\\
-Safety factor at $\lambda\geq 200$ & $\geq 65\times$ & Same, monotone in $\lambda$ & IA + Cauchy tail\\
+$|\mathrm{cert\_gap}|$ at $\lambda{=}100$ & $\geq 2.25$ & First legacy CAP diagnostic (\Cref{prop:finite-certificates}) & Legacy CAP diagnostic\\
+$|\mathrm{cert\_gap}|$ at $\lambda{=}1.3{\cdot}10^6$ & $\geq 475.83$ & Last legacy CAP diagnostic & Legacy CAP diagnostic\\
+Safety factor at $\lambda{=}100$ & $\geq 34\times$ & $|\mathrm{cert\_gap}|$ vs.\ Galerkin/tail error (\Cref{rem:truncation-safety}) & IA + diagnostic Cauchy-tail estimate\\
+Safety factor at $\lambda\geq 200$ & $\geq 65\times$ & Same, monotone in $\lambda$ & IA + diagnostic Cauchy-tail estimate\\
 $c$ (slot cancellation) & $2+\sqrt 2$ & Closed-form constant (\Cref{lem:leading-cancel}(a)) & Symbolic (sympy)
 \end{tabular}
 \end{center}
