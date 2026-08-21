@@ -151,7 +151,7 @@ if __name__ == "__main__":
     res = run_verification_exact(LAMBDA_LIST, N, P_MAX, MAX_M, EPS_LIST)
     for lam, r in res.items():
         print("lambda", lam, "sum_Delta", r['sum_Delta'], "sum_HS_off", r['sum_HS_off'], "gap", r['gap_estimate'])
-        
+
         with open(f'results_lambda_{lam}.csv', 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['p', 'Delta_p', 'HS_off'])

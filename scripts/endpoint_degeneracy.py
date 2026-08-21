@@ -93,8 +93,10 @@ if __name__ == "__main__":
                     for j in range(i, N):
                         sc = coeff * (S_cos(i, j, delta, L) + S_cos(i, j, -delta, L))
                         ss = coeff * (S_sin(i, j, delta, L) + S_sin(i, j, -delta, L))
-                        W_cos[i, j] += sc; W_cos[j, i] = W_cos[i, j]
-                        W_sin[i, j] += ss; W_sin[j, i] = W_sin[i, j]
+                        W_cos[i, j] += sc
+                        W_cos[j, i] = W_cos[i, j]
+                        W_sin[i, j] += ss
+                        W_sin[j, i] = W_sin[i, j]
 
         W11 = W_cos[1, 1]
         W00 = W_sin[0, 0]

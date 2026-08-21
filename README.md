@@ -1,6 +1,14 @@
 # From Landscape to Atlas: Multi-Route Cartography of an Ongoing Expedition Toward the Riemann Hypothesis
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19035640.svg)](https://doi.org/10.5281/zenodo.19035640)
+[![Tests & Quality Gate](https://github.com/research-line/rh-even-dominance/actions/workflows/tests.yml/badge.svg)](https://github.com/research-line/rh-even-dominance/actions/workflows/tests.yml)
+[![Version](https://img.shields.io/badge/Version-3.1.1-blue.svg)](CHANGELOG.md)
+[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](pyproject.toml)
+[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20macOS-lightgrey.svg)](pyproject.toml)
+[![Privacy: 100% Offline](https://img.shields.io/badge/Privacy-100%25%20Offline%20%7C%20Zero--Egress-brightgreen.svg)](SECURITY.md)
+[![Security Policy](https://img.shields.io/badge/Security-Policy-blue.svg)](SECURITY.md)
+[![Tests](https://img.shields.io/badge/Tests-10%20Passed%20%7C%20100%25-brightgreen.svg)](tests/)
+[![Concept DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19035640.svg)](https://doi.org/10.5281/zenodo.19035640)
+[![Latest Record DOI](https://img.shields.io/badge/Zenodo%20Record-10.5281%2Fzenodo.20479302-blue.svg)](https://doi.org/10.5281/zenodo.20479302)
 
 **Research status:** public reproducibility package and audit-trail atlas. This
 repository documents conditional reductions, explored routes, failed paths, and
@@ -201,6 +209,7 @@ even block and float64 with Cauchy tail bounds for the odd block.
 
 ## Version History
 
+- **3.1.1** (2026-08-21): Repository hygiene and CI matrix hardening: GitHub Actions automated CI matrix workflow (`.github/workflows/tests.yml`), PEP 621 metadata standard (`pyproject.toml`), bilingual security policy (`SECURITY.md`), automated test suite (`tests/test_metadata.py`), and metadata contract parity
 - **3.1** (2026-05-31): Repo sync of the Atlas pentalogy; companion Even-Dominance paper updated to v1.9 (`10.5281/zenodo.20479145`); Part I rebuilt for the five-part framing; combined EN PDF regenerated (103 pages); internal strategy/QA files kept private via `.gitignore`
 - **3.0** (2026-05-26): Restructured the three-part Trilogy ("From Landscape to Proof") into the five-part Atlas ("From Landscape to Atlas"): Part III split into Spectral Routes (III), Cross-Route Synthesis (IV), and Conclusio (V); structural reorganization only, conditional-reduction status unchanged
 - **2.5** (2026-05-24): Public repo synced to the Part-III excluded-paths catalog extension; Part III EN/DE and combined PDFs rebuilt; local agent-control files kept private via `.gitignore`

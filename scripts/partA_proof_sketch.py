@@ -30,6 +30,8 @@ import numpy as np
 from sympy import primerange
 import sys
 
+LOG4PI_GAMMA_F = 3.2720532309274587
+
 
 def S_cos(n, m, delta, L):
     if abs(delta) > 2*L:

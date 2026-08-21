@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rh-even-dominance"
+version = "3.1.1"
+description = "Public reproducibility package and audit-trail atlas for multi-route research toward the Riemann Hypothesis via Connes' spectral program"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "CC-BY-4.0" }
+authors = [
+    { name = "Lukas Geiger" },
+]
+keywords = [
+    "riemann-hypothesis",
+    "spectral-theory",
+    "connes-spectral-program",
+    "weil-quadratic-form",
+    "even-dominance",
+    "reproducible-research",
+    "mathematical-physics",
+    "zenodo",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Physics",
+    "License :: Free For Educational Use",
+    "Operating System :: OS Independent",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://github.com/research-line/rh-even-dominance"
+Documentation = "https://github.com/research-line/rh-even-dominance#readme"
+Repository = "https://github.com/research-line/rh-even-dominance.git"
+Issues = "https://github.com/research-line/rh-even-dominance/issues"
+"Zenodo Concept" = "https://doi.org/10.5281/zenodo.19035640"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+extend-exclude = [
+    "_claude-work",
+    "_archive",
+    "_copilot",
+    "_experiments",
+    "_handoff",
+    "_sources",
+    "_proof-notes",
+    "scripts/_exploration",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = [
+    "E501",  # line too long
+    "E402",  # module level import not at top of file
+    "E701",  # multiple statements on one line (colon)
+    "E741",  # ambiguous variable name
+    "F401",  # unused import
+    "F841",  # unused variable
+    "F541",  # f-string without placeholders
+    "E711",  # comparison to None
+    "E712",  # comparison to True/False
+    "I001",  # unsorted imports in research scripts
+    "E401",  # multiple imports on one line
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["scripts"]
