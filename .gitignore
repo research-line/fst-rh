@@ -111,7 +111,6 @@ _claude-work/
 _experiments/
 _sources/
 
-
 # >>> RESEARCH-PIPELINE MANAGED GITIGNORE >>>
 # Interne Konzept-, Planungs- und Aufgabensteuerung — standardmäßig privat
 **/KONZEPT.md
@@ -192,6 +191,10 @@ credentials.json
 _archive/
 Plan.txt
 # <<< RESEARCH-PIPELINE MANAGED GITIGNORE <<<
+
+# Bewusst öffentliche Ausnahmen: kuratierte Verifikationslogs laut README
+!scripts/gemini_verification/prolate_run_N120_P2000_2026-04-11.log
+!scripts/gemini_verification/prolate_run_N200_P10000_2026-04-12.log
 
 # Lokale Ergaenzung (nach verwaltetem Block): aktive-Front-Compute-Skripte privat [C 2026-08-15]
 _scripts/
