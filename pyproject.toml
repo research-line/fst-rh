@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rh-even-dominance"
-version = "3.1.1"
+version = "3.1.2"
 description = "Public reproducibility package and audit-trail atlas for multi-route research toward the Riemann Hypothesis via Connes' spectral program"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -44,7 +44,11 @@ Homepage = "https://github.com/research-line/rh-even-dominance"
 Documentation = "https://github.com/research-line/rh-even-dominance#readme"
 Repository = "https://github.com/research-line/rh-even-dominance.git"
 Issues = "https://github.com/research-line/rh-even-dominance/issues"
+Changelog = "https://github.com/research-line/rh-even-dominance/blob/master/CHANGELOG.md"
+Security = "https://github.com/research-line/rh-even-dominance/blob/master/SECURITY.md"
+Umbrella = "https://github.com/open-bricks"
 "Zenodo Concept" = "https://doi.org/10.5281/zenodo.19035640"
+"Zenodo Record" = "https://doi.org/10.5281/zenodo.20479302"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
