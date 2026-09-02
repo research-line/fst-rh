@@ -1,4 +1,4 @@
-## Last-checked: 2026-08-21
+## Last-checked: 2026-08-23
 
 # rh-even-dominance
 
@@ -26,12 +26,13 @@ explicit open conditions.
 
 ## Primary Files
 
-- `README.md`: public overview, status, citation links, script/result index
+- `README.md`: public overview, architecture diagrams, status, citation links, script/result index
+- `README_de.md`: full German documentation and localized Mermaid architecture/lifecycle diagrams
 - `SECURITY.md`: bilingual security policy and offline research invariants
 - `CITATION.cff`: citation metadata for GitHub and tooling
 - `pyproject.toml`: PEP 621 metadata, dependencies, and test configuration
 - `.github/workflows/tests.yml`: GitHub Actions automated CI matrix workflow
-- `tests/test_metadata.py`: automated test suite for reproducibility and parity
+- `tests/test_metadata.py`: automated test suite for reproducibility, diagrams, and parity (14 tests)
 - `CHANGELOG.md`: version history and release log
 - `paper/`: public TeX/PDF sources for the Landscape/Atlas and companion papers
 - `scripts/`: public certification and analysis scripts

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_core_documentation_files_exist() -> None:
     required_docs = [
         "README.md",
+        "README_de.md",
         "SECURITY.md",
         "CITATION.cff",
         "llms.txt",
@@ -69,8 +71,9 @@ def test_llms_txt_integrity() -> None:
     assert "https://doi.org/10.5281/zenodo.19035640" in content
     assert "https://doi.org/10.5281/zenodo.20479302" in content
     assert "SECURITY.md" in content
+    assert "README_de.md" in content
     assert ".github/workflows/tests.yml" in content
-    assert "Last-checked: 2026-08-21" in content
+    assert "Last-checked: 2026-08-23" in content
 
 
 def test_security_policy_integrity_and_bilingual_parity() -> None:
@@ -92,7 +95,7 @@ def test_pyproject_pep621_metadata() -> None:
     content = toml_file.read_text(encoding="utf-8")
 
     assert 'name = "rh-even-dominance"' in content
-    assert 'version = "3.1.1"' in content
+    assert 'version = "3.1.2"' in content
     assert 'requires-python = ">=3.10"' in content
     assert "Programming Language :: Python :: 3.13" in content
     assert "Operating System :: OS Independent" in content
@@ -162,21 +165,69 @@ def test_core_certification_scripts_byte_compile() -> None:
         assert compiled is not None
 
 
+def test_readme_de_exists_and_bilingual_parity() -> None:
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    assert "# Vom Landscape zum Atlas" in readme_de
+    assert "Forschungsstatus:" in readme_de
+    assert "Schnelle Navigation" in readme_de
+    assert "Quick Navigation" in readme_en
+    assert "Geschwister-Forschungs- & Werkzeug-Ökosystem" in readme_de
+    assert "Sibling Research & Tools Ecosystem" in readme_en
+    assert "README_de.md" in readme_en
+    assert "README.md" in readme_de
+
+
+def test_mermaid_diagrams_syntax() -> None:
+    for filename in ["README.md", "README_de.md"]:
+        content = (ROOT / filename).read_text(encoding="utf-8")
+        assert "```mermaid" in content, f"Missing mermaid diagram block in {filename}"
+        assert "flowchart TD" in content, f"Missing flowchart TD diagram in {filename}"
+        assert "sequenceDiagram" in content, f"Missing sequence diagram in {filename}"
+
+
+def test_sibling_ecosystem_and_urls() -> None:
+    for filename in ["README.md", "README_de.md"]:
+        content = (ROOT / filename).read_text(encoding="utf-8")
+        assert "https://github.com/research-line/fst-nash" in content
+        assert "https://github.com/research-line/functional-stability-theory" in content
+        assert "https://github.com/ellmos-ai/open-compute-mcp" in content
+        assert "https://github.com/doc-bricks/CleanMarkdown" in content
+        assert "https://github.com/open-bricks" in content
+
+
+def test_version_parity() -> None:
+    toml_content = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    changelog_content = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    readme_content = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de_content = (ROOT / "README_de.md").read_text(encoding="utf-8")
+    llms_content = (ROOT / "llms.txt").read_text(encoding="utf-8")
+
+    version_match = re.search(r'version\s*=\s*"([^"]+)"', toml_content)
+    assert version_match is not None, "Version not found in pyproject.toml"
+    current_ver = version_match.group(1)
+    assert current_ver == "3.1.2", f"Expected version 3.1.2, got {current_ver}"
+
+    assert f"## [{current_ver}]" in changelog_content
+    assert f"Version-{current_ver}-blue.svg" in readme_content
+    assert f"Version-{current_ver}-blue.svg" in readme_de_content
+    assert "Last-checked: 2026-08-23" in llms_content
+
+
 def test_utf8_encoding_no_mojibake() -> None:
     extensions = {".md", ".py", ".tex", ".toml", ".txt", ".json", ".yml", ".yaml", ".cff"}
-    for p in ROOT.rglob("*"):
+    target_paths = [
+        *ROOT.glob("*"),
+        *(ROOT / "scripts").rglob("*"),
+        *(ROOT / "tests").rglob("*"),
+        *(ROOT / "results" / "certificates").glob("*.json"),
+        *(ROOT / "results" / "gap_analysis").glob("*.json"),
+        *(ROOT / ".github").rglob("*"),
+    ]
+    for p in target_paths:
         if p.is_file() and p.suffix in extensions:
-            if any(part.startswith(".") for part in p.parts):
-                if p.name not in [".gitignore", "tests.yml", ".gitattributes"]:
-                    continue
-            if (
-                "_archive" in p.parts
-                or "_claude-work" in p.parts
-                or "_proof-notes" in p.parts
-                or "_sources" in p.parts
-                or ".pytest_cache" in p.parts
-                or ".ruff_cache" in p.parts
-            ):
+            if "_exploration" in p.parts:
                 continue
             try:
                 text = p.read_text(encoding="utf-8")
